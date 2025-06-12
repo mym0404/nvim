@@ -15,7 +15,7 @@ vim.keymap.set("i", "jj", "<Esc>", {
 
 vim.keymap.set("n", "<S-Right>", "<cmd>vertical resize +5<cr>", { desc = "Increase window width" })
 vim.keymap.set("n", "<S-Left>", "<cmd>vertical resize -5<cr>", { desc = "Decrease window width" }) -- 전용 레지스터 설정
-vim.keymap.set("n", "<S-Up>", "<cmd>resize -5<cr>", { desc = "Increase window height" })
+vim.keymap.set("n", "<S-Up>", "<cmd>resize +5<cr>", { desc = "Increase window height" })
 vim.keymap.set("n", "<S-Down>", "<cmd>resize -5<cr>", { desc = "Decrease window height" })
 
 -- vim.keymap.set({ "n", "v" }, "y", '"ay', { desc = "Yank to register a" })
