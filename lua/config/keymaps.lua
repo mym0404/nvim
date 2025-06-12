@@ -25,3 +25,5 @@ vim.keymap.set("n", "<S-Down>", "<cmd>resize -3<cr>", { desc = "Decrease window 
 -- -- x, d를 블랙홀 레지스터로
 -- vim.keymap.set({ "n", "v" }, "x", '"_x', { desc = "Delete without register" })
 -- vim.keymap.set({ "n", "v" }, "d", '"_d', { desc = "Delete without register" })
+
+vim.keymap.set({ "n", "i" }, "<C-t>", "<leader>ft")
