@@ -7,11 +7,9 @@
 --   silent = true,
 -- })
 
-vim.keymap.set("i", "jj", "<Esc>", {
-  noremap = true,
-  silent = true,
-  desc = "Exit insert mode with jj",
-})
+for _, key in ipairs({ "jj", "jk", "kj" }) do
+  vim.keymap.set("i", key, "<Esc>", { noremap = true, silent = true, desc = "Exit insert mode" })
+end
 
 vim.keymap.set("n", "<S-Right>", "<cmd>vertical resize +3<cr>", { desc = "Increase window width" })
 vim.keymap.set("n", "<S-Left>", "<cmd>vertical resize -3<cr>", { desc = "Decrease window width" }) -- 전용 레지스터 설정
@@ -26,4 +24,4 @@ vim.keymap.set("n", "<S-Down>", "<cmd>resize -3<cr>", { desc = "Decrease window 
 -- vim.keymap.set({ "n", "v" }, "x", '"_x', { desc = "Delete without register" })
 -- vim.keymap.set({ "n", "v" }, "d", '"_d', { desc = "Delete without register" })
 
-vim.keymap.set({ "n", "i" }, "<C-t>", "<leader>ft")
+vim.keymap.set({ "n", "i" }, "<C-t>", "<leader>")
