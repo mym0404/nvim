@@ -10,5 +10,6 @@ opt.number = true
 opt.relativenumber = false
 opt.ambiwidth = "single"
 opt.autowrite = true
+opt.swapfile = false
 
 vim.g.lazyvim_prettier_needs_config = true
