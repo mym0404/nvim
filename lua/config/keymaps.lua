@@ -13,10 +13,10 @@ vim.keymap.set("i", "jj", "<Esc>", {
   desc = "Exit insert mode with jj",
 })
 
-vim.keymap.set("n", "<S-Right>", "<cmd>vertical resize +5<cr>", { desc = "Increase window width" })
-vim.keymap.set("n", "<S-Left>", "<cmd>vertical resize -5<cr>", { desc = "Decrease window width" }) -- 전용 레지스터 설정
-vim.keymap.set("n", "<S-Up>", "<cmd>resize +5<cr>", { desc = "Increase window height" })
-vim.keymap.set("n", "<S-Down>", "<cmd>resize -5<cr>", { desc = "Decrease window height" })
+vim.keymap.set("n", "<S-Right>", "<cmd>vertical resize +3<cr>", { desc = "Increase window width" })
+vim.keymap.set("n", "<S-Left>", "<cmd>vertical resize -3<cr>", { desc = "Decrease window width" }) -- 전용 레지스터 설정
+vim.keymap.set("n", "<S-Up>", "<cmd>resize +3<cr>", { desc = "Increase window height" })
+vim.keymap.set("n", "<S-Down>", "<cmd>resize -3<cr>", { desc = "Decrease window height" })
 
 -- vim.keymap.set({ "n", "v" }, "y", '"ay', { desc = "Yank to register a" })
 -- vim.keymap.set({ "n", "v" }, "p", '"ap', { desc = "Paste from register a" })
