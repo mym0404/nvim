@@ -13,7 +13,7 @@ opt.autowrite = true
 opt.swapfile = false
 
 vim.g.lazyvim_prettier_needs_config = true
--- vim.g.lazyvim_cmp = "nvim-cmp"
+vim.g.lazyvim_cmp = "nvim-cmp"
 
 vim.o.mouse = "a"
 vim.o.showmode = false
