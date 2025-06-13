@@ -1,3 +1,4 @@
+---@diagnostic disable: undefined-global
 local lush = require("lush")
 local hsl = lush.hsl
 local hsluv = lush.hsluv
@@ -205,7 +206,8 @@ local theme = lush(function(injected_functions)
     NoiceCursor({ Cursor }),
     RedrawDebugNormal({ gui = "reverse" }),
     Underlined({ gui = "underline" }),
-    Substitute({ bg = "#f85149", fg = "#0d1117" }),
+    Substitute({ bg = "#fa147f", fg = "white" }),
+    FlashBackdrop({ fg = "#828282" }),
     Ignore({ Normal }),
     NvimSpacing({ Normal }),
     TroubleText({ Normal }),
@@ -224,7 +226,7 @@ local theme = lush(function(injected_functions)
     NoiceCmdlinePopup({ Normal }),
     NoiceConfirm({ Normal }),
     SnacksNotifierHistory({ Normal }),
-    Constant({ fg = "#79c0ff" }),
+    Constant({ Normal }),
     sym("@constant")({ Constant }),
     sym("@attribute")({ Constant }),
     lessCssAttribute({ Constant }),
