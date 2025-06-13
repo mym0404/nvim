@@ -38,7 +38,7 @@ return {
       -- provide the inlay hints.
       inlay_hints = {
         enabled = true,
-        exclude = { "vue" }, -- filetypes for which you don't want to enable inlay hints
+        exclude = { "vue", "swift" }, -- filetypes for which you don't want to enable inlay hints
       },
       -- Enable this to enable the builtin LSP code lenses on Neovim >= 0.10.0
       -- Be aware that you also will need to properly configure your LSP server to
@@ -60,7 +60,7 @@ return {
       -- but can be also overridden when specified
       format = {
         formatting_options = nil,
-        timeout_ms = nil,
+        timeout_ms = 3000,
       },
       -- LSP Server Settings
       ---@type lspconfig.options
