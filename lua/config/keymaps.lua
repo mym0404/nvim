@@ -30,3 +30,11 @@ vim.keymap.set("x", "q", "<Esc>", { noremap = true, silent = true, desc = "Exit 
 -- Move visual
 vim.keymap.set("x", "<S-j>", ":move '>+1<CR>gv=gv", { noremap = true, silent = true, desc = "Move selection down" })
 vim.keymap.set("x", "<S-k>", ":move '<-2<CR>gv=gv", { noremap = true, silent = true, desc = "Move selection up" })
+
+vim.keymap.set("n", "<leader>z", "<cmd>DiffviewOpen<cr>", { noremap = true, silent = true, desc = "Open Diff View" })
+vim.keymap.set(
+  "n",
+  "<leader>h",
+  "<cmd>DiffviewFileHistory<cr>",
+  { noremap = true, silent = true, desc = "Open Diff view file history" }
+)
