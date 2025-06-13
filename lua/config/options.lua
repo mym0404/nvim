@@ -17,6 +17,7 @@ vim.g.lazyvim_prettier_needs_config = true
 
 vim.o.mouse = "a"
 vim.o.showmode = false
+vim.o.exrc = true
 
 vim.schedule(function()
   vim.o.clipboard = "unnamedplus"

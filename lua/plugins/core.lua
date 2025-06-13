@@ -1,10 +1,4 @@
 return {
-  {
-    "LazyVim/LazyVim",
-    opts = function()
-      require("tokyonight").load()
-    end,
-  },
   -- override nvim-cmp and add cmp-emoji
   {
     "hrsh7th/nvim-cmp",

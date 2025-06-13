@@ -22,11 +22,11 @@ vim.keymap.set("n", "<S-Left>", "<cmd>vertical resize -3<cr>", { desc = "Decreas
 vim.keymap.set("n", "<S-Up>", "<cmd>resize +3<cr>", { desc = "Increase window height" })
 vim.keymap.set("n", "<S-Down>", "<cmd>resize -3<cr>", { desc = "Decrease window height" })
 
--- vim.keymap.set({ "n", "v" }, "y", '"ay', { desc = "Yank to register a" })
--- vim.keymap.set({ "n", "v" }, "p", '"ap', { desc = "Paste from register a" })
--- vim.keymap.set({ "n", "v" }, "P", '"aP', { desc = "Paste before from register a" })
--- vim.keymap.set({ "n", "v" }, "x", '"_x', { desc = "Delete without register" })
--- vim.keymap.set({ "n", "v" }, "d", '"_d', { desc = "Delete without register" })
+vim.keymap.set({ "n", "v" }, "y", '"ay', { desc = "Yank to register a" })
+vim.keymap.set({ "n", "v" }, "p", '"ap', { desc = "Paste from register a" })
+vim.keymap.set({ "n", "v" }, "P", '"aP', { desc = "Paste before from register a" })
+vim.keymap.set({ "n", "v" }, "x", '"_x', { desc = "Delete without register" })
+vim.keymap.set({ "n", "v" }, "d", '"_d', { desc = "Delete without register" })
 
 -- Quit visual mode with 'q'
 vim.keymap.set("x", "q", "<Esc>", { noremap = true, silent = true, desc = "Exit visual mode with q" })

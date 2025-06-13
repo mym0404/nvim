@@ -17,9 +17,7 @@ return {
 
     vim.api.nvim_create_autocmd("LspAttach", {
       desc = "LSP Actions",
-      callback = function(args)
-        print("123")
-      end,
+      callback = function(args) end,
     })
   end,
 }
