@@ -6,7 +6,7 @@ local hsluv = lush.hsluv
 local theme = lush(function(injected_functions)
   local sym = injected_functions.sym
   return {
-    Normal({ bg = "#0d1117", fg = "#ffffff" }),
+    Normal({ bg = "#000000", fg = "#ffffff" }),
     EndOfBuffer({ fg = "#0d1117" }),
     TermCursor({ gui = "reverse" }),
     GitSignsAddInline({ TermCursor }),
