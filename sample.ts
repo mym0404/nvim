@@ -5,11 +5,11 @@ console.log(a);
 console.log("hello")
 
 JSON.stringify({ "hello": 1 })
-// TODO: hello
+// todo: hello
 
 // FIXME: Hello
 hello
 
 
 const b = new URLSearchParams();
-b.getAll(name)
+console.log('hllo')
