@@ -21,5 +21,3 @@ vim.keymap.set("n", "<S-Down>", "<cmd>resize -3<cr>", { desc = "Decrease window 
 -- vim.keymap.set({ "n", "v" }, "P", '"aP', { desc = "Paste before from register a" })
 -- vim.keymap.set({ "n", "v" }, "x", '"_x', { desc = "Delete without register" })
 -- vim.keymap.set({ "n", "v" }, "d", '"_d', { desc = "Delete without register" })
-
-vim.keymap.set({ "n", "i" }, "<C-T>", "<leader>ft", { desc = "Toggle Terminal" })
