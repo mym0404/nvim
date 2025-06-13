@@ -8,4 +8,8 @@ JSON.stringify({ "hello": 1 })
 // TODO: hello
 
 // FIXME: Hello
+hello
 
+
+const b = new URLSearchParams();
+b.getAll(name)

@@ -8,11 +8,11 @@
 -- })
 
 for _, key in ipairs({ "jj", "jk", "kj" }) do
-  vim.keymap.set({ "i", "x" }, key, "<Esc>", { noremap = true, silent = true, desc = "Exit insert mode" })
+  vim.keymap.set({ "i" }, key, "<Esc>", { noremap = true, silent = true, desc = "Exit insert mode" })
 end
 
 vim.keymap.set("n", "<S-Right>", "<cmd>vertical resize +3<cr>", { desc = "Increase window width" })
-vim.keymap.set("n", "<S-Left>", "<cmd>vertical resize -3<cr>", { desc = "Decrease window width" }) -- 전용 레지스터 설정
+vim.keymap.set("n", "<S-Left>", "<cmd>vertical resize -3<cr>", { desc = "Decrease window width" })
 vim.keymap.set("n", "<S-Up>", "<cmd>resize +3<cr>", { desc = "Increase window height" })
 vim.keymap.set("n", "<S-Down>", "<cmd>resize -3<cr>", { desc = "Decrease window height" })
 
