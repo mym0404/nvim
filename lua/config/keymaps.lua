@@ -38,3 +38,46 @@ vim.keymap.set(
   "<cmd>DiffviewFileHistory<cr>",
   { noremap = true, silent = true, desc = "Open Diff view file history" }
 )
+
+vim.keymap.set("n", "<C-w>", ":tabclose<CR>", { noremap = true, silent = true, desc = "Close tab" })
+
+-- vim.keymap.set("n", "<leader>gr", function()
+--   local filepath = vim.fn.expand("%")
+--   if filepath == "" then
+--     print("No file to restore")
+--     return
+--   end
+--   -- 저장되지 않은 변경사항 모두 git restore 로 되돌리기
+--   vim.cmd("silent !git restore " .. filepath)
+--   print("Discarded changes in " .. filepath)
+--   -- 버퍼 다시 읽기
+--   vim.cmd("edit!")
+-- end, { noremap = true, silent = true, desc = "Git discard current file changes" })
+
+vim.keymap.set("x", "<leader>gr", function()
+  -- 선택된 줄 범위 가져오기
+  local start_line = vim.fn.line("v")
+  local end_line = vim.fn.line(".")
+  if start_line > end_line then
+    start_line, end_line = end_line, start_line
+  end
+
+  -- 현재 파일 경로
+  local filepath = vim.fn.expand("%:p")
+  if filepath == "" then
+    print("No file to restore")
+    return
+  end
+
+  -- 선택된 줄들만 git restore 하기 위해 patch 생성 후 적용 (임시 파일 필요)
+  local cmd =
+    string.format("git checkout HEAD -- %s && git restore -p %s -L %d,%d", filepath, filepath, start_line, end_line)
+
+  -- 시스템 명령 실행
+  local result = vim.fn.system(cmd)
+
+  -- 버퍼 다시 읽기
+  vim.cmd("edit!")
+
+  print("Discarded changes in lines " .. start_line .. " to " .. end_line)
+end, { noremap = true, silent = true, desc = "Git discard selected lines" })
