@@ -3,7 +3,6 @@
 -- Add any additional options here
 
 vim.g.snacks_animate = true
-
 local opt = vim.opt
 
 opt.number = true

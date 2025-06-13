@@ -5,7 +5,7 @@ return {
     indent = { enabled = false },
     explorer = {
       position = "left",
-      width = 30,
+      width = 25,
     },
     picker = {
       hidden = true,

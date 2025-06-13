@@ -2,14 +2,9 @@
 
 local utils = require("../utils/utils")
 
--- Keymaps are automatically loaded on the VeryLazy event
--- Default keymaps that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/keymaps.lua
--- Add any additional keymaps here
-
--- vim.keymap.set({ "n", "v", "i" }, "<M-w>", ":bd<MR>", {
---   desc = "Mlose buffer",
---   silent = true,
--- })
+vim.keymap.del("n", "gcc")
+vim.keymap.del("n", "gco")
+vim.keymap.del("n", "gcO")
 
 -- Go back to normal mode with jj, jk, kj
 for _, key in ipairs({ "jj", "jk", "kj" }) do
