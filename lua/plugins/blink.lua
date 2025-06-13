@@ -37,10 +37,17 @@ return {
       nerd_font_variant = "mono",
     },
     completion = {
+      keyword = { range = "prefix" },
       accept = {
         -- experimental auto-brackets support
         auto_brackets = {
-          enabled = true,
+          enabled = false,
+        },
+      },
+      list = {
+        selection = {
+          preselect = true,
+          auto_insert = false,
         },
       },
       menu = {
@@ -48,12 +55,14 @@ return {
           treesitter = { "lsp" },
         },
       },
+
       documentation = {
         auto_show = true,
-        auto_show_delay_ms = 700,
+        auto_show_delay_ms = 300,
       },
       ghost_text = {
-        enabled = vim.g.ai_cmp,
+        -- enabled = vim.g.ai_cmp,
+        enabled = false,
       },
     },
     -- experimental signature help support
