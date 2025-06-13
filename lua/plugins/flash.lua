@@ -3,6 +3,7 @@ return {
   enable = true,
   event = "VeryLazy",
   ---@type Flash.Config
+  ---@diagnostic disable-next-line: missing-fields
   opts = {},
   -- stylua: ignore
   keys = {
