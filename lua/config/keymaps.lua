@@ -1,27 +1,46 @@
----@diagnostic disable: need-check-nil
-
 local utils = require("../utils/utils")
 
-vim.keymap.del("n", "gcc")
-vim.keymap.del("n", "gco")
-vim.keymap.del("n", "gcO")
+-- gc to comment
+local function setup_comments()
+  local reset_keys = { { "n", "gc" }, { "n", "gco" }, { "n", "gcO" }, { "o", "gc" }, { "x", "gc" }, { "n", "gcc" } }
 
--- Go back to normal mode with jj, jk, kj
+  for _, key in ipairs(reset_keys) do
+    pcall(vim.keymap.del, key[1], key[2])
+  end
+
+  local api = require("Comment.api")
+
+  vim.keymap.set("n", "gc", api.toggle.linewise.current)
+
+  local esc = vim.api.nvim_replace_termcodes("<ESC>", true, false, true)
+
+  vim.keymap.set("x", "gc", function()
+    vim.api.nvim_feedkeys(esc, "nx", false)
+    api.toggle.linewise(vim.fn.visualmode())
+  end)
+end
+
+setup_comments()
+
 for _, key in ipairs({ "jj", "jk", "kj" }) do
   vim.keymap.set({ "i" }, key, "<Esc>", { noremap = true, silent = true, desc = "Exit insert mode" })
 end
+
+local function manipulate_yank_paste_register_behavior()
+  vim.keymap.set({ "n", "v" }, "y", '"zy', { desc = "Yank to register a" })
+  vim.keymap.set({ "n", "v" }, "p", '"zp', { desc = "Paste from register a" })
+  vim.keymap.set({ "n", "v" }, "P", '"zP', { desc = "Paste before from register a" })
+  -- vim.keymap.set({ "n", "v" }, "x", '"_x', { desc = "Delete without register" })
+  vim.keymap.set({ "n", "v" }, "d", '"_d', { desc = "Delete without register" })
+end
+
+manipulate_yank_paste_register_behavior()
 
 -- Resize windows
 vim.keymap.set("n", "<S-Right>", "<cmd>vertical resize +3<cr>", { desc = "Increase window width" })
 vim.keymap.set("n", "<S-Left>", "<cmd>vertical resize -3<cr>", { desc = "Decrease window width" })
 vim.keymap.set("n", "<S-Up>", "<cmd>resize +3<cr>", { desc = "Increase window height" })
 vim.keymap.set("n", "<S-Down>", "<cmd>resize -3<cr>", { desc = "Decrease window height" })
-
-vim.keymap.set({ "n", "v" }, "y", '"ay', { desc = "Yank to register a" })
-vim.keymap.set({ "n", "v" }, "p", '"ap', { desc = "Paste from register a" })
-vim.keymap.set({ "n", "v" }, "P", '"aP', { desc = "Paste before from register a" })
-vim.keymap.set({ "n", "v" }, "x", '"_x', { desc = "Delete without register" })
-vim.keymap.set({ "n", "v" }, "d", '"_d', { desc = "Delete without register" })
 
 -- Quit visual mode with 'q'
 vim.keymap.set("x", "q", "<Esc>", { noremap = true, silent = true, desc = "Exit visual mode with q" })
