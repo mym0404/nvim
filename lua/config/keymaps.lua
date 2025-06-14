@@ -1,13 +1,20 @@
 local utils = require("../utils/utils")
 
--- gc to comment
-local function setup_comments()
-  local reset_keys = { { "n", "gc" }, { "n", "gco" }, { "n", "gcO" }, { "o", "gc" }, { "x", "gc" }, { "n", "gcc" } }
-
+local function reset_keymaps()
+  local reset_keys = {
+    { "n", "gc" },
+    { "n", "gco" },
+    { "n", "gcO" },
+    { "o", "gc" },
+    { "x", "gc" },
+    { "n", "gcc" },
+  }
   for _, key in ipairs(reset_keys) do
     pcall(vim.keymap.del, key[1], key[2])
   end
+end
 
+local function setup_comments()
   local api = require("Comment.api")
 
   vim.keymap.set("n", "gc", api.toggle.linewise.current)
@@ -20,10 +27,10 @@ local function setup_comments()
   end)
 end
 
-setup_comments()
-
-for _, key in ipairs({ "jj", "jk", "kj" }) do
-  vim.keymap.set({ "i" }, key, "<Esc>", { noremap = true, silent = true, desc = "Exit insert mode" })
+local function customizeExitInsertMode()
+  for _, key in ipairs({ "jj", "jk", "kj" }) do
+    vim.keymap.set({ "i" }, key, "<Esc>", { noremap = true, silent = true, desc = "Exit insert mode" })
+  end
 end
 
 local function manipulate_yank_paste_register_behavior()
@@ -31,10 +38,8 @@ local function manipulate_yank_paste_register_behavior()
   vim.keymap.set({ "n", "v" }, "p", '"zp', { desc = "Paste from register a" })
   vim.keymap.set({ "n", "v" }, "P", '"zP', { desc = "Paste before from register a" })
   -- vim.keymap.set({ "n", "v" }, "x", '"_x', { desc = "Delete without register" })
-  vim.keymap.set({ "n", "v" }, "d", '"_d', { desc = "Delete without register" })
+  vim.keymap.set({ "n", "v" }, "d", '"zd', { desc = "Delete without register" })
 end
-
-manipulate_yank_paste_register_behavior()
 
 -- Resize windows
 vim.keymap.set("n", "<S-Right>", "<cmd>vertical resize +3<cr>", { desc = "Increase window width" })
@@ -57,7 +62,14 @@ vim.keymap.set(
   { noremap = true, silent = true, desc = "Open Diff view file history" }
 )
 
-vim.keymap.set("n", "<C-w>", ":tabclose<CR>", { noremap = true, silent = true, desc = "Close tab" })
+vim.keymap.set("n", "<C-w>", function()
+  local tab_count = vim.fn.tabpagenr("$")
+  if tab_count > 1 then
+    vim.cmd("tabclose")
+  else
+    vim.cmd("bdelete")
+  end
+end, { noremap = true, silent = true, desc = "Close tab if multiple tabs, else close buffer" })
 
 vim.keymap.set("n", "<CR>", "i<CR>", { desc = "New line on normal mode" })
 
@@ -86,3 +98,8 @@ vim.keymap.set("x", "<leader>gr", function()
 
   utils.go_to_normal_mode()
 end, { noremap = true, silent = true, desc = "Git restore selected lines" })
+
+reset_keymaps()
+setup_comments()
+manipulate_yank_paste_register_behavior()
+customizeExitInsertMode()
