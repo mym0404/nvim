@@ -23,6 +23,8 @@ local function set_english_input()
   vim.fn.system("macism com.apple.keylayout.US")
 end
 
+-- brew tap laishulu/homebrew
+-- brew install macism
 vim.api.nvim_create_autocmd({ "InsertLeave", "FocusGained", "ModeChanged" }, {
   callback = function(event)
     if event.event == "InsertLeave" then
