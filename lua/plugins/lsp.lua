@@ -254,5 +254,7 @@ return {
 
     -- sourcekit options
     require("../utils/sourcekit_lsp").setup_sourcekit()
+    local capabilities = vim.lsp.protocol.make_client_capabilities()
+    capabilities.positionEncodings = { "utf-16" } -- 최신 네오빔 권장
   end,
 }

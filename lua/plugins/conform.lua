@@ -11,10 +11,12 @@ return {
       },
       formatters_by_ft = {
         lua = { "stylua" },
-        fish = { "fish_indent" },
+        -- fish = { "fish_indent" },
         sh = { "shfmt" },
-        ts = { "biome" },
-        js = { "biome" },
+        javascript = { "biome-check" },
+        javascriptreact = { "biome-check" },
+        typescript = { "biome-check" },
+        typescriptreact = { "biome-check" },
         swift = { "swiftformat" },
       },
       -- The options you set here will be merged with the builtin formatters.
@@ -33,15 +35,15 @@ return {
         -- shfmt = {
         --   prepend_args = { "-i", "2", "-ci" },
         -- },
-        biome = {
-          require_cwd = true,
-        },
       },
     }
     for ft, _ in pairs(opts.formatters_by_ft) do
       opts.formatters_by_ft[ft] = opts.formatters_by_ft[ft] or {}
-      table.insert(opts.formatters_by_ft[ft], "biome")
+      table.insert(opts.formatters_by_ft[ft], "biome-check")
     end
+    opts.formatters["biome-check"] = {
+      require_cwd = true,
+    }
     return opts
   end,
 }

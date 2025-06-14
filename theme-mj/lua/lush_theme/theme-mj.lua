@@ -51,7 +51,7 @@ local theme = lush(function(injected_functions)
     TroubleFilename({ Directory }),
     ErrorMsg({ fg = "#ff423d" }),
     NvimInvalidSpacing({ ErrorMsg }),
-    IncSearch({ bg = "#ffd54d", fg = "white", gui = "bold underline" }),
+    IncSearch({ bg = "red", fg = "white", gui = "bold underline" }),
     CurSearch({ IncSearch }),
     MiniSurround({ IncSearch }),
     FzfLuaSearch({ IncSearch }),
