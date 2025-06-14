@@ -47,7 +47,7 @@ local function manipulate_yank_paste_register_behavior()
     '"zP',
     { desc = "Paste before from register a" }
   )
-  -- vim.keymap.set({ "n", "v" }, "x", '"_x', { desc = "Delete without register" })
+  vim.keymap.set({ "n", "v" }, "x", '"_x', { desc = "Delete without register" })
   vim.keymap.set({ "n", "v" }, "d", '"zd', { desc = "Delete without register" })
 end
 

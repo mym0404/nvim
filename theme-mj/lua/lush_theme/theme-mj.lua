@@ -470,6 +470,7 @@ local theme = lush(function(injected_functions)
     sym("@lsp.type.event")({ sym("@type") }),
     sym("@lsp.type.struct")({ fg = "#FFDAAD" }),
     sym("@lsp.type.class")({ fg = "#FFDAAD" }),
+    sym("@lsp.type.identifier")({ sym("@lsp.type.struct") }),
     sym("@lsp.type.type")({ sym("@type") }),
     sym("@module.elixir")({ sym("@type") }),
     SnacksPickerIconClass({ sym("@type") }),
