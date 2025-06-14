@@ -2,7 +2,6 @@
 -- Default options that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/options.lua
 -- Add any additional options here
 
-vim.g.snacks_animate = true
 local opt = vim.opt
 
 opt.number = true
@@ -12,20 +11,24 @@ opt.autowrite = true
 opt.swapfile = false
 opt.conceallevel = 0
 
-vim.g.lazyvim_prettier_needs_config = true
-vim.g.lazyvim_cmp = "nvim-cmp"
+opt.iminsert = 0
+opt.imsearch = 0
 
-vim.o.mouse = "a"
-vim.o.showmode = false
-vim.o.exrc = true
+vim.opt.cindent = true
+vim.opt.imsearch = 0
+vim.opt.imsearch = 0
+
+vim.opt.mouse = "a"
+vim.opt.showmode = false
+vim.opt.exrc = true
 
 vim.schedule(function()
-  vim.o.clipboard = "unnamedplus"
+  vim.opt.clipboard = "unnamedplus"
 end)
 
-vim.o.breakindent = true
-vim.o.ignorecase = true
-vim.o.smartcase = true
+vim.opt.breakindent = true
+vim.opt.ignorecase = true
+vim.opt.smartcase = true
 
 vim.api.nvim_create_autocmd("TextYankPost", {
   desc = "Highlight when yanking (copying) text",
@@ -37,4 +40,8 @@ vim.api.nvim_create_autocmd("TextYankPost", {
     vim.hl.on_yank()
   end,
 })
-vim.o.termguicolors = true
+vim.opt.termguicolors = true
+
+vim.g.lazyvim_prettier_needs_config = true
+vim.g.lazyvim_cmp = "nvim-cmp"
+vim.g.snacks_animate = true
