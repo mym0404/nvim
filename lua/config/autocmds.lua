@@ -18,3 +18,22 @@ vim.api.nvim_create_autocmd("BufEnter", {
     vim.diagnostic.config({ virtual_text = false })
   end,
 })
+
+local function set_english_input()
+  vim.fn.system("macism com.apple.keylayout.US")
+end
+
+vim.api.nvim_create_autocmd({ "InsertLeave", "FocusGained", "ModeChanged" }, {
+  callback = function(event)
+    if event.event == "InsertLeave" then
+      set_english_input()
+    elseif event.event == "ModeChanged" then
+      local mode_change = vim.fn.mode()
+      if mode_change == "n" then
+        set_english_input()
+      end
+    elseif event.event == "FocusGained" and vim.fn.mode() ~= "i" then
+      set_english_input()
+    end
+  end,
+})
