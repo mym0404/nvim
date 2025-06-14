@@ -10,6 +10,7 @@ opt.relativenumber = false
 opt.ambiwidth = "single"
 opt.autowrite = true
 opt.swapfile = false
+opt.conceallevel = 0
 
 vim.g.lazyvim_prettier_needs_config = true
 vim.g.lazyvim_cmp = "nvim-cmp"
@@ -28,7 +29,10 @@ vim.o.smartcase = true
 
 vim.api.nvim_create_autocmd("TextYankPost", {
   desc = "Highlight when yanking (copying) text",
-  group = vim.api.nvim_create_augroup("kickstart-highlight-yank", { clear = true }),
+  group = vim.api.nvim_create_augroup(
+    "kickstart-highlight-yank",
+    { clear = true }
+  ),
   callback = function()
     vim.hl.on_yank()
   end,

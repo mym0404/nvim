@@ -29,38 +29,90 @@ end
 
 local function customizeExitInsertMode()
   for _, key in ipairs({ "jj", "jk", "kj" }) do
-    vim.keymap.set({ "i" }, key, "<Esc>", { noremap = true, silent = true, desc = "Exit insert mode" })
+    vim.keymap.set(
+      { "i" },
+      key,
+      "<Esc>",
+      { noremap = true, silent = true, desc = "Exit insert mode" }
+    )
   end
 end
 
 local function manipulate_yank_paste_register_behavior()
   vim.keymap.set({ "n", "v" }, "y", '"zy', { desc = "Yank to register a" })
   vim.keymap.set({ "n", "v" }, "p", '"zp', { desc = "Paste from register a" })
-  vim.keymap.set({ "n", "v" }, "P", '"zP', { desc = "Paste before from register a" })
+  vim.keymap.set(
+    { "n", "v" },
+    "P",
+    '"zP',
+    { desc = "Paste before from register a" }
+  )
   -- vim.keymap.set({ "n", "v" }, "x", '"_x', { desc = "Delete without register" })
   vim.keymap.set({ "n", "v" }, "d", '"zd', { desc = "Delete without register" })
 end
 
 -- Resize windows
-vim.keymap.set("n", "<S-Right>", "<cmd>vertical resize +3<cr>", { desc = "Increase window width" })
-vim.keymap.set("n", "<S-Left>", "<cmd>vertical resize -3<cr>", { desc = "Decrease window width" })
-vim.keymap.set("n", "<S-Up>", "<cmd>resize +3<cr>", { desc = "Increase window height" })
-vim.keymap.set("n", "<S-Down>", "<cmd>resize -3<cr>", { desc = "Decrease window height" })
-
--- Quit visual mode with 'q'
-vim.keymap.set("x", "q", "<Esc>", { noremap = true, silent = true, desc = "Exit visual mode with q" })
-
--- Move visual
-vim.keymap.set("x", "<S-j>", ":move '>+1<CR>gv=gv", { noremap = true, silent = true, desc = "Move selection down" })
-vim.keymap.set("x", "<S-k>", ":move '<-2<CR>gv=gv", { noremap = true, silent = true, desc = "Move selection up" })
-
-vim.keymap.set("n", "<leader>z", "<cmd>DiffviewOpen<cr>", { noremap = true, silent = true, desc = "Open Diff View" })
 vim.keymap.set(
   "n",
-  "<leader>h",
-  "<cmd>DiffviewFileHistory<cr>",
-  { noremap = true, silent = true, desc = "Open Diff view file history" }
+  "<S-Right>",
+  "<cmd>vertical resize +3<cr>",
+  { desc = "Increase window width" }
 )
+vim.keymap.set(
+  "n",
+  "<S-Left>",
+  "<cmd>vertical resize -3<cr>",
+  { desc = "Decrease window width" }
+)
+vim.keymap.set(
+  "n",
+  "<S-Up>",
+  "<cmd>resize +3<cr>",
+  { desc = "Increase window height" }
+)
+vim.keymap.set(
+  "n",
+  "<S-Down>",
+  "<cmd>resize -3<cr>",
+  { desc = "Decrease window height" }
+)
+
+-- Quit visual mode with 'q'
+vim.keymap.set(
+  "x",
+  "q",
+  "<Esc>",
+  { noremap = true, silent = true, desc = "Exit visual mode with q" }
+)
+
+-- Move visual
+vim.keymap.set(
+  "x",
+  "<S-j>",
+  ":move '>+1<CR>gv=gv",
+  { noremap = true, silent = true, desc = "Move selection down" }
+)
+vim.keymap.set(
+  "x",
+  "<S-k>",
+  ":move '<-2<CR>gv=gv",
+  { noremap = true, silent = true, desc = "Move selection up" }
+)
+
+local function configure_git_diff()
+  vim.keymap.set(
+    "n",
+    "<leader>z",
+    "<cmd>DiffviewOpen<cr>",
+    { noremap = true, silent = true, desc = "Open Diff View" }
+  )
+  vim.keymap.set(
+    "n",
+    "<leader>h",
+    "<cmd>DiffviewFileHistory %<cr>",
+    { noremap = true, silent = true, desc = "Open Diff view file history" }
+  )
+end
 
 vim.keymap.set("n", "<C-w>", function()
   local tab_count = vim.fn.tabpagenr("$")
@@ -69,21 +121,30 @@ vim.keymap.set("n", "<C-w>", function()
   else
     vim.cmd("bdelete")
   end
-end, { noremap = true, silent = true, desc = "Close tab if multiple tabs, else close buffer" })
+end, {
+  noremap = true,
+  silent = true,
+  desc = "Close tab if multiple tabs, else close buffer",
+})
 
 vim.keymap.set("n", "<CR>", "i<CR>", { desc = "New line on normal mode" })
 
-vim.keymap.set("n", "<leader>gr", function()
-  local filepath = vim.fn.expand("%")
-  if filepath == "" then
-    print("No file to restore")
-    return
-  end
-  vim.cmd("silent !git restore " .. filepath)
-  print("Discarded changes in " .. filepath)
-  vim.cmd("edit!")
-  -- vim.cmd("normal! <Esc>")
-end, { noremap = true, silent = true, desc = "Git discard current file changes" })
+vim.keymap.set(
+  "n",
+  "<leader>gr",
+  function()
+    local filepath = vim.fn.expand("%")
+    if filepath == "" then
+      print("No file to restore")
+      return
+    end
+    vim.cmd("silent !git restore " .. filepath)
+    print("Discarded changes in " .. filepath)
+    vim.cmd("edit!")
+    -- vim.cmd("normal! <Esc>")
+  end,
+  { noremap = true, silent = true, desc = "Git discard current file changes" }
+)
 
 vim.keymap.set("x", "<leader>gr", function()
   local start_line, end_line = utils.get_start_and_end_lines()
@@ -103,3 +164,4 @@ reset_keymaps()
 setup_comments()
 manipulate_yank_paste_register_behavior()
 customizeExitInsertMode()
+configure_git_diff()
