@@ -41,7 +41,7 @@ return {
       accept = {
         -- experimental auto-brackets support
         auto_brackets = {
-          enabled = false,
+          enabled = true,
         },
       },
       list = {
@@ -53,16 +53,20 @@ return {
       menu = {
         draw = {
           treesitter = { "lsp" },
+          columns = {
+            { "kind_icon", gap = 1 },
+            { "label", "label_description" },
+          },
         },
       },
 
       documentation = {
         auto_show = true,
-        auto_show_delay_ms = 300,
+        auto_show_delay_ms = 500,
       },
       ghost_text = {
-        -- enabled = vim.g.ai_cmp,
-        enabled = false,
+        enabled = vim.g.ai_cmp,
+        -- enabled = true,
       },
     },
     -- experimental signature help support
@@ -78,15 +82,17 @@ return {
     cmdline = {
       enabled = true,
       keymap = {
-        ["<tab>"] = { "show" },
+        ["<tab>"] = { "select_next" },
+        ["<s-tab>"] = { "select_prev" },
         ["<CR>"] = { "accept_and_enter", "fallback" },
       },
       completion = { menu = { auto_show = true } },
     },
 
     keymap = {
-      preset = "enter",
-      ["<C-y>"] = { "select_and_accept" },
+      ["<tab>"] = { "select_next" },
+      ["<s-tab>"] = { "select_prev" },
+      ["<CR>"] = { "accept", "fallback" },
     },
   },
   ---@param opts blink.cmp.Config | { sources: { compat: string[] } }
