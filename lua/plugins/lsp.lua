@@ -1,3 +1,6 @@
+if true then
+  return {}
+end
 return {
   "neovim/nvim-lspconfig",
   event = { "BufReadPre", "BufNewFile", "LazyFile" },
@@ -162,7 +165,10 @@ return {
       end
     end
 
-    if type(opts.diagnostics.virtual_text) == "table" and opts.diagnostics.virtual_text.prefix == "icons" then
+    if
+      type(opts.diagnostics.virtual_text) == "table"
+      and opts.diagnostics.virtual_text.prefix == "icons"
+    then
       opts.diagnostics.virtual_text.prefix = vim.fn.has("nvim-0.10.0") == 0 and "●"
         or function(diagnostic)
           local icons = LazyVim.config.icons.diagnostics
@@ -212,7 +218,8 @@ return {
     local have_mason, mlsp = pcall(require, "mason-lspconfig")
     local all_mslp_servers = {}
     if have_mason then
-      all_mslp_servers = vim.tbl_keys(require("mason-lspconfig.mappings.server").lspconfig_to_package)
+      all_mslp_servers =
+        vim.tbl_keys(require("mason-lspconfig.mappings.server").lspconfig_to_package)
     end
 
     local ensure_installed = {} ---@type string[]

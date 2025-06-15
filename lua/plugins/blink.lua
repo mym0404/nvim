@@ -76,7 +76,12 @@ return {
     },
 
     cmdline = {
-      enabled = false,
+      enabled = true,
+      keymap = {
+        ["<tab>"] = { "show" },
+        ["<CR>"] = { "accept_and_enter", "fallback" },
+      },
+      completion = { menu = { auto_show = true } },
     },
 
     keymap = {
