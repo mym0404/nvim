@@ -1123,11 +1123,7 @@ local theme = lush(function(injected_functions)
       fg = "#e6edf3",
       gui = "bold,nocombine",
     }),
-    lualine_c_16_LV_MatchParen_inactive({
-      bg = "#04070d",
-      fg = "#e6edf3",
-      gui = "bold,nocombine",
-    }),
+    lualine_c_16_LV_MatchParen_inactive({ bg = "#04070d", fg = "#e6edf3", gui = "bold,nocombine" }),
     lualine_transitional_lualine_b_normal_to_lualine_c_diagnostics_error_normal({
       bg = "#0e1219",
       fg = "#1c2f45",
