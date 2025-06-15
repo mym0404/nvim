@@ -85,7 +85,7 @@ return {
         ["<tab>"] = { "select_next" },
         ["<s-tab>"] = { "select_prev" },
         ["<CR>"] = { "accept_and_enter", "fallback" },
-        ["<esc>"] = { "hide", "fallback" },
+        -- ["<esc>"] = { "hide", "fallback" },
       },
       completion = { menu = { auto_show = true } },
     },
@@ -94,7 +94,7 @@ return {
       ["<tab>"] = { "select_next" },
       ["<s-tab>"] = { "select_prev" },
       ["<CR>"] = { "accept", "fallback" },
-      ["<esc>"] = { "hide", "fallback" },
+      -- ["<esc>"] = { "hide", "fallback" },
     },
   },
   ---@param opts blink.cmp.Config | { sources: { compat: string[] } }
