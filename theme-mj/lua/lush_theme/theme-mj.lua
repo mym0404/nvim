@@ -3,16 +3,13 @@ local lush = require("lush")
 local hsl = lush.hsl
 local hsluv = lush.hsluv
 
-local fg = {
-  text = "#ffffff",
-  border = "#424242",
-}
+local text = { fg = "#ffffff" }
+local border = { fg = "#424242" }
 local bg = {
   selected = "#324963",
   search = "#0269c9",
 }
 local vcs = {}
-local border = { fg = fg.border }
 local error = { fg = "#FD9491" }
 local error_line = { fg = error.fg, bg = "#772e2c" }
 local warn = { fg = "#EED45F" }
@@ -25,8 +22,8 @@ local hint_line = { fg = hint.fg, bg = "#222222" }
 local theme = lush(function(injected_functions)
   local sym = injected_functions.sym
   return {
-    Search({ bg = bg.search, fg = fg.text, gui = "bold underline" }),
-    Normal({ fg = fg.text }),
+    Search({ bg = bg.search, fg = text.fg, gui = "bold underline" }),
+    Normal({ fg = text.fg }),
     Visual({ bg = bg.selected }),
 
     Error(error),
@@ -53,7 +50,6 @@ local theme = lush(function(injected_functions)
     sym("@variable.member.nix")({ sym("@variable.member") }),
     TabLineFill({}),
     lualine_c_16_LV_MatchParen_inactive({ bg = "#04070d", fg = "#e6edf3", gui = "bold,nocombine" }),
-    BufferLineMiniIconsAzureSelected({ bg = "#0d1117", fg = "#79c0ff" }),
     GitSignsStagedUntrackedCul({ fg = "#1f5c28" }),
     GitSignsStagedTopdeleteCul({ fg = "#7c2824" }),
     GitSignsStagedChangedeleteCul({ fg = "#694c11" }),
@@ -77,65 +73,6 @@ local theme = lush(function(injected_functions)
     GitSignsStagedChange({ fg = "#694c11" }),
     GitSignsStagedAdd({ fg = "#1f5c28" }),
     NoiceFormatProgressDone({ bg = "#3c3b33" }),
-    BufferLineBackground({ fg = "#8b949e" }),
-    BufferLineBuffer({ fg = "#8b949e" }),
-    BufferLineBufferSelected({ fg = "#e6edf3", gui = "bold " }),
-    BufferLineBufferVisible({ fg = "#8b949e" }),
-    BufferLineCloseButton({ fg = "#8b949e" }),
-    BufferLineCloseButtonSelected({ fg = "#e6edf3" }),
-    BufferLineCloseButtonVisible({ fg = "#8b949e" }),
-    BufferLineDiagnostic({ fg = "#686f76" }),
-    BufferLineDiagnosticSelected({ fg = "#acb1b6", gui = "bold " }),
-    BufferLineDiagnosticVisible({ fg = "#686f76" }),
-    BufferLineDuplicate({ fg = "#848c96" }),
-    BufferLineDuplicateSelected({ fg = "#848c96", gui = "italic" }),
-    BufferLineDuplicateVisible({ fg = "#848c96" }),
-    BufferLineError(error),
-    BufferLineErrorDiagnostic(error),
-    BufferLineErrorDiagnosticSelected(error),
-    BufferLineErrorDiagnosticVisible(error),
-    BufferLineErrorSelected(error),
-    BufferLineErrorVisible(error),
-    BufferLineGroupLabel({ fg = "#07090c" }),
-    BufferLineGroupSeparator({ fg = "#8b949e" }),
-    BufferLineHint(hint),
-    BufferLineHintDiagnostic(hint),
-    BufferLineHintDiagnosticSelected(hint),
-    BufferLineHintDiagnosticVisible(hint),
-    BufferLineHintSelected(hint),
-    BufferLineHintVisible({ fg = "#8b949e" }),
-    BufferLineIndicatorVisible({ fg = "#0b0f15" }),
-    BufferLineInfo(info),
-    BufferLineInfoDiagnostic(info),
-    BufferLineInfoDiagnosticSelected(info),
-    BufferLineInfoDiagnosticVisible(info),
-    BufferLineInfoSelected(info),
-    BufferLineInfoVisible(info),
-    BufferLineModified({ fg = "#a5d6ff" }),
-    BufferLineModifiedSelected({ fg = "#a5d6ff" }),
-    BufferLineModifiedVisible({ fg = "#a5d6ff" }),
-    BufferLineNumbers({ fg = "#8b949e" }),
-    BufferLineNumbersSelected({ fg = "#e6edf3", gui = "bold " }),
-    BufferLineNumbersVisible({ fg = "#8b949e" }),
-    BufferLineOffsetSeparator({ fg = "#161b22" }),
-    BufferLinePick({ fg = "#f85149", gui = "bold " }),
-    BufferLinePickSelected({ fg = "#f85149", gui = "bold " }),
-    BufferLinePickVisible({ fg = "#f85149", gui = "bold " }),
-    BufferLineSeparator({ fg = "#07090c" }),
-    BufferLineSeparatorSelected({ fg = "#07090c" }),
-    BufferLineSeparatorVisible({ fg = "#07090c" }),
-    BufferLineTab({ fg = "#8b949e" }),
-    BufferLineTabClose({ fg = "#8b949e" }),
-    BufferLineTabSelected({ fg = "#6e7681" }),
-    BufferLineTabSeparator({ fg = "#07090c" }),
-    BufferLineTabSeparatorSelected({ fg = "#07090c" }),
-    BufferLineTruncMarker({ fg = "#8b949e" }),
-    BufferLineWarning(warn),
-    BufferLineWarningDiagnostic(warn),
-    BufferLineWarningDiagnosticSelected(warn),
-    BufferLineWarningDiagnosticVisible(warn),
-    BufferLineWarningSelected(warn),
-    BufferLineWarningVisible(warn),
     TodoSignNOTE({ fg = "#7d8590" }),
     TodoFgNOTE({ fg = "#7d8590" }),
     TodoBgNOTE({ bg = "#7d8590", fg = "#0d1117", gui = "bold" }),
@@ -279,7 +216,6 @@ local theme = lush(function(injected_functions)
     MiniIconsGreen({ fg = "#56d364" }),
     MiniIconsBlue({ fg = "#58a6ff" }),
     sym("@markup.list.checked")({ fg = "#3fb950" }),
-    BufferLineIndicatorSelected({ bg = "#0d1117", fg = "#6e7681" }),
     diffOldFile({ fg = "#d29922" }),
     sym("@markup.list.unchecked")({ fg = "#6e7681" }),
     GitSignsAdd({ fg = "#AEE8AF" }),
@@ -327,7 +263,7 @@ local theme = lush(function(injected_functions)
     sym("@comment.todo")({ bg = "#7d8590", fg = "#0d1117" }),
     sym("@comment.warning")({ bg = "#d29922", fg = "#0d1117" }),
     sym("@comment.error")({ bg = "#f85149", fg = "#0d1117" }),
-    Operator({ fg = fg.text }),
+    Operator({ fg = text.fg }),
     sym("@constructor")({ fg = "#ffa657" }),
     Function({ fg = "#C7FFB8" }),
     Identifier({ fg = "#e6edf3" }),
@@ -335,7 +271,7 @@ local theme = lush(function(injected_functions)
     sym("@lsp.type.struct")({ fg = "#FFDAAD" }),
     sym("@lsp.type.enum")({ fg = "#FFDAAD" }),
     sym("@lsp.type.type.typescript")({ fg = "#79c0ff" }),
-    sym("@type")({ fg = fg.text }),
+    sym("@type")({ fg = text.fg }),
     sym("@string.special.url")({ fg = "#79c0ff", gui = "underline " }),
     sym("@string.escape")({ fg = "#a5d6ff", gui = "bold" }),
     sym("@string.regexp")({ fg = "#a5d6ff" }),
@@ -997,6 +933,68 @@ local theme = lush(function(injected_functions)
     xmlTagName({ htmlTag }),
     YankyPut({ Search }),
     YankyYanked({ Search }),
+    -- BufferLineBackground({ fg = text.fg }), -- BufferLineBackground xxx guifg=#8b949e
+    -- BufferLineBuffer({ fg = text.fg }), -- BufferLineBuffer xxx guifg=#7ae755
+    -- BufferLineBufferSelected({ fg = "#ffffff", gui = "bold" }), -- BufferLineBufferSelected xxx cterm=bold gui=bold guifg=#ffffff
+    -- BufferLineBufferVisible({ fg = text.fg }), -- BufferLineBufferVisible xxx guifg=#7ae755
+    -- BufferLineCloseButton({ fg = "#8b949e" }), -- BufferLineCloseButton xxx guifg=#8b949e
+    -- BufferLineCloseButtonSelected({ fg = "#ffffff" }), -- BufferLineCloseButtonSelected xxx guifg=#ffffff
+    -- BufferLineCloseButtonVisible({ fg = text.fg }), -- BufferLineCloseButtonVisible xxx guifg=#7ae755
+    -- BufferLineDiagnostic({ fg = "#686f76" }), -- BufferLineDiagnostic xxx guifg=#686f76
+    -- BufferLineDiagnosticSelected({ fg = "#bfbfbf", gui = "bold" }), -- BufferLineDiagnosticSelected xxx cterm=bold gui=bold guifg=#bfbfbf
+    -- BufferLineDiagnosticVisible({ fg = "#5bad3f" }), -- BufferLineDiagnosticVisible xxx guifg=#5bad3f
+    -- BufferLineDuplicate({ fg = "#848c96" }), -- BufferLineDuplicate xxx guifg=#848c96
+    -- BufferLineDuplicateSelected({ fg = "#73db50", gui = "italic" }), -- BufferLineDuplicateSelected xxx cterm=italic gui=italic guifg=#73db50
+    -- BufferLineDuplicateVisible({ fg = "#73db50", gui = "italic" }), -- BufferLineDuplicateVisible xxx cterm=italic gui=italic guifg=#73db50
+    -- BufferLineError({ fg = "#fd9491" }), -- BufferLineError xxx guifg=#fd9491
+    -- BufferLineErrorDiagnostic({ fg = "#fd9491" }), -- BufferLineErrorDiagnostic xxx guifg=#fd9491
+    -- BufferLineErrorDiagnosticSelected({ fg = "#bd6f6c", sp = "#bd6f6c", gui = "bold" }), -- BufferLineErrorDiagnosticSelected xxx cterm=bold gui=bold guifg=#bd6f6c guisp=#bd6f6c
+    -- BufferLineErrorDiagnosticVisible({ fg = "#5bad3f" }), -- BufferLineErrorDiagnosticVisible xxx guifg=#5bad3f
+    -- BufferLineErrorSelected({ fg = "#fd9491", sp = "#fd9491", gui = "bold" }), -- BufferLineErrorSelected xxx cterm=bold gui=bold guifg=#fd9491 guisp=#fd9491
+    -- BufferLineErrorVisible({ fg = text.fg }), -- BufferLineErrorVisible xxx guifg=#7ae755
+    -- BufferLineFill({ fg = text.fg }), -- BufferLineFill xxx guifg=#7ae755
+    -- BufferLineGroupLabel({ fg = "#07090c" }), -- BufferLineGroupLabel xxx guifg=#07090c
+    -- BufferLineGroupSeparator({ fg = "#8b949e" }), -- BufferLineGroupSeparator xxx guifg=#8b949e
+    BufferLineHint({ fg = "red" }), -- BufferLineHint xxx guifg=#7d8590
+    -- BufferLineHintDiagnostic({ fg = "#7d8590" }), -- BufferLineHintDiagnostic xxx guifg=#7d8590
+    -- BufferLineHintDiagnosticSelected({ fg = "#5d636c", sp = "#5d636c", gui = "bold" }), -- BufferLineHintDiagnosticSelected xxx cterm=bold gui=bold guifg=#5d636c guisp=#5d636c
+    -- BufferLineHintDiagnosticVisible({ fg = "#5bad3f" }), -- BufferLineHintDiagnosticVisible xxx guifg=#5bad3f
+    -- BufferLineHintSelected({ fg = "#7d8590", sp = "#7d8590", gui = "bold" }), -- BufferLineHintSelected xxx cterm=bold gui=bold guifg=#7d8590 guisp=#7d8590
+    -- BufferLineHintVisible({ fg = text.fg }), -- BufferLineHintVisible xxx guifg=#7ae755
+    -- BufferLineIndicatorSelected({ fg = "#6e7681", bg = "#0d1117" }), -- BufferLineIndicatorSelected xxx guifg=#6e7681 guibg=#0d1117
+    -- BufferLineIndicatorVisible({ fg = "#0b0f15" }), -- BufferLineIndicatorVisible xxx guifg=#0b0f15
+    -- BufferLineInfo({ fg = "#2f81f7" }), -- BufferLineInfo xxx guifg=#2f81f7
+    -- BufferLineInfoDiagnostic({ fg = "#2f81f7" }), -- BufferLineInfoDiagnostic xxx guifg=#2f81f7
+    -- BufferLineInfoDiagnosticSelected({ fg = "#2360b9", sp = "#2360b9", gui = "bold" }), -- BufferLineInfoDiagnosticSelected xxx cterm=bold gui=bold guifg=#2360b9 guisp=#2360b9
+    -- BufferLineInfoDiagnosticVisible({ fg = "#5bad3f" }), -- BufferLineInfoDiagnosticVisible xxx guifg=#5bad3f
+    -- BufferLineInfoSelected({ fg = "#2f81f7", sp = "#2f81f7", gui = "bold" }), -- BufferLineInfoSelected xxx cterm=bold gui=bold guifg=#2f81f7 guisp=#2f81f7
+    -- BufferLineInfoVisible({ fg = text.fg }), -- BufferLineInfoVisible xxx guifg=#7ae755
+    -- BufferLineMiniIconsAzure({ fg = "#79c0ff" }), -- BufferLineMiniIconsAzure xxx guifg=#79c0ff
+    -- BufferLineMiniIconsAzureInactive({ fg = "#79c0ff" }), -- BufferLineMiniIconsAzureInactive xxx guifg=#79c0ff
+    -- BufferLineMiniIconsAzureSelected({ fg = "#79c0ff", bg = "#0d1117" }), -- BufferLineMiniIconsAzureSelected xxx guifg=#79c0ff guibg=#0d1117
+    -- BufferLineModified({ fg = "#a5d6ff" }), -- BufferLineModified xxx guifg=#a5d6ff
+    -- BufferLineModifiedSelected({ fg = "#fffcd7" }), -- BufferLineModifiedSelected xxx guifg=#fffcd7
+    -- BufferLineModifiedVisible({ fg = "#fffcd7" }), -- BufferLineModifiedVisible xxx guifg=#fffcd7
+    -- BufferLineNumbers({ fg = "#8b949e" }), -- BufferLineNumbers xxx guifg=#8b949e
+    -- BufferLineNumbersSelected({ fg = "#ffffff", gui = "bold" }), -- BufferLineNumbersSelected xxx cterm=bold gui=bold guifg=#ffffff
+    -- BufferLineNumbersVisible({ fg = text.fg }), -- BufferLineNumbersVisible xxx guifg=#7ae755
+    -- BufferLineOffsetSeparator({ fg = "#161b22" }), -- BufferLineOffsetSeparator xxx guifg=#161b22
+    -- BufferLinePick({ fg = "#f85149", gui = "bold" }), -- BufferLinePick xxx cterm=bold gui=bold guifg=#f85149
+    -- BufferLinePickSelected({ fg = "#fd9491", gui = "bold" }), -- BufferLinePickSelected xxx cterm=bold gui=bold guifg=#fd9491
+    -- BufferLinePickVisible({ fg = "#fd9491", gui = "bold" }), -- BufferLinePickVisible xxx cterm=bold gui=bold guifg=#fd9491
+    -- BufferLineSeparator({ fg = "#07090c" }), -- BufferLineSeparator xxx guifg=#07090c
+    -- BufferLineTab({ fg = "#8b949e" }), -- BufferLineTab  xxx guifg=#8b949e
+    -- BufferLineTabClose({ fg = "#8b949e" }), -- BufferLineTabClose xxx guifg=#8b949e
+    -- BufferLineTabSelected({ fg = "#6e7681" }), -- BufferLineTabSelected xxx guifg=#6e7681
+    -- BufferLineTabSeparator({ fg = "#07090c" }), -- BufferLineTabSeparator xxx guifg=#07090c
+    -- BufferLineTabSeparatorSelected({ fg = "#07090c" }), -- BufferLineTabSeparatorSelected xxx guifg=#07090c
+    -- BufferLineTruncMarker({ fg = "#8b949e" }), -- BufferLineTruncMarker xxx guifg=#8b949e
+    BufferLineWarning({ fg = "#eed45f" }), -- BufferLineWarning xxx guifg=#eed45f
+    BufferLineWarningDiagnostic({ fg = "#eed45f" }), -- BufferLineWarningDiagnostic xxx guifg=#eed45f
+    BufferLineWarningDiagnosticSelected({ fg = "#eed45f" }), -- BufferLineWarningDiagnosticSelected xxx guifg=#eed45f
+    BufferLineWarningDiagnosticVisible({ fg = "#eed45f" }), -- BufferLineWarningDiagnosticVisible xxx guifg=#eed45f
+    BufferLineWarningSelected({ fg = "#eed45f" }), -- BufferLineWarningSelected xxx guifg=#eed45f
+    BufferLineWarningVisible({ fg = "#eed45f" }), -- BufferLineWarningVisible xxx guifg=#eed45f
   }
 end)
 return theme
