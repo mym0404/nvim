@@ -8,7 +8,8 @@ local fg = {
   border = "#424242",
 }
 local bg = {
-  selected = "",
+  selected = "#324963",
+  search = "#0269c9",
 }
 local vcs = {}
 local border = { fg = fg.border }
@@ -16,8 +17,9 @@ local border = { fg = fg.border }
 local theme = lush(function(injected_functions)
   local sym = injected_functions.sym
   return {
-    Search({ bg = "#0269c9", fg = fg.text, gui = "bold underline" }),
+    Search({ bg = bg.search, fg = fg.text, gui = "bold underline" }),
     Normal({ fg = fg.text }),
+    Visual({ bg = bg.selected }),
     TermCursor({ gui = "reverse" }),
     LineNr({ fg = "#6e7681" }),
     LineNrAbove({ LineNr }),
@@ -354,7 +356,6 @@ local theme = lush(function(injected_functions)
     FoldColumn({ fg = "#6e7681" }),
     Folded({ bg = "#171b22", fg = "#6e7681" }),
     WarningMsg({ fg = "#d29922" }),
-    Visual({ bg = "#324963" }),
     Title({ fg = "#79c0ff", gui = "bold" }),
     VertSplit({ fg = "#161b22" }),
     WinSeparator({ fg = "#161b22" }),
@@ -378,7 +379,6 @@ local theme = lush(function(injected_functions)
     BufferLineInfoDiagnosticSelected({ fg = "#2360b9", gui = "bold,italic", sp = "#2360b9" }),
     BufferLineInfoSelected({ fg = "#2f81f7", gui = "bold,italic", sp = "#2f81f7" }),
     BufferLineHintDiagnosticSelected({ fg = "#5d636c", gui = "bold,italic", sp = "#5d636c" }),
-    -- this is fucking important, don't remove it - by copilot
     BufferLineHintSelected({ fg = "white", gui = "bold", sp = "#7d8590" }),
     BufferLineDiagnosticSelected({ fg = "#acb1b6", gui = "bold,italic" }),
     BufferLineNumbersSelected({ fg = "#e6edf3", gui = "bold,italic" }),
@@ -414,21 +414,9 @@ local theme = lush(function(injected_functions)
       fg = "#173322",
       gui = "nocombine",
     }),
-    lualine_c_filetype_MiniIconsAzure_normal({
-      bg = "#0e1219",
-      fg = "#79c0ff",
-      gui = "nocombine",
-    }),
-    lualine_c_filetype_MiniIconsAzure_insert({
-      bg = "#0e1318",
-      fg = "#79c0ff",
-      gui = "nocombine",
-    }),
-    lualine_c_filetype_MiniIconsAzure_visual({
-      bg = "#0f1217",
-      fg = "#79c0ff",
-      gui = "nocombine",
-    }),
+    lualine_c_filetype_MiniIconsAzure_normal({ bg = "#0e1219", fg = "#79c0ff", gui = "nocombine" }),
+    lualine_c_filetype_MiniIconsAzure_insert({ bg = "#0e1318", fg = "#79c0ff", gui = "nocombine" }),
+    lualine_c_filetype_MiniIconsAzure_visual({ bg = "#0f1217", fg = "#79c0ff", gui = "nocombine" }),
     lualine_c_filetype_MiniIconsAzure_replace({
       bg = "#0f1218",
       fg = "#79c0ff",
@@ -449,41 +437,13 @@ local theme = lush(function(injected_functions)
       fg = "#79c0ff",
       gui = "nocombine",
     }),
-    lualine_c_16_LV_Bold_normal({
-      bg = "#0e1219",
-      fg = "#3a6aa2",
-      gui = "bold,nocombine",
-    }),
-    lualine_c_16_LV_Bold_insert({
-      bg = "#0e1318",
-      fg = "#2b7639",
-      gui = "bold,nocombine",
-    }),
-    lualine_c_16_LV_Bold_visual({
-      bg = "#0f1217",
-      fg = "#83631e",
-      gui = "bold,nocombine",
-    }),
-    lualine_c_16_LV_Bold_replace({
-      bg = "#0f1218",
-      fg = "#9e514e",
-      gui = "bold,nocombine",
-    }),
-    lualine_c_16_LV_Bold_command({
-      bg = "#0f1319",
-      fg = "#836ca2",
-      gui = "bold,nocombine",
-    }),
-    lualine_c_16_LV_Bold_terminal({
-      bg = "#0f1217",
-      fg = "#95582e",
-      gui = "bold,nocombine",
-    }),
-    lualine_c_16_LV_Bold_inactive({
-      bg = "#04070d",
-      fg = "#4e5359",
-      gui = "bold,nocombine",
-    }),
+    lualine_c_16_LV_Bold_normal({ bg = "#0e1219", fg = "#3a6aa2", gui = "bold,nocombine" }),
+    lualine_c_16_LV_Bold_insert({ bg = "#0e1318", fg = "#2b7639", gui = "bold,nocombine" }),
+    lualine_c_16_LV_Bold_visual({ bg = "#0f1217", fg = "#83631e", gui = "bold,nocombine" }),
+    lualine_c_16_LV_Bold_replace({ bg = "#0f1218", fg = "#9e514e", gui = "bold,nocombine" }),
+    lualine_c_16_LV_Bold_command({ bg = "#0f1319", fg = "#836ca2", gui = "bold,nocombine" }),
+    lualine_c_16_LV_Bold_terminal({ bg = "#0f1217", fg = "#95582e", gui = "bold,nocombine" }),
+    lualine_c_16_LV_Bold_inactive({ bg = "#04070d", fg = "#4e5359", gui = "bold,nocombine" }),
     lualine_transitional_lualine_b_normal_to_lualine_c_13_normal({
       bg = "#0e1219",
       fg = "#1c2f45",
@@ -509,42 +469,17 @@ local theme = lush(function(injected_functions)
       fg = "#342f45",
       gui = "nocombine",
     }),
-    lualine_c_16_LV_MatchParen_normal({
-      bg = "#0e1219",
-      fg = "#e6edf3",
-      gui = "bold,nocombine",
-    }),
-    lualine_c_16_LV_MatchParen_insert({
-      bg = "#0e1318",
-      fg = "#e6edf3",
-      gui = "bold,nocombine",
-    }),
-    lualine_c_16_LV_MatchParen_visual({
-      bg = "#0f1217",
-      fg = "#e6edf3",
-      gui = "bold,nocombine",
-    }),
-    lualine_c_16_LV_MatchParen_replace({
-      bg = "#0f1218",
-      fg = "#e6edf3",
-      gui = "bold,nocombine",
-    }),
-    lualine_c_16_LV_MatchParen_command({
-      bg = "#0f1319",
-      fg = "#e6edf3",
-      gui = "bold,nocombine",
-    }),
-    lualine_c_16_LV_MatchParen_terminal({
-      bg = "#0f1217",
-      fg = "#e6edf3",
-      gui = "bold,nocombine",
-    }),
+    lualine_c_16_LV_MatchParen_normal({ bg = "#0e1219", fg = "#e6edf3", gui = "bold,nocombine" }),
+    lualine_c_16_LV_MatchParen_insert({ bg = "#0e1318", fg = "#e6edf3", gui = "bold,nocombine" }),
+    lualine_c_16_LV_MatchParen_visual({ bg = "#0f1217", fg = "#e6edf3", gui = "bold,nocombine" }),
+    lualine_c_16_LV_MatchParen_replace({ bg = "#0f1218", fg = "#e6edf3", gui = "bold,nocombine" }),
+    lualine_c_16_LV_MatchParen_command({ bg = "#0f1319", fg = "#e6edf3", gui = "bold,nocombine" }),
+    lualine_c_16_LV_MatchParen_terminal({ bg = "#0f1217", fg = "#e6edf3", gui = "bold,nocombine" }),
     lualine_transitional_lualine_b_normal_to_lualine_c_diagnostics_error_normal({
       bg = "#0e1219",
       fg = "#1c2f45",
       gui = "nocombine",
     }),
-    --
     BlinkCmpDoc({ NormalFloat }),
     BlinkCmpDocBorder(border),
     BlinkCmpDocCursorLine({ Visual }),
