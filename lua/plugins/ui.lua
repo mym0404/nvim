@@ -69,6 +69,24 @@ return {
             -- ignored = true,
           },
         },
+        explorer = {
+          win = {
+            list = {
+              keys = {
+                ["<F1>"] = "explorer_rename",
+              },
+            },
+          },
+        },
+      },
+    },
+    keys = {
+      {
+        "<F1>",
+        function()
+          Snacks.explorer.reveal()
+        end,
+        desc = "Reveal in explorer",
       },
     },
   },

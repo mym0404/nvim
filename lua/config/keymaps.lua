@@ -167,13 +167,12 @@ vim.keymap.set("x", "<leader>gr", function()
 end, { noremap = true, silent = true, desc = "Git restore selected lines" })
 
 local function map_rename()
-  vim.keymap.set({ "n" }, "<F6>", function()
-    vim.api.nvim_feedkeys(
-      vim.api.nvim_replace_termcodes("<leader>cr", true, false, true),
-      "n",
-      false
-    )
-  end, { desc = "LSP Rename" })
+  -- vim.keymap.set("n", "<F6>", ":IncRename ", {})
+  vim.keymap.set("n", "<F6>", function()
+    local keys =
+      vim.api.nvim_replace_termcodes(":IncRename ", true, false, true)
+    vim.api.nvim_feedkeys(keys, "n", false)
+  end, {})
 end
 
 reset_keymaps()
