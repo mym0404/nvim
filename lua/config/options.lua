@@ -5,7 +5,7 @@
 local opt = vim.opt
 
 opt.number = true
-opt.relativenumber = false
+opt.relativenumber = true
 opt.ambiwidth = "single"
 opt.autowrite = true
 opt.swapfile = false
