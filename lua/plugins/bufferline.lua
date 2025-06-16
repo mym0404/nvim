@@ -25,6 +25,11 @@ return {
       right_trunc_marker = "",
       always_show_bufferline = true,
       tab_size = 18,
+      indicator = {
+        style = "icon",
+        icon = "▎",
+      },
+      color_icons = true,
       diagnostics = "nvim_lsp",
       diagnostics_indicator = function(_, _, diag)
         return ""
@@ -33,7 +38,7 @@ return {
       show_buffer_close_icons = false,
       show_close_icon = false,
       show_tab_indicators = true,
-      separator_style = "thick",
+      separator_style = { "", "" },
     },
   },
   -- config = function(_, opts)
