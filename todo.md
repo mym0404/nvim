@@ -1,3 +1,3 @@
-- fix delay on save
-- {} <> 사이에서 엔터 칠 때 잘 처리해주기
 - string 에선 completion 안되게 
+- recording keymap
+- hunk based line discard

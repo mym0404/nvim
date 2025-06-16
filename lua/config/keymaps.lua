@@ -160,12 +160,18 @@ local function map_delete_file()
 end
 
 local function map_enter()
-  vim.keymap.set("i", "<cr>", function()
+  vim.keymap.set({ "n", "i" }, "<cr>", function()
+    local prefix = vim.api.nvim_get_mode().mode == "n" and "i" or ""
     if utils.is_in_pairs() then
-      return "<cr><esc>O"
+      return prefix .. "<cr><esc>O"
     end
-    return "<cr>"
+    return prefix .. "<cr>"
   end, { expr = true })
+end
+
+local function map_recording()
+  vim.keymap.set("n", "q", "qt", { desc = "start recording with register t" })
+  vim.keymap.set("n", "@", "@t", { desc = "run recording with register t" })
 end
 
 reset_keymaps()
@@ -180,3 +186,4 @@ map_close_tap_or_buffer()
 map_rename()
 map_delete_file()
 map_enter()
+map_recording()
