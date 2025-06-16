@@ -36,9 +36,6 @@ return {
       -- adjusts spacing to ensure icons are aligned
       nerd_font_variant = "mono",
     },
-    enabled = function ()
-     return vim.editor 
-    end
     completion = {
       keyword = { range = "prefix" },
       accept = {

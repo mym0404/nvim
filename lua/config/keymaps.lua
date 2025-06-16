@@ -118,8 +118,6 @@ local function map_close_tap_or_buffer()
   })
 end
 
-vim.keymap.set("n", "<CR>", "i<CR>", { desc = "New line on normal mode" })
-
 vim.keymap.set("n", "<leader>gr", function()
   local filepath = vim.fn.expand("%")
   if filepath == "" then
@@ -156,10 +154,18 @@ local function map_delete_file()
   vim.keymap.set("n", "<space>cd", function()
     local current_buffer_file_path = vim.api.nvim_buf_get_name(0)
     vim.cmd("bdelete")
-    -- utils.run_key("<leader>bd")
     vim.cmd("!rm " .. current_buffer_file_path)
     vim.notify("Delete file " .. current_buffer_file_path)
   end, { desc = "Delete current file" })
+end
+
+local function map_enter()
+  vim.keymap.set("i", "<cr>", function()
+    if utils.is_in_pairs() then
+      return "<cr><esc>O"
+    end
+    return "<cr>"
+  end, { expr = true })
 end
 
 reset_keymaps()
@@ -173,3 +179,4 @@ map_move_vline()
 map_close_tap_or_buffer()
 map_rename()
 map_delete_file()
+map_enter()
