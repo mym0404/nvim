@@ -164,33 +164,43 @@ end
 local function map_smart_splits()
   local vertical_resize_amount = 3
   local horizontal_resize_amount = 5
+  -- recommended mappings
   -- resizing splits
-  -- amount defaults to 3 if not specified
-  -- use absolute values, no + or -
-  -- the functions also check for a range,
-  -- so for example if you bind `<A-h>` to `resize_left`,
-  -- then `10<A-h>` will `resize_left` by `(10 * config.default_amount)`
-  require("smart-splits").resize_up(vertical_resize_amount)
-  require("smart-splits").resize_down(vertical_resize_amount)
-  require("smart-splits").resize_left(horizontal_resize_amount)
-  require("smart-splits").resize_right(horizontal_resize_amount)
+  -- these keymaps will also accept a range,
+  -- for example `10<A-h>` will `resize_left` by `(10 * config.default_amount)`
+  vim.keymap.set("n", "<A-h>", function()
+    require("smart-splits").resize_left(horizontal_resize_amount)
+  end)
+  vim.keymap.set("n", "<A-j>", function()
+    require("smart-splits").resize_down(vertical_resize_amount)
+  end)
+  vim.keymap.set("n", "<A-k>", function()
+    require("smart-splits").resize_up(vertical_resize_amount)
+  end)
+  vim.keymap.set("n", "<A-l>", function()
+    require("smart-splits").resize_right(horizontal_resize_amount)
+  end)
+
   -- moving between splits
-  -- You can override config.at_edge and
-  -- config.move_cursor_same_row via opts
-  -- See Configuration.
-  -- require("smart-splits").move_cursor_up({ same_row = false, at_edge = "wrap" })
-  -- require("smart-splits").move_cursor_down()
-  -- require("smart-splits").move_cursor_left()
-  -- require("smart-splits").move_cursor_right()
-  -- require("smart-splits").move_cursor_previous()
-  -- -- Swapping buffers directionally with the window to the specified direction
-  -- require("smart-splits").swap_buf_up()
-  -- require("smart-splits").swap_buf_down()
-  -- require("smart-splits").swap_buf_left()
-  -- require("smart-splits").swap_buf_right()
-  -- the buffer swap functions can also take an `opts` table to override the
-  -- default behavior of whether or not the cursor follows the buffer
-  -- require("smart-splits").swap_buf_right({ move_cursor = true })
+  vim.keymap.set("n", "<C-h>", function()
+    require("smart-splits").move_cursor_left({ at_edge = "wrap" })
+  end)
+  vim.keymap.set("n", "<C-j>", function()
+    require("smart-splits").move_cursor_down({ at_edge = "wrap" })
+  end)
+  vim.keymap.set("n", "<C-k>", function()
+    require("smart-splits").move_cursor_up({ at_edge = "wrap" })
+  end)
+  vim.keymap.set("n", "<C-l>", function()
+    require("smart-splits").move_cursor_right({ at_edge = "wrap" })
+  end)
+
+  -- vim.keymap.set("n", "<C-\\>", require("smart-splits").move_cursor_previous)
+  -- swapping buffers between windows
+  -- vim.keymap.set("n", "<leader><leader>h", require("smart-splits").swap_buf_left)
+  -- vim.keymap.set("n", "<leader><leader>j", require("smart-splits").swap_buf_down)
+  -- vim.keymap.set("n", "<leader><leader>k", require("smart-splits").swap_buf_up)
+  -- vim.keymap.set("n", "<leader><leader>l", require("smart-splits").swap_buf_right)
 end
 
 reset_keymaps()
