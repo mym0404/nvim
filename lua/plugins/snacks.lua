@@ -2,6 +2,7 @@ local utils = require("../utils//utils")
 return {
   "folke/snacks.nvim",
   lazy = false,
+  priority = 1000,
   ---@module "snacks.nvim"
   ---@type snacks.Config
   opts = {

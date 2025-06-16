@@ -1,7 +1,7 @@
 return {
   {
     "rktjmp/lush.nvim",
-    { dir = "~/.config/nvim/theme-mj", lazy = true },
+    { dir = vim.fn.stdpath("config") .. "/theme-mj", lazy = true },
   },
   {
     "LazyVim/LazyVim",
