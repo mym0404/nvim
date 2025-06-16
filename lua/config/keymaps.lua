@@ -59,24 +59,9 @@ local function map_resize_windows()
     "<cmd>vertical resize +3<cr>",
     { desc = "Increase window width" }
   )
-  vim.keymap.set(
-    "n",
-    "<S-Left>",
-    "<cmd>vertical resize -3<cr>",
-    { desc = "Decrease window width" }
-  )
-  vim.keymap.set(
-    "n",
-    "<S-Up>",
-    "<cmd>resize +3<cr>",
-    { desc = "Increase window height" }
-  )
-  vim.keymap.set(
-    "n",
-    "<S-Down>",
-    "<cmd>resize -3<cr>",
-    { desc = "Decrease window height" }
-  )
+  vim.keymap.set("n", "<S-Left>", "<cmd>vertical resize -3<cr>", { desc = "Decrease window width" })
+  vim.keymap.set("n", "<S-Up>", "<cmd>resize +3<cr>", { desc = "Increase window height" })
+  vim.keymap.set("n", "<S-Down>", "<cmd>resize -3<cr>", { desc = "Decrease window height" })
 end
 
 local function map_close_visual()
@@ -135,22 +120,17 @@ end
 
 vim.keymap.set("n", "<CR>", "i<CR>", { desc = "New line on normal mode" })
 
-vim.keymap.set(
-  "n",
-  "<leader>gr",
-  function()
-    local filepath = vim.fn.expand("%")
-    if filepath == "" then
-      print("No file to restore")
-      return
-    end
-    vim.cmd("silent !git restore " .. filepath)
-    print("Discarded changes in " .. filepath)
-    vim.cmd("edit!")
-    -- vim.cmd("normal! <Esc>")
-  end,
-  { noremap = true, silent = true, desc = "Git discard current file changes" }
-)
+vim.keymap.set("n", "<leader>gr", function()
+  local filepath = vim.fn.expand("%")
+  if filepath == "" then
+    print("No file to restore")
+    return
+  end
+  vim.cmd("silent !git restore " .. filepath)
+  print("Discarded changes in " .. filepath)
+  vim.cmd("edit!")
+  -- vim.cmd("normal! <Esc>")
+end, { noremap = true, silent = true, desc = "Git discard current file changes" })
 
 vim.keymap.set("x", "<leader>gr", function()
   local start_line, end_line = utils.get_start_and_end_lines()
@@ -167,12 +147,19 @@ vim.keymap.set("x", "<leader>gr", function()
 end, { noremap = true, silent = true, desc = "Git restore selected lines" })
 
 local function map_rename()
-  -- vim.keymap.set("n", "<F6>", ":IncRename ", {})
   vim.keymap.set("n", "<F6>", function()
-    local keys =
-      vim.api.nvim_replace_termcodes(":IncRename ", true, false, true)
-    vim.api.nvim_feedkeys(keys, "n", false)
-  end, {})
+    utils.run_key(":IncRename ", "n")
+  end, { desc = "Rename file" })
+end
+
+local function map_delete_file()
+  vim.keymap.set("n", "<space>cd", function()
+    local current_buffer_file_path = vim.api.nvim_buf_get_name(0)
+    vim.cmd("bdelete")
+    -- utils.run_key("<leader>bd")
+    vim.cmd("!rm " .. current_buffer_file_path)
+    vim.notify("Delete file " .. current_buffer_file_path)
+  end, { desc = "Delete current file" })
 end
 
 reset_keymaps()
@@ -185,3 +172,4 @@ map_close_visual()
 map_move_vline()
 map_close_tap_or_buffer()
 map_rename()
+map_delete_file()

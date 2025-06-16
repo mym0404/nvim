@@ -25,7 +25,8 @@ M.discard_changes_in_range = function(filepath, start_line, end_line)
   local relative_path = vim.fn.fnamemodify(filepath, ":p"):gsub("^" .. git_root .. "/", "")
 
   -- Get original content from HEAD
-  local original_lines = vim.fn.systemlist(string.format("git show HEAD:%s", vim.fn.shellescape(relative_path)))
+  local original_lines =
+    vim.fn.systemlist(string.format("git show HEAD:%s", vim.fn.shellescape(relative_path)))
   if vim.v.shell_error ~= 0 then
     print("Failed to get original content")
     return
@@ -59,6 +60,12 @@ M.discard_changes_in_range = function(filepath, start_line, end_line)
   end
 
   print(string.format("Restored lines %d to %d", start_line, end_line))
+end
+
+M.run_key = function(termcodes, mode)
+  mode = mode or "m"
+  local keys = vim.api.nvim_replace_termcodes(termcodes, true, false, true)
+  vim.api.nvim_feedkeys(keys, mode, false)
 end
 
 return M

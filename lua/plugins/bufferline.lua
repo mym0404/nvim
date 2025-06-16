@@ -23,7 +23,7 @@ return {
       close_icon = "",
       left_trunc_marker = "",
       right_trunc_marker = "",
-      always_show_bufferline = true,
+      always_show_bufferline = false,
       tab_size = 18,
       indicator = {
         style = "icon",
