@@ -2,7 +2,8 @@ return {
   "akinsho/bufferline.nvim",
   event = "VeryLazy",
   -- keys = {
-  --   { "<leader>bp", "<Cmd>BufferLineTogglePin<CR>", desc = "Toggle Pin" },
+  --
+  --     bu{ "<leader>bp", "<Cmd>BufferLineTogglePin<CR>", desc = "Toggle Pin" },
   --   { "<leader>bP", "<Cmd>BufferLineGroupClose ungrouped<CR>", desc = "Delete Non-Pinned Buffers" },
   --   { "<leader>br", "<Cmd>BufferLineCloseRight<CR>", desc = "Delete Buffers to the Right" },
   --   { "<leader>bl", "<Cmd>BufferLineCloseLeft<CR>", desc = "Delete Buffers to the Left" },
@@ -15,13 +16,24 @@ return {
   -- },
   opts = {
     options = {
+      style_preset = require("bufferline").style_preset.minimal,
+      numbers = "none",
+      buffer_close_icon = "",
+      modified_icon = "",
+      close_icon = "",
+      left_trunc_marker = "",
+      right_trunc_marker = "",
       always_show_bufferline = true,
+      tab_size = 18,
+      diagnostics = "nvim_lsp",
       diagnostics_indicator = function(_, _, diag)
-        local icons = LazyVim.config.icons.diagnostics
-        local ret = (diag.error and icons.Error .. diag.error .. " " or "")
-          .. (diag.warning and icons.Warn .. diag.warning or "")
-        return vim.trim(ret)
+        return ""
       end,
+      show_buffer_icons = true,
+      show_buffer_close_icons = false,
+      show_close_icon = false,
+      show_tab_indicators = true,
+      separator_style = "thick",
     },
   },
   -- config = function(_, opts)

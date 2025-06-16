@@ -2,7 +2,8 @@ const a = 1;
 
 console.info("hello ")
 
-console.log("hello");
+cnsole.log("hello");
+
 console.warn("hello");
 // hlelo
 // warnconsole.error("hello");

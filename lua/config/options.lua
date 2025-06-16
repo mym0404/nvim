@@ -10,6 +10,7 @@ opt.ambiwidth = "single"
 opt.autowrite = true
 opt.swapfile = false
 opt.conceallevel = 0
+opt.termguicolors = true
 
 opt.iminsert = 0
 opt.imsearch = 0
