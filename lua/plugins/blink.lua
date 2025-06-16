@@ -1,7 +1,7 @@
 return {
   "saghen/blink.cmp",
-  version = not vim.g.lazyvim_blink_main and "*",
-  build = vim.g.lazyvim_blink_main and "cargo build --release",
+  -- version = not vim.g.lazyvim_blink_main and "*",
+  -- build = vim.g.lazyvim_blink_main and "cargo build --release",
   opts_extend = {
     "sources.completion.enabled_providers",
     "sources.compat",
@@ -14,7 +14,7 @@ return {
       "saghen/blink.compat",
       optional = false, -- make optional so it's only enabled if any extras need it
       opts = {},
-      version = not vim.g.lazyvim_blink_main and "*",
+      -- version = not vim.g.lazyvim_blink_main and "*",
     },
   },
   event = "InsertEnter",
@@ -22,6 +22,26 @@ return {
   ---@module 'blink.cmp'
   ---@type blink.cmp.Config
   opts = {
+    keymap = {
+      preset = "default",
+      ["<tab>"] = { "select_next", "fallback" },
+      ["<s-tab>"] = { "select_prev", "fallback" },
+      ["<CR>"] = { "accept", "fallback" },
+      -- ["<esc>"] = { "hide", "fallback" },
+      ["<s-d>"] = { "show_documentation" },
+      ["<C-p>"] = { "select_prev", "scroll_documentation_up", "fallback_to_mappings" },
+      ["<C-n>"] = { "select_next", "scroll_documentation_down", "fallback_to_mappings" },
+    },
+    cmdline = {
+      enabled = true,
+      keymap = {
+        ["<tab>"] = { "select_next", "fallback" },
+        ["<s-tab>"] = { "select_prev", "fallback" },
+        ["<CR>"] = { "accept_and_enter", "fallback" },
+        -- ["<esc>"] = { "hide", "fallback" },
+      },
+      completion = { menu = { auto_show = true } },
+    },
     snippets = {
       expand = function(snippet)
         return LazyVim.cmp.expand(snippet)
@@ -79,28 +99,8 @@ return {
       compat = {},
       default = { "lsp", "path", "snippets", "buffer" },
     },
-
-    cmdline = {
-      enabled = true,
-      keymap = {
-        ["<tab>"] = { "fallback" },
-        -- ["<s-tab>"] = { "select_prev" },
-        ["<CR>"] = { "accept_and_enter", "fallback" },
-        -- ["<esc>"] = { "hide", "fallback" },
-      },
-      completion = { menu = { auto_show = true } },
-    },
-
-    keymap = {
-      ["<tab>"] = { "fallback" },
-      -- ["<s-tab>"] = { "select_prev" },
-      ["<CR>"] = { "accept", "fallback" },
-      -- ["<esc>"] = { "hide", "fallback" },
-      ["<s-d>"] = { "show_documentation" },
-      ["<c-n>"] = { "scroll_documentation_down", "fallback" },
-      ["<c-p>"] = { "scroll_documentation_up", "fallback" },
-    },
   },
+
   ---@param opts blink.cmp.Config | { sources: { compat: string[] } }
   config = function(_, opts)
     -- setup compat sources
