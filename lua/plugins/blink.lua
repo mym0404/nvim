@@ -36,6 +36,9 @@ return {
       -- adjusts spacing to ensure icons are aligned
       nerd_font_variant = "mono",
     },
+    enabled = function ()
+     return vim.editor 
+    end
     completion = {
       keyword = { range = "prefix" },
       accept = {
@@ -82,8 +85,8 @@ return {
     cmdline = {
       enabled = true,
       keymap = {
-        ["<tab>"] = { "select_next" },
-        ["<s-tab>"] = { "select_prev" },
+        ["<tab>"] = { "fallback" },
+        -- ["<s-tab>"] = { "select_prev" },
         ["<CR>"] = { "accept_and_enter", "fallback" },
         -- ["<esc>"] = { "hide", "fallback" },
       },
@@ -91,8 +94,8 @@ return {
     },
 
     keymap = {
-      ["<tab>"] = { "select_next" },
-      ["<s-tab>"] = { "select_prev" },
+      ["<tab>"] = { "fallback" },
+      -- ["<s-tab>"] = { "select_prev" },
       ["<CR>"] = { "accept", "fallback" },
       -- ["<esc>"] = { "hide", "fallback" },
     },

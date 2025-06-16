@@ -20,7 +20,8 @@ vim.api.nvim_create_autocmd("BufEnter", {
 })
 
 local function set_english_input()
-  vim.fn.system("macism com.apple.keylayout.US")
+  -- vim.fn.system("macism com.apple.keylayout.US")
+  vim.fn.system("macism com.apple.keylayout.ABC")
 end
 
 -- brew tap laishulu/homebrew
@@ -28,7 +29,7 @@ end
 vim.api.nvim_create_autocmd({ "InsertLeave", "FocusGained", "ModeChanged" }, {
   callback = function(event)
     if event.event == "InsertLeave" then
-      set_english_input()
+      -- set_english_input()
     elseif event.event == "ModeChanged" then
       local mode_change = vim.fn.mode()
       if mode_change == "n" then
