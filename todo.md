@@ -1,3 +1,4 @@
 - string 에선 completion 안되게 
-- recording keymap
 - hunk based line discard
+- snacks explorer 에서 diagnostic background 삭제
+- nerd font 에서 아이콘 크기좀 키우기

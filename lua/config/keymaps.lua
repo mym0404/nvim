@@ -51,19 +51,6 @@ local function manipulate_yank_paste_register_behavior()
   -- vim.keymap.set({ "n", "v" }, "d", '"zd', { desc = "Delete without register" })
 end
 
-local function map_resize_windows()
-  -- Resize windows
-  vim.keymap.set(
-    "n",
-    "<S-Right>",
-    "<cmd>vertical resize +3<cr>",
-    { desc = "Increase window width" }
-  )
-  vim.keymap.set("n", "<S-Left>", "<cmd>vertical resize -3<cr>", { desc = "Decrease window width" })
-  vim.keymap.set("n", "<S-Up>", "<cmd>resize +3<cr>", { desc = "Increase window height" })
-  vim.keymap.set("n", "<S-Down>", "<cmd>resize -3<cr>", { desc = "Decrease window height" })
-end
-
 local function map_close_visual()
   vim.keymap.set(
     "x",
@@ -174,12 +161,43 @@ local function map_recording()
   vim.keymap.set("n", "@", "@t", { desc = "run recording with register t" })
 end
 
+local function map_smart_splits()
+  local vertical_resize_amount = 3
+  local horizontal_resize_amount = 5
+  -- resizing splits
+  -- amount defaults to 3 if not specified
+  -- use absolute values, no + or -
+  -- the functions also check for a range,
+  -- so for example if you bind `<A-h>` to `resize_left`,
+  -- then `10<A-h>` will `resize_left` by `(10 * config.default_amount)`
+  require("smart-splits").resize_up(vertical_resize_amount)
+  require("smart-splits").resize_down(vertical_resize_amount)
+  require("smart-splits").resize_left(horizontal_resize_amount)
+  require("smart-splits").resize_right(horizontal_resize_amount)
+  -- moving between splits
+  -- You can override config.at_edge and
+  -- config.move_cursor_same_row via opts
+  -- See Configuration.
+  require("smart-splits").move_cursor_up({ same_row = false, at_edge = "wrap" })
+  require("smart-splits").move_cursor_down()
+  require("smart-splits").move_cursor_left()
+  require("smart-splits").move_cursor_right()
+  require("smart-splits").move_cursor_previous()
+  -- Swapping buffers directionally with the window to the specified direction
+  require("smart-splits").swap_buf_up()
+  require("smart-splits").swap_buf_down()
+  require("smart-splits").swap_buf_left()
+  require("smart-splits").swap_buf_right()
+  -- the buffer swap functions can also take an `opts` table to override the
+  -- default behavior of whether or not the cursor follows the buffer
+  -- require("smart-splits").swap_buf_right({ move_cursor = true })
+end
+
 reset_keymaps()
 setup_comments()
 manipulate_yank_paste_register_behavior()
 customizeExitInsertMode()
 configure_git_diff()
-map_resize_windows()
 map_close_visual()
 map_move_vline()
 map_close_tap_or_buffer()
@@ -187,3 +205,4 @@ map_rename()
 map_delete_file()
 map_enter()
 map_recording()
+map_smart_splits()
