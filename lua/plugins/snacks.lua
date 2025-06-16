@@ -1,5 +1,3 @@
-local utils = require("../utils//utils")
-
 ---@diagnostic disable: assign-type-mismatch
 ---@type snacks.picker.layout.Config
 local vscode_layout = {
