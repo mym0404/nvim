@@ -105,31 +105,35 @@ local function map_close_tap_or_buffer()
   })
 end
 
-vim.keymap.set("n", "<leader>gr", function()
-  local filepath = vim.fn.expand("%")
-  if filepath == "" then
-    print("No file to restore")
-    return
-  end
-  vim.cmd("silent !git restore " .. filepath)
-  print("Discarded changes in " .. filepath)
-  vim.cmd("edit!")
-  -- vim.cmd("normal! <Esc>")
-end, { noremap = true, silent = true, desc = "Git discard current file changes" })
+local function map_git_actions()
+  vim.keymap.set("n", "<leader>gr", function()
+    local filepath = vim.fn.expand("%")
+    if filepath == "" then
+      print("No file to restore")
+      return
+    end
+    vim.cmd("silent !git restore " .. filepath)
+    print("Discarded changes in " .. filepath)
+    vim.cmd("edit!")
+    -- vim.cmd("normal! <Esc>")
+  end, { noremap = true, silent = true, desc = "Git discard current file changes" })
 
-vim.keymap.set("x", "<leader>gr", function()
-  local start_line, end_line = utils.get_start_and_end_lines()
-  local filepath = vim.fn.expand("%:p")
+  vim.keymap.set("x", "<leader>gr", function()
+    local start_line, end_line = utils.get_start_and_end_lines()
+    local filepath = vim.fn.expand("%:p")
 
-  if filepath == "" then
-    print("No file to restore")
-    return
-  end
+    if filepath == "" then
+      print("No file to restore")
+      return
+    end
 
-  utils.discard_changes_in_range(filepath, start_line, end_line)
-
-  utils.go_to_normal_mode()
-end, { noremap = true, silent = true, desc = "Git restore selected lines" })
+    local gs = require("gitsigns")
+    -- utils.discard_changes_in_ran-- visual start~end 줄 번호 가져오기
+    -- 해당 범위에 걸치는 모든 hunk reset
+    gs.reset_hunk({ start_line, end_line })
+    utils.go_to_normal_mode()
+  end, { noremap = true, silent = true, desc = "Git restore selected lines" })
+end
 
 local function map_rename()
   vim.keymap.set("n", "<F6>", function()
@@ -232,3 +236,4 @@ map_recording()
 map_smart_splits()
 map_split()
 map_select_all()
+map_git_actions()
