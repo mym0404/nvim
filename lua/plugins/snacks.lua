@@ -1,4 +1,29 @@
 local utils = require("../utils//utils")
+
+---@diagnostic disable: assign-type-mismatch
+---@type snacks.picker.layout.Config
+local vscode_layout = {
+  preview = true,
+  layout = {
+    backdrop = true,
+    row = 2,
+    width = 0.5,
+    min_width = 80,
+    height = 0.7,
+    border = "none",
+    box = "vertical",
+    {
+      win = "input",
+      height = 1,
+      border = "rounded",
+      title = "{title} {live} {flags}",
+      title_pos = "center",
+    },
+    { win = "list", border = "hpad", height = 7 },
+    { win = "preview", title = "{preview}", border = "rounded" },
+  },
+}
+
 return {
   "folke/snacks.nvim",
   lazy = false,
@@ -10,25 +35,18 @@ return {
     ---@type snacks.explorer.Config
     explorer = {
       replace_netrw = true,
-
-      -- position = "left",
-      -- width = 1,
-      -- ignored = true,
-      -- hidden = false,
-      -- replace_netrw = true,
     },
     ---@type snacks.picker.Config
     picker = {
       hidden = true,
-      layout = { fullscreen = false, preview = false },
       -- ignored = true,
       sources = {
+        grep = { layout = vscode_layout },
+        git_grep = { layout = vscode_layout },
+        notifications = { layout = vscode_layout },
         explorer = {
           hidden = true,
-          layout = {
-            auto_hide = { "input" },
-            preset = "sidebar",
-          },
+          layout = { auto_hide = { "input" }, preset = "sidebar" },
           win = {
             list = {
               keys = {
@@ -62,6 +80,7 @@ return {
         },
         files = {
           hidden = true,
+          layout = vscode_layout,
           -- ignored = true,
         },
       },
