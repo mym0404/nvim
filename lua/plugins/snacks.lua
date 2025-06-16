@@ -44,16 +44,16 @@ return {
                   require("smart-splits").resize_right(5)
                 end,
                 ["<C-h>"] = function()
-                  require("smart-splits").move_cursor_left({ at_edge = "stop" })
+                  require("smart-splits").move_cursor_left({ at_edge = "wrap" })
                 end,
                 ["<C-j>"] = function()
-                  require("smart-splits").move_cursor_down({ at_edge = "stop" })
+                  require("smart-splits").move_cursor_down({ at_edge = "wrap" })
                 end,
                 ["<C-k>"] = function()
-                  require("smart-splits").move_cursor_up({ at_edge = "stop" })
+                  require("smart-splits").move_cursor_up({ at_edge = "wrap" })
                 end,
                 ["<C-l>"] = function()
-                  require("smart-splits").move_cursor_right({ at_edge = "stop" })
+                  require("smart-splits").move_cursor_right({ at_edge = "wrap" })
                 end,
               },
             },
