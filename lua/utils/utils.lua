@@ -103,4 +103,9 @@ M.is_in_pairs = function()
   return false
 end
 
+M.is_in_explorer = function()
+  local buf = vim.api.nvim_get_current_buf(0)
+  local buf_name = vim.api.nvim_buf_get_name(buf)
+end
+
 return M

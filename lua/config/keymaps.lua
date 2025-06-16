@@ -208,9 +208,14 @@ local function map_smart_splits()
   -- vim.keymap.set("n", "<leader><leader>l", require("smart-splits").swap_buf_right)
 end
 
-vim.keymap.set("n", "<c-a>", "ggVG", { desc = "select all" })
-vim.keymap.set("n", "|", ":vsplit<cr>", { desc = "split vertical", nowait = true })
-vim.keymap.set("n", "_", ":split<cr>", { desc = "split horizontal", nowait = true })
+local function map_split()
+  vim.keymap.set("n", "_", ":split<cr>", { desc = "split horizontal", nowait = true })
+  vim.keymap.set("n", "|", ":vsplit<cr>", { desc = "split vertical", nowait = true })
+end
+
+local function map_select_all()
+  vim.keymap.set("n", "<c-a>", "ggVG", { desc = "select all" })
+end
 
 reset_keymaps()
 setup_comments()
@@ -225,3 +230,5 @@ map_delete_file()
 map_enter()
 map_recording()
 map_smart_splits()
+map_split()
+map_select_all()

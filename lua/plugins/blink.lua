@@ -12,7 +12,7 @@ return {
     -- add blink.compat to dependencies
     {
       "saghen/blink.compat",
-      optional = true, -- make optional so it's only enabled if any extras need it
+      optional = false, -- make optional so it's only enabled if any extras need it
       opts = {},
       version = not vim.g.lazyvim_blink_main and "*",
     },
@@ -63,6 +63,7 @@ return {
       documentation = {
         auto_show = true,
         auto_show_delay_ms = 500,
+        window = { scrollbar = false },
       },
       ghost_text = {
         enabled = vim.g.ai_cmp,
@@ -70,7 +71,7 @@ return {
       },
     },
     -- experimental signature help support
-    -- signature = { enabled = true },
+    signature = { enabled = true, window = { show_documentation = false } },
 
     sources = {
       -- adding any nvim-cmp sources here will enable them
@@ -95,6 +96,9 @@ return {
       -- ["<s-tab>"] = { "select_prev" },
       ["<CR>"] = { "accept", "fallback" },
       -- ["<esc>"] = { "hide", "fallback" },
+      ["<s-d>"] = { "show_documentation" },
+      ["<c-n>"] = { "scroll_documentation_down", "fallback" },
+      ["<c-p>"] = { "scroll_documentation_up", "fallback" },
     },
   },
   ---@param opts blink.cmp.Config | { sources: { compat: string[] } }
@@ -113,20 +117,20 @@ return {
     end
 
     -- add ai_accept to <Tab> key
-    if not opts.keymap["<Tab>"] then
-      if opts.keymap.preset == "super-tab" then -- super-tab
-        opts.keymap["<Tab>"] = {
-          require("blink.cmp.keymap.presets")["super-tab"]["<Tab>"][1],
-          LazyVim.cmp.map({ "snippet_forward", "ai_accept" }),
-          "fallback",
-        }
-      else -- other presets
-        opts.keymap["<Tab>"] = {
-          LazyVim.cmp.map({ "snippet_forward", "ai_accept" }),
-          "fallback",
-        }
-      end
-    end
+    -- if not opts.keymap["<Tab>"] then
+    --   if opts.keymap.preset == "super-tab" then -- super-tab
+    --     opts.keymap["<Tab>"] = {
+    --       require("blink.cmp.keymap.presets")["super-tab"]["<Tab>"][1],
+    --       LazyVim.cmp.map({ "snippet_forward", "ai_accept" }),
+    --       "fallback",
+    --     }
+    --   else -- other presets
+    --     opts.keymap["<Tab>"] = {
+    --       LazyVim.cmp.map({ "snippet_forward", "ai_accept" }),
+    --       "fallback",
+    --     }
+    --   end
+    -- end
 
     -- Unset custom prop to pass blink.cmp validation
     opts.sources.compat = nil
