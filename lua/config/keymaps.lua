@@ -178,16 +178,16 @@ local function map_smart_splits()
   -- You can override config.at_edge and
   -- config.move_cursor_same_row via opts
   -- See Configuration.
-  require("smart-splits").move_cursor_up({ same_row = false, at_edge = "wrap" })
-  require("smart-splits").move_cursor_down()
-  require("smart-splits").move_cursor_left()
-  require("smart-splits").move_cursor_right()
-  require("smart-splits").move_cursor_previous()
-  -- Swapping buffers directionally with the window to the specified direction
-  require("smart-splits").swap_buf_up()
-  require("smart-splits").swap_buf_down()
-  require("smart-splits").swap_buf_left()
-  require("smart-splits").swap_buf_right()
+  -- require("smart-splits").move_cursor_up({ same_row = false, at_edge = "wrap" })
+  -- require("smart-splits").move_cursor_down()
+  -- require("smart-splits").move_cursor_left()
+  -- require("smart-splits").move_cursor_right()
+  -- require("smart-splits").move_cursor_previous()
+  -- -- Swapping buffers directionally with the window to the specified direction
+  -- require("smart-splits").swap_buf_up()
+  -- require("smart-splits").swap_buf_down()
+  -- require("smart-splits").swap_buf_left()
+  -- require("smart-splits").swap_buf_right()
   -- the buffer swap functions can also take an `opts` table to override the
   -- default behavior of whether or not the cursor follows the buffer
   -- require("smart-splits").swap_buf_right({ move_cursor = true })
