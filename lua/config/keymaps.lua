@@ -195,6 +195,11 @@ local function map_smart_splits()
     require("smart-splits").move_cursor_right({ at_edge = "wrap" })
   end)
 
+  -- split windows
+  vim.keymap.set("n", "<C-l>", function()
+    require("smart-splits").move_cursor_right({ at_edge = "wrap" })
+  end)
+
   -- vim.keymap.set("n", "<C-\\>", require("smart-splits").move_cursor_previous)
   -- swapping buffers between windows
   -- vim.keymap.set("n", "<leader><leader>h", require("smart-splits").swap_buf_left)
@@ -202,6 +207,10 @@ local function map_smart_splits()
   -- vim.keymap.set("n", "<leader><leader>k", require("smart-splits").swap_buf_up)
   -- vim.keymap.set("n", "<leader><leader>l", require("smart-splits").swap_buf_right)
 end
+
+vim.keymap.set("n", "<c-a>", "ggVG", { desc = "select all" })
+vim.keymap.set("n", "|", ":vsplit<cr>", { desc = "split vertical", nowait = true })
+vim.keymap.set("n", "_", ":split<cr>", { desc = "split horizontal", nowait = true })
 
 reset_keymaps()
 setup_comments()

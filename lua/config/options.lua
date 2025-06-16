@@ -11,6 +11,7 @@ opt.autowrite = true
 opt.swapfile = false
 opt.conceallevel = 0
 opt.termguicolors = true
+opt.list = false
 
 opt.iminsert = 0
 opt.imsearch = 0

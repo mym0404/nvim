@@ -1,4 +1,6 @@
 - string 에선 completion 안되게 
 - hunk based line discard
 - snacks explorer 에서 diagnostic background 삭제
-- nerd font 에서 아이콘 크기좀 키우기
+- smart split 에서 split 도 넣기
+- smart split 에서 explorer 관련 버그 수정
+- blink docs 에서 스크롤 키 설정

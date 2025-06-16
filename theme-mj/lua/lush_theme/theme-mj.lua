@@ -9,6 +9,7 @@ local palette = {
 local text = { fg = "#ffffff" }
 local text_sub = { fg = "grey" }
 local border = { fg = "#424242" }
+local win_border = { fg = "#313131" }
 local bg = {
   selected = "#324963",
   search = "#0269c9",
@@ -29,6 +30,9 @@ local theme = lush(function(injected_functions)
     Search({ bg = bg.search, fg = text.fg, gui = "bold underline" }),
     Normal({ fg = text.fg }),
     Visual({ bg = bg.selected }),
+
+    VertSplit(win_border),
+    WinSeparator(win_border),
 
     Error(error),
     Hint(hint),
@@ -296,8 +300,6 @@ local theme = lush(function(injected_functions)
     Folded({ bg = "#171b22", fg = "#6e7681" }),
     WarningMsg({ fg = "#d29922" }),
     Title({ fg = "#79c0ff", gui = "bold" }),
-    VertSplit({ fg = "#161b22" }),
-    WinSeparator({ fg = "#161b22" }),
     MoreMsg({ fg = "#2f8cf7", gui = "bold" }),
     ModeMsg({ fg = "#d29922", gui = "bold" }),
     ErrorMsg({ fg = "#FD9491" }),
