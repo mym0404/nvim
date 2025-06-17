@@ -40,9 +40,14 @@ return {
         ["<CR>"] = {
           function()
             if vim.fn.getcmdtype() == ":" then
-              require("blink-cmp").accept_and_enter()
-              return true
+              local cmp = require("blink-cmp")
+              if cmp.is_visible() then
+                require("blink-cmp").accept_and_enter()
+                return true
+              end
+              return false
             end
+            return false
           end,
           "fallback",
         },

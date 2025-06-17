@@ -88,7 +88,7 @@ local theme = lush(function(injected_functions)
 
     DiagnosticError(error),
     DiagnosticHint(hint),
-    DiagnosticInfo(hint),
+    DiagnosticInfo(info),
     DiagnosticWarn(warn),
     DiagnosticVirtualTextHint(hint),
 
