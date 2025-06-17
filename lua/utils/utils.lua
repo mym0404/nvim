@@ -34,13 +34,38 @@ M.get_current_cursor_char = function()
   return line:sub(col + 1, col + 1)
 end
 
+local double_new_line_files = {
+  "lua",
+  "javascript",
+  "typescript",
+  "typescriptreact",
+  "javascriptreact",
+  "swift",
+  "kotlin",
+  "java",
+  "html",
+}
 local matching_pairs = {
   "{}",
   "[]",
   "()",
   "><",
 }
-M.is_in_pairs = function()
+M.should_be_double_new_line = function()
+  local ft = vim.bo.filetype
+  local is_valid_ft = false
+  for _, check_ft in ipairs(double_new_line_files) do
+    if ft == check_ft then
+      is_valid_ft = true
+      break
+    end
+  end
+
+  if not is_valid_ft then
+    return false
+  end
+
+  -- check is inside between pair
   local _, col = M.get_row_and_col()
   local line = vim.api.nvim_get_current_line()
   local left = line:sub(col, col)
@@ -48,6 +73,21 @@ M.is_in_pairs = function()
 
   for _, pair in ipairs(matching_pairs) do
     if pair:sub(1, 1) == left and pair:sub(2, 2) == right then
+      return true
+    end
+  end
+
+  -- check is lua function start
+  if ft == "lua" then
+    local left_str = line:sub(1, col)
+    local right_str = line:sub(col + 1)
+    local node = require("nvim-treesitter.ts_utils").get_node_at_cursor()
+    if
+      left_str:match("function")
+      and right_str:match("end")
+      and node ~= nil
+      and node:type() == "function_definition"
+    then
       return true
     end
   end

@@ -155,7 +155,7 @@ end
 local function map_enter()
   vim.keymap.set({ "n", "i" }, "<cr>", function()
     local prefix = vim.api.nvim_get_mode().mode == "n" and "i" or ""
-    if utils.is_in_pairs() then
+    if utils.should_be_double_new_line() then
       return prefix .. "<cr><esc>O"
     end
     return prefix .. "<cr>"

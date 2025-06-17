@@ -37,7 +37,15 @@ return {
       keymap = {
         ["<tab>"] = { "select_next", "fallback" },
         ["<s-tab>"] = { "select_prev", "fallback" },
-        ["<CR>"] = { "accept_and_enter", "fallback" },
+        ["<CR>"] = {
+          function()
+            if vim.fn.getcmdtype() == ":" then
+              require("blink-cmp").accept_and_enter()
+              return true
+            end
+          end,
+          "fallback",
+        },
         -- ["<esc>"] = { "hide", "fallback" },
       },
       completion = { menu = { auto_show = true } },
@@ -86,8 +94,8 @@ return {
         window = { scrollbar = false },
       },
       ghost_text = {
-        enabled = vim.g.ai_cmp,
-        -- enabled = true,
+        -- enabled = vim.g.ai_cmp,
+        enabled = false,
       },
     },
     -- experimental signature help support
