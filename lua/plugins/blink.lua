@@ -27,10 +27,6 @@ return {
       ["<tab>"] = { "select_next", "fallback" },
       ["<s-tab>"] = { "select_prev", "fallback" },
       ["<CR>"] = { "accept", "fallback" },
-      -- ["<esc>"] = { "hide", "fallback" },
-      -- ["<s-d>"] = { "show_documentation" },
-      ["<C-p>"] = { "select_prev", "scroll_documentation_up", "fallback_to_mappings" },
-      ["<C-n>"] = { "select_next", "scroll_documentation_down", "fallback_to_mappings" },
     },
     cmdline = {
       enabled = true,
@@ -93,9 +89,9 @@ return {
       },
 
       documentation = {
-        auto_show = true,
-        auto_show_delay_ms = 500,
-        window = { scrollbar = false },
+        auto_show = false,
+        auto_show_delay_ms = 1000,
+        window = { scrollbar = true },
       },
       ghost_text = {
         -- enabled = vim.g.ai_cmp,

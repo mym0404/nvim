@@ -17,7 +17,7 @@ local vscode_layout = {
       title = "{title} {live} {flags}",
       title_pos = "center",
     },
-    { win = "list", border = "hpad", height = 7 },
+    { win = "list", border = "hpad", height = 10 },
     { win = "preview", title = "{preview}", border = "rounded" },
   },
 }

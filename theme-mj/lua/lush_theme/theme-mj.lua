@@ -268,7 +268,7 @@ local theme = lush(function(injected_functions)
     sym("@string.regexp")({ fg = "#a5d6ff" }),
     String({ fg = "#FFFCD7" }),
     Comment({ fg = "#7AE755", gui = "nocombine" }),
-    LspSignatureActiveParameter({ fg = "#1c3d6a" }),
+    LspSignatureActiveParameter({ Normal }),
     SnacksPickerGitStatusModified({ fg = "#80CBC4" }),
     LspReferenceWrite({ bg = "#17335a" }),
     LspReferenceText({ bg = "#17335a" }),

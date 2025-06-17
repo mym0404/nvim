@@ -223,6 +223,16 @@ local function map_shift_cr()
   vim.keymap.set("n", "<S-CR>", "i<esc>o")
 end
 
+local function map_searches()
+  vim.keymap.set("n", "<S-f>", function()
+    Snacks.picker.git_files()
+  end)
+  vim.keymap.set("n", "<S-p>", function()
+    Snacks.picker.git_grep()
+  end)
+end
+
+map_searches()
 map_shift_cr()
 reset_keymaps()
 setup_comments()

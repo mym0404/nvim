@@ -49,4 +49,4 @@ vim.opt.termguicolors = true
 
 vim.g.lazyvim_prettier_needs_config = true
 -- vim.g.lazyvim_cmp = "nvim-cmp"
-vim.g.snacks_animate = false
+vim.g.snacks_animate = true
