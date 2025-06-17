@@ -220,6 +220,7 @@ end
 
 local function map_shift_cr()
   vim.keymap.set("i", "<S-CR>", "<esc>o")
+  vim.keymap.set("n", "<S-CR>", "i<esc>o")
 end
 
 map_shift_cr()
