@@ -218,6 +218,11 @@ local function map_select_all()
   vim.keymap.set("n", "<c-a>", "ggVG", { desc = "select all" })
 end
 
+local function map_shift_cr()
+  vim.keymap.set("i", "<S-CR>", "<esc>o")
+end
+
+map_shift_cr()
 reset_keymaps()
 setup_comments()
 manipulate_yank_paste_register_behavior()
