@@ -12,8 +12,8 @@ return {
       autojump = false,
     },
     label = {
-      after = false,
-      before = true,
+      after = true,
+      before = false,
     },
     highlight = {
       -- backdrop = false,
@@ -21,6 +21,7 @@ return {
     modes = {
       char = {
         keys = { "f", "F" },
+        jump = { pos = "start" },
       },
     },
   },
@@ -29,7 +30,6 @@ return {
       "s",
       mode = { "n" },
       function()
-        vim.notify("hello", vim.log.levels.WARN, {})
         require("flash").jump()
       end,
       desc = "Flash",

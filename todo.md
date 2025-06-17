@@ -5,7 +5,6 @@
 
 # Sub
 
-- 깃 diff 색상 바꾸기
 - tag / to auto close
 
 # Not Plan
