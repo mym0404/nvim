@@ -6,6 +6,5 @@
 
 - " 나 { 로 감싸기 선택한 부분
 - 깃 diff 색상 바꾸기
-- shift + p, shift + f
 - flash reset keymap
 - tag / to auto close
