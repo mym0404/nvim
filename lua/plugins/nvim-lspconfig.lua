@@ -1,6 +1,3 @@
--- if true then
---   return {}
--- end
 return {
   "neovim/nvim-lspconfig",
   dependencies = {
@@ -13,10 +10,4 @@ return {
       sourcekit = {},
     },
   },
-  -- config = function()
-  --   vim.notify(1)
-  -- require("../utils/sourcekit_lsp").setup_sourcekit()
-  -- local capabilities = vim.lsp.protocol.make_client_capabilities()
-  -- capabilities.posi:tionEncodings = { "utf-16" }
-  -- end,
 }

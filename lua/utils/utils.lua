@@ -34,16 +34,20 @@ M.get_current_cursor_char = function()
   return line:sub(col + 1, col + 1)
 end
 
-local double_new_line_files = {
-  "lua",
+local tag_file_tyeps = {
+
   "javascript",
   "typescript",
   "typescriptreact",
   "javascriptreact",
+  "html",
+}
+
+local double_new_line_files = {
+  "lua",
   "swift",
   "kotlin",
   "java",
-  "html",
 }
 local matching_pairs = {
   "{}",
@@ -95,10 +99,15 @@ M.should_be_double_new_line = function()
   return false
 end
 
-M.is_in_explorer = function()
-  local buf = vim.api.nvim_get_current_buf()
-  local buf_name = vim.api.nvim_buf_get_name(buf)
-  vim.notify(buf_name)
+M.should_close_slash_in_tag = function()
+  -- <br "/">
+  local col = vim.api.nvim_win_get_cursor(0)[2]
+  local line = vim.api.nvim_get_current_line()
+  local left = line:sub(1, col)
+  if left:match(".*<[%w%d]") then
+    return true
+  end
+  return false
 end
 
 return M

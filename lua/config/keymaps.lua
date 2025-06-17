@@ -54,12 +54,7 @@ local function manipulate_yank_paste_register_behavior()
 end
 
 local function map_close_visual()
-  vim.keymap.set(
-    "x",
-    "q",
-    "<Esc>",
-    { noremap = true, silent = true, desc = "Exit visual mode with q" }
-  )
+  vim.keymap.set("x", "q", "<Esc>", { silent = true, desc = "Exit visual mode with q" })
 end
 
 local function map_move_vline()
@@ -68,41 +63,29 @@ local function map_move_vline()
     "x",
     "<S-j>",
     ":move '>+1<CR>gv=gv",
-    { noremap = true, silent = true, desc = "Move selection down" }
+    { silent = true, desc = "Move selection down" }
   )
-  vim.keymap.set(
-    "x",
-    "<S-k>",
-    ":move '<-2<CR>gv=gv",
-    { noremap = true, silent = true, desc = "Move selection up" }
-  )
+  vim.keymap.set("x", "<S-k>", ":move '<-2<CR>gv=gv", { silent = true, desc = "Move selection up" })
 end
 local function configure_git_diff()
   vim.keymap.set(
     "n",
     "<leader>z",
     "<cmd>DiffviewOpen<cr>",
-    { noremap = true, silent = true, desc = "Open Diff View" }
+    { silent = true, desc = "Open Diff View" }
   )
   vim.keymap.set(
     "n",
     "<leader>h",
-    "<cmd>DiffviewFileHistory %<cr>",
-    { noremap = true, silent = true, desc = "Open Diff view file history" }
+    "<cmd>DiffviewFilehistory %<cr>",
+    { silent = true, desc = "Open Diff view file history" }
   )
 end
 
 local function map_close_tap_or_buffer()
   vim.keymap.set("n", "<C-w>", function()
-    local tab_count = vim.fn.tabpagenr("$")
-    if tab_count > 1 then
-      vim.cmd("tabclose")
-    else
-      vim.cmd("bdelete")
-    end
+    vim.cmd("tabclose")
   end, {
-    noremap = true,
-    silent = true,
     desc = "Close tab if multiple tabs, else close buffer",
   })
 end
@@ -118,7 +101,7 @@ local function map_git_actions()
     print("Discarded changes in " .. filepath)
     vim.cmd("edit!")
     -- vim.cmd("normal! <Esc>")
-  end, { noremap = true, silent = true, desc = "Git discard current file changes" })
+  end, { silent = true, desc = "Git discard current file changes" })
 
   vim.keymap.set("x", "<leader>gr", function()
     local start_line, end_line = utils.get_start_and_end_lines()
@@ -134,7 +117,7 @@ local function map_git_actions()
     -- 해당 범위에 걸치는 모든 hunk reset
     gs.reset_hunk({ start_line, end_line })
     utils.go_to_normal_mode()
-  end, { noremap = true, silent = true, desc = "Git restore selected lines" })
+  end, { silent = true, desc = "Git restore selected lines" })
 end
 
 local function map_rename()
