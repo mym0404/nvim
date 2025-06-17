@@ -48,3 +48,18 @@ end
 --     end
 --   end,
 -- })
+
+local function map_searches()
+  vim.keymap.set("n", "<S-f>", function()
+    Snacks.picker.files()
+  end)
+  vim.keymap.set("n", "<S-p>", function()
+    Snacks.picker.grep()
+  end, { nowait = true, noremap = true })
+end
+
+vim.api.nvim_create_autocmd({ "BufEnter" }, {
+  callback = function(event)
+    map_searches()
+  end,
+})
