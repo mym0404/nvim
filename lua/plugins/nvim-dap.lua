@@ -6,11 +6,9 @@ return {
     },
     lazy = false,
     config = function()
-      vim.notify(1)
       local xcodebuild = require("xcodebuild.integrations.dap")
       -- SAMPLE PATH, change it to your local codelldb path
       local codelldbPath = os.getenv("HOME") .. "/tools/codelldb/extension/adapter/codelldb"
-      vim.notify(codelldbPath)
 
       xcodebuild.setup(codelldbPath)
 
