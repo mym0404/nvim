@@ -46,7 +46,6 @@ return {
           end,
           "fallback",
         },
-        -- ["<esc>"] = { "hide", "fallback" },
       },
       completion = { menu = { auto_show = true } },
     },
