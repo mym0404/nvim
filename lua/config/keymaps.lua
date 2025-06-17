@@ -84,7 +84,12 @@ end
 
 local function map_close_tap_or_buffer()
   vim.keymap.set("n", "<C-w>", function()
-    vim.cmd("tabclose")
+    local tab_count = vim.fn.tabpagenr("$")
+    if tab_count > 1 then
+      vim.cmd("tabclose")
+    else
+      vim.cmd("close")
+    end
   end, {
     desc = "Close tab if multiple tabs, else close buffer",
   })

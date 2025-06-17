@@ -50,11 +50,11 @@ end
 -- })
 
 local function map_searches()
-  vim.keymap.set("n", "<S-f>", function()
-    Snacks.picker.files()
-  end)
+  -- vim.keymap.set("n", "<S-f>", function()
+  --   Snacks.picker.grep()
+  -- end)
   vim.keymap.set("n", "<S-p>", function()
-    Snacks.picker.grep()
+    Snacks.picker.files()
   end, { nowait = true, noremap = true })
 end
 
