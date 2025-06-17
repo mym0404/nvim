@@ -72,7 +72,24 @@ return {
                   require("smart-splits").move_cursor_up({ at_edge = "stop" })
                 end,
                 ["<C-l>"] = function()
-                  require("smart-splits").move_cursor_right({ at_edge = "stop" })
+                  local wins = vim.api.nvim_list_wins()
+                  local cur_win = vim.api.nvim_get_current_win()
+                  -- for i, win in ipairs(wins) do
+                  --   vim.notify(i .. ", " .. win)
+                  -- end
+                  -- vim.notify("cur win " .. cur_win)
+                  local buf_id = vim.api.nvim_win_get_buf(cur_win)
+                  local buf_name = vim.api.nvim_buf_get_name(buf_id)
+
+                  local pickers = Snacks.picker.get({ source = "explorer" })
+                  local is_explorer_visible = #pickers >= 1
+
+                  if buf_name == "" and is_explorer_visible then
+                    vim.api.nvim_set_current_win(wins[1])
+                  else
+                    require("smart-splits").move_cursor_right({ at_edge = "stop" })
+                  end
+                  -- vim.notify("buf_name " .. buf_name)
                 end,
               },
             },
