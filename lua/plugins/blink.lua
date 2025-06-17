@@ -28,7 +28,7 @@ return {
       ["<s-tab>"] = { "select_prev", "fallback" },
       ["<CR>"] = { "accept", "fallback" },
       -- ["<esc>"] = { "hide", "fallback" },
-      ["<s-d>"] = { "show_documentation" },
+      -- ["<s-d>"] = { "show_documentation" },
       ["<C-p>"] = { "select_prev", "scroll_documentation_up", "fallback_to_mappings" },
       ["<C-n>"] = { "select_next", "scroll_documentation_down", "fallback_to_mappings" },
     },

@@ -42,6 +42,7 @@ return {
         grep = { layout = vscode_layout },
         git_grep = { layout = vscode_layout },
         notifications = { layout = vscode_layout },
+        highlights = { layout = vscode_layout },
         explorer = {
           hidden = true,
           ignored = true,
