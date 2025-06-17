@@ -16,6 +16,9 @@ opt.list = false
 opt.iminsert = 0
 opt.imsearch = 0
 
+-- opt.tabstop = 2
+-- opt.shiftwidth = 8
+
 opt.guicursor =
   "n-v-c-sm:block-blinkwait1000-blinkon500-blinkoff500,i-ci-ve:ver25,r-cr-o:hor20,t:block-blinkon500-blinkoff500-TermCursor"
 

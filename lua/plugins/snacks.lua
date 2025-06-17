@@ -44,6 +44,7 @@ return {
         notifications = { layout = vscode_layout },
         explorer = {
           hidden = true,
+          ignored = true,
           layout = { auto_hide = { "input" }, preset = "sidebar" },
           win = {
             list = {
