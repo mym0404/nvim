@@ -50,12 +50,13 @@ end
 -- })
 
 local function map_searches()
-  -- vim.keymap.set("n", "<S-f>", function()
-  --   Snacks.picker.grep()
-  -- end)
-  vim.keymap.set("n", "<S-p>", function()
-    Snacks.picker.files()
-  end, { nowait = true, noremap = true })
+  vim.keymap.set("n", "<leader>/", function()
+    Snacks.picker.git_grep()
+  end, { nowait = true, noremap = true, desc = "git grep" })
+  vim.keymap.set("n", "<leader> ", function()
+    Snacks.picker.git_files()
+    -- Snacks.picker.files()
+  end, { nowait = true, noremap = true, desc = "git files" })
 end
 
 vim.api.nvim_create_autocmd({ "BufEnter" }, {

@@ -16,9 +16,10 @@ local vscode_layout = {
       border = "rounded",
       title = "{title} {live} {flags}",
       title_pos = "center",
+      focusable = true,
     },
-    { win = "list", border = "hpad", height = 10 },
-    { win = "preview", title = "{preview}", border = "rounded" },
+    { win = "list", border = "hpad", height = 10, focusable = true },
+    { win = "preview", title = "{preview}", border = "rounded", focusable = true },
   },
 }
 
@@ -103,6 +104,10 @@ return {
           hidden = true,
           layout = vscode_layout,
           -- ignored = true,
+        },
+        git_files = {
+          hidden = true,
+          layout = vscode_layout,
         },
       },
     },
