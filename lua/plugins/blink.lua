@@ -99,7 +99,7 @@ return {
       },
     },
     -- experimental signature help support
-    signature = { enabled = true, window = { show_documentation = false } },
+    signature = { enabled = false, window = { show_documentation = false } },
 
     sources = {
       -- adding any nvim-cmp sources here will enable them

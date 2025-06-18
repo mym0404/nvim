@@ -12,6 +12,7 @@ return {
     jump = {
       pos = "end",
       autojump = false,
+      offset = 0,
     },
     label = {
       after = true,
