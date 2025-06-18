@@ -14,7 +14,7 @@ local function reset_keymaps()
   end
 end
 
-local function setup_comments()
+local function map_comments()
   local api = require("Comment.api")
 
   vim.keymap.set("n", "gc", api.toggle.linewise.current)
@@ -207,7 +207,7 @@ end)
 
 reset_keymaps()
 map_shift_cr()
-setup_comments()
+map_comments()
 manipulate_yank_paste_register_behavior()
 customizeExitInsertMode()
 configure_git_diff()

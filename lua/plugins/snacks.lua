@@ -19,7 +19,7 @@ local vscode_layout = {
       focusable = true,
     },
     { win = "list", border = "hpad", height = 10, focusable = true },
-    { win = "preview", title = "{preview}", border = "rounded", focusable = true },
+    { wrap = true, win = "preview", title = "{preview}", border = "rounded", focusable = true },
   },
 }
 
@@ -30,6 +30,7 @@ return {
   ---@module "snacks.nvim"
   ---@type snacks.Config
   opts = {
+    scroll = { enabled = false },
     indent = { enabled = false },
     ---@type snacks.explorer.Config
     explorer = {
