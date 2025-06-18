@@ -752,7 +752,7 @@ local theme = lush(function(injected_functions)
     SnacksPickerManPage({ Special }),
     SnacksPickerManSection({ Number }),
     SnacksPickerMatch({ Special }),
-    SnacksPickerPathHidden({ NonText }),
+    SnacksPickerPathHidden({ Normal }),
     SnacksPickerPathIgnored({ NonText }),
     SnacksPickerPickWin({ Search }),
     SnacksPickerPrompt({ Special }),

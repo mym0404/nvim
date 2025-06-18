@@ -23,6 +23,8 @@ local vscode_layout = {
   },
 }
 
+local common_exclude = { ".git", ".idea" }
+
 return {
   "folke/snacks.nvim",
   lazy = false,
@@ -41,14 +43,40 @@ return {
       hidden = true,
       -- ignored = true,
       sources = {
-        grep = { layout = vscode_layout },
-        git_grep = { layout = vscode_layout },
         notifications = { layout = vscode_layout },
         highlights = { layout = vscode_layout },
+        files = {
+          ignored = false,
+          hidden = true,
+          layout = vscode_layout,
+          exclude = common_exclude,
+        },
+        grep = { exclude = common_exclude, hidden = true, ignored = false, layout = vscode_layout },
         explorer = {
           hidden = true,
+          exclude = common_exclude,
           ignored = true,
-          layout = { auto_hide = { "input" }, preset = "sidebar" },
+          layout = {
+            layout = {
+              backdrop = false,
+              width = 35,
+              min_width = 35,
+              height = 0,
+              enter = false,
+              position = "left",
+              border = "none",
+              box = "vertical",
+              -- {
+              --   win = "input",
+              --   height = 1,
+              --   border = "rounded",
+              --   title = "{title} {live} {flags}",
+              --   title_pos = "center",
+              -- },
+              { win = "list", border = "none" },
+              { win = "preview", title = "{preview}", height = 0.4, border = "top" },
+            },
+          },
           win = {
             list = {
               keys = {
@@ -100,15 +128,6 @@ return {
               },
             },
           },
-        },
-        files = {
-          hidden = true,
-          layout = vscode_layout,
-          -- ignored = true,
-        },
-        git_files = {
-          hidden = true,
-          layout = vscode_layout,
         },
       },
     },
