@@ -63,3 +63,28 @@ vim.api.nvim_create_autocmd({ "BufEnter" }, {
     map_searches()
   end,
 })
+
+--                                                         *lsp-defaults-disable*
+-- To override or delete any of the above defaults, set or unset the options on
+-- |LspAttach|: >lua
+
+vim.api.nvim_create_autocmd("LspAttach", {
+  callback = function(args)
+    -- Unmap K
+    -- Move visual
+    vim.keymap.set(
+      "x",
+      "<S-j>",
+      ":move '>+1<CR>gv=gv",
+      { silent = true, desc = "Move selection down" }
+    )
+    vim.keymap.set(
+      "x",
+      "<S-k>",
+      ":move '<-2<CR>gv=gv",
+      { silent = true, desc = "Move selection up" }
+    )
+    vim.keymap.set("n", "<S-j>", ":m .+1<CR>==", { noremap = true, silent = true })
+    vim.keymap.set("n", "<S-k>", ":m .-2<CR>==", { noremap = true, silent = true })
+  end,
+})

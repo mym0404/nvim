@@ -53,20 +53,10 @@ local function manipulate_yank_paste_register_behavior()
   -- vim.keymap.set({ "n", "v" }, "d", '"zd', { desc = "Delete without register" })
 end
 
-local function map_close_visual()
+local function map_esc()
   vim.keymap.set("x", "q", "<Esc>", { silent = true, desc = "Exit visual mode with q" })
 end
 
-local function map_move_vline()
-  -- Move visual
-  vim.keymap.set(
-    "x",
-    "<S-j>",
-    ":move '>+1<CR>gv=gv",
-    { silent = true, desc = "Move selection down" }
-  )
-  vim.keymap.set("x", "<S-k>", ":move '<-2<CR>gv=gv", { silent = true, desc = "Move selection up" })
-end
 local function configure_git_diff()
   vim.keymap.set(
     "n",
@@ -211,20 +201,23 @@ local function map_shift_cr()
   vim.keymap.set("n", "<S-CR>", "i<esc>o")
 end
 
-map_shift_cr()
+vim.keymap.set("n", "<s-d>", function()
+  vim.lsp.buf.hover({})
+end)
+
 reset_keymaps()
+map_shift_cr()
 setup_comments()
 manipulate_yank_paste_register_behavior()
 customizeExitInsertMode()
 configure_git_diff()
-map_close_visual()
-map_move_vline()
+map_esc()
 map_close_tap_or_buffer()
 map_rename()
 map_delete_file()
 map_enter()
 map_recording()
-map_smart_splits()
 map_split()
+map_smart_splits()
 map_select_all()
 map_git_actions()

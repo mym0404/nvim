@@ -85,6 +85,10 @@ return {
                   local is_explorer_visible = #pickers >= 1
 
                   if buf_name == "" and is_explorer_visible then
+                    --    for _, win in ipairs(wins) do
+                    --    local position = vim.api.nvim_win_get_position(win)
+                    --    vim.notify("win: " .. win ..position)
+                    ---   end
                     vim.api.nvim_set_current_win(wins[1])
                   else
                     require("smart-splits").move_cursor_right({ at_edge = "stop" })
