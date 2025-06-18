@@ -21,6 +21,7 @@ return {
       },
       -- The options you set here will be merged with the builtin formatters.
       -- You can also define any custom formatters here.
+      ---@diagnostic disable-next-line: undefined-doc-name
       ---@type table<string, conform.FormatterConfigOverride|fun(bufnr: integer): nil|conform.FormatterConfigOverride>
       formatters = {
         injected = { options = { ignore_errors = true } },
@@ -37,10 +38,6 @@ return {
         -- },
       },
     }
-    for ft, _ in pairs(opts.formatters_by_ft) do
-      opts.formatters_by_ft[ft] = opts.formatters_by_ft[ft] or {}
-      table.insert(opts.formatters_by_ft[ft], "biome-check")
-    end
     opts.formatters["biome-check"] = {
       require_cwd = true,
     }
