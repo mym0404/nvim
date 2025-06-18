@@ -70,21 +70,33 @@ vim.api.nvim_create_autocmd({ "BufEnter" }, {
 
 vim.api.nvim_create_autocmd("LspAttach", {
   callback = function(args)
-    -- Unmap K
+    local keys = require("lazyvim.plugins.lsp.keymaps").get()
+    -- disable a keymap
+    keys[#keys + 1] = { "K", false }
     -- Move visual
     vim.keymap.set(
       "x",
-      "<S-j>",
+      "<s-j>",
       ":move '>+1<CR>gv=gv",
-      { silent = true, desc = "Move selection down" }
+      { silent = true, desc = "Move selection down", buffer = args.buf }
     )
     vim.keymap.set(
       "x",
-      "<S-k>",
+      "<s-k>",
       ":move '<-2<CR>gv=gv",
-      { silent = true, desc = "Move selection up" }
+      { silent = true, desc = "Move selection up", buffer = args.buf }
     )
-    vim.keymap.set("n", "<S-j>", ":m .+1<CR>==", { noremap = true, silent = true })
-    vim.keymap.set("n", "<S-k>", ":m .-2<CR>==", { noremap = true, silent = true })
+    vim.keymap.set(
+      "n",
+      "<s-k>",
+      ":m .-2<CR>==",
+      { noremap = true, silent = true, buffer = args.buf }
+    )
+    vim.keymap.set(
+      "n",
+      "<s-j>",
+      ":m .+1<CR>==",
+      { noremap = true, silent = true, buffer = args.buf }
+    )
   end,
 })
