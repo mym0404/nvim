@@ -25,12 +25,12 @@ vim.api.nvim_create_autocmd("BufEnter", {
   desc = "Disable auto comment continuation",
 })
 
-local function set_english_input()
-  -- vim.defer_fn(function()
-  --   vim.fn.system("macism com.apple.keylayout.ABC")
-  --   vim.fn.system("macism com.apple.keylayout.US")
-  -- end, 100)
-end
+-- local function set_english_input()
+--   -- vim.defer_fn(function()
+--   --   vim.fn.system("macism com.apple.keylayout.ABC")
+--   --   vim.fn.system("macism com.apple.keylayout.US")
+--   -- end, 100)
+-- end
 
 -- brew tap laishulu/homebrew
 -- brew install macism

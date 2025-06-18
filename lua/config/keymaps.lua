@@ -204,7 +204,8 @@ end
 vim.keymap.set("n", "<s-d>", function()
   vim.lsp.buf.hover({})
 end)
-
+vim.keymap.set("n", "<C-d>", "10<C-d>zz", { noremap = true })
+vim.keymap.set("n", "<C-u>", "10<C-u>zz", { noremap = true })
 reset_keymaps()
 map_shift_cr()
 map_comments()
