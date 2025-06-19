@@ -53,7 +53,7 @@ export default async function RootLayout({ children }) {
 					navbar={navbar}
 					pageMap={await getPageMap()}
 					feedback={{ content: "Give me feedback" }}
-					docsRepositoryBase="https://github.com/mym0404/devenv/tree/main"
+					docsRepositoryBase="https://github.com/mym0404/devenv/tree/main/devenv"
 					footer={footer}
 				>
 					{children}
