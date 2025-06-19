@@ -47,7 +47,7 @@ local function setup_core()
 	c.custom_block_glyphs = true -- 블록 글리프 자체 계산 (선명도 개선)  [oai_citation:1‡wezterm.org](https://wezterm.org/config/lua/config/custom_block_glyphs.html?utm_source=chatgpt.com)
 
 	-- 📐 줄 높이 및 DPI 조정
-	c.line_height = 1.1
+	c.line_height = 1.15
 
 	c.window_background_opacity = 0.99
 	c.macos_window_background_blur = 15
