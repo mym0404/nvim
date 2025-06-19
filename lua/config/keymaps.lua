@@ -66,7 +66,7 @@ local function configure_git_diff()
   vim.keymap.set(
     "n",
     "<leader>h",
-    "<cmd>DiffviewFilehistory %<cr>",
+    "<cmd>DiffviewFileHistory %<cr>",
     { silent = true, desc = "Open Diff view file history" }
   )
 end
