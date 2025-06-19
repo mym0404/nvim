@@ -31,7 +31,7 @@ const navbar = (
 				<b>Dev Environment</b>
 			</p>
 		}
-		projectLink={"https://github.com/mym0404/DevEnvironment"}
+		projectLink={"https://github.com/mym0404/nvim"}
 		// ... Your additional navbar options
 	/>
 );
@@ -53,7 +53,7 @@ export default async function RootLayout({ children }) {
 					navbar={navbar}
 					pageMap={await getPageMap()}
 					feedback={{ content: "Give me feedback" }}
-					docsRepositoryBase="https://github.com/mym0404/devenv/tree/main/devenv"
+					docsRepositoryBase="https://github.com/mym0404/nvim/tree/main/devenv"
 					footer={footer}
 				>
 					{children}
