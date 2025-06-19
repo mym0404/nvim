@@ -224,9 +224,11 @@ local function map_tstools()
     end
   end, { desc = "Add Missing Imports" })
 
-  vim.keymap.set("n", "gs", function()
+  vim.keymap.set("n", "gD", function()
     if vim.bo.filetype == "typescript" or vim.bo.filetype == "typescriptreact" then
       require("typescript-tools.api").go_to_source_definition(true, { loclist = true })
+    else
+      vim.lsp.buf.declaration({ loclist = true })
     end
   end, { desc = "Add Missing Imports" })
 end
