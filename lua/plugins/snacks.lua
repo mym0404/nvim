@@ -56,6 +56,7 @@ return {
           hidden = true,
           exclude = common_exclude,
           ignored = true,
+          follow_file = false,
           layout = {
             layout = {
               backdrop = false,

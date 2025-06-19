@@ -63,6 +63,7 @@ local function map_searches()
       cwd = root,
       ignored = false,
       hidden = true,
+      follow_file = false,
     })
   end, { desc = "Open Explorer" })
 end
