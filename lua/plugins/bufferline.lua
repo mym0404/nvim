@@ -18,12 +18,13 @@ return {
     options = {
       style_preset = require("bufferline").style_preset.minimal,
       numbers = "none",
+      truncate_names = false,
       buffer_close_icon = "",
       modified_icon = "",
       close_icon = "",
       left_trunc_marker = "",
       right_trunc_marker = "",
-      always_show_bufferline = false,
+      always_show_bufferline = true,
       tab_size = 18,
       indicator = {
         style = "icon",
