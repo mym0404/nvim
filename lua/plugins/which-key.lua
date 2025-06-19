@@ -1,4 +1,4 @@
 return {
   "folke/which-key.nvim",
-  enabled = true,
+  enabled = false,
 }
