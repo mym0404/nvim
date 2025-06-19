@@ -67,7 +67,7 @@ local theme = lush(function(injected_functions)
     sym("@variable.builtin")({ fg = "#79c0ff" }),
     sym("@variable")({ fg = "#e6edf3" }),
     Number({ fg = "#809DFF" }),
-    Search({ bg = bg.search, fg = text.fg, gui = "bold underline" }),
+    Search({ bg = bg.search, fg = text.fg, gui = "bold" }),
     Normal({ fg = text.fg }),
     Visual({ bg = bg.selected }),
 
@@ -110,7 +110,7 @@ local theme = lush(function(injected_functions)
     LineNr({ fg = "#939393", gui = "bold" }),
     LineNrAbove({ LineNr, gui = "bold" }),
     LineNrBelow({ LineNr, gui = "bold" }),
-    IncSearch({ bg = "red", fg = "white", gui = "bold underline" }),
+    IncSearch({ bg = "red", fg = "white", gui = "bold" }),
     NonText(text_sub),
     CursorLineNr({ fg = "#e6edf3", gui = "bold" }),
     Constant({ Normal }),
