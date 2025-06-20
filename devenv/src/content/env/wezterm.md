@@ -21,10 +21,13 @@ function getOS()
 end
 
 local is_windows = getOS() == "Windows"
-local cmd_key = is_windows and "WIN" or "CMD"
+local CMD = is_windows and "SUPER" or "CMD"
+local CTRL = "CTRL"
+local OPT = "OPT"
+local SHIFT = "SHIFT"
 
 local function setup_core()
-	if getOS() == "Windows" then
+	if is_windows then
 		c.default_prog = { "C:\\Program Files\\Git\\bin\\bash.exe", "--login", "-i" }
 	end
 	c.set_environment_variables = {
@@ -119,50 +122,31 @@ local function setup_core()
 		window:set_right_status(wezterm.format(elements))
 	end)
 
-	c.leader = { key = "l", mods = "CMD", timeout_milliseconds = 1000 }
 	c.native_macos_fullscreen_mode = true
 end
 
 local function setup_basic_keys()
 	c.keys = {
-		{ key = "f", mods = "CTRL|CMD", action = wezterm.action.ToggleFullScreen },
+		{ key = "f", mods = CTRL .. "|" .. CMD, action = wezterm.action.ToggleFullScreen },
 		-- Sends ESC + b and ESC + f sequence, which is used
 		-- for telling your shell to jump back/forward.
 		{
 			-- When the left arrow is pressed
 			key = "LeftArrow",
 			-- With the "Option" key modifier held down
-			mods = "OPT",
+			mods = OPT,
 			-- Perform this action, in this case - sending ESC + B
 			-- to the terminal
 			action = act.SendString("\x1bb"),
 		},
 		{
 			key = "RightArrow",
-			mods = "OPT",
+			mods = OPT,
 			action = act.SendString("\x1bf"),
 		},
-
-		{
-			key = ",",
-			mods = "SUPER",
-			action = act.SpawnCommandInNewTab({
-				cwd = wezterm.home_dir,
-				args = { "nvim", wezterm.c_file },
-			}),
-		},
-
-		{
-			key = "a",
-			-- When we're in leader mode _and_ CTRL + A is pressed...
-			mods = "LEADER|CTRL",
-			-- Actually send CTRL + A key to the terminal
-			action = act.SendKey({ key = "a", mods = "CTRL" }),
-		},
-
 		{
 			key = "w",
-			mods = "CMD",
+			mods = CMD,
 			action = wezterm.action_callback(function(window, pane)
 				local tab = pane:tab()
 				local panes = tab:panes()
@@ -203,12 +187,12 @@ local function regsiter_smart_splits_multiplexer()
 	local function split_nav(resize_or_move, key)
 		return {
 			key = key,
-			mods = resize_or_move == "resize" and "META" or "CTRL",
+			mods = resize_or_move == "resize" and OPT or CTRL,
 			action = w.action_callback(function(win, pane)
 				if is_vim(pane) then
 					-- pass the keys through to vim/nvim
 					win:perform_action({
-						SendKey = { key = key, mods = resize_or_move == "resize" and "META" or "CTRL" },
+						SendKey = { key = key, mods = resize_or_move == "resize" and OPT or CTRL },
 					}, pane)
 				else
 					if resize_or_move == "resize" then
@@ -241,7 +225,7 @@ local function register_split_multiplexing()
 	end
 
 	local function split_nav(is_horizontal)
-		local mods = "CMD" .. (is_horizontal and "|ALT" or "")
+		local mods = CMD .. (is_horizontal and "|" .. OPT or "")
 		return {
 			key = "0",
 			mods = mods,
