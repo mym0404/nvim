@@ -1,0 +1,78 @@
+import {Tabs } from 'nextra/components'
+
+# Getting Started
+
+<Tabs items={['macos', 'win']}>
+<Tabs.Tab>
+
+## WezTerm
+
+```shell
+brew install --cask wezterm
+vim ~/.weazterm.lua
+```
+
+copy [.wezterm.lua](https://devenv.mjstudio.net/env/wezterm) into ~/.wezterm.lua
+
+## Git
+
+- [macos](https://git-scm.com/downloads/mac)
+
+## Plugins
+
+```shell
+brew tap laishulu/homebrew
+brew install macism
+brew install jesseduffield/lazygit/lazygit
+brew install lazygit ripgrep fd figlet corepack bat neovim
+```
+
+## Lazyvim
+
+```shell
+rm -rf ~/.config.nvim
+git clone https://github.com/mym0404/nvim ~/.config/nvim
+```
+
+</Tabs.Tab>
+<Tabs.Tab>
+
+## Choco
+
+```shell
+Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))
+choco feature enable -n allowGlobalConfirmation
+
+# Install Runtimes
+choco install -y git nodejs fz fneovim ripgrep wget fd unzip gzip mingw make lazygit figlet bat corepack
+```
+
+## Warp
+
+- [downloads](https://www.warp.dev/)
+
+</Tabs.Tab>
+
+</Tabs>
+
+## Font
+
+- [Jetbrains Mono Hangul Nerd](https://github.com/Jhyub/JetBrainsMonoHangul/releases/download/20220606/JetBrainsMonoNerdFontsHangul-20220606.zip) 
+- [Hack Nerd Font](https://github.com/ryanoasis/nerd-fonts/releases/download/v3.4.0/Hack.zip)
+- [D2 Coding Nerd](https://github.com/ryanoasis/nerd-fonts/releases/download/v3.4.0/D2Coding.zip)
+
+## Install `zsh` theme `lambda-gitster` from my fork
+
+```sh
+git clone https://github.com/mym0404/lambda-gitster.git
+cd lambda-gitster
+cp lambda-gitster.zsh-theme ~/.oh-my-zsh/custom/themes
+```
+
+## Apple Development
+
+### xcode-build-server
+
+```shell
+brew install xcode-build-server
+```

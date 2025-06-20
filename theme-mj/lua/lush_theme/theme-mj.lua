@@ -803,6 +803,7 @@ local theme = lush(function(injected_functions)
     sym("@lsp.type.parameter")({ sym("@variable.parameter") }),
     sym("@lsp.type.regexp")({ sym("@string.regexp") }),
     sym("@lsp.type.type")({ sym("@type") }),
+    sym("@lsp.type.interface")({ fg = "#F2F68D" }),
     sym("@lsp.typemod.variable.defaultLibrary")({ sym("@variable.builtin") }),
     sym("@lsp.typemod.variable.injected")({ sym("@variable") }),
     sym("@markup.link.label")({ Special }),

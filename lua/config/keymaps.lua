@@ -200,12 +200,41 @@ local function map_shift_cr()
   vim.keymap.set("n", "<S-CR>", "i<esc>o")
 end
 
-vim.keymap.set("n", "<s-d>", function()
-  vim.lsp.buf.hover({})
-end)
-vim.keymap.set("n", "<C-d>", "10<C-d>zz", { noremap = true })
-vim.keymap.set("n", "<C-u>", "10<C-u>zz", { noremap = true })
+local function map_docs_hover()
+  vim.keymap.set("n", "<s-d>", function()
+    vim.lsp.buf.hover({})
+  end)
+end
+
+local function map_scroll()
+  vim.keymap.set("n", "<C-d>", "10<C-d>zz", { noremap = true })
+  vim.keymap.set("n", "<C-u>", "10<C-u>zz", { noremap = true })
+end
+
+local function map_tstools()
+  vim.keymap.set("n", "<leader>co", function()
+    if vim.bo.filetype == "typescript" or vim.bo.filetype == "typescriptreact" then
+      require("typescript-tools.api").organize_imports(true)
+    end
+  end, { desc = "Organize Import" })
+
+  vim.keymap.set("n", "<leader>cm", function()
+    if vim.bo.filetype == "typescript" or vim.bo.filetype == "typescriptreact" then
+      require("typescript-tools.api").add_missing_imports(true)
+    end
+  end, { desc = "Add Missing Imports" })
+
+  vim.keymap.set("n", "gs", function()
+    if vim.bo.filetype == "typescript" or vim.bo.filetype == "typescriptreact" then
+      require("typescript-tools.api").go_to_source_definition(true, { loclist = true })
+    end
+  end, { desc = "Go to Source with TSTool" })
+end
+
 reset_keymaps()
+map_tstools()
+map_docs_hover()
+map_scroll()
 map_shift_cr()
 map_comments()
 manipulate_yank_paste_register_behavior()
