@@ -7,3 +7,4 @@ asd
 asd
 
 asd
+console.log()
