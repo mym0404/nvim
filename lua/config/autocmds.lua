@@ -61,7 +61,7 @@ local function map_searches()
     Snacks.picker.explorer({
       enter = false,
       cwd = root,
-      ignored = false,
+      ignored = true,
       hidden = true,
       follow_file = false,
     })
