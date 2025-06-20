@@ -35,7 +35,6 @@ M.get_current_cursor_char = function()
 end
 
 local tag_file_tyeps = {
-
   "javascript",
   "typescript",
   "typescriptreact",
@@ -48,6 +47,11 @@ local double_new_line_files = {
   "swift",
   "kotlin",
   "java",
+  "html",
+  "typescript",
+  "javascript",
+  "typescriptreact",
+  "javascriptreact",
 }
 local matching_pairs = {
   "{}",

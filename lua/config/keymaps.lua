@@ -136,7 +136,7 @@ local function map_enter()
       return prefix .. "<cr><esc>O"
     end
     return prefix .. "<cr>"
-  end, { expr = true })
+  end, { expr = true, noremap = true, nowait = true, silent = true })
 end
 
 local function map_recording()
