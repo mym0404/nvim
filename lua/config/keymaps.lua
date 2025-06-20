@@ -126,7 +126,7 @@ local function map_delete_file()
     vim.cmd("bdelete")
     vim.cmd("!rm " .. current_buffer_file_path)
     vim.notify("Delete file " .. current_buffer_file_path)
-  end, { desc = "Delete current file" })
+  end, { desc = "Delete current file", nowait = true })
 end
 
 local function map_enter()
