@@ -1,4 +1,4 @@
-console.log('{{ello')
+console.log('${}')
 
 export const C = () => {
   return <div>

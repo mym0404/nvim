@@ -129,13 +129,13 @@ local function map_delete_file()
 end
 
 local function map_enter()
-  vim.keymap.set({ "n", "i" }, "<cr>", function()
-    local prefix = vim.api.nvim_get_mode().mode == "n" and "i" or ""
-    if utils.should_be_double_new_line() then
-      return prefix .. "<cr><esc>O"
-    end
-    return prefix .. "<cr>"
-  end, { expr = true, noremap = true, nowait = true, silent = true })
+  -- vim.keymap.set({ "n", "i" }, "<cr>", function()
+  --   local prefix = vim.api.nvim_get_mode().mode == "n" and "i" or ""
+  --   if utils.should_be_double_new_line() then
+  --     return prefix .. "<cr><esc>O"
+  --   end
+  --   return prefix .. "<cr>"
+  -- end, { expr = true, noremap = true, nowait = true, silent = true })
 end
 
 local function map_recording()
@@ -304,7 +304,6 @@ local function map_template_string()
   vim.keymap.set("i", "{", function()
     local ft = vim.bo.filetype
     local is_allow_ft = false
-    vim.notify(ft .. " filetype")
     for _, allowed in ipairs(allowed_ft) do
       if ft == allowed then
         is_allow_ft = true
