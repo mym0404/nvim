@@ -254,7 +254,7 @@ local theme = lush(function(injected_functions)
     DiagnosticUnderlineError({ gui = "undercurl", sp = "#ff7b72" }),
     MatchParen({ bg = "#1e4273", fg = "#e6edf3", gui = "bold" }),
     sym("@type.qualifier")({ fg = "#ff7b72" }),
-    sym("@tag")({ fg = "#CCA06A" }),
+    sym("@tag")({ fg = "white" }),
     sym("@markup.link")({ fg = "#e6edf3", gui = "underline" }),
     sym("@markup.strikethrough")({ fg = "#e6edf3", gui = "strikethrough" }),
     sym("@markup.italic")({ fg = "#e6edf3", gui = "italic" }),

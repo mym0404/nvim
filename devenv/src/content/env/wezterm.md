@@ -5,12 +5,13 @@ local wezterm = require("wezterm")
 local c = wezterm.config_builder()
 local act = wezterm.action
 
-function getOS()
+local function getOS()
 	-- ask LuaJIT first
 	if jit then
 		return jit.os
 	end
 
+  local osname = ''
 	-- Unix, Linux variants
 	local fh, err = assert(io.popen("uname -o 2>/dev/null", "r"))
 	if fh then
