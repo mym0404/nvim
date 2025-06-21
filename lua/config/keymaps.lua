@@ -6,7 +6,6 @@ local function reset_keymaps()
     { "n", "gco" },
     { "n", "gcO" },
     { "o", "gc" },
-    { "x", "gc" },
     { "n", "gcc" },
   }
   for _, key in ipairs(reset_keys) do
@@ -19,12 +18,12 @@ local function map_comments()
 
   vim.keymap.set("n", "gc", api.toggle.linewise.current)
 
-  local esc = vim.api.nvim_replace_termcodes("<ESC>", true, false, true)
+  -- local esc = vim.api.nvim_replace_termcodes("<ESC>", true, false, true)
 
-  vim.keymap.set("x", "gc", function()
-    vim.api.nvim_feedkeys(esc, "nx", false)
-    api.toggle.linewise(vim.fn.visualmode())
-  end)
+  -- vim.keymap.set("x", "gc", function()
+  --   vim.api.nvim_feedkeys(esc, "nx", false)
+  --   api.toggle.linewise(vim.fn.visualmode())
+  -- end)
 end
 
 local function customizeExitInsertMode()
