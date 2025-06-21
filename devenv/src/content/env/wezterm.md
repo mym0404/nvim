@@ -11,7 +11,7 @@ local function getOS()
 		return jit.os
 	end
 
-  local osname = ''
+	local osname = ""
 	-- Unix, Linux variants
 	local fh, err = assert(io.popen("uname -o 2>/dev/null", "r"))
 	if fh then
@@ -36,6 +36,7 @@ local function setup_core()
 	}
 
 	c.color_scheme = "Tokyo Night"
+	c.adjust_window_size_when_changing_font_size = false
 
 	-- c.font = wezterm.font("D2Coding", { weight = "Medium" })
 	c.font = wezterm.font_with_fallback({ "JetBrainsMonoHangul Nerd Font Mono" }, { weight = "Medium" })
