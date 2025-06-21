@@ -286,7 +286,44 @@ local function map_delete_buffer()
   vim.keymap.set("n", "<leader>w", ":bdelete<cr>", { nowait = true })
 end
 
+local function map_react_prop_bracket()
+  vim.keymap.set("i", "=", function()
+    if vim.bo.filetype ~= "typescriptreact" and vim.bo.filetype ~= "javascriptreact" then
+      return "="
+    end
+    local node = require("nvim-treesitter.ts_utils").get_node_at_cursor()
+    if node ~= nil and node:type() == "jsx_opening_element" then
+      return "={}<esc>i"
+    end
+    return "="
+  end, { nowait = true, expr = true })
+end
+
+local function map_template_string()
+  local allowed_ft = { "typescript", "typescriptreact", "javascript", "javascriptreact" }
+  vim.keymap.set("i", "{", function()
+    local ft = vim.bo.filetype
+    local is_allow_ft = false
+    for _, allowed in ipairs(allowed_ft) do
+      if ft == allowed then
+        is_allow_ft = true
+        break
+      end
+    end
+    if not is_allow_ft then
+      return "{"
+    end
+
+    local node = require("nvim-treesitter.ts_utils").get_node_at_cursor()
+    if node ~= nil and node:type() == "jsx_opening_element" then
+      return "={}<esc>i"
+    end
+  end, { nowait = true, expr = true })
+end
+
 reset_keymaps()
+map_react_prop_bracket()
+map_template_string()
 map_delete_buffer()
 map_tstools()
 map_docs_hover()
