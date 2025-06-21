@@ -140,7 +140,8 @@ local function map_enter()
 end
 
 local function map_recording()
-  vim.keymap.set("n", "q", "qt", { desc = "start recording with register t" })
+  vim.keymap.set("n", "q", "<Nop>")
+  vim.keymap.set("n", "!", "qt", { desc = "start recording with register t" })
   vim.keymap.set("n", "@", "@t", { desc = "run recording with register t" })
 end
 
@@ -282,7 +283,12 @@ local function map_package_info()
   )
 end
 
+local function map_delete_buffer()
+  vim.keymap.set("n", "<leader>w", ":bdelete<cr>", { nowait = true })
+end
+
 reset_keymaps()
+map_delete_buffer()
 map_tstools()
 map_docs_hover()
 map_scroll()
