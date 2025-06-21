@@ -23,7 +23,7 @@ local vscode_layout = {
   },
 }
 
-local common_exclude = { ".git", ".idea", ".DS_Store" }
+local common_exclude = { ".git", "~", ".idea", ".DS_Store" }
 
 return {
   "folke/snacks.nvim",

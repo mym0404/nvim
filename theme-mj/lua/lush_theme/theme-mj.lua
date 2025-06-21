@@ -32,7 +32,7 @@ local vcs = {
     code = { bg = "#442A45" },
   },
   ignored = {
-    label = { fg = text_sub.fg },
+    label = { fg = "#736c41", gui = "italic,bold" },
   },
   untracked = {
     label = { fg = "#E0787C" },
@@ -753,7 +753,7 @@ local theme = lush(function(injected_functions)
     SnacksPickerManSection({ Number }),
     SnacksPickerMatch({ Special }),
     SnacksPickerPathHidden({ Normal }),
-    SnacksPickerPathIgnored({ NonText }),
+    SnacksPickerPathIgnored(vcs.ignored.label),
     SnacksPickerPickWin({ Search }),
     SnacksPickerPrompt({ Special }),
     SnacksPickerRegister({ Number }),
