@@ -34,6 +34,8 @@ local function setup_core()
 	c.set_environment_variables = {
 		PATH = "/opt/homebrew/bin:" .. os.getenv("PATH"),
 	}
+	c.initial_cols = 160
+	c.initial_rows = 34
 
 	c.color_scheme = "Tokyo Night"
 	c.adjust_window_size_when_changing_font_size = false
@@ -41,7 +43,7 @@ local function setup_core()
 	-- c.font = wezterm.font("D2Coding", { weight = "Medium" })
 	c.font = wezterm.font_with_fallback({ "JetBrainsMonoHangul Nerd Font Mono" }, { weight = "Medium" })
 	c.harfbuzz_features = { "calt=0", "clig=0", "liga=0" }
-	c.font_size = 13
+	c.font_size = 12
 
 	-- Slightly transparent and blurred background
 	c.front_end = "OpenGL"
@@ -54,8 +56,8 @@ local function setup_core()
 	-- 📐 줄 높이 및 DPI 조정
 	c.line_height = 1.15
 
-	c.window_background_opacity = 0.99
-	c.macos_window_background_blur = 15
+	c.window_background_opacity = 0.9
+	c.macos_window_background_blur = 2
 	-- Removes the title bar, leaving only the tab bar. Keeps
 	-- the ability to resize by dragging the window's edges.
 	-- On macOS, 'RESIZE|INTEGRATED_BUTTONS' also looks nice if
