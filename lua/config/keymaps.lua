@@ -300,40 +300,50 @@ local function map_react_prop_bracket()
 end
 
 local function map_template_string()
+  local Rule = require("nvim-autopairs.rule")
+  local npairs = require("nvim-autopairs")
+  local cond = require("nvim-autopairs.conds")
   local allowed_ft = { "typescript", "typescriptreact", "javascript", "javascriptreact" }
-  vim.keymap.set("i", "{", function()
-    local ft = vim.bo.filetype
-    local is_allow_ft = false
-    for _, allowed in ipairs(allowed_ft) do
-      if ft == allowed then
-        is_allow_ft = true
-        break
-      end
-    end
-    if not is_allow_ft then
-      return "{"
-    end
 
-    local node = require("nvim-treesitter.ts_utils").get_node_at_cursor()
-    if node == nil then
-      vim.notify("nil")
-      return "{"
-    end
-    vim.notify(node:type())
-    if node:parent() ~= nil and node:parent():type() == "string" then
-      local start_row, start_col, end_row, end_col = node:parent():range()
-      vim.api.nvim_buf_set_text(0, start_row, start_col, end_row, start_col, { "`" })
-      vim.api.nvim_buf_set_text(0, start_row, end_col, end_row, end_col, { "`" })
-      return "{"
-    else
-      return "{"
-    end
-  end, { nowait = true, expr = true })
+  npairs.add_rule(
+    Rule("{", "}", allowed_ft)
+      :with_pair(cond.before_text("$"))
+      :with_pair(cond.is_inside_quote())
+      :replace_endpair(function(opts)
+        local node = require("nvim-treesitter.ts_utils").get_node_at_cursor()
+        if node == nil then
+          return "}"
+        end
+        local string_node = (node ~= nil and node:type() == "string") and node
+          or (
+            (node ~= nil and node:parent() ~= nil and node:parent():type() == "string")
+              and node:parent()
+            or nil
+          )
+        if string_node ~= nil then
+          local start_row, start_col, end_row, end_col = string_node:range()
+          vim.schedule(function()
+            vim.api.nvim_buf_set_text(0, start_row, start_col, end_row, start_col + 1, { "`" })
+            vim.api.nvim_buf_set_text(0, start_row, end_col, end_row, end_col + 2, { "`" })
+          end)
+          return "}"
+        else
+          return "}"
+        end
+      end)
+  )
+  -- press x1234 => x12341234
+  npairs.add_rules({
+    Rule("x%d%d%d%d$", "number", "lua"):use_regex(true):replace_endpair(function(opts)
+      -- print(vim.inspect(opts))
+      return opts.prev_char:sub(#opts.prev_char - 3, #opts.prev_char)
+    end),
+  })
 end
 
 reset_keymaps()
-map_react_prop_bracket()
 map_template_string()
+map_react_prop_bracket()
 map_delete_buffer()
 map_tstools()
 map_docs_hover()
