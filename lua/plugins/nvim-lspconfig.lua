@@ -9,6 +9,7 @@ return {
     servers = {
       sourcekit = {},
       jdtls = {},
+      kotlin_language_server = {},
       vtsls = {
         enabled = false,
       },
