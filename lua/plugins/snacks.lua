@@ -36,7 +36,7 @@ return {
     indent = { enabled = false },
     ---@type snacks.explorer.Config
     explorer = {
-      replace_netrw = true,
+      replace_netrw = false,
     },
     ---@type snacks.picker.Config
     picker = {

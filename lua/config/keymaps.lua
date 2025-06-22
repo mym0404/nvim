@@ -283,7 +283,7 @@ local function map_package_info()
 end
 
 local function map_delete_buffer()
-  vim.keymap.set("n", "<leader>w", ":bdelete<cr>", { nowait = true })
+  vim.keymap.set("n", "<leader>w", ":bdelete<cr>", {})
 end
 
 local function map_react_prop_bracket()
