@@ -12,6 +12,8 @@ opt.swapfile = false
 opt.conceallevel = 0
 opt.termguicolors = true
 opt.list = false
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1
 
 opt.iminsert = 0
 opt.imsearch = 0
