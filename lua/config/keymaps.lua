@@ -294,7 +294,10 @@ local function map_react_prop_bracket()
       return "="
     end
     local node = require("nvim-treesitter.ts_utils").get_node_at_cursor()
-    if node ~= nil and node:type() == "jsx_opening_element" then
+    if
+      node ~= nil
+      and (node:type() == "jsx_opening_element" or node:type() == "jsx_self_closing_element")
+    then
       return "={}<esc>i"
     end
     return "="
