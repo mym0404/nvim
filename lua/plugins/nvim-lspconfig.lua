@@ -8,6 +8,7 @@ return {
     inlay_hints = { enabled = false },
     servers = {
       sourcekit = {},
+      jdtls = {},
       vtsls = {
         enabled = false,
       },
