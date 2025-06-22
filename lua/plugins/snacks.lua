@@ -57,6 +57,7 @@ return {
           exclude = common_exclude,
           ignored = true,
           follow_file = false,
+          git_status_open = false,
           layout = {
             layout = {
               backdrop = false,
