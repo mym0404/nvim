@@ -6,8 +6,17 @@ return {
     settings = {
       separate_diagnostic_server = true,
       tsserver_format_options = {},
+      expose_as_code_action = {
+        "fix_all",
+        "add_missing_imports",
+        "remove_unused",
+        "remove_unused_imports",
+        "organize_imports",
+      },
       tsserver_file_preferences = {
-        "all",
+        quotePreference = "single",
+        includeCompletionsForImportStatements = true,
+        includeCompletionsWithSnippetText = true,
       },
     },
   },
