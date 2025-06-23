@@ -780,7 +780,7 @@ local theme = lush(function(injected_functions)
     SnacksWinKey(keyword),
     SnacksWinKeyDesc({ Function }),
     SnacksWinKeySep({ NonText }),
-    SnippetTabstop({ Visual }),
+    SnippetTabstop({}),
     SpecialChar(special),
     SpecialComment(special),
     SpecialKey({ NonText }),
