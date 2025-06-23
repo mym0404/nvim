@@ -5,9 +5,9 @@ local vscode_layout = {
   layout = {
     backdrop = true,
     row = 2,
-    width = 0.5,
+    width = 0.60,
     min_width = 80,
-    height = 0.7,
+    height = 0.8,
     border = "none",
     box = "vertical",
     {
@@ -19,7 +19,7 @@ local vscode_layout = {
       focusable = true,
     },
     { win = "list", border = "hpad", height = 10, focusable = true },
-    { wrap = true, win = "preview", title = "{preview}", border = "rounded", focusable = true },
+    { wrap = true, win = "preview", title = "{title}", border = "rounded", focusable = true },
   },
 }
 
@@ -55,6 +55,7 @@ return {
               keys = {
                 ["<up>"] = { "history_back", mode = { "i", "n" } },
                 ["<down>"] = { "history_forward", mode = { "i", "n" } },
+                ["<esc>"] = { "close", mode = { "i", "n" } },
               },
             },
           },
@@ -69,6 +70,7 @@ return {
               keys = {
                 ["<up>"] = { "history_back", mode = { "i", "n" } },
                 ["<down>"] = { "history_forward", mode = { "i", "n" } },
+                ["<esc>"] = { "close", mode = { "i", "n" } },
               },
             },
           },

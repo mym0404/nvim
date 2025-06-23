@@ -7,6 +7,8 @@
 -- Or remove existing autocmds by their group name (which is prefixed with `lazyvim_` for the defaults)
 -- e.g. vim.api.nvim_del_augroup_by_name("lazyvim_wrap_spell")
 
+local utils = require("utils/utils")
+
 vim.api.nvim_create_autocmd({ "BufLeave", "FocusLost" }, {
   pattern = { "*" },
   command = "silent! wall",
@@ -24,30 +26,6 @@ vim.api.nvim_create_autocmd("BufEnter", {
   end,
   desc = "Disable auto comment continuation",
 })
-
--- local function set_english_input()
---   -- vim.defer_fn(function()
---   --   vim.fn.system("macism com.apple.keylayout.ABC")
---   --   vim.fn.system("macism com.apple.keylayout.US")
---   -- end, 100)
--- end
-
--- brew tap laishulu/homebrew
--- brew install macism
--- vim.api.nvim_create_autocmd({ "InsertLeave", "FocusGained", "ModeChanged" }, {
---   callback = function(event)
---     if event.event == "InsertLeave" then
---       -- set_english_input()
---     elseif event.event == "ModeChanged" then
---       local mode_change = vim.fn.mode()
---       if mode_change == "n" then
---         set_english_input()
---       end
---     elseif event.event == "FocusGained" and vim.fn.mode() ~= "i" then
---       set_english_input()
---     end
---   end,
--- })
 
 local function map_searches()
   local root = vim.fs.root(0, { ".git" })
@@ -108,5 +86,13 @@ vim.api.nvim_create_autocmd("LspAttach", {
       ":m .+1<CR>==",
       { noremap = true, silent = true, buffer = args.buf }
     )
+  end,
+})
+
+vim.api.nvim_create_autocmd("LspNotify", {
+  callback = function(args)
+    if args.data.method == "textDocument/didOpen" then
+      vim.lsp.foldclose("imports", vim.fn.bufwinid(args.buf))
+    end
   end,
 })

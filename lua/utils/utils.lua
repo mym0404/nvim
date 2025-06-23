@@ -34,12 +34,11 @@ M.get_current_cursor_char = function()
   return line:sub(col + 1, col + 1)
 end
 
-local tag_file_tyeps = {
+local js_fts = {
   "javascript",
   "typescript",
   "typescriptreact",
   "javascriptreact",
-  "html",
 }
 
 local double_new_line_files = {
@@ -122,6 +121,7 @@ M.to_str_list = function(str)
   end
   return ret
 end
+
 M.get_jsx_name = function(node)
   local n = node
   if
@@ -142,4 +142,14 @@ M.get_jsx_name = function(node)
 
   return vim.treesitter.get_node_text(name_node, 0)
 end
+
+M.is_js_ft = function()
+  for _, ft in ipairs(js_fts) do
+    if vim.bo.filetype == ft then
+      return true
+    end
+  end
+  return false
+end
+
 return M
