@@ -51,9 +51,10 @@ return {
       completion = { menu = { auto_show = true } },
     },
     snippets = {
-      expand = function(snippet)
-        return LazyVim.cmp.expand(snippet)
-      end,
+      preset = "luasnip",
+      -- expand = function(snippet)
+      --   return LazyVim.cmp.expand(snippet)
+      -- end,
     },
     appearance = {
       -- sets the fallback highlight groups to nvim-cmp's highlight groups
