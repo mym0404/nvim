@@ -50,6 +50,14 @@ return {
           hidden = true,
           layout = vscode_layout,
           exclude = common_exclude,
+          win = {
+            input = {
+              keys = {
+                ["<up>"] = { "history_back", mode = { "i", "n" } },
+                ["<down>"] = { "history_forward", mode = { "i", "n" } },
+              },
+            },
+          },
         },
         grep = { exclude = common_exclude, hidden = true, ignored = false, layout = vscode_layout },
         explorer = {
