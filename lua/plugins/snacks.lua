@@ -19,7 +19,7 @@ local vscode_layout = {
       focusable = true,
     },
     { win = "list", border = "hpad", height = 10, focusable = true },
-    { wrap = true, win = "preview", title = "{title}", border = "rounded", focusable = true },
+    { wrap = true, win = "preview", title = "{preview}", border = "rounded", focusable = true },
   },
 }
 
