@@ -27,7 +27,6 @@ local types = require("luasnip.util.types")
 local parse = require("luasnip.util.parser").parse_snippet
 local ms = ls.multi_snippet
 local k = require("luasnip.nodes.key_indexer").new_key
--- stylua: ignore start
 
 return {
   s(
@@ -133,47 +132,46 @@ export const [use{}Context, {}Provider, {}Consumer] = createCtx(() => {{
     )
   ),
   s("Expo_Page", {
-    t({ 
-      "export default function Page() {", 
-      "   return <Box className={'flex-1'} />;", 
-      "}"
+    t({
+      "export default function Page() {",
+      "   return <Box className={'flex-1'} />;",
+      "}",
     }),
   }),
   s("Next_Page", {
     t({
       "export const metadata: Metadata = {",
-  "  title: '',",
-  "};",
-  "",
-  "type Props = {",
-  "  params: Promise<{ id: string }>;",
-  "  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;",
-  "};",
-  "",
-  "export async function generateMetadata(",
-  "  { params, searchParams }: Props,",
-  "  parent: ResolvingMetadata,",
-  "): Promise<Metadata> {",
-  "  // read route params",
-  "  const id = (await params).id;",
-  "",
-  "  return {",
-  "    title: '',",
-  "  };",
-  "}",
-  "",
-  "export function generateStaticParams() {",
-  "  return [];",
-  "}",
-  "",
-  "export default function Page() {",
-  "  return null;",
-  "}",})
+      "  title: '',",
+      "};",
+      "",
+      "type Props = {",
+      "  params: Promise<{ id: string }>;",
+      "  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;",
+      "};",
+      "",
+      "export async function generateMetadata(",
+      "  { params, searchParams }: Props,",
+      "  parent: ResolvingMetadata,",
+      "): Promise<Metadata> {",
+      "  // read route params",
+      "  const id = (await params).id;",
+      "",
+      "  return {",
+      "    title: '',",
+      "  };",
+      "}",
+      "",
+      "export function generateStaticParams() {",
+      "  return [];",
+      "}",
+      "",
+      "export default function Page() {",
+      "  return null;",
+      "}",
+    }),
   }),
   s("LocalStorageMMKV", {
-    t(
-util.to_str_list(
-        [[
+    t(util.to_str_list([[
 import { useCallback, useRef, useState } from 'react';
 import { MMKV } from 'react-native-mmkv';
 import type { StateStorage } from 'zustand/middleware/persist';
@@ -354,11 +352,10 @@ export const zustandPersistStorage: StateStorage = {
 };
 
 export default instance;
-        ]]
-      )
-    )
+        ]])),
   }),
-  s("createCtx", {t(util.to_str_list([[
+  s("createCtx", {
+    t(util.to_str_list([[
 import React, { ReactNode, createElement, ReactElement } from 'react';
 
 export type ChildrenTransformer = (children?: ReactNode) => ReactNode | undefined;
@@ -393,8 +390,10 @@ function createCtx<T, P extends object>(
 
 export default createCtx;
 
-  ]]))}),
-  s("zx-util", {t(util.to_str_list([[
+  ]])),
+  }),
+  s("zx-util", {
+    t(util.to_str_list([[
 #!/usr/bin/env zx
 /* eslint-disable max-len */
 // region ZX Util
@@ -532,8 +531,150 @@ async function main(){
 
 };
 main();
-  ]]))}),
-  s("createZus")
-}
+  ]])),
+  }),
+  s(
+    "createZustandPersistStore",
+    fmt(
+      [[
+import {{ create }} from 'zustand';
+import {{ persist, createJSONStorage }} from 'zustand/middleware';
+import {{ immer }} from 'zustand/middleware/immer';
 
--- stylua: ignore end
+export type {}State = {{ _hasHydrated: boolean; _markHydrate: () => void; reset: () => void }};
+
+const initialState: OmitFunctions<{}State> = {{ _hasHydrated: false }};
+
+export const use{} = create<{}State>()(
+  persist(
+    immer((set, get) => {{
+      return {{
+        ...initialState,
+        reset: () => set((s) => {{ return {{ ...initialState, _hasHydrated: s._hasHydrated }} }}, true),
+        _markHydrate: () => set({{ _hasHydrated: true }}),
+      }}
+    }}),
+    {{
+      version: 0,
+      name: '{}-storage',
+      storage: createJSONStorage(() => zustandPersistStorage),
+      onRehydrateStorage: (s) => () => s._markHydrate(),
+    }}
+  )
+);
+
+export const use{}Store = () => use{}(useShallow((s) => s));
+]],
+      {
+        i(1, "Name"),
+        rep(1),
+        rep(1),
+        rep(1),
+        rep(1),
+        rep(1),
+        rep(1),
+      }
+    )
+  ),
+  s(
+    "createZustandStore",
+    fmt(
+      [[
+import {{ create }} from 'zustand';
+import {{ immer }} from 'zustand/middleware/immer';
+
+export type {}State = {{ reset: () => void }};
+
+const initialState: OmitFunctions<{}State> = {{}};
+
+export const use{} = create<{}State>()(
+  immer((set, get) => {{
+    return {{
+      ...initialState,
+      reset: () => set(initialState),
+    }}
+  }})
+);
+
+export const use{}Store = () => use{}(useShallow((s) => s));
+]],
+      {
+        i(1, "Example"),
+        rep(1),
+        rep(1),
+        rep(1),
+        rep(1),
+        rep(1),
+      }
+    )
+  ),
+  s(
+    "createZustandStoreProvider",
+    fmt(
+      [[
+import type {{ PropsWithChildren }} from 'react';
+import {{ createContext, useContext }} from 'react';
+import {{ createStore, useStore }} from 'zustand';
+import {{ useShallow }} from 'zustand/react/shallow';
+import {{ useStoreWithEqualityFn }} from 'zustand/traditional';
+
+export function create{}StoreProvider<State, InitialStateParam = void>({{
+  creator,
+  name = '{}',
+}}: {{
+  creator: Parameters<ReturnType<typeof createStore<State>>>[0];
+  name?: string;
+}}) {{
+  const _createStore = (initialState?: InitialStateParam) =>
+    createStore<State>()((set, get, store) => ({{
+      ...creator(set, get, store),
+      ...initialState,
+    }}));
+  const Context = createContext<ReturnType<typeof _createStore> | null>(null);
+  Context.displayName = name;
+
+  const Provider = (
+    props: PropsWithChildren<
+      InitialStateParam extends void
+        ? {{ initialState?: InitialStateParam }}
+        : {{ initialState: InitialStateParam }}
+    >,
+  ) => {{
+    const store = useRefValue(() => _createStore(props.initialState));
+    return <Context.Provider value={{store}}>{{props.children}}</Context.Provider>;
+  }};
+
+  function useStoreProvider(): State;
+  function useStoreProvider<T>(selector: (state: State) => T): T;
+  function useStoreProvider<T>(
+    selector: (state: State) => T,
+    equalityFn: (lhs: T, rhs: T) => boolean,
+  ): T;
+  function useStoreProvider(selector?: any, equalityFn?: any) {{
+    const store = useContext(Context);
+    if (!store) {{
+      throw new Error(`Missing ${{name}} Provider in the tree`);
+    }}
+    if (equalityFn) {{
+      return useStoreWithEqualityFn(store, selector, equalityFn);
+    }} else if (selector) {{
+      return useStore(store, selector);
+    }} else {{
+      return useStore(store);
+    }}
+  }}
+
+  const useStoreProviderShallow = <T,>(selector: (state: State) => T) => {{
+    return useStoreProvider(useShallow(selector));
+  }};
+
+  return {{ Provider, useStoreProvider, useStoreProviderShallow, Consumer: Context.Consumer }};
+}}
+]],
+      {
+        i(1, "Name"), -- $NAME$
+        rep(1),
+      }
+    )
+  ),
+}
