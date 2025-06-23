@@ -1,4 +1,4 @@
-local util = require("../../lua/utils/utils")
+local util = require("utils/utils")
 
 local ls = require("luasnip")
 local s = ls.snippet
