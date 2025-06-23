@@ -114,4 +114,13 @@ M.should_close_slash_in_tag = function()
   return false
 end
 
+--- @param str string
+M.to_str_list = function(str)
+  local ret = {}
+  for line in str:gmatch("[^\r\n]+") do
+    table.insert(ret, line)
+  end
+  return ret
+end
+
 return M

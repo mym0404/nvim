@@ -24,15 +24,15 @@ return {
   opts = {
     keymap = {
       preset = "default",
-      ["<tab>"] = { "select_next", "fallback" },
-      ["<s-tab>"] = { "select_prev", "fallback" },
+      -- ["<tab>"] = { "select_next", "fallback" },
+      -- ["<s-tab>"] = { "select_prev", "fallback" },
       ["<CR>"] = { "accept", "fallback" },
     },
     cmdline = {
       enabled = true,
       keymap = {
-        ["<tab>"] = { "select_next", "fallback" },
-        ["<s-tab>"] = { "select_prev", "fallback" },
+        -- ["<tab>"] = { "select_next", "fallback" },
+        -- ["<s-tab>"] = { "select_prev", "fallback" },
         ["<CR>"] = {
           function()
             if vim.fn.getcmdtype() == ":" then
@@ -49,12 +49,6 @@ return {
         },
       },
       completion = { menu = { auto_show = true } },
-    },
-    snippets = {
-      preset = "luasnip",
-      -- expand = function(snippet)
-      --   return LazyVim.cmp.expand(snippet)
-      -- end,
     },
     appearance = {
       -- sets the fallback highlight groups to nvim-cmp's highlight groups
@@ -106,7 +100,13 @@ return {
       -- adding any nvim-cmp sources here will enable them
       -- with blink.compat
       compat = {},
-      default = { "lsp", "path", "buffer" },
+      default = { "lsp", "path", "buffer", "snippets" },
+    },
+    snippets = {
+      preset = "luasnip",
+      -- expand = function(snippet)
+      --   return LazyVim.cmp.expand(snippet)
+      -- end,
     },
   },
 

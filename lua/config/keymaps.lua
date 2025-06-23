@@ -346,6 +346,26 @@ local function map_template_string()
   })
 end
 
+local function map_luasnip()
+  local ls = require("luasnip")
+
+  -- vim.keymap.set({ "i" }, "<C-K>", function()
+  --   ls.expand({})
+  -- end, { silent = true })
+  -- vim.keymap.set({ "i", "s" }, "<tab>", function()
+  --   ls.jump(1)
+  -- end, { silent = true })
+  -- vim.keymap.set({ "i", "s" }, "<s-tab>", function()
+  --   ls.jump(-1)
+  -- end, { silent = true })
+  --
+  -- vim.keymap.set({ "i", "s" }, "<C-E>", function()
+  --   if ls.choice_active() then
+  --     ls.change_choice(1)
+  --   end
+  -- end, { silent = true })
+end
+
 reset_keymaps()
 map_template_string()
 map_react_prop_bracket()
@@ -369,3 +389,4 @@ map_smart_splits()
 map_select_all()
 map_git_actions()
 map_package_info()
+map_luasnip()
