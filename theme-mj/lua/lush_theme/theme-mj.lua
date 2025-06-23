@@ -310,7 +310,7 @@ local theme = lush(function(injected_functions)
     Conceal({ fg = "#8b949e" }),
     SignColumn({ fg = "#6e7681" }),
     FoldColumn({ fg = "#6e7681" }),
-    Folded({ bg = "#171b22", fg = "#6e7681" }),
+    Folded({ bg = "#253634", fg = "#6e7681", gui = "" }),
     WarningMsg({ fg = "#d29922" }),
     Title({ fg = palette.theme }),
     MoreMsg({ fg = "#2f8cf7", gui = "bold" }),
@@ -1005,6 +1005,9 @@ local theme = lush(function(injected_functions)
     SnacksPickerGitStatusUnmerged({ fg = DiagnosticError.fg }),
     SnacksPickerGitStatusUntracked(vcs.untracked.label),
     SnacksPickerGitType({ Title }),
+
+    UfoFoldedEllipsis(text_sub),
+    UfoCursorFoldedLine({ fg = "red" }),
   }
 end)
 return theme

@@ -52,3 +52,11 @@ vim.opt.termguicolors = true
 vim.g.lazyvim_prettier_needs_config = true
 -- vim.g.lazyvim_cmp = "nvim-cmp"
 vim.g.snacks_animate = false
+
+vim.opt.foldmethod = "manual"
+vim.opt.foldexpr = nil
+vim.opt.foldcolumn = "1"
+vim.opt.foldlevel = 99
+vim.opt.foldtext = "v:lua.require'ufo.main'.foldtext()"
+vim.opt.foldlevelstart = 99
+vim.opt.foldenable = true
