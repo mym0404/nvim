@@ -58,6 +58,11 @@ return {
       -- set to 'mono' for 'Nerd Font Mono' or 'normal' for 'Nerd Font'
       -- adjusts spacing to ensure icons are aligned
       nerd_font_variant = "mono",
+      -- kinds_icons = vim.tbl_extend(
+      --   "force",
+      --   opts.appearance.kind_icons or {},
+      --   LazyVim.config.icons.kinds
+      -- ),
     },
     completion = {
       keyword = { range = "prefix" },
@@ -78,7 +83,28 @@ return {
           treesitter = { "lsp" },
           columns = {
             { "kind_icon", gap = 1 },
-            { "label", "label_description" },
+            { "label" },
+          },
+          components = {
+            kind_icon = {
+              ellipsis = false,
+              text = function(ctx)
+                return ctx.kind_icon .. ctx.icon_gap
+              end,
+              -- Set the highlight priority to 20000 to beat the cursorline's default priority of 10000
+              highlight = function(ctx)
+                return require("colorful-menu").blink_components_highlight(ctx)
+                -- return { { group = ctx.kind_hl, priority = 20000 } }
+              end,
+            },
+            label = {
+              text = function(ctx)
+                return require("colorful-menu").blink_components_text(ctx)
+              end,
+              -- highlight = function(ctx)
+              --   return require("colorful-menu").blink_components_highlight(ctx)
+              -- end,
+            },
           },
         },
       },
