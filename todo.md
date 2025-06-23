@@ -2,7 +2,6 @@
 
 # Sub
 
-- tag / to auto close
 - yanky 붙여넣을때 복사 안되게 하기
 
 # Not Plan
