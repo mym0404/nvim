@@ -59,7 +59,20 @@ return {
             },
           },
         },
-        grep = { exclude = common_exclude, hidden = true, ignored = false, layout = vscode_layout },
+        grep = {
+          exclude = common_exclude,
+          hidden = true,
+          ignored = false,
+          layout = vscode_layout,
+          win = {
+            input = {
+              keys = {
+                ["<up>"] = { "history_back", mode = { "i", "n" } },
+                ["<down>"] = { "history_forward", mode = { "i", "n" } },
+              },
+            },
+          },
+        },
         explorer = {
           hidden = true,
           exclude = common_exclude,
