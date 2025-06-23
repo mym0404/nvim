@@ -122,5 +122,24 @@ M.to_str_list = function(str)
   end
   return ret
 end
+M.get_jsx_name = function(node)
+  local n = node
+  if
+    n == nil
+    or not (
+      n:type() == "jsx_opening_element"
+      or n:type() == "jsx_closing_element"
+      or n:type() == "jsx_self_closing_element"
+    )
+  then
+    return nil
+  end
 
+  local name_node = n:field("name")[1]
+  if not name_node then
+    return nil
+  end
+
+  return vim.treesitter.get_node_text(name_node, 0)
+end
 return M

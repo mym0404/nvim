@@ -1,7 +1,5 @@
 # Primary
 
-- grep, file search arrow key to history
-
 # Sub
 
 - tag / to auto close

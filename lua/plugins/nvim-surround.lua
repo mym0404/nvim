@@ -6,10 +6,10 @@ return {
     keymaps = {
       insert_line = "<C-g>S",
       insert = "<C-g>s",
-      normal = "ms",
-      normal_cur = "mss",
+      normal = "m",
+      normal_cur = "ms",
       normal_line = "mS",
-      normal_cur_line = "mSS",
+      normal_cur_line = "mS",
       visual = "S",
       visual_line = "S",
       delete = "ds",

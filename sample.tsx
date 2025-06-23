@@ -2,7 +2,8 @@ type HelloProps = {
 
 };
 const Hello = ({ }: HelloProps) => {
-  return null;
+  return <div />
+
 };
 
 export { Hello }

@@ -165,16 +165,28 @@ local function map_smart_splits()
   end)
 
   -- moving between splits
-  vim.keymap.set("n", "<C-h>", function()
+  vim.keymap.set({ "i", "n" }, "<C-h>", function()
+    if vim.api.nvim_get_mode().mode == "i" then
+      utils.go_to_normal_mode()
+    end
     require("smart-splits").move_cursor_left({ at_edge = "stop" })
   end)
-  vim.keymap.set("n", "<C-j>", function()
+  vim.keymap.set({ "i", "n" }, "<C-j>", function()
+    if vim.api.nvim_get_mode().mode == "i" then
+      utils.go_to_normal_mode()
+    end
     require("smart-splits").move_cursor_down({ at_edge = "stop" })
   end)
-  vim.keymap.set("n", "<C-k>", function()
+  vim.keymap.set({ "i", "n" }, "<C-k>", function()
+    if vim.api.nvim_get_mode().mode == "i" then
+      utils.go_to_normal_mode()
+    end
     require("smart-splits").move_cursor_up({ at_edge = "stop" })
   end)
-  vim.keymap.set("n", "<C-l>", function()
+  vim.keymap.set({ "i", "n" }, "<C-l>", function()
+    if vim.api.nvim_get_mode().mode == "i" then
+      utils.go_to_normal_mode()
+    end
     require("smart-splits").move_cursor_right({ at_edge = "stop" })
   end)
 
@@ -289,6 +301,7 @@ local function map_delete_buffer()
 end
 
 local function map_react_prop_bracket()
+  -- = to open curly brace
   vim.keymap.set("i", "=", function()
     if vim.bo.filetype ~= "typescriptreact" and vim.bo.filetype ~= "javascriptreact" then
       return "="
@@ -301,6 +314,45 @@ local function map_react_prop_bracket()
       return "={}<esc>i"
     end
     return "="
+  end, { nowait = true, expr = true })
+
+  -- / to close tag
+  vim.keymap.set("i", "/", function()
+    if vim.bo.filetype ~= "typescriptreact" and vim.bo.filetype ~= "javascriptreact" then
+      return "/"
+    end
+    local node = require("nvim-treesitter.ts_utils").get_node_at_cursor()
+    local _, col = utils.get_row_and_col()
+    local line = vim.api.nvim_get_current_line()
+    local next_char = line:sub(col + 1, col + 1)
+    local left = line:sub(1, col)
+
+    if not node then
+      return "/"
+    end
+
+    if node ~= nil and node:has_error() and next_char ~= ">" and left:match(".*<[%w%d]+.*") then
+      return "/>"
+    end
+
+    local tag_name = utils.get_jsx_name(node)
+    local next_sibling = node:next_sibling()
+    if
+      node ~= nil
+      and next_sibling ~= nil
+      and tag_name ~= nil
+      and node:type() == "jsx_opening_element"
+      and next_char == ">"
+      and tag_name == utils.get_jsx_name(node:next_sibling())
+    then
+      local start_row, start_col, end_row, end_col = next_sibling:range()
+      vim.schedule(function()
+        vim.api.nvim_buf_set_text(0, start_row, start_col, end_row, end_col, {})
+      end)
+      return "/"
+    end
+
+    return "/"
   end, { nowait = true, expr = true })
 end
 
@@ -346,26 +398,6 @@ local function map_template_string()
   })
 end
 
-local function map_luasnip()
-  local ls = require("luasnip")
-
-  -- vim.keymap.set({ "i" }, "<C-K>", function()
-  --   ls.expand({})
-  -- end, { silent = true })
-  -- vim.keymap.set({ "i", "s" }, "<tab>", function()
-  --   ls.jump(1)
-  -- end, { silent = true })
-  -- vim.keymap.set({ "i", "s" }, "<s-tab>", function()
-  --   ls.jump(-1)
-  -- end, { silent = true })
-  --
-  -- vim.keymap.set({ "i", "s" }, "<C-E>", function()
-  --   if ls.choice_active() then
-  --     ls.change_choice(1)
-  --   end
-  -- end, { silent = true })
-end
-
 reset_keymaps()
 map_template_string()
 map_react_prop_bracket()
@@ -389,4 +421,3 @@ map_smart_splits()
 map_select_all()
 map_git_actions()
 map_package_info()
-map_luasnip()
