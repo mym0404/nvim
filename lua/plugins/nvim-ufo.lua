@@ -1,5 +1,6 @@
 return {
   "kevinhwang91/nvim-ufo",
+  enabled = false,
   dependencies = { "kevinhwang91/promise-async" },
   event = "LspNotify",
   keys = {
@@ -31,10 +32,6 @@ return {
       default = { "imports" },
       typescript = { "imports" },
     },
-    preview = {
-      mappins = {
-        default = {},
-      },
-    },
+    -- preview = false,
   },
 }
