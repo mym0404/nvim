@@ -26,9 +26,15 @@ return {
     -- },
   },
   opts = {
+    open_fold_hl_timeout = 0,
     close_fold_kinds_for_ft = {
       default = { "imports" },
       typescript = { "imports" },
+    },
+    preview = {
+      mappins = {
+        default = {},
+      },
     },
   },
 }

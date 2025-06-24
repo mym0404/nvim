@@ -10,8 +10,8 @@ return {
       normal_cur = "ms",
       normal_line = "mS",
       normal_cur_line = "mS",
-      visual = "S",
-      visual_line = "S",
+      visual = "m",
+      visual_line = "m",
       delete = "ds",
       change = "cs",
       change_line = "cS",
@@ -19,5 +19,3 @@ return {
     move_cursor = "sticky",
   },
 }
-
---  <((asdㅛㄴasd))>
