@@ -27,8 +27,8 @@ return {
   },
   opts = {
     close_fold_kinds_for_ft = {
-      default = { "imports", "region" },
-      typescript = { "imports", "region" },
+      default = { "imports" },
+      typescript = { "imports" },
     },
   },
 }
