@@ -41,16 +41,19 @@ local function setup_core()
 	c.adjust_window_size_when_changing_font_size = false
 
 	-- c.font = wezterm.font("D2Coding", { weight = "Medium" })
-	c.font = wezterm.font_with_fallback({ "JetBrainsMonoHangul Nerd Font Mono" }, { weight = "Medium" })
+	c.font = wezterm.font_with_fallback({
+		{ family = "D2Coding", weight = "Regular" },
+		{ family = "JetBrainsMonoHangul Nerd Font Mono" },
+	})
 	c.harfbuzz_features = { "calt=0", "clig=0", "liga=0" }
-	c.font_size = 12
+	c.font_size = 13
 
 	-- Slightly transparent and blurred background
-	c.front_end = "OpenGL"
-	c.cell_width = 0.85
+	c.front_end = "WebGpu"
+	c.cell_width = 0.93
+	-- c.freetype_load_flags = "NO_HINTING"
 	c.freetype_load_target = "Light"
-	c.freetype_render_target = "HorizontalLcd"
-	c.freetype_load_flags = "NO_HINTING"
+	-- c.freetype_render_target = "HorizontalLcd"
 	c.custom_block_glyphs = true -- 블록 글리프 자체 계산 (선명도 개선)  [oai_citation:1‡wezterm.org](https://wezterm.org/config/lua/config/custom_block_glyphs.html?utm_source=chatgpt.com)
 
 	-- 📐 줄 높이 및 DPI 조정
