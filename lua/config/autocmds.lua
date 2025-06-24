@@ -99,7 +99,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
 --   end,
 -- })
 
-vim.api.nvim_create_autocmd("FileWriteCmd", {
+vim.api.nvim_create_autocmd("FileWritePost", {
   callback = function()
     require("typescript-tools.api").remove_unused_imports(true)
   end,
