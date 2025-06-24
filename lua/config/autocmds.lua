@@ -89,16 +89,6 @@ vim.api.nvim_create_autocmd("LspAttach", {
   end,
 })
 
--- vim.api.nvim_create_autocmd("LspNotify", {
---   callback = function(args)
---     if args.data.method == "textDocument/didOpen" then
---       vim.notify("fold imports")
---       vim.lsp.foldclose("imports", vim.fn.bufwinid(args.buf))
---       vim.lsp.foldclose("imports")
---     end
---   end,
--- })
-
 vim.api.nvim_create_autocmd("BufWritePost", {
   callback = function()
     if utils.is_js_ft() then
@@ -106,3 +96,27 @@ vim.api.nvim_create_autocmd("BufWritePost", {
     end
   end,
 })
+
+-- local function set_english_input()
+-- vim.defer_fn(function()
+-- vim.fn.system("macism com.apple.keylayout.ABC")
+-- vim.fn.system("macism com.apple.keylayout.US")
+-- end, 100)
+-- end
+
+-- brew tap laishulu/homebrew
+-- brew install macism
+-- vim.api.nvim_create_autocmd({ "InsertLeave", "FocusGained", "ModeChanged" }, {
+--   callback = function(event)
+--     if event.event == "InsertLeave" then
+--       set_english_input()
+--     elseif event.event == "ModeChanged" then
+--       local mode_change = vim.fn.mode()
+--       if mode_change == "n" then
+--         set_english_input()
+--       end
+--     elseif event.event == "FocusGained" and vim.fn.mode() ~= "i" then
+--       set_english_input()
+--     end
+--   end,
+-- })
