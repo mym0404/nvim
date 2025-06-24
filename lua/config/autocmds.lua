@@ -101,6 +101,8 @@ vim.api.nvim_create_autocmd("LspAttach", {
 
 vim.api.nvim_create_autocmd("BufWritePost", {
   callback = function()
-    require("typescript-tools.api").remove_unused_imports(true)
+    if utils.is_js_ft() then
+      require("typescript-tools.api").remove_unused_imports(true)
+    end
   end,
 })
