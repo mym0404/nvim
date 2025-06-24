@@ -143,9 +143,10 @@ M.get_jsx_name = function(node)
   return vim.treesitter.get_node_text(name_node, 0)
 end
 
-M.is_js_ft = function()
+M.is_js_ft = function(buf)
+  buf = buf or 0
   for _, ft in ipairs(js_fts) do
-    if vim.bo.filetype == ft then
+    if vim.bo[buf].filetype == ft then
       return true
     end
   end

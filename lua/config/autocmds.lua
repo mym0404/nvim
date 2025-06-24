@@ -89,18 +89,18 @@ vim.api.nvim_create_autocmd("LspAttach", {
   end,
 })
 
--- vim.api.nvim_create_autocmd("BufWritePost", {
---   callback = function()
---     if utils.is_js_ft() then
---       require("typescript-tools.api").remove_unused_imports()
---     end
---   end,
--- })
+vim.api.nvim_create_autocmd("BufWritePost", {
+  callback = function(opts)
+    if utils.is_js_ft(opts.buf) then
+      require("typescript-tools.api").remove_unused_imports(true)
+    end
+  end,
+})
 
 vim.api.nvim_create_autocmd("LspNotify", {
   callback = function(opts)
-    if opts.data.method == "textDocument/didOpen" and utils.is_js_ft() then
-      local firstLine = vim.api.nvim_buf_get_lines(0, 1, 2, false)
+    if opts.data.method == "textDocument/didOpen" and utils.is_js_ft(opts.buf) then
+      local firstLine = vim.api.nvim_buf_get_lines(opts.buf, 1, 2, false)
       if #firstLine >= 1 and firstLine[1]:match("^import ") then
         vim.cmd("1,1foldclose")
       end
