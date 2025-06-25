@@ -79,8 +79,11 @@ return {
           hidden = true,
           exclude = common_exclude,
           ignored = true,
+          diagnostics = true,
           follow_file = false,
           git_status_open = false,
+          confirm = true,
+          auto_confirm = false,
           layout = {
             layout = {
               backdrop = false,
@@ -184,13 +187,17 @@ return {
               enabled = true, -- show git icons
               commit = "󰜘 ", -- used by git log
               staged = "●", -- staged changes. always overrides the type icons
-              added = "",
-              deleted = "",
-              ignored = " ",
-              modified = "○",
-              renamed = "",
               unmerged = " ",
+              renamed = "",
               untracked = "?",
+              -- ignored = " ",
+              -- added = "",
+              -- deleted = "",
+              -- modified = "○",
+              ignored = "",
+              added = "",
+              deleted = "",
+              modified = "",
             },
             diagnostics = {
               Error = " ",
@@ -243,6 +250,18 @@ return {
               Unknown = " ",
               Value = " ",
               Variable = "󰀫 ",
+            },
+          },
+          formatters = {
+            file = {
+              filename_only = true,
+              icon_width = 3,
+              git_status_hl = true,
+            },
+            severity = {
+              icons = true,
+              level = false,
+              pos = "right",
             },
           },
         },

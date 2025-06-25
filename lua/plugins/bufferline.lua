@@ -36,7 +36,8 @@ return {
         if level == "hint" then
           return ""
         end
-        return "(" .. count .. ")"
+        return ""
+        -- return "(" .. count .. ")"
       end,
       show_buffer_icons = true,
       show_buffer_close_icons = false,

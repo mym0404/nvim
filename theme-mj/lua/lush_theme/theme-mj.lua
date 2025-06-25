@@ -262,10 +262,11 @@ local theme = lush(function(injected_functions)
     sym("@comment.hint")({ bg = "#7d8590", fg = "#0d1117" }),
     sym("@markup.raw")({ fg = "#e6edf3", gui = "italic" }),
 
-    DiagnosticUnderlineHint({ gui = "undercurl", sp = "#7d8590" }),
-    DiagnosticUnderlineInfo({ gui = "undercurl", sp = "#2f81f7" }),
-    DiagnosticUnderlineWarn({ gui = "undercurl", sp = "#d29922" }),
-    DiagnosticUnderlineError({ gui = "undercurl", sp = "#ff7b72" }),
+    DiagnosticUnderlineHint({ gui = "undercurl", sp = palette.hint_undercurl }),
+    DiagnosticUnderlineInfo({ gui = "undercurl", sp = palette.info_undercurl }),
+    DiagnosticUnderlineWarn({ gui = "undercurl", sp = palette.warn_undercurl }),
+    DiagnosticUnderlineError({ gui = "undercurl", sp = palette.error_undercurl }),
+
     MatchParen({ bg = "#1e4273", fg = "#e6edf3", gui = "bold" }),
     sym("@type.qualifier")({ fg = "#ff7b72" }),
     sym("@tag")({ fg = "#CCA06A" }),
