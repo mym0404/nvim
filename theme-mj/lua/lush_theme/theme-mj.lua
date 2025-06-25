@@ -4,7 +4,7 @@ local hsl = lush.hsl
 local hsluv = lush.hsluv
 
 local palette = {
-  theme = "#c79cff",
+  theme = "#c4d194",
   error_label = "#E0787C",
   error_undercurl = "#E0787C",
   warn_label = "#EED45F",
@@ -46,7 +46,7 @@ local vcs = {
     code = { bg = "#442A45" },
   },
   ignored = {
-    label = { fg = "#736c41", gui = "italic,bold" },
+    label = { fg = "#736c41", gui = "italic" },
   },
   untracked = {
     label = { fg = palette.untracked_label },
@@ -687,7 +687,7 @@ local theme = lush(function(injected_functions)
     SnacksIndent6({ DiagnosticHint }),
     SnacksIndent7({ fg = DiagnosticWarn.fg }),
     SnacksIndent8({ fg = DiagnosticError.fg }),
-    SnacksIndentScope(special),
+    SnacksIndentScope({ fg = "#8c7d91", gui = "bold" }),
     SnacksInputBorder(border),
     SnacksInputIcon({ DiagnosticHint }),
     SnacksInputNormal({ Normal }),
@@ -918,9 +918,10 @@ local theme = lush(function(injected_functions)
     BufferLineInfo({ fg = text_sub.fg }),
     BufferLineInfoSelected({ fg = text.fg, gui = "bold" }),
     BufferLineInfoVisible({ fg = text_sub.fg }),
-    BufferLineModified({ fg = text_sub.fg }),
-    BufferLineModifiedSelected({ fg = text.fg, gui = "bold" }),
-    BufferLineModifiedVisible({ fg = text_sub.fg }),
+
+    BufferLineModified(vcs.modified.label),
+    BufferLineModifiedSelected({ fg = vcs.modified.label.fg, gui = "bold" }),
+    BufferLineModifiedVisible({ BufferLineModified }),
 
     BufferLineTab({ fg = text_sub.fg }),
     BufferLineTabClose({ fg = text_sub.fg }),

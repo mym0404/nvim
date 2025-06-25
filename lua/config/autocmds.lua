@@ -47,7 +47,7 @@ local function map_searches()
 end
 
 vim.api.nvim_create_autocmd({ "BufEnter" }, {
-  callback = function(event)
+  callback = function()
     map_searches()
   end,
 })
