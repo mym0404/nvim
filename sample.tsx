@@ -6,5 +6,5 @@ const Hello = ({ }: HelloProps) => {
 
 };
 
-export { Hello }
+e xport { Hello }
 export type { HelloProps }

@@ -5,6 +5,9 @@ local hsluv = lush.hsluv
 
 local palette = {
   theme = "#2f81f7",
+  error_label = "#E0787C",
+  error_undercurl = "#E0787C",
+  untracked_label = "#E0787C",
 }
 local special = { fg = "#c79cff", bg = "#2a2136", gui = "bold" }
 local text = { fg = "#ffffff" }
@@ -26,7 +29,7 @@ local vcs = {
     code = { bg = "#303D47" },
   },
   deleted = {
-    label = { fg = "#E0787C" },
+    label = { fg = palette.error_label },
     code = { bg = "#9B464B" },
   },
   conflicted = {
@@ -36,7 +39,7 @@ local vcs = {
     label = { fg = "#736c41", gui = "italic,bold" },
   },
   untracked = {
-    label = { fg = "#E0787C" },
+    label = { fg = palette.untracked_label },
   },
 }
 
@@ -887,6 +890,7 @@ local theme = lush(function(injected_functions)
     WildMenu({ Pmenu }),
     xmlAttrib({ htmlTag }),
     xmlTagName({ htmlTag }),
+
     BufferLineTabSeparator({ fg = "red" }),
     BufferLineTabSeparatorSelected({ fg = "red", gui = "bold" }),
     BufferLineSeparator({ NonText }),
@@ -898,30 +902,15 @@ local theme = lush(function(injected_functions)
     BufferLineBuffer({ fg = text_sub.fg }),
     BufferLineBufferSelected({ fg = text.fg, gui = "bold" }),
     BufferLineBufferVisible({ fg = text_sub.fg }),
-    BufferLineDiagnostic({ fg = text_sub.fg }),
-    BufferLineDiagnosticSelected({ fg = text.fg, gui = "bold" }),
-    BufferLineDiagnosticVisible({ fg = text_sub.fg }),
     BufferLineDuplicate({ fg = text_sub.fg }),
     BufferLineDuplicateSelected({ fg = text.fg, gui = "bold" }),
     BufferLineDuplicateVisible({ fg = text_sub.fg }),
-    BufferLineError({ fg = text_sub.fg }),
-    BufferLineErrorDiagnostic({ fg = text.fg }),
-    BufferLineErrorDiagnosticSelected({ fg = text.fg }),
-    BufferLineErrorDiagnosticVisible({ fg = text_sub.fg }),
-    BufferLineErrorSelected({ fg = text.fg, gui = "bold" }),
-    BufferLineErrorVisible({ fg = text_sub.fg }),
     BufferLineFill({ fg = text_sub.fg }),
     BufferLineGroupLabel({ fg = text_sub.fg }),
     BufferLineHint({ fg = text_sub.fg }),
-    BufferLineHintaiagnostic({ fg = text_sub.fg }),
-    BufferLineHintDiagnosticSelected({ fg = text.fg, gui = "bold" }),
-    BufferLineHintDiagnosticVisible({ fg = text_sub.fg }),
     BufferLineHintSelected({ fg = text.fg, gui = "bold" }),
     BufferLineHintVisible({ fg = text_sub.fg }),
     BufferLineInfo({ fg = text_sub.fg }),
-    BufferLineInfoDiagnostic({ fg = text_sub.fg }),
-    BufferLineInfoDiagnosticSelected({ fg = text.fg, gui = "bold" }),
-    BufferLineInfoDiagnosticVisible({ fg = text_sub.fg }),
     BufferLineInfoSelected({ fg = text.fg, gui = "bold" }),
     BufferLineInfoVisible({ fg = text_sub.fg }),
     BufferLineModified({ fg = text_sub.fg }),
@@ -937,18 +926,53 @@ local theme = lush(function(injected_functions)
     BufferLineTabClose({ fg = text_sub.fg }),
     BufferLineTabSelected({ fg = text.fg, gui = "bold" }),
     BufferLineTruncMarker({ fg = text_sub.fg }),
+
+    BufferLineError({ fg = text_sub.fg }),
+    BufferLineErrorSelected({ fg = text.fg, gui = "bold,undercurl", sp = palette.error_undercurl }),
+    BufferLineErrorVisible({
+      fg = text_sub.fg,
+      gui = "undercurl",
+      sp = palette.error_undercurl,
+    }),
+
     BufferLineWarning({ fg = text_sub.fg }),
-    BufferLineWarningDiagnostic({ fg = text_sub.fg }),
-    BufferLineWarningDiagnosticSelected({ fg = text.fg, gui = "bold" }),
-    BufferLineWarningDiagnosticVisible({ fg = text_sub.fg }),
     BufferLineWarningSelected({ fg = text.fg, gui = "bold" }),
     BufferLineWarningVisible({ fg = text_sub.fg }),
+
     -- BufferLineCloseButton({ fg = text_sub.fg }),
     -- BufferLineCloseButtonSelected({ fg = text.fg, gui = "bold" }),
     -- BufferLineCloseButtonVisible({ fg = text_sub.fg }),
     -- BufferLineMiniIconsAzure({ fg = text_sub.fg }),
     -- BufferLineMiniIconsAzureInactive({ fg = text_sub.fg }),
     -- BufferLineMiniIconsAzureSelected({ fg = text.fg }),
+
+    -- buffer line diagnostic
+    BufferLineDiagnostic({ fg = text_sub.fg }),
+    BufferLineDiagnosticSelected({ fg = text.fg, gui = "bold" }),
+    BufferLineDiagnosticVisible({ fg = text_sub.fg }),
+
+    BufferLineHintDiagnostic({ fg = text_sub.fg }),
+    BufferLineHintDiagnosticSelected({ fg = text.fg, gui = "bold" }),
+    BufferLineHintDiagnosticVisible({ fg = text_sub.fg }),
+
+    BufferLineErrorDiagnostic({
+      fg = palette.error_undercurl,
+      gui = "",
+    }),
+    BufferLineErrorDiagnosticSelected({
+      BufferLineErrorDiagnostic,
+    }),
+    BufferLineErrorDiagnosticVisible({
+      BufferLineErrorDiagnostic,
+    }),
+
+    BufferLineWarningDiagnostic({ fg = text_sub.fg }),
+    BufferLineWarningDiagnosticSelected({ fg = text.fg, gui = "bold" }),
+    BufferLineWarningDiagnosticVisible({ fg = text_sub.fg }),
+
+    BufferLineInfoDiagnostic({ fg = text_sub.fg }),
+    BufferLineInfoDiagnosticSelected({ fg = text.fg, gui = "bold" }),
+    BufferLineInfoDiagnosticVisible({ fg = text_sub.fg }),
 
     GitSignsAdd(vcs.added.label),
     GitSignsChange(vcs.modified.label),

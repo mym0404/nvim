@@ -32,8 +32,8 @@ return {
       },
       color_icons = true,
       diagnostics = "nvim_lsp",
-      diagnostics_indicator = function(_, _, diag)
-        return ""
+      diagnostics_indicator = function(count, level, diag, context)
+        return "(" .. count .. ")"
       end,
       show_buffer_icons = true,
       show_buffer_close_icons = false,
