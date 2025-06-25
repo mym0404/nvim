@@ -33,6 +33,9 @@ return {
       color_icons = true,
       diagnostics = "nvim_lsp",
       diagnostics_indicator = function(count, level, diag, context)
+        if level == "hint" then
+          return ""
+        end
         return "(" .. count .. ")"
       end,
       show_buffer_icons = true,
