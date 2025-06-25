@@ -25,7 +25,8 @@ return {
       left_trunc_marker = "",
       right_trunc_marker = "",
       always_show_bufferline = true,
-      tab_size = 18,
+      more_wraps_at_ends = true,
+      tab_size = 15,
       indicator = {
         style = "icon",
         icon = "▎",
