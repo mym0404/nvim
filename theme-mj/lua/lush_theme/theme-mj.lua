@@ -4,7 +4,7 @@ local hsl = lush.hsl
 local hsluv = lush.hsluv
 
 local palette = {
-  theme = "#2f81f7",
+  theme = "#c79cff",
   error_label = "#E0787C",
   error_undercurl = "#E0787C",
   warn_label = "#EED45F",
@@ -15,10 +15,13 @@ local palette = {
   hint_undercurl = "#acacac",
   untracked_label = "#E0787C",
   untracked_undercurl = "#E0787C",
+  text = "#ffffff",
+  text_sub = "#666666",
+  text_sub2 = "#333333",
 }
 local special = { fg = "#c79cff", bg = "#2a2136", gui = "bold" }
-local text = { fg = "#ffffff" }
-local text_sub = { fg = "grey" }
+local text = { fg = palette.text }
+local text_sub = { fg = palette.text_sub }
 local border = { fg = "#424242" }
 local win_border = { fg = "#313131" }
 local bg = {
@@ -675,7 +678,7 @@ local theme = lush(function(injected_functions)
     SnacksDashboardNormal({ Normal }),
     SnacksDashboardSpecial(special),
     SnacksDashboardTitle(special),
-    SnacksIndent({ NonText }),
+    SnacksIndent({ fg = palette.text_sub2 }),
     SnacksIndent1({ DiagnosticInfo }),
     SnacksIndent2({ DiagnosticHint }),
     SnacksIndent3({ fg = DiagnosticWarn.fg }),

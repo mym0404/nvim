@@ -33,7 +33,7 @@ return {
   ---@type snacks.Config
   opts = {
     scroll = { enabled = false },
-    indent = { enabled = false },
+    indent = { enabled = true, priority = 1, only_current = true, only_scope = true },
     ---@type snacks.explorer.Config
     explorer = {
       replace_netrw = false,
