@@ -24,7 +24,9 @@ opt.imsearch = 0
 opt.guicursor =
   "n-v-c-sm:block-blinkwait1000-blinkon500-blinkoff500,i-ci-ve:ver25,r-cr-o:hor20,t:block-blinkon500-blinkoff500-TermCursor"
 
-vim.opt.cindent = true
+vim.opt.cindent = false
+vim.opt.autoindent = false
+vim.opt.cindent = false
 vim.opt.imsearch = 0
 vim.opt.imsearch = 0
 
