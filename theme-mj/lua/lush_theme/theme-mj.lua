@@ -687,7 +687,7 @@ local theme = lush(function(injected_functions)
     SnacksIndent6({ DiagnosticHint }),
     SnacksIndent7({ fg = DiagnosticWarn.fg }),
     SnacksIndent8({ fg = DiagnosticError.fg }),
-    SnacksIndentScope({ fg = "#8c7d91", gui = "bold" }),
+    SnacksIndentScope({ fg = "#a584b3", gui = "bold" }),
     SnacksInputBorder(border),
     SnacksInputIcon({ DiagnosticHint }),
     SnacksInputNormal({ Normal }),
