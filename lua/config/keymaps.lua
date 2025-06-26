@@ -219,8 +219,8 @@ local function map_docs_hover()
 end
 
 local function map_scroll()
-  vim.keymap.set("n", "<C-d>", "10<C-d>zz", { noremap = true, nowait = true })
-  vim.keymap.set("n", "<C-u>", "10<C-u>zz", { noremap = true, nowait = true })
+  vim.keymap.set("n", "<C-d>", "10<C-d>", { noremap = true, nowait = true })
+  vim.keymap.set("n", "<C-u>", "10<C-u>", { noremap = true, nowait = true })
 end
 
 local function map_tstools()
