@@ -70,18 +70,18 @@ local function configure_git_diff()
   )
 end
 
-local function map_close_tap_or_buffer()
-  vim.keymap.set("n", "<C-w>", function()
-    local tab_count = vim.fn.tabpagenr("$")
-    if tab_count > 1 then
-      vim.cmd("tabclose")
-    else
-      vim.cmd("close")
-    end
-  end, {
-    desc = "Close tab if multiple tabs, else close buffer",
-  })
-end
+-- local function map_close_tap_or_buffer()
+--   vim.keymap.set("n", "<C-w>", function()
+--     local tab_count = vim.fn.tabpagenr("$")
+--     if tab_count > 1 then
+--       vim.cmd("tabclose")
+--     else
+--       vim.cmd("close")
+--     end
+--   end, {
+--     desc = "Close tab if multiple tabs, else close buffer",
+--   })
+-- end
 
 local function map_git_actions()
   vim.keymap.set("n", "<leader>gr", function()
@@ -411,7 +411,7 @@ manipulate_yank_paste_register_behavior()
 customizeExitInsertMode()
 configure_git_diff()
 map_esc()
-map_close_tap_or_buffer()
+-- map_close_tap_or_buffer()
 map_rename()
 map_delete_file()
 map_enter()
