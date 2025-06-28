@@ -41,12 +41,19 @@ return {
   opts = {
     ---@type table<string, snacks.win.Config>
     styles = {
-      input = {
-        title_pos = "left",
-        height = 50,
-      },
+      -- input = {
+      --   title_pos = "left",
+      --   height = 1,
+      --   width = 60,
+      -- },
       notification = {
         border = "solid",
+        wo = {
+          wrap = true,
+        },
+      },
+      notification_history = {
+        title_pos = "left",
         wo = {
           wrap = true,
         },
