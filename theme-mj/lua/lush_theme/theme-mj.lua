@@ -3,6 +3,7 @@ local lush = require("lush")
 local hsl = lush.hsl
 local hsluv = lush.hsluv
 
+local undercurl = require("utils/utils").is_windows and "undercurl,bold" or "undercurl"
 local palette = {
   theme = "#c4d194",
   error_label = "#E0787C",
@@ -265,10 +266,26 @@ local theme = lush(function(injected_functions)
     sym("@comment.hint")({ bg = "#7d8590", fg = "#0d1117" }),
     sym("@markup.raw")({ fg = "#e6edf3", gui = "italic" }),
 
-    DiagnosticUnderlineHint({ gui = "undercurl", sp = palette.hint_undercurl }),
-    DiagnosticUnderlineInfo({ gui = "undercurl", sp = palette.info_undercurl }),
-    DiagnosticUnderlineWarn({ gui = "undercurl", sp = palette.warn_undercurl }),
-    DiagnosticUnderlineError({ gui = "undercurl", sp = palette.error_undercurl }),
+    DiagnosticUnderlineHint({
+      gui = undercurl,
+      sp = palette.hint_undercurl,
+      fg = palette.hint_undercurl,
+    }),
+    DiagnosticUnderlineInfo({
+      gui = undercurl,
+      sp = palette.info_undercurl,
+      fg = palette.hint_undercurl,
+    }),
+    DiagnosticUnderlineWarn({
+      gui = undercurl,
+      sp = palette.warn_undercurl,
+      fg = palette.hint_undercurl,
+    }),
+    DiagnosticUnderlineError({
+      gui = undercurl,
+      sp = palette.error_undercurl,
+      fg = palette.hint_undercurl,
+    }),
 
     MatchParen({ bg = "#1e4273", fg = "#e6edf3", gui = "bold" }),
     sym("@type.qualifier")({ fg = "#ff7b72" }),
@@ -317,10 +334,10 @@ local theme = lush(function(injected_functions)
     PmenuThumb({ bg = "#17335a" }),
     PmenuSel({ bg = "#1c3d6a" }),
     Pmenu({ fg = "white" }),
-    SpellLocal({ gui = "undercurl", sp = "#2f81f7" }),
-    SpellRare({ gui = "undercurl", sp = "#2f81f7" }),
-    SpellCap({ gui = "undercurl", sp = "#d29922" }),
-    SpellBad({ gui = "undercurl", sp = "#f85149" }),
+    SpellLocal({ gui = undercurl, sp = "#2f81f7" }),
+    SpellRare({ gui = undercurl, sp = "#2f81f7" }),
+    SpellCap({ gui = undercurl, sp = "#d29922" }),
+    SpellBad({ gui = undercurl, sp = "#f85149" }),
     Conceal({ fg = "#8b949e" }),
     SignColumn({ fg = "#6e7681" }),
     FoldColumn({ fg = "#6e7681" }),
@@ -933,11 +950,11 @@ local theme = lush(function(injected_functions)
     BufferLineBufferSelected({ fg = text.fg, gui = "bold" }),
     BufferLineBufferVisible({ fg = text_sub.fg }),
 
-    BufferLineError({ fg = text_sub.fg, gui = "undercurl", sp = palette.error_undercurl }),
+    BufferLineError({ fg = text_sub.fg, gui = undercurl, sp = palette.error_undercurl }),
     BufferLineErrorVisible({ BufferLineError }),
     BufferLineErrorSelected({ fg = text.fg, gui = "bold,undercurl", sp = palette.error_undercurl }),
 
-    BufferLineWarning({ fg = text_sub.fg, gui = "undercurl", sp = palette.warn_undercurl }),
+    BufferLineWarning({ fg = text_sub.fg, gui = undercurl, sp = palette.warn_uvimndercurl }),
     BufferLineWarningVisible({ BufferLineWarning }),
     BufferLineWarningSelected({ fg = text.fg, gui = "bold,undercurl", sp = palette.warn_undercurl }),
 

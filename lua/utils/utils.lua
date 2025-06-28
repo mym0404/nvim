@@ -153,4 +153,23 @@ M.is_js_ft = function(buf)
   return false
 end
 
+local function getOS()
+  -- ask LuaJIT first
+  if jit then
+    return jit.os
+  end
+
+  local osname = ""
+  -- Unix, Linux variants
+  local fh, err = assert(io.popen("uname -o 2>/dev/null", "r"))
+  if fh then
+    osname = fh:read()
+  end
+
+  return osname or "Windows"
+end
+
+M.getOS = getOS
+M.is_windows = getOS() == "Windows"
+
 return M

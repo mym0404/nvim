@@ -9,6 +9,46 @@ return {
           ["vim.lsp.util.stylize_markdown"] = true,
           ["cmp.entry.get_documentation"] = true,
         },
+        hover = {
+          enabled = true,
+          silent = false,
+          -- view = "hover",
+          view = "hover",
+          ---@type NoiceViewOptions
+          opts = {
+            lang = "markdown",
+            replace = true,
+            render = "plain",
+            format = { "{message}" },
+            win_options = { concealcursor = "n", conceallevel = 3, wrap = true },
+          },
+        },
+        documentation = {
+          enabled = true,
+          silent = false,
+          -- view = "hover",
+          view = "hover",
+          ---@type NoiceViewOptions
+          opts = {
+            lang = "markdown",
+            replace = true,
+            render = "plain",
+            format = { "{message}" },
+            win_options = { concealcursor = "n", conceallevel = 3, wrap = true },
+          },
+        },
+        signature = {
+          enabled = false,
+          auto_open = {
+            enabled = true,
+            trigger = true, -- Automatically show signature help when typing a trigger character from the LSP
+            luasnip = true, -- Will open signature help when jumping to Luasnip insert nodes
+            throttle = 50, -- Debounce lsp signature help request by 50ms
+          },
+          view = nil, -- when nil, use defaults from documentation
+          ---@type NoiceViewOptions
+          opts = {}, -- merged with defaults from documentation
+        },
       },
       routes = {
         {
@@ -28,7 +68,7 @@ return {
         command_palette = true,
         long_message_to_split = false,
         -- inc_rename = true,
-        -- lsp_doc_border = true,
+        lsp_doc_border = true,
       },
     },
   -- stylua: ignore
