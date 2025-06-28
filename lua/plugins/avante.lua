@@ -5,8 +5,10 @@ return {
   build = function()
     -- conditionally use the correct build system for the current OS
     if vim.fn.has("win32") == 1 then
+      vim.notify("hello2")
       return "powershell -ExecutionPolicy Bypass -File Build.ps1 -BuildFromSource false"
     else
+      vim.notify("hello")
       return "make"
     end
   end,
@@ -15,18 +17,35 @@ return {
   ---@module 'avante'
   ---@type avante.Config
   opts = {
-    -- add any opts here
-    -- for example
-    provider = "claude",
+    provider = "openai",
     providers = {
-      claude = {
-        endpoint = "https://api.anthropic.com",
-        model = "claude-sonnet-4-20250514",
-        timeout = 30000, -- Timeout in milliseconds
+      openai = {
+        endpoint = "https://api.openai.com/v1",
+        model = "gpt-4o",
+        timeout = 30000,
         extra_request_body = {
           temperature = 0.75,
           max_tokens = 20480,
         },
+      },
+      claude = {
+        endpoint = "https://api.anthropic.com",
+        model = "claude-sonnet-4-20250514",
+        timeout = 30000,
+        extra_request_body = {
+          temperature = 0.75,
+          max_tokens = 20480,
+        },
+      },
+    },
+    selector = {
+      provider = "fzf",
+      provider_opts = {},
+    },
+    input = {
+      provider = "snacks",
+      provider_opts = {
+        title = "Avante Input",
       },
     },
   },
