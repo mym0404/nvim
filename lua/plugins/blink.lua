@@ -100,6 +100,9 @@ return {
               end,
               -- Set the highlight priority to 20000 to beat the cursorline's default priority of 10000
               highlight = function(ctx)
+                if ctx.kind:lower() == "copilot" then
+                  return "Special"
+                end
                 return require("colorful-menu").blink_components_highlight(ctx)
                 -- return { { group = ctx.kind_hl, priority = 20000 } }
               end,

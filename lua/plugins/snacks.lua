@@ -39,6 +39,28 @@ return {
   ---@module "snacks.nvim"
   ---@type snacks.Config
   opts = {
+    ---@type table<string, snacks.win.Config>
+    styles = {
+      input = {
+        title_pos = "left",
+        height = 50,
+      },
+      notification = {
+        border = "solid",
+        wo = {
+          wrap = true,
+        },
+      },
+    },
+    notifier = {
+      enabled = true,
+      timeout = 5000,
+      width = { min = 60, max = 0.7 },
+      height = { min = 1, max = 0.7 },
+      sort = { "added", "level" },
+      ---@type snacks.notifier.style
+      style = "fancy",
+    },
     scroll = { enabled = false },
     indent = { enabled = true, priority = 1, only_current = true, only_scope = true },
     image = { enabled = false },
