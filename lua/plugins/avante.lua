@@ -76,5 +76,8 @@ return {
         title = "Avante Input",
       },
     },
+    behaviour = {
+      auto_set_highlight_group = false,
+    },
   },
 }

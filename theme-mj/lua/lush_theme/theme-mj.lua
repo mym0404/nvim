@@ -1,7 +1,7 @@
 ---@diagnostic disable: undefined-global
 local lush = require("lush")
-local hsl = lush.hsl
-local hsluv = lush.hsluv
+-- local hsl = lush.hsl
+-- local hsluv = lush.hsluv
 
 local undercurl = require("utils/utils").is_windows and "undercurl,bold" or "undercurl"
 local palette = {
@@ -1062,6 +1062,46 @@ local theme = lush(function(injected_functions)
 
     UfoFoldedEllipsis(text_sub),
     UfoCursorFoldedLine({ fg = "red" }),
+
+    AvanteButtonPrimary({ fg = "#1e222a", bg = "#abb2bf" }),
+    AvanteButtonDefaultHover({ fg = "#1e222a", bg = "#a9cf8a" }),
+    AvanteButtonDefault({ fg = "#1e222a", bg = "#abb2bf" }),
+    AvanteConfirmTitle({ fg = "#1e222a", bg = "#e06c75" }),
+    AvanteToBeDeletedWOStrikethrough({ bg = "#562c30" }),
+    AvanteToBeDeleted({ gui = "strikethrough", bg = "#ffcccc" }),
+    AvanteInlineHint({ Keyword }),
+    AvanteSidebarWinHorizontalSeparator({ fg = "#313131" }),
+    AvanteReversedTitle({ fg = "#98c379" }),
+    AvanteTitle({ fg = "#1e222a", bg = "#98c379" }),
+    AvanteSuggestion({ Comment }),
+    AvanteReversedThirdTitle({ fg = "#353b45" }),
+    AvanteThirdTitle({ fg = "#abb2bf", bg = "#353b45" }),
+    AvanteReversedSubtitle({ fg = "#56b6c2" }),
+    AvanteSubtitle({ fg = "#1e222a", bg = "#56b6c2" }),
+    AvanteThinking({ fg = "#c678dd" }),
+    AvanteTaskCompleted({ fg = "#98c379" }),
+    AvanteStateSpinnerCompacting({ Special }),
+    AvanteStateSpinnerThinking({ Special }),
+    AvanteStateSpinnerSearching({ Special }),
+    AvanteStateSpinnerSucceeded({ fg = "#1e222a", bg = "#98c379" }),
+    AvanteStateSpinnerFailed({ fg = "#1e222a", bg = "#e06c75" }),
+    AvanteStateSpinnerToolCalling({ fg = "#1e222a", bg = "#56b6c2" }),
+    AvanteStateSpinnerGenerating({ fg = "#1e222a", bg = "#ab9df2" }),
+    AvanteReversedNormal({ bg = "#ffffff" }),
+    AvanteCommentFg({ fg = "#7ae755" }),
+    AvanteSidebarWinSeparator({}),
+    AvanteSidebarNormal({ fg = text.fg }),
+    AvantePromptInput({ fg = text.fg }),
+    AvanteButtonDangerHover({ fg = "#1e222a", bg = "#e06c75" }),
+    AvanteButtonDanger({ fg = "#1e222a", bg = "#abb2bf" }),
+    AvantePromptInputBorder({ NormalFloat }),
+    AvanteAnnotation({ Comment }),
+    AvanteButtonPrimaryHover({ fg = "#1e222a", bg = "#56b6c2" }),
+    AvantePopupHint({ NormalFloat }),
+    AvanteConflictCurrentLabel({ bg = "#6f393e" }),
+    AvanteConflictIncoming({ gui = "bold", bg = "#314753" }),
+    AvanteConflictCurrent({ gui = "bold", bg = "#562c30" }),
+    AvanteConflictIncomingLabel({ bg = "#3f5c6b" }),
   }
 end)
 return theme
