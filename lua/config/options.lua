@@ -24,23 +24,23 @@ opt.imsearch = 0
 opt.guicursor =
   "n-v-c-sm:block-blinkwait1000-blinkon500-blinkoff500,i-ci-ve:ver25,r-cr-o:hor20,t:block-blinkon500-blinkoff500-TermCursor"
 
-vim.opt.cindent = false
-vim.opt.autoindent = false
-vim.opt.cindent = false
-vim.opt.imsearch = 0
-vim.opt.imsearch = 0
+opt.cindent = false
+opt.autoindent = false
+opt.cindent = false
+opt.imsearch = 0
+opt.imsearch = 0
 
-vim.opt.mouse = "a"
-vim.opt.showmode = false
-vim.opt.exrc = true
+opt.mouse = "a"
+opt.showmode = false
+opt.exrc = true
 
 vim.schedule(function()
-  vim.opt.clipboard = "unnamedplus"
+  opt.clipboard = "unnamedplus"
 end)
 
-vim.opt.breakindent = true
-vim.opt.ignorecase = true
-vim.opt.smartcase = true
+opt.breakindent = true
+opt.ignorecase = true
+opt.smartcase = true
 
 vim.api.nvim_create_autocmd("TextYankPost", {
   desc = "Highlight when yanking (copying) text",
@@ -49,17 +49,19 @@ vim.api.nvim_create_autocmd("TextYankPost", {
     vim.hl.on_yank()
   end,
 })
-vim.opt.termguicolors = true
+opt.termguicolors = true
 
 vim.g.lazyvim_prettier_needs_config = true
 -- vim.g.lazyvim_cmp = "nvim-cmp"
 -- vim.g.snacks_animate = false
 
--- vim.opt.foldmethod = "manual"
--- vim.opt.foldexpr = nil
-vim.opt.foldcolumn = "1"
-vim.opt.foldlevel = 99
--- vim.opt.foldtext = "v:lua.require'ufo.main'.foldtext()"
--- vim.opt.foldexpr = "v:lua.vim.lsp.foldexpr()"
-vim.opt.foldlevelstart = 99
-vim.opt.foldenable = true
+-- opt.foldmethod = "manual"
+-- opt.foldexpr = nil
+opt.foldcolumn = "1"
+opt.foldlevel = 99
+-- opt.foldtext = "v:lua.require'ufo.main'.foldtext()"
+-- opt.foldexpr = "v:lua.vim.lsp.foldexpr()"
+opt.foldlevelstart = 99
+opt.foldenable = true
+
+opt.laststatus = 3
