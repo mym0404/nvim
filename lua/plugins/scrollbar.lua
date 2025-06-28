@@ -35,16 +35,16 @@ return {
           highlight = "Normal",
         },
         Search = {
-          text = { "━━" },
+          text = { "➤" },
           priority = 1,
           gui = nil,
-          color = "#f2b866",
+          color = "#ffd700",
           cterm = nil,
           color_nr = nil, -- cterm
           highlight = "Search",
         },
         Error = {
-          text = { "━━" },
+          text = { "━" },
           priority = 2,
           gui = nil,
           color = nil,
@@ -53,7 +53,7 @@ return {
           highlight = "DiagnosticVirtualTextError",
         },
         Warn = {
-          text = { "━━" },
+          text = { "━" },
           priority = 3,
           gui = nil,
           color = nil,
@@ -62,7 +62,7 @@ return {
           highlight = "DiagnosticVirtualTextWarn",
         },
         Info = {
-          text = { "━━" },
+          text = { "━" },
           priority = 4,
           gui = nil,
           color = nil,
@@ -118,6 +118,12 @@ return {
       },
       excluded_buftypes = {
         "terminal",
+        "prompt",
+        "nofile",
+        "quickfix",
+        "help",
+        "popup",
+        "lspinfo",
       },
       excluded_filetypes = {
         "blink-cmp-menu",
@@ -150,9 +156,9 @@ return {
       },
       ow = true,
       handlers = {
-        cursor = true,
+        cursor = false,
         diagnostic = true,
-        gitsigns = false,
+        gitsigns = true,
         handle = true,
         search = true,
       },

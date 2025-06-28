@@ -1,5 +1,3 @@
-import { fft } from './fft';
-
 console.log(1)
 console.log()
 
