@@ -60,6 +60,10 @@ return {
       },
       lazygit = { wo = {} },
     },
+    terminal = {
+      shell = "zsh",
+      win = {},
+    },
     notifier = {
       enabled = true,
       timeout = 5000,
