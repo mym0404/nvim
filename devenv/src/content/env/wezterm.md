@@ -22,14 +22,18 @@ local function getOS()
 end
 
 local is_windows = getOS() == "Windows"
-local CMD = is_windows and "SUPER" or "CMD"
+local CMD = is_windows and "ALT" or "CMD"
 local CTRL = "CTRL"
 local OPT = "OPT"
 local SHIFT = "SHIFT"
 
 local function setup_core()
 	if is_windows then
-		c.default_prog = { "C:\\Program Files\\Git\\bin\\bash.exe", "--login", "-i" }
+		c.default_prog = { "wsl" }
+		c.wsl_domains = { {
+			name = "WSL:Ubuntu-24.04",
+			distribution = "Ubuntu-24.04",
+		} }
 	end
 	c.set_environment_variables = {
 		PATH = "/opt/homebrew/bin:" .. os.getenv("PATH"),
@@ -59,7 +63,11 @@ local function setup_core()
 	-- 📐 줄 높이 및 DPI 조정
 	c.line_height = 1.15
 
-	c.window_background_opacity = 0.9
+	if is_windows then
+		c.dpi = 144
+	end
+
+	c.window_background_opacity = 0.5
 	c.macos_window_background_blur = 2
 	-- Removes the title bar, leaving only the tab bar. Keeps
 	-- the ability to resize by dragging the window's edges.
