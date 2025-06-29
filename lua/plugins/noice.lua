@@ -6,8 +6,8 @@ return {
     opts = {
       lsp = {
         override = {
-          ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
-          ["vim.lsp.util.stylize_markdown"] = true,
+          ["vim.lsp.util.convert_input_to_markdown_lines"] = false,
+          ["vim.lsp.util.stylize_markdown"] = false,
           ["cmp.entry.get_documentation"] = true,
         },
         -- cmdline = {
@@ -27,8 +27,9 @@ return {
               style = "rounded",
               padding = { 0, 2 },
             },
-            win_options = { concealcursor = "n", conceallevel = 1, wrap = true },
-            lang = "markdown",
+            buf_options = { filetype = "markdown" },
+            -- win_options = { concealcursor = "n", conceallevel = 1, wrap = true },
+            -- lang = "markdown",
             replace = true,
             render = "plain",
             format = { "{message}" },
@@ -39,17 +40,17 @@ return {
           silent = false,
           -- view = "hover",
           ---@type NoiceViewOptions
-          opts = {
-            lang = "markdown",
-            replace = true,
-            render = "plain",
-            format = { "{message}" },
-            win_options = { concealcursor = "n", conceallevel = 3, wrap = true },
-            border = {
-              style = "rounded",
-              padding = { 1, 2 },
-            },
-          },
+          -- opts = {
+          --   lang = "markdown",
+          --   replace = true,
+          --   render = "plain",
+          --   format = { "{message}" },
+          --   win_options = { concealcursor = "n", conceallevel = 3, wrap = true },
+          --   border = {
+          --     style = "rounded",
+          --     padding = { 1, 2 },
+          --   },
+          -- },
         },
         signature = {
           enabled = false,

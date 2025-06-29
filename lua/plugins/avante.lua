@@ -35,14 +35,6 @@ return {
     --     },
     --   },
     -- },
-    {
-      -- Make sure to set this up properly if you have lazy=true
-      "MeanderingProgrammer/render-markdown.nvim",
-      opts = {
-        file_types = { "markdown", "Avante" },
-      },
-      ft = { "markdown", "Avante" },
-    },
   },
   opts = {
     provider = "gemini",
@@ -69,7 +61,7 @@ return {
         model = "gemini-2.5-flash",
         extra_request_body = {
           max_tokens = 300,
-          temperature = 0.20,
+          temper,
         },
       },
     },
