@@ -66,9 +66,9 @@ return {
     },
     notifier = {
       enabled = true,
-      timeout = 5000,
-      width = { min = 60, max = 0.7 },
-      height = { min = 1, max = 0.7 },
+      timeout = 3000,
+      width = { min = 45, max = 0.6 },
+      height = { min = 1, max = 0.6 },
       sort = { "added", "level" },
       ---@type snacks.notifier.style
       style = "fancy",
