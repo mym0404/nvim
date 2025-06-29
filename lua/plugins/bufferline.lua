@@ -18,7 +18,14 @@ return {
     options = {
       style_preset = require("bufferline").style_preset.minimal,
       name_formatter = function(buf)
-        return buf.name
+        local name = buf.name
+        local extensions_to_drop = { "swift", "kt", "jsx", "js", "tsx", "ts", "lua" }
+        for _, ext in ipairs(extensions_to_drop) do
+          if name:match("." .. ext .. "$") then
+            return " " .. name:gsub("." .. ext .. "$", "")
+          end
+        end
+        return " " .. name
       end,
       custom_filter = function(buf_number, buf_numbers)
         local name = vim.fn.bufname(buf_number)
@@ -37,7 +44,7 @@ return {
       left_trunc_marker = "",
       right_trunc_marker = "",
       always_show_bufferline = true,
-      tab_size = 20,
+      tab_size = 14,
       indicator = {
         style = "icon",
         icon = "▎",
