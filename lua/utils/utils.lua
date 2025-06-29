@@ -1,6 +1,6 @@
-M = {}
+local M = {}
 
-M.get_start_and_end_lines = function()
+function M.get_start_and_end_lines()
   local start_line = vim.fn.line("v")
   local end_line = vim.fn.line(".")
   if start_line > end_line then
@@ -9,26 +9,26 @@ M.get_start_and_end_lines = function()
   return start_line, end_line
 end
 
-M.go_to_normal_mode = function()
+function M.go_to_normal_mode()
   local esc = vim.api.nvim_replace_termcodes("<Esc>", true, false, true)
   vim.api.nvim_feedkeys(esc, "n", false)
 end
 
-M.get_current_filetype = function()
+function M.get_current_filetype()
   return vim.bo.filetype
 end
 
-M.get_row_and_col = function()
+function M.get_row_and_col()
   return unpack(vim.api.nvim_win_get_cursor(0))
 end
 
-M.run_key = function(termcodes, mode)
+function M.run_key(termcodes, mode)
   mode = mode or "m"
   local keys = vim.api.nvim_replace_termcodes(termcodes, true, false, true)
   vim.api.nvim_feedkeys(keys, mode, false)
 end
 
-M.get_current_cursor_char = function()
+function M.get_current_cursor_char()
   local _, col = M.get_row_and_col()
   local line = vim.api.nvim_get_current_line()
   return line:sub(col + 1, col + 1)
@@ -58,7 +58,7 @@ local matching_pairs = {
   "()",
   "><",
 }
-M.should_be_double_new_line = function()
+function M.should_be_double_new_line()
   local ft = vim.bo.filetype
   local is_valid_ft = false
   for _, check_ft in ipairs(double_new_line_files) do
@@ -161,7 +161,7 @@ local function getOS()
 
   local osname = ""
   -- Unix, Linux variants
-  local fh, err = assert(io.popen("uname -o 2>/dev/null", "r"))
+  local fh = assert(io.popen("uname -o 2>/dev/null", "r"))
   if fh then
     osname = fh:read()
   end
