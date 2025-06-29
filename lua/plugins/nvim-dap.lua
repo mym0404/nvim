@@ -1,9 +1,11 @@
+local utils = require("utils/utils")
 return {
   {
     "mfussenegger/nvim-dap",
     dependencies = {
       "wojciech-kulik/xcodebuild.nvim",
     },
+    enabled = utils.is_mac,
     lazy = false,
     config = function()
       local xcodebuild = require("xcodebuild.integrations.dap")
