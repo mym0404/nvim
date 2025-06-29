@@ -35,7 +35,7 @@ return {
           },
         },
         documentation = {
-          enabled = false,
+          enabled = true,
           silent = false,
           -- view = "hover",
           ---@type NoiceViewOptions
@@ -44,7 +44,7 @@ return {
             replace = true,
             render = "plain",
             format = { "{message}" },
-            win_options = { concealcursor = "n", conceallevel = 1, wrap = true },
+            win_options = { concealcursor = "n", conceallevel = 3, wrap = true },
             border = {
               style = "rounded",
               padding = { 1, 2 },
