@@ -341,7 +341,7 @@ local theme = lush(function(injected_functions)
     Conceal({ fg = "#8b949e" }),
     SignColumn({ fg = "#6e7681" }),
     FoldColumn({ fg = "#6e7681" }),
-    Folded({ bg = "#253634", fg = "#6e7681", gui = "" }),
+    Folded({ bg = "#1e222a", fg = "#6e7681", gui = "" }),
     WarningMsg({ fg = "#d29922" }),
     Title({ fg = palette.theme }),
     MoreMsg({ fg = "#2f8cf7", gui = "bold" }),
