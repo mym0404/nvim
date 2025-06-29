@@ -17,6 +17,18 @@ return {
   opts = {
     options = {
       style_preset = require("bufferline").style_preset.minimal,
+      name_formatter = function(buf)
+        return buf.name
+      end,
+      custom_filter = function(buf_number, buf_numbers)
+        local name = vim.fn.bufname(buf_number)
+        local buf = vim.bo[buf_number]
+        -- exclude explorer
+        if buf.filetype == "" and name == "./" then
+          return false
+        end
+        return true
+      end,
       numbers = "none",
       truncate_names = false,
       buffer_close_icon = "",
@@ -25,7 +37,6 @@ return {
       left_trunc_marker = "",
       right_trunc_marker = "",
       always_show_bufferline = true,
-      more_wraps_at_ends = true,
       tab_size = 20,
       indicator = {
         style = "icon",
