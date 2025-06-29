@@ -7,6 +7,7 @@ const input = [1, 2, 3, 4]; // Replace with your input
 const output = fft(input);
 console.log('FFT Output:', output); // Display the FFT output
 
+
 // Another simple example usage:
 const input2 = [0, 1, 0, 1, 0, 1, 0, 1]; // A simple input for FFT
 const output2 = fft(input2);
