@@ -25,6 +25,7 @@ type Complex = [number, number];
  */
 function fft(input: Array<number | Complex>): Array<Complex> {
   const n = input.length;
+  console.log()
 
   // Convert input to an array of complex numbers [real, imaginary].
   // If the input elements are numbers, treat them as real parts with imaginary part 0.

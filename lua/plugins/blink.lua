@@ -88,6 +88,8 @@ return {
       },
       menu = {
         draw = {
+          padding = 1,
+          gap = 1,
           treesitter = { "lsp" },
           columns = {
             { "kind_icon", gap = 1 },
@@ -123,7 +125,7 @@ return {
       documentation = {
         auto_show = true,
         auto_show_delay_ms = 1000,
-        window = { scrollbar = true },
+        window = { scrollbar = true, border = "rounded" },
       },
       ghost_text = {
         -- enabled = vim.g.ai_cmp,
@@ -131,7 +133,10 @@ return {
       },
     },
     -- experimental signature help support
-    signature = { enabled = false, window = { show_documentation = false } },
+    signature = {
+      enabled = true,
+      window = { show_documentation = false, border = "rounded" },
+    },
 
     sources = {
       -- adding any nvim-cmp sources here will enable them

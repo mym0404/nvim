@@ -2,6 +2,7 @@ return {
   {
     "folke/noice.nvim",
     event = "VeryLazy",
+    enabled = true,
     opts = {
       lsp = {
         override = {
@@ -19,12 +20,24 @@ return {
         hover = {
           enabled = true,
           silent = false,
-          view = nil,
+          view = "hover",
+          ---@type NoiceViewOptions
+          opts = {
+            border = {
+              style = "rounded",
+              padding = { 0, 2 },
+            },
+            win_options = { concealcursor = "n", conceallevel = 1, wrap = true },
+            lang = "markdown",
+            replace = true,
+            render = "plain",
+            format = { "{message}" },
+          },
         },
         documentation = {
-          enabled = true,
+          enabled = false,
           silent = false,
-          view = "hover",
+          -- view = "hover",
           ---@type NoiceViewOptions
           opts = {
             lang = "markdown",
@@ -32,10 +45,14 @@ return {
             render = "plain",
             format = { "{message}" },
             win_options = { concealcursor = "n", conceallevel = 1, wrap = true },
+            border = {
+              style = "rounded",
+              padding = { 1, 2 },
+            },
           },
         },
         signature = {
-          enabled = true,
+          enabled = false,
           auto_open = {
             enabled = true,
             trigger = true, -- Automatically show signature help when typing a trigger character from the LSP
@@ -63,7 +80,22 @@ return {
         command_palette = true,
         long_message_to_split = false,
         -- inc_rename = true,
-        lsp_doc_border = true,
+        lsp_doc_border = false,
+      },
+      markdown = {
+        hover = {
+          ["|(%S-)|"] = vim.cmd.help, -- vim help links
+          ["%[.-%]%((%S-)%)"] = require("noice.util").open, -- markdown links
+        },
+        highlights = {
+          ["|%S-|"] = "@text.reference",
+          ["@%S+"] = "@parameter",
+          ["^[%s@-]*param:"] = "@text.title",
+          ["^[%s@-]*(Parameters:)"] = "@text.title",
+          ["^[%s@-]*(Return:)"] = "@text.title",
+          ["^[%s@-]*(See also:)"] = "@text.title",
+          ["{%S-}"] = "@parameter",
+        },
       },
     },
     keys = {
