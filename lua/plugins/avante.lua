@@ -3,14 +3,15 @@ return {
   -- if you want to build from source then do `make BUILD_FROM_SOURCE=true`
   -- ⚠️ must add this setting! ! !
   build = function()
-    -- conditionally use the correct build system for the current OS
+    -- Conditionally use the correct build system for the current OS
+    -- Determine the appropriate build command based on the operating system.
+    local build_command
     if vim.fn.has("win32") == 1 then
-      vim.notify("hello2")
-      return "powershell -ExecutionPolicy Bypass -File Build.ps1 -BuildFromSource false"
+      build_command = "powershell -ExecutionPolicy Bypass -File Build.ps1 -BuildFromSource false"
     else
-      vim.notify("hello")
-      return "make"
+      build_command = "make"
     end
+    return build_command
   end,
   event = "VeryLazy",
   version = false, -- Never set this value to "*"! Never!
@@ -44,15 +45,15 @@ return {
     },
   },
   opts = {
-    provider = "openai",
+    provider = "gemini",
     providers = {
       openai = {
         endpoint = "https://api.openai.com/v1",
         model = "gpt-4o-mini",
         timeout = 30000,
         extra_request_body = {
-          temperature = 0.75,
-          max_tokens = 4096,
+          temperature = 0.20,
+          max_tokens = 300,
         },
       },
       claude = {
@@ -64,8 +65,13 @@ return {
           max_tokens = 20480,
         },
       },
+      gemini = {
+        model = "gemini-2.5-flash",
+        extra_request_body = {
+          max_tokens = 300,
+        },
+      },
     },
-
     selector = {
       provider = "snacks",
       provider_opts = {},

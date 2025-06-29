@@ -16,6 +16,7 @@ return {
       opts = {},
       -- version = not vim.g.lazyvim_blink_main and "*",
     },
+    "Kaiser-Yang/blink-cmp-avante",
   },
   event = "InsertEnter",
 
@@ -136,16 +137,21 @@ return {
       -- adding any nvim-cmp sources here will enable them
       -- with blink.compat
       compat = {},
-      default = { "lsp", "path", "snippets", "buffer" },
-      -- providers = {
-      --   copilot = {
-      --     name = "copilot",
-      --     module = "blink-cmp-copilot",
-      --     kind = "Copilot",
-      --     score_offset = 100,
-      --     async = true,
-      --   },
-      -- },
+      default = { "avante", "lsp", "path", "snippets", "buffer" },
+      providers = {
+        copilot = {
+          name = "copilot",
+          module = "blink-cmp-copilot",
+          kind = "Copilot",
+          score_offset = 100,
+          async = true,
+        },
+        avante = {
+          module = "blink-cmp-avante",
+          name = "Avante",
+          opts = {},
+        },
+      },
     },
     snippets = {
       preset = "luasnip",
