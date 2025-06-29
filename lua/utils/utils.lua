@@ -171,6 +171,6 @@ end
 
 M.getOS = getOS
 M.is_windows = getOS() == "Windows"
-M.is_mac = getOS() == "Darwin"
+M.is_mac = getOS():lower() == "OSX"
 
 return M
