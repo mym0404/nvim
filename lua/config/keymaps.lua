@@ -398,6 +398,19 @@ local function map_template_string()
   })
 end
 
+local function map_close_bracket()
+  vim.keymap.set("i", "}", function()
+    if vim.bo.filetype == "swift" then
+      require("conform").format({
+        bufnr = vim.api.nvim_get_current_buf(),
+        async = true,
+        quiet = true,
+      })
+    end
+    return "}"
+  end, { expr = true, nowait = true, silent = true })
+end
+
 reset_keymaps()
 map_template_string()
 map_react_prop_bracket()
@@ -421,3 +434,4 @@ map_smart_splits()
 map_select_all()
 map_git_actions()
 map_package_info()
+map_close_bracket()
