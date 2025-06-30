@@ -73,6 +73,7 @@ return {
       -- ),
     },
     completion = {
+      trigger = { show_on_keyword = true },
       keyword = { range = "prefix" },
       accept = {
         -- experimental auto-brackets support
@@ -93,7 +94,7 @@ return {
           treesitter = { "lsp" },
           columns = {
             { "kind_icon", gap = 1 },
-            { "label" },
+            { "label", "label_description" },
           },
           components = {
             kind_icon = {
