@@ -129,13 +129,13 @@ local function map_delete_file()
 end
 
 local function map_enter()
-  -- vim.keymap.set({ "n", "i" }, "<cr>", function()
-  --   local prefix = vim.api.nvim_get_mode().mode == "n" and "i" or ""
-  --   if utils.should_be_double_new_line() then
-  --     return prefix .. "<cr><esc>O"
-  --   end
-  --   return prefix .. "<cr>"
-  -- end, { expr = true, noremap = true, nowait = true, silent = true })
+  vim.keymap.set({ "n", "i" }, "<cr>", function()
+    local prefix = vim.api.nvim_get_mode().mode == "n" and "i" or ""
+    if utils.should_be_double_new_line() then
+      return prefix .. "<cr><esc>O"
+    end
+    return prefix .. "<cr>"
+  end, { expr = true, noremap = true, nowait = true, silent = true })
 end
 
 local function map_recording()
@@ -151,39 +151,39 @@ local function map_smart_splits()
   -- resizing splits
   -- these keymaps will also accept a range,
   -- for example `10<A-h>` will `resize_left` by `(10 * config.default_amount)`
-  vim.keymap.set("n", "<A-h>", function()
+  vim.keymap.set({ "n", "t" }, "<A-h>", function()
     require("smart-splits").resize_left(horizontal_resize_amount)
   end)
-  vim.keymap.set("n", "<A-j>", function()
+  vim.keymap.set({ "n", "t" }, "<A-j>", function()
     require("smart-splits").resize_down(vertical_resize_amount)
   end)
-  vim.keymap.set("n", "<A-k>", function()
+  vim.keymap.set({ "n", "t" }, "<A-k>", function()
     require("smart-splits").resize_up(vertical_resize_amount)
   end)
-  vim.keymap.set("n", "<A-l>", function()
+  vim.keymap.set({ "n", "t" }, "<A-l>", function()
     require("smart-splits").resize_right(horizontal_resize_amount)
   end)
 
   -- moving between splits
-  vim.keymap.set({ "i", "n" }, "<C-h>", function()
+  vim.keymap.set({ "i", "n", "t" }, "<C-h>", function()
     if vim.api.nvim_get_mode().mode == "i" then
       utils.go_to_normal_mode()
     end
     require("smart-splits").move_cursor_left({ at_edge = "stop" })
   end)
-  vim.keymap.set({ "i", "n" }, "<C-j>", function()
+  vim.keymap.set({ "i", "n", "t" }, "<C-j>", function()
     if vim.api.nvim_get_mode().mode == "i" then
       utils.go_to_normal_mode()
     end
     require("smart-splits").move_cursor_down({ at_edge = "stop" })
   end)
-  vim.keymap.set({ "i", "n" }, "<C-k>", function()
+  vim.keymap.set({ "i", "n", "t" }, "<C-k>", function()
     if vim.api.nvim_get_mode().mode == "i" then
       utils.go_to_normal_mode()
     end
     require("smart-splits").move_cursor_up({ at_edge = "stop" })
   end)
-  vim.keymap.set({ "i", "n" }, "<C-l>", function()
+  vim.keymap.set({ "i", "n", "t" }, "<C-l>", function()
     if vim.api.nvim_get_mode().mode == "i" then
       utils.go_to_normal_mode()
     end

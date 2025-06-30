@@ -362,7 +362,7 @@ local theme = lush(function(injected_functions)
     sym("@markup.list.checked")({ fg = "#3fb950" }),
     sym("@markup.link")({ fg = "#e6edf3", gui = "underline" }),
     sym("@markup.link.uri")({ fg = code.keyword.fg, gui = "underline " }),
-    sym("@markup.link.label")(special),
+    sym("@markup.link.label")({ fg = palette.text }),
     sym("@markup.italic")({ fg = "#e6edf3", gui = "italic" }),
     sym("@markup.environment")({ fg = "#ff7b72" }),
     sym("@markup.environment.name")({ fg = "#d2a8ff" }),
