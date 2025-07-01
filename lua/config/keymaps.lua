@@ -27,7 +27,7 @@ local function map_comments()
 end
 
 local function customizeExitInsertMode()
-  for _, key in ipairs({ "jj", "jk", "kj" }) do
+  for _, key in ipairs({ "jj", "jk", "kj", "ㅓㅏ", "ㅓㅓ" }) do
     vim.keymap.set(
       { "i" },
       key,
@@ -219,8 +219,19 @@ local function map_docs_hover()
 end
 
 local function map_scroll()
-  vim.keymap.set("n", "<C-d>", "10<C-d>", { noremap = true, nowait = true })
-  vim.keymap.set("n", "<C-u>", "10<C-u>", { noremap = true, nowait = true })
+  vim.keymap.set("n", "<C-d>", function()
+    vim.schedule(function()
+      vim.cmd("normal! zz")
+    end)
+    return "10<C-d>"
+  end, { noremap = true, nowait = true, expr = true })
+
+  vim.keymap.set("n", "<C-u>", function()
+    vim.schedule(function()
+      vim.cmd("normal! zz")
+    end)
+    return "10<C-u>"
+  end, { noremap = true, nowait = true, expr = true })
 end
 
 local function map_tstools()
