@@ -151,8 +151,8 @@ return {
           layout = {
             layout = {
               backdrop = false,
-              width = 35,
-              min_width = 35,
+              max_width = 42,
+              min_width = 42,
               height = 0,
               enter = false,
               position = "left",
