@@ -63,4 +63,16 @@ struct {}: View {{
       }
     )
   ),
+  s(
+    "content",
+    fmt(
+      [[
+@ViewBuilder
+private var {}: some View {{
+  {}
+}}
+  ]],
+      { i(1, "Name"), i(0) }
+    )
+  ),
 }
