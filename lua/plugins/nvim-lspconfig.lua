@@ -16,6 +16,9 @@ return {
       vtsls = {
         enabled = false,
       },
+      marksman = {
+        filetypes = { "markdown", "markdown.mdx" },
+      },
     },
   },
 }
