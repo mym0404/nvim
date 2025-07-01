@@ -215,7 +215,7 @@ end
 local function map_docs_hover()
   vim.keymap.set("n", "<s-d>", function()
     vim.lsp.buf.hover({})
-  end)
+  end, { desc = "hover documentation", silent = true })
 end
 
 local function map_scroll()
