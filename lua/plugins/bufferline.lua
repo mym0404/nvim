@@ -31,7 +31,7 @@ return {
         local name = vim.fn.bufname(buf_number)
         local buf = vim.bo[buf_number]
         -- exclude explorer
-        if buf.filetype == "" and name == "./" then
+        if buf.filetype == "" and (name == "./" or name == "" or name == nil) then
           return false
         end
         return true
