@@ -37,7 +37,7 @@ return {
     -- },
   },
   opts = {
-    provider = "gemini",
+    provider = "openai",
     providers = {
       openai = {
         endpoint = "https://api.openai.com/v1",
@@ -77,6 +77,63 @@ return {
     },
     behaviour = {
       auto_set_highlight_group = false,
+      auto_approve_tool_permissions = true,
+    },
+    windows = {
+      ask = {
+        floating = true,
+      },
+    },
+    highlights = {
+      diff = {
+        current = "DiffDelete",
+        imcoming = "DiffAdd",
+      },
+    },
+    diff = {
+      list_opener = "snacks",
+    },
+    mappings = {
+      --- @class AvanteConflictMappings
+      diff = {
+        ours = "co",
+        theirs = "ct",
+        all_theirs = "ca",
+        both = "cb",
+        cursor = "cc",
+        next = "]x",
+        prev = "[x",
+      },
+      suggestion = {
+        accept = "<M-l>",
+        next = "<M-]>",
+        prev = "<M-[>",
+        dismiss = "<C-]>",
+      },
+      jump = {
+        next = "]]",
+        prev = "[[",
+      },
+      submit = {
+        normal = "<CR>",
+        insert = "<CR>",
+      },
+      cancel = {
+        normal = { "<Esc>", "q" },
+        insert = { "<Esc>" },
+      },
+      sidebar = {
+        apply_all = "A",
+        apply_cursor = "a",
+        retry_user_request = "r",
+        edit_user_request = "e",
+        switch_windows = "<Tab>",
+        reverse_switch_windows = "<S-Tab>",
+        remove_file = "d",
+        add_file = "@",
+        close = { "<Esc>", "q" },
+        close_from_input = nil, -- e.g., { normal = "<Esc>", insert = "<C-d>" }
+      },
     },
   },
 }
