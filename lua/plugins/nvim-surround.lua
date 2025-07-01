@@ -11,11 +11,11 @@ return {
       normal_line = "mS",
       normal_cur_line = "mS",
       visual = "m",
-      visual_line = "m",
+      -- visual_line = "m",
       delete = "ds",
       change = "cs",
       change_line = "cS",
     },
-    move_cursor = "sticky",
+    move_cursor = "begin",
   },
 }
