@@ -375,7 +375,7 @@ local theme = lush(function(injected_functions)
     sym("@lsp.type.parameter")({ sym("@variable.parameter") }),
     sym("@lsp.type.modifier")(code.modifier),
     sym("@lsp.type.interface")({ fg = "#F2F68D" }),
-    sym("@lsp.type.identifier")(code.module),
+    sym("@lsp.type.identifier")(text),
     sym("@lsp.type.event")({ sym("@type") }),
     sym("@lsp.type.enum")({ fg = "#FFDAAD" }),
     sym("@lsp.type.class")({ fg = "#FFDAAD" }),
