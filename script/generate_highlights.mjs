@@ -7,7 +7,7 @@ const resolve = path.resolve;
 const filename = path.basename(__filename);
 const cwd = () => process.cwd();
 const exit = process.exit;
-const _printTag = '' || filename;
+const _printTag = 'Highlights' || filename;
 function exist(path) {
   return fs.existsSync(path);
 }
@@ -109,14 +109,14 @@ const langs = ["c", "cpp", "javascript", "typescript", "typescriptreact", "javas
 const q = `
 ;; extends
 
-((protocol_declaration name: (type_identifier) @code.interface) (#set! priority 200))
-((class_declaration name: (type_identifier) @code.class) (#set! priority 200))
+[swift]((protocol_declaration name: (type_identifier) @code.interface) (#set! priority 200))
+[swift]((class_declaration name: (type_identifier) @code.class) (#set! priority 200))
 ((custom_operator) @code.operator (#set! priority 200))
 
 ((value_argument name: (value_argument_label) @code) (#set! priority 150))
 
-; ((type_identifier) @lsp.type.struct (#set! priority 200))
-; ((type_identifier) @type (#set! priority 150))
+((type_identifier) @lsp.type.struct (#set! priority 200))
+((type_identifier) @type (#set! priority 150))
 `.trim()
 async function main() {
   const base_path = join(resolve(__dirname, '..'), "after", "queries");
@@ -125,9 +125,19 @@ async function main() {
     const dir_path = join(base_path, lang);
     const file_path = join(dir_path, "highlights.scm");
 
+    let ret = '';
+    for (const line of q.split(/\r?\n/)) {
+      const m = line.match(/^\[([\w,]+)\](.*)/);
+      if (!m) {
+        ret += line + "\n";
+      } else if (m[1].split(',').map(c => c.trim()).includes(lang)) {
+        print(lang)
+        ret += m[2] + "\n";
+      }
+    }
+
     try {
-      write(file_path, q);
-      printSuccess(`Generated: ${file_path}`);
+      write(file_path, ret);
     } catch (error) {
       printError(`Error: Could not write to file: ${file_path}`, error);
     }
