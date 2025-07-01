@@ -37,7 +37,7 @@ return {
     -- },
   },
   opts = {
-    provider = "openai",
+    provider = "gemini",
     providers = {
       openai = {
         endpoint = "https://api.openai.com/v1",
@@ -65,6 +65,9 @@ return {
         },
       },
     },
+    hint = {
+      enabled = false,
+    },
     selector = {
       provider = "snacks",
       provider_opts = {},
@@ -80,8 +83,15 @@ return {
       auto_approve_tool_permissions = true,
     },
     windows = {
+      sidebar_header = {
+        enabled = false,
+      },
+      -- input = {
+      --   prefix = "> ",
+      --   height = 8,
+      -- },
       ask = {
-        floating = true,
+        floating = false,
       },
     },
     highlights = {
@@ -95,44 +105,47 @@ return {
     },
     mappings = {
       --- @class AvanteConflictMappings
-      diff = {
-        ours = "co",
-        theirs = "ct",
-        all_theirs = "ca",
-        both = "cb",
-        cursor = "cc",
-        next = "]x",
-        prev = "[x",
-      },
-      suggestion = {
-        accept = "<M-l>",
-        next = "<M-]>",
-        prev = "<M-[>",
-        dismiss = "<C-]>",
-      },
-      jump = {
-        next = "]]",
-        prev = "[[",
-      },
-      submit = {
-        normal = "<CR>",
-        insert = "<CR>",
-      },
-      cancel = {
-        normal = { "<Esc>", "q" },
-        insert = { "<Esc>" },
-      },
-      sidebar = {
-        apply_all = "A",
-        apply_cursor = "a",
-        retry_user_request = "r",
-        edit_user_request = "e",
-        switch_windows = "<Tab>",
-        reverse_switch_windows = "<S-Tab>",
-        remove_file = "d",
-        add_file = "@",
-        close = { "<Esc>", "q" },
-        close_from_input = nil, -- e.g., { normal = "<Esc>", insert = "<C-d>" }
+      -- diff = {
+      --   ours = "co",
+      --   theirs = "ct",
+      --   all_theirs = "ca",
+      --   both = "cb",
+      --   cursor = "cc",
+      --   next = "]x",
+      --   prev = "[x",
+      -- },
+      -- suggestion = {
+      --   accept = "<M-l>",
+      --   next = "<M-]>",
+      --   prev = "<M-[>",
+      --   dismiss = "<C-]>",
+      -- },
+      -- jump = {
+      --   next = "]]",
+      --   prev = "[[",
+      -- },
+      -- submit = {
+      --   normal = { "<c-s>", "<CR>" },
+      --   insert = { "<c-s>", "<CR>" },
+      -- },
+      -- cancel = {
+      --   normal = { "<Esc>", "q" },
+      --   insert = { "<Esc>" },
+      -- },
+      -- sidebar = {
+      --   apply_all = "A",
+      --   apply_cursor = "a",
+      --   retry_user_request = "r",
+      --   edit_user_request = "e",
+      --   switch_windows = "<Tab>",
+      --   reverse_switch_windows = "<S-Tab>",
+      --   remove_file = "d",
+      --   add_file = "@",
+      --   close = { "<Esc>", "q" },
+      --   close_from_input = nil, -- e.g., { normal = "<Esc>", insert = "<C-d>" }
+      -- },
+      confirm = {
+        focus_window = "<leader>aF",
       },
     },
   },

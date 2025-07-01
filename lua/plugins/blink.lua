@@ -23,6 +23,9 @@ return {
   ---@module 'blink.cmp'
   ---@type blink.cmp.Config
   opts = {
+    enabled = function()
+      return not vim.tbl_contains({ "AvantePromptInput", "AvanteInput" }, vim.bo.filetype)
+    end,
     keymap = {
       preset = "default",
       ["<tab>"] = {
