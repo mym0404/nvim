@@ -112,6 +112,7 @@ const q = `
 [swift]((protocol_declaration name: (type_identifier) @code.interface) (#set! priority 200))
 [swift]((class_declaration name: (type_identifier) @code.class) (#set! priority 200))
 [swift]((custom_operator) @code.operator (#set! priority 200))
+[swift]((parameter name: (simple_identifier)) @code (#set! priority 150))
 
 ((value_argument name: (value_argument_label) @code) (#set! priority 150))
 
@@ -130,9 +131,14 @@ async function main() {
       const m = line.match(/^\[([\w,]+)\](.*)/);
       if (!m) {
         ret += line + "\n";
-      } else if (m[1].split(',').map(c => c.trim()).includes(lang)) {
-        print(lang)
-        ret += m[2] + "\n";
+      } else {
+        const tokens = m[1].split(',').map(c => c.trim())
+        const negativeTokens = tokens.filter(t => t.startsWith("!")).map(t => t.substr(1));
+        const positiveTokens = tokens.filter(t => !t.startsWith("!"));
+        const isAllTokenExist = tokens.findIndex(t => t === "*") !== -1;
+        if (!negativeTokens.includes(lang) && (isAllTokenExist || positiveTokens.includes(lang))) {
+          ret += m[2] + "\n";
+        }
       }
     }
 

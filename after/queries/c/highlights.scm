@@ -1,6 +1,5 @@
 ;; extends
 
-((custom_operator) @code.operator (#set! priority 200))
 
 ((value_argument name: (value_argument_label) @code) (#set! priority 150))
 
