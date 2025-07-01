@@ -65,8 +65,9 @@ return {
         },
       },
     },
-    hint = {
+    hints = {
       enabled = false,
+      submit_hint = false,
     },
     selector = {
       provider = "snacks",

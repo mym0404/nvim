@@ -111,7 +111,7 @@ const q = `
 
 [swift]((protocol_declaration name: (type_identifier) @code.interface) (#set! priority 200))
 [swift]((class_declaration name: (type_identifier) @code.class) (#set! priority 200))
-((custom_operator) @code.operator (#set! priority 200))
+[swift]((custom_operator) @code.operator (#set! priority 200))
 
 ((value_argument name: (value_argument_label) @code) (#set! priority 150))
 
