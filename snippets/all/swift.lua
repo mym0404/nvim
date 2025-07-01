@@ -30,7 +30,7 @@ local k = require("luasnip.nodes.key_indexer").new_key
 
 return {
   s(
-    "View",
+    "view",
     fmt(
       [[
 import SwiftUI
@@ -48,6 +48,18 @@ struct {}: View {{
           return 'Text("' .. name .. '")'
         end, { 1 }),
         i(0),
+      }
+    )
+  ),
+  s(
+    "st",
+    fmt(
+      [[
+@State private var {} = {}
+  ]],
+      {
+        i(1, "Name"),
+        i(2, "Value"),
       }
     )
   ),
