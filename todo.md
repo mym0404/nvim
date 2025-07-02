@@ -1,8 +1,6 @@
 # Primary
 
-- file, grep list format
 - file, grep float center
-- avante highlighting
 
 # Sub
 
