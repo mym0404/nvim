@@ -23,8 +23,11 @@ source ~/Repos/znap/znap.zsh  # Start Znap
 # Plugins
 plugins=(
     git
+    zsh-autosuggestions
     git-auto-fetch
+    direnv
 )
+ZSH_AUTOSUGGEST_STRATEGY=(history completion)
 
 
 alias g=git
@@ -34,6 +37,10 @@ source $ZSH/oh-my-zsh.sh
 eval "$(fzf --zsh)"
 
 alias vim=nvim
+alias v=vim
+export EDITOR=nvim
+alias VIM="cd ~/.config/nvim && vim ."
+alias WEZ='vim ~/.wezterm.lua'
 
 #Ruby
 export PATH="$HOME/.rbenv/bin:$PATH"
@@ -102,4 +109,58 @@ figlet -f "Sub-Zero" "MJ" | lolcat
 if [[ "$(pwd)" = "$HOME" ]]; then
 cd ~/Desktop
 fi
+
+# Auto add node_modules/.bin into PATH
+
+# 1) Declare a global variable to store the previously added pm bin path
+typeset -g ZPM_BIN=""
+
+# 2) Helper to locate package.json up to the Git top-level directory
+_locate_pkg() {
+  local dir=$1 top
+  # get Git repository root, or fail
+  top=$(git rev-parse --show-toplevel 2>/dev/null) || return 1
+  # traverse from current dir up to the Git root
+  while [[ $dir != $top && $dir != "/" ]]; do
+    [[ -f $dir/package.json ]] && { echo "$dir"; return 0; }
+    dir=${dir%/*}
+  done
+  # check at the Git root
+  [[ -f $top/package.json ]] && echo "$top" && return 0
+  return 1
+}
+
+# 3) Function to update PATH with the project’s local bin
+update_pm_bin() {
+  # 3-1) Remove the previously added bin directory from PATH
+  if [[ -n $ZPM_BIN ]]; then
+    path=( ${path:#$ZPM_BIN} )
+    ZPM_BIN=""
+  fi
+
+  # 3-2) Find the directory containing package.json
+  local root bin_dir
+  root=$(_locate_pkg "$PWD") || return
+
+  # 3-3) Determine which package manager is in use and set bin_dir
+  if [[ -f $root/pnpm-lock.yaml ]]; then
+    bin_dir=$(pnpm --prefix "$root" bin)
+  elif [[ -f $root/yarn.lock ]]; then
+    bin_dir=$(yarn --cwd "$root" bin)
+  elif [[ -f $root/bun.lockb ]]; then
+    bin_dir="$root/node_modules/.bin"
+  else
+    bin_dir=$(npm --prefix "$root" bin)
+  fi
+
+  # 3-4) If bin_dir exists, prepend it to PATH and record it
+  [[ -d $bin_dir ]] || return
+  path=( $bin_dir $path )
+  ZPM_BIN=$bin_dir
+}
+
+# 4) Register hook to run on directory change, and run once at shell startup
+autoload -U add-zsh-hook
+add-zsh-hook chpwd update_pm_bin
+update_pm_bin
 ```

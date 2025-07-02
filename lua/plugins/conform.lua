@@ -13,6 +13,7 @@ return {
         lua = { "stylua" },
         -- fish = { "fish_indent" },
         sh = { "shfmt" },
+        zsh = { "shfmt" },
         javascript = { "biome-check" },
         javascriptreact = { "biome-check" },
         typescript = { "biome-check" },
