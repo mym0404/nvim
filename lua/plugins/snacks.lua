@@ -140,6 +140,13 @@ return {
           },
         },
         select = {
+          win = {
+            input = {
+              keys = {
+                ["<esc>"] = { "close", mode = { "i", "n" } },
+              },
+            },
+          },
           layout = {
             preview = true,
             -- preset = "dropdown",
@@ -172,6 +179,19 @@ return {
                 ["<up>"] = { "history_back", mode = { "i", "n" } },
                 ["<down>"] = { "history_forward", mode = { "i", "n" } },
                 ["<esc>"] = { "close", mode = { "i", "n" } },
+                ["<tab>"] = { "focus_list", mode = { "i", "n" } },
+              },
+            },
+            list = {
+              keys = {
+                -- ["<esc>"] = { "close", mode = { "i", "n" } },
+                ["<tab>"] = { "focus_preview", mode = { "i", "n" } },
+              },
+            },
+            preview = {
+              keys = {
+                -- ["<esc>"] = { "close", mode = { "i", "n" } },
+                ["<tab>"] = { "focus_input", mode = { "i", "n" } },
               },
             },
           },
@@ -185,6 +205,7 @@ return {
           git_status_open = false,
           confirm = true,
           auto_confirm = false,
+          focus = "list",
           title = " " .. vim.fn.fnamemodify(vim.fs.root(0, { ".git" }) or "", ":t"),
           ---@type fun(item:snacks.picker.finder.Item, ctx:snacks.picker.finder.ctx):(boolean|snacks.picker.finder.Item|nil)
           transform = function(item, _)
@@ -377,7 +398,7 @@ return {
         history_bonus = true,
         frecency = true,
         cwd_bonus = true,
-        sort_empty = true,
+        sort_empty = false,
       },
       formatters = {
         file = {
