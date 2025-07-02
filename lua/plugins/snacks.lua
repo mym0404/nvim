@@ -475,7 +475,8 @@ return {
     {
       "<F1>",
       function()
-        Snacks.explorer.reveal()
+        local picker = Snacks.explorer.reveal({})
+        require("snacks.picker.actions").focus_list(picker)
       end,
       desc = "Reveal in explorer",
     },
