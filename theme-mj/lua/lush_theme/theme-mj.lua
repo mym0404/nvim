@@ -18,7 +18,7 @@ local palette = {
   untracked_label = "#E0787C",
   untracked_undercurl = "#E0787C",
   text = "#ffffff",
-  text_sub = "#666666",
+  text_sub = "#747474",
   text_sub2 = "#333333",
 }
 local special = { fg = "#c79cff", bg = "#2a2136", gui = "bold" }
@@ -324,7 +324,7 @@ local theme = lush(function(injected_functions)
     ModeMsg({ fg = "#d29922", gui = "bold" }),
     ErrorMsg({ fg = "#FD9491" }),
     EndOfBuffer({ fg = "#0d1117" }),
-    Directory({ fg = "#ffffff" }),
+    Directory(text),
     StatusLine({ bg = "#3f76b6", fg = "#04070d" }),
     StatusLineNC({ bg = "#0d1117", fg = "#0d1117", gui = "underline", sp = "#04070d" }),
     NoiceHiddenCursor({ blend = 100, gui = "nocombine" }),
@@ -821,7 +821,7 @@ local theme = lush(function(injected_functions)
     SnacksPickerDiagnosticCode(special),
     SnacksPickerDiagnosticSource(code.comment),
     SnacksPickerDimmed({ Conceal }),
-    SnacksPickerDir({ NonText }),
+    SnacksPickerDir({ fg = "#a0a0a0" }),
     SnacksPickerDirectory({ Directory }),
     SnacksPickerIcon(special),
     SnacksPickerIconArray({ sym("@punctuation.bracket") }),

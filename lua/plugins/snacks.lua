@@ -1,6 +1,6 @@
 ---@diagnostic disable: assign-type-mismatch
 ---@type snacks.picker.layout.Config
-local vscode_layout = {
+local vscode_layout_preview = {
   preview = true,
   layout = {
     backdrop = true,
@@ -12,13 +12,12 @@ local vscode_layout = {
     box = "vertical",
     {
       win = "input",
-      height = 1,
       border = "rounded",
       title = "{title} {live} {flags}",
       title_pos = "center",
       focusable = true,
     },
-    { win = "list", border = "hpad", max_height = 15, focusable = true, height = 0.4 },
+    { win = "list", border = "rounded", max_height = 15, focusable = true, height = 0.4 },
     {
       wrap = true,
       win = "preview",
@@ -27,6 +26,30 @@ local vscode_layout = {
       focusable = true,
       height = 0.6,
     },
+  },
+}
+---@diagnostic disable: assign-type-mismatch
+---@type snacks.picker.layout.Config
+local vscode_layout_without_preview = {
+  preview = false,
+  layout = {
+    backdrop = true,
+    row = 2,
+    width = 0.40,
+    min_width = 40,
+    height = 0.7,
+    max_height = 35,
+    border = "none",
+    box = "vertical",
+    {
+      win = "input",
+      height = 1,
+      border = "rounded",
+      title = "{title} {live} {flags}",
+      title_pos = "center",
+      focusable = true,
+    },
+    { win = "list", border = "rounded", focusable = true },
   },
 }
 
@@ -85,12 +108,12 @@ return {
       hidden = true,
       -- ignored = true,
       sources = {
-        notifications = { layout = vscode_layout },
-        highlights = { layout = vscode_layout },
+        notifications = { layout = vscode_layout_preview },
+        highlights = { layout = vscode_layout_preview },
         files = {
           ignored = false,
           hidden = true,
-          layout = vscode_layout,
+          layout = vscode_layout_without_preview,
           exclude = common_exclude,
           win = {
             input = {
@@ -128,7 +151,7 @@ return {
           exclude = common_exclude,
           hidden = true,
           ignored = false,
-          layout = vscode_layout,
+          layout = vscode_layout_preview,
           win = {
             input = {
               keys = {
@@ -316,18 +339,25 @@ return {
               Variable = "󰀫 ",
             },
           },
-          formatters = {
-            file = {
-              filename_only = true,
-              icon_width = 3,
-              git_status_hl = true,
-            },
-            severity = {
-              icons = true,
-              level = false,
-              pos = "right",
-            },
-          },
+        },
+      },
+      sort = {},
+      matcher = {
+        history_bonus = true,
+        frecency = true,
+        cwd_bonus = true,
+        sort_empty = true,
+      },
+      formatters = {
+        file = {
+          filename_first = true,
+          truncate = 100,
+          icon_width = 3,
+        },
+        severity = {
+          icons = true,
+          level = false,
+          pos = "right",
         },
       },
     },
@@ -360,6 +390,57 @@ return {
     },
   },
   keys = {
+    {
+      "<leader>/",
+      function()
+        local root = vim.fs.root(0, { ".git" })
+        Snacks.picker.grep({
+          ignored = false,
+          title = "Search Text",
+          cwd = root,
+          enter = true,
+        })
+      end,
+      desc = "Search Text",
+    },
+    {
+      "<leader><space>",
+      function()
+        local root = vim.fs.root(0, { ".git" })
+        Snacks.picker.files({
+          ignored = false,
+          title = "Files",
+          cwd = root,
+          enter = true,
+          -- format = Snacks.picker.format.file,
+          --items = vim.tbl_map(function(path)
+          --   return {
+          --     -- item.name: 첫 번째 컬럼 (파일명)
+          --     name = vim.fn.fnamemodify(path, ":t"),
+          --     -- item.text: 두 번째 컬럼 (상대경로)
+          --     text = vim.fn.fnamemodify(path, ":h"),
+          --     -- 전체 경로(열었을 때 사용할 값)
+          --     full = vim.fn.getcwd() .. "/" .. path,
+          --   }
+          -- end, files),
+        })
+      end,
+      desc = "Find Files",
+    },
+    {
+      "<leader>e",
+      function()
+        local root = vim.fs.root(0, { ".git" })
+        Snacks.picker.explorer({
+          enter = false,
+          cwd = root,
+          ignored = true,
+          hidden = true,
+          follow_file = false,
+        })
+      end,
+      desc = "Open Explorer",
+    },
     {
       "<F1>",
       function()

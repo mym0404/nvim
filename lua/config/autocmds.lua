@@ -27,31 +27,6 @@ vim.api.nvim_create_autocmd("BufEnter", {
   desc = "Disable auto comment continuation",
 })
 
-local function map_searches()
-  local root = vim.fs.root(0, { ".git" })
-  vim.keymap.set("n", "<leader>/", function()
-    Snacks.picker.grep({ ignored = false, title = "Search Grep Anywhere", cwd = root, enter = true })
-  end, { nowait = true, noremap = true, desc = "git grep" })
-  vim.keymap.set("n", "<leader> ", function()
-    Snacks.picker.files({ ignored = false, title = "Search Anywhere", cwd = root, enter = true })
-  end, { nowait = true, noremap = true, desc = "git files" })
-  vim.keymap.set("n", "<leader>e", function()
-    Snacks.picker.explorer({
-      enter = false,
-      cwd = root,
-      ignored = true,
-      hidden = true,
-      follow_file = false,
-    })
-  end, { desc = "Open Explorer" })
-end
-
-vim.api.nvim_create_autocmd({ "BufEnter" }, {
-  callback = function()
-    map_searches()
-  end,
-})
-
 --                                                         *lsp-defaults-disable*
 -- To override or delete any of the above defaults, set or unset the options on
 -- |LspAttach|: >lua
