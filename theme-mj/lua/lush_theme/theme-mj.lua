@@ -6,7 +6,7 @@ local lush = require("lush")
 local undercurl = require("utils/utils").is_windows and "undercurl,bold" or "undercurl"
 
 local palette = {
-  theme = "#c4d194",
+  theme = "#9ebaff",
   error_label = "#E0787C",
   error_undercurl = "#E0787C",
   warn_label = "#EED45F",
@@ -319,7 +319,7 @@ local theme = lush(function(injected_functions)
     FoldColumn({ fg = "#6e7681" }),
     Folded(folded),
     WarningMsg({ fg = "#d29922" }),
-    Title({ fg = palette.theme }),
+    Title({ fg = palette.theme, gui = "bold" }),
     MoreMsg({ fg = "#2f8cf7", gui = "bold" }),
     ModeMsg({ fg = "#d29922", gui = "bold" }),
     ErrorMsg({ fg = "#FD9491" }),
