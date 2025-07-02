@@ -90,11 +90,18 @@ local theme = lush(function(injected_functions)
     Statement(code.keyword),
     Conditional(code.keyword),
     FlashBackdrop({ fg = "#828282" }),
-    Substitute({ bg = "#31f7f4", fg = "black", gui = "bold" }),
+    Substitute({ bg = "#0036a3", fg = "white", gui = "bold" }),
     Number(code.number),
     Search({ bg = searched.bg, fg = text.fg, gui = "bold" }),
     Normal(text),
     Visual(visual),
+    Scrollbar({ bg = "#646464" }),
+
+    FlashMatch({ bg = "#0036a3", fg = "white", gui = "" }),
+    FlashCurrent({ bg = "#0036a3", fg = "white", gui = "" }),
+    FlashBackrop({}),
+    FlashLabel({ fg = "white", bg = "#db16a3", gui = "bold" }),
+    FlashCursor({ fg = "black", bg = "red" }),
 
     VertSplit(win_border),
     WinSeparator(win_border),
@@ -263,22 +270,22 @@ local theme = lush(function(injected_functions)
     DiagnosticUnderlineHint({
       gui = undercurl,
       sp = palette.hint_undercurl,
-      fg = palette.hint_undercurl,
+      -- fg = palette.hint_undercurl,
     }),
     DiagnosticUnderlineInfo({
       gui = undercurl,
       sp = palette.info_undercurl,
-      fg = palette.hint_undercurl,
+      -- fg = palette.hint_undercurl,
     }),
     DiagnosticUnderlineWarn({
       gui = undercurl,
       sp = palette.warn_undercurl,
-      fg = palette.hint_undercurl,
+      -- fg = palette.hint_undercurl,
     }),
     DiagnosticUnderlineError({
       gui = undercurl,
       sp = palette.error_undercurl,
-      fg = palette.hint_undercurl,
+      -- fg = palette.hint_undercurl,
     }),
 
     MatchParen({ bg = "#1e4273", fg = "#e6edf3", gui = "bold" }),
