@@ -223,14 +223,14 @@ local function map_scroll()
     vim.schedule(function()
       vim.cmd("normal! zz")
     end)
-    return "10<C-d>"
+    return "<C-d>"
   end, { noremap = true, nowait = true, expr = true })
 
   vim.keymap.set("n", "<C-u>", function()
     vim.schedule(function()
       vim.cmd("normal! zz")
     end)
-    return "10<C-u>"
+    return "<C-u>"
   end, { noremap = true, nowait = true, expr = true })
 end
 

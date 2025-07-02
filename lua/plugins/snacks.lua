@@ -464,17 +464,6 @@ return {
           title = "Files",
           cwd = root,
           enter = true,
-          -- format = Snacks.picker.format.file,
-          --items = vim.tbl_map(function(path)
-          --   return {
-          --     -- item.name: 첫 번째 컬럼 (파일명)
-          --     name = vim.fn.fnamemodify(path, ":t"),
-          --     -- item.text: 두 번째 컬럼 (상대경로)
-          --     text = vim.fn.fnamemodify(path, ":h"),
-          --     -- 전체 경로(열었을 때 사용할 값)
-          --     full = vim.fn.getcwd() .. "/" .. path,
-          --   }
-          -- end, files),
         })
       end,
       desc = "Find Files",
