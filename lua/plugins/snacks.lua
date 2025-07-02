@@ -1,3 +1,17 @@
+function table.deepcopy(orig)
+  local orig_type = type(orig)
+  local copy
+  if orig_type == "table" then
+    copy = {}
+    for orig_key, orig_value in next, orig, nil do
+      copy[table.deepcopy(orig_key)] = table.deepcopy(orig_value)
+    end
+    setmetatable(copy, table.deepcopy(getmetatable(orig)))
+  else -- number, string, boolean, etc
+    copy = orig
+  end
+  return copy
+end
 ---@diagnostic disable: assign-type-mismatch
 ---@type snacks.picker.layout.Config
 local vscode_layout_preview = {
@@ -172,6 +186,22 @@ return {
           confirm = true,
           auto_confirm = false,
           title = " " .. vim.fn.fnamemodify(vim.fs.root(0, { ".git" }) or "", ":t"),
+          ---@type fun(item:snacks.picker.finder.Item, ctx:snacks.picker.finder.ctx):(boolean|snacks.picker.finder.Item|nil)
+          transform = function(item, _)
+            if item.dir and item.parent == nil then
+              return false
+            end
+            local original = table.deepcopy(item)
+            local cur = original
+            while cur.parent ~= nil do
+              if cur.parent.parent == nil then
+                cur.parent = nil
+                break
+              end
+              cur = cur.parent
+            end
+            return original
+          end,
           layout = {
             layout = {
               backdrop = false,
