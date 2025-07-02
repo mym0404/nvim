@@ -171,6 +171,7 @@ return {
           git_status_open = false,
           confirm = true,
           auto_confirm = false,
+          title = " " .. vim.fn.fnamemodify(vim.fs.root(0, { ".git" }) or "", ":t"),
           layout = {
             layout = {
               backdrop = false,
@@ -181,13 +182,13 @@ return {
               position = "left",
               border = "none",
               box = "vertical",
-              -- {
-              --   win = "input",
-              --   height = 1,
-              --   border = "rounded",
-              --   title = "{title} {live} {flags}",
-              --   title_pos = "center",
-              -- },
+              {
+                win = "input",
+                height = 1,
+                border = "rounded",
+                title = "{title} {live} {flags}",
+                title_pos = "left",
+              },
               { win = "list", border = "none" },
               { win = "preview", title = "{preview}", height = 0.4, border = "top" },
             },
