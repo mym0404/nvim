@@ -162,7 +162,7 @@ return {
           -- vim.notify("prettied: " .. prettify_detail(opts.item.documentation.value))
 
           -- vim.notify(vim.bo[opts.window.buf].filetype)
-          vim.notify(opts.item.detail)
+          -- vim.notify(opts.item.detail)
           opts.default_implementation({
             detail = docs.prettify_detail(opts.item.detail, { trim = false }),
             documentation = opts.item.documentation == nil and nil

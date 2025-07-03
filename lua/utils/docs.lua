@@ -22,6 +22,7 @@ function docs.prettify_detail(detail, opts)
   local result_lines = {}
   local in_code_block = false
 
+  local indent_line_start_idx = 1
   for line in detail:gmatch("([^\r\n]*)[\r\n]?") do
     local trimmed_line = opts.trim and line:gsub("^%s*(.-)%s*$", "%1") or line
 
@@ -44,20 +45,20 @@ function docs.prettify_detail(detail, opts)
     elseif in_code_block then
       table.insert(result_lines, line)
     else
-      local is_auto_import_line = line:match("^Auto import%s+(.+)$")
-      line = line:gsub("^%s*%(alias%)", "")
-      line = line:gsub("^import.+$", "")
-      line = line:gsub("^export.+$", "")
-      if is_auto_import_line then
-        local imported = line:match("^Auto import%s+(.+)$")
-        line = "import from " .. imported
+      if line:match("^Auto%s+(.+)$") then
+        indent_line_start_idx = indent_line_start_idx + 2
+        local imported = line:match("^Auto%s+(.+)$")
+        line = " " .. imported
+        line = line:gsub("^%s*(.-)%s*$", "%1")
         table.insert(result_lines, line)
         table.insert(result_lines, "")
-      end
-      if opts.trim then
-        line = line:gsub("^%s*(.-)%s*$", "%1")
-      end
-      if not is_auto_import_line then
+      else
+        line = line:gsub("^%s*%(alias%)", "")
+        line = line:gsub("^import.+$", "")
+        line = line:gsub("^export.+$", "")
+        if opts.trim then
+          line = line:gsub("^%s*(.-)%s*$", "%1")
+        end
         table.insert(result_lines, line)
       end
     end
@@ -71,7 +72,10 @@ function docs.prettify_detail(detail, opts)
     table.remove(result_lines, #result_lines)
   end
 
-  local indent = #result_lines > 0 and docs.get_space_indent(result_lines[1]) or 0
+  local indent = #result_lines >= indent_line_start_idx
+      and docs.get_space_indent(result_lines[indent_line_start_idx])
+    or 0
+
   for i, line in ipairs(result_lines) do
     local line_indent = docs.get_space_indent(line)
     local removed_indent = math.min(indent, line_indent)
