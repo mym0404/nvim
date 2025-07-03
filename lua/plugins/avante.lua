@@ -37,7 +37,7 @@ return {
     -- },
   },
   opts = {
-    provider = "gemini",
+    provider = "openai",
     providers = {
       openai = {
         endpoint = "https://api.openai.com/v1",
