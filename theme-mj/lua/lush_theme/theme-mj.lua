@@ -536,6 +536,7 @@ local theme = lush(function(injected_functions)
     BlinkCmpScrollBarThumb({ PmenuThumb }),
     BlinkCmpSignatureHelpActiveParameter({ LspSignatureActiveParameter }),
     BlinkCmpSignatureHelpBorder(border),
+    BlinkCmpLabelMatch(special),
     Bold({ gui = "bold" }),
     Boolean(code.keyword),
     Character(code.string),

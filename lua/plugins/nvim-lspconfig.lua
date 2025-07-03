@@ -6,7 +6,7 @@ return {
     { "antosha417/nvim-lsp-file-operations", config = true },
   },
   opts = {
-    inlay_hints = { enabled = false },
+    inlay_hints = { enabled = true },
     servers = {
       sourcekit = {
         enabled = utils.is_mac,
@@ -19,6 +19,14 @@ return {
       marksman = {
         filetypes = { "markdown", "markdown.mdx" },
       },
+    },
+    setup = {
+      ["*"] = function(server, _)
+        local capabilities = require("blink.cmp").get_lsp_capabilities()
+        local lspconfig = require("lspconfig")
+
+        lspconfig[server].setup({ capabilities = capabilities })
+      end,
     },
   },
 }

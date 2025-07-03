@@ -44,14 +44,22 @@ function docs.prettify_detail(detail, opts)
     elseif in_code_block then
       table.insert(result_lines, line)
     else
+      local is_auto_import_line = line:match("^Auto import%s+(.+)$")
       line = line:gsub("^%s*%(alias%)", "")
       line = line:gsub("^import.+$", "")
       line = line:gsub("^export.+$", "")
-      line = line:gsub("^Auto import.+$", "")
+      if is_auto_import_line then
+        local imported = line:match("^Auto import%s+(.+)$")
+        line = "import from " .. imported
+        table.insert(result_lines, line)
+        table.insert(result_lines, "")
+      end
       if opts.trim then
         line = line:gsub("^%s*(.-)%s*$", "%1")
       end
-      table.insert(result_lines, line)
+      if not is_auto_import_line then
+        table.insert(result_lines, line)
+      end
     end
   end
 

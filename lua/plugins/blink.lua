@@ -97,31 +97,44 @@ return {
           treesitter = { "lsp" },
           columns = {
             { "kind_icon", gap = 1 },
-            { "label", "label_description" },
+            { "label", "label_description", gap = 1, "source_name" },
           },
           components = {
             kind_icon = {
               ellipsis = false,
               text = function(ctx)
-                return ctx.kind_icon .. ctx.icon_gap
+                local kind_icon, _, _ = require("mini.icons").get("lsp", ctx.kind)
+                return kind_icon
               end,
-              -- Set the highlight priority to 20000 to beat the cursorline's default priority of 10000
+              -- (optional) use highlights from mini.icons
               highlight = function(ctx)
-                if ctx.kind:lower() == "copilot" then
-                  return "Special"
-                end
-                return require("colorful-menu").blink_components_highlight(ctx)
-                -- return { { group = ctx.kind_hl, priority = 20000 } }
+                local _, hl, _ = require("mini.icons").get("lsp", ctx.kind)
+                return hl
               end,
             },
-            -- label = {
-            --   text = function(ctx)
-            --     return require("colorful-menu").blink_components_text(ctx)
-            --   end,
-            -- highlight = function(ctx)
-            --   return require("colorful-menu").blink_components_highlight(ctx)
-            -- end,
-            -- },
+            label = {
+              width = { fill = true, max = 60 },
+              text = function(ctx)
+                local highlights_info = require("colorful-menu").blink_highlights(ctx)
+                if highlights_info ~= nil then
+                  return highlights_info.label
+                else
+                  return ctx.label
+                end
+              end,
+              -- highlight = function(ctx)
+              --   local highlights = {}
+              --   local highlights_info = require("colorful-menu").blink_highlights(ctx)
+              --   if highlights_info ~= nil then
+              --     highlights = highlights_info.highlights
+              --   end
+              --   for _, idx in ipairs(ctx.label_matched_indices) do
+              --     table.insert(highlights, { idx, idx + 1, group = "BlinkCmpLabelMatch" })
+              --   end
+              --   -- Do something else
+              --   return highlights
+              -- end,
+            },
           },
         },
       },
@@ -133,9 +146,11 @@ return {
           scrollbar = true,
           border = "rounded",
           winblend = 0,
-          desired_min_height = 30,
-          max_height = 50,
+          desired_min_height = 60,
+          max_height = 60,
           min_width = 40,
+          max_width = 999,
+          desired_min_width = 40,
         },
 
         treesitter_highlighting = true,
