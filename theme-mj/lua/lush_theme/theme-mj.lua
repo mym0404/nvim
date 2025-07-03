@@ -25,7 +25,8 @@ local special = { fg = "#c79cff", bg = "#2a2136", gui = "bold" }
 local text = { fg = palette.text }
 local text_sub = { fg = palette.text_sub }
 local visual = { bg = "#214283" }
-local searched = { bg = "#0269c9" }
+local searched = { bg = "#46ba1c", fg = palette.text }
+local searched_selected = { fg = palette.text, bg = "#db16a3", gui = "bold,underline" }
 local folded = { bg = "#112620", fg = "white", gui = "italic,bold" }
 local border = { fg = "#424242" }
 local win_border = { fg = "#313131" }
@@ -92,15 +93,18 @@ local theme = lush(function(injected_functions)
     FlashBackdrop({ fg = "#828282" }),
     Substitute({ bg = "#0036a3", fg = "white", gui = "bold" }),
     Number(code.number),
-    Search({ bg = searched.bg, fg = text.fg, gui = "bold" }),
+
+    Search(searched),
+    IncSearch(searched_selected),
+
     Normal(text),
     Visual(visual),
     Scrollbar({ bg = "#646464" }),
 
-    FlashMatch({ bg = "#0036a3", fg = "white", gui = "" }),
-    FlashCurrent({ bg = "#0036a3", fg = "white", gui = "" }),
+    FlashMatch(searched),
+    FlashCurrent(searched),
     FlashBackrop({}),
-    FlashLabel({ fg = "white", bg = "#db16a3", gui = "bold" }),
+    FlashLabel(searched_selected),
     FlashCursor({ fg = "black", bg = "red" }),
 
     VertSplit(win_border),
@@ -142,7 +146,6 @@ local theme = lush(function(injected_functions)
     LineNr({ fg = "#939393", gui = "bold" }),
     LineNrAbove({ LineNr, gui = "bold" }),
     LineNrBelow({ LineNr, gui = "bold" }),
-    IncSearch({ bg = "red", fg = "white", gui = "bold" }),
     NonText(text_sub),
     CursorLineNr({ fg = "#e6edf3", gui = "bold" }),
     Constant(text),
