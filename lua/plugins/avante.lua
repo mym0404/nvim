@@ -37,7 +37,7 @@ return {
     -- },
   },
   opts = {
-    provider = "openai",
+    provider = "gemini",
     providers = {
       openai = {
         endpoint = "https://api.openai.com/v1",
@@ -61,7 +61,7 @@ return {
         model = "gemini-2.5-flash",
         extra_request_body = {
           max_tokens = 300,
-          temper,
+          temperature = 0.15,
         },
       },
     },
