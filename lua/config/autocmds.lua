@@ -108,8 +108,8 @@ vim.api.nvim_create_autocmd("BufWritePost", {
 -- })
 
 vim.api.nvim_create_autocmd("BufEnter", {
-  callback = function(event)
-    local file_path = vim.api.nvim_buf_get_name(event.buf)
+  callback = function(_)
+    local file_path = vim.fn.expand("%:p")
     if file_path == "" or file_path == nil then
       return
     end
@@ -119,9 +119,10 @@ vim.api.nvim_create_autocmd("BufEnter", {
       return
     end
 
-    local is_ignored = vim.fn.system("git check-ignore -q " .. vim.fn.shellescape(file_path))
+    local cmd = "git check-ignore -q -- " .. vim.fn.shellescape(file_path)
+    local _ = vim.fn.system(cmd)
     if vim.v.shell_error == 0 then
-      vim.notify("File is git-ignored", vim.log.levels.WARN, { title = "Git" })
+      vim.notify("Ignored File", vim.log.levels.WARN, { title = "Git" })
     end
   end,
   desc = "Warn if file is git ignored",

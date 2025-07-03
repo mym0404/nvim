@@ -90,10 +90,12 @@ local function map_git_actions()
       print("No file to restore")
       return
     end
-    vim.cmd("silent !git restore " .. filepath)
-    print("Discarded changes in " .. filepath)
-    vim.cmd("edit!")
-    -- vim.cmd("normal! <Esc>")
+    local gs = require("gitsigns")
+    gs.reset_buffer()
+
+    filepath = vim.fn.fnamemodify(vim.fn.expand("%:p"), ":.")
+
+    vim.notify("Discarded changes in " .. filepath, vim.log.levels.INFO)
   end, { silent = true, desc = "Git discard current file changes" })
 
   vim.keymap.set("x", "<leader>gr", function()
@@ -106,8 +108,6 @@ local function map_git_actions()
     end
 
     local gs = require("gitsigns")
-    -- utils.discard_changes_in_ran-- visual start~end 줄 번호 가져오기
-    -- 해당 범위에 걸치는 모든 hunk reset
     gs.reset_hunk({ start_line, end_line })
     utils.go_to_normal_mode()
   end, { silent = true, desc = "Git restore selected lines" })
