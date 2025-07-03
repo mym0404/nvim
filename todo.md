@@ -1,6 +1,5 @@
 # Primary
 
-- file, grep float center
 - noice - hover documentation formatting
 - noice - hover documentation highlighting
 - blink documentation fill if empty
@@ -13,3 +12,4 @@
 
 - string 에선 completion 안되게 
 - diffview floating window (this is not possible)
+- file, grep float center
