@@ -103,12 +103,12 @@ return {
     },
     notifier = {
       enabled = true,
-      timeout = 3000,
-      width = { min = 45, max = 0.6 },
-      height = { min = 1, max = 0.6 },
+      timeout = 2500,
+      width = { min = 35, max = 0.5 },
+      height = { min = 1, max = 0.5 },
       sort = { "added", "level" },
       ---@type snacks.notifier.style
-      style = "fancy",
+      style = "compact",
     },
     scroll = { enabled = false },
     indent = { enabled = true, priority = 1, only_current = true, only_scope = true },

@@ -19,7 +19,7 @@ return {
         popupmenu = { enabled = true },
         hover = {
           enabled = true,
-          silent = false,
+          silent = true,
           view = "hover",
           ---@type NoiceViewOptions
           opts = {
@@ -37,7 +37,7 @@ return {
         },
         documentation = {
           enabled = true,
-          silent = false,
+          silent = true,
           -- view = "hover",
           ---@type NoiceViewOptions
           -- opts = {

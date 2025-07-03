@@ -114,9 +114,6 @@ const q = `
 [swift]((custom_operator) @code.operator (#set! priority 200))
 [swift]((parameter name: (simple_identifier)) @code (#set! priority 150))
 [swift] ((value_argument name: (value_argument_label) @code) (#set! priority 150))
-
-((type_identifier) @lsp.type.struct (#set! priority 200))
-((type_identifier) @type (#set! priority 150))
 `.trim()
 async function main() {
   const base_path = join(resolve(__dirname, '..'), "after", "queries");

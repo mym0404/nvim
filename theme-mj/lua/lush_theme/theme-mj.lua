@@ -75,7 +75,7 @@ local code = {
   number = { fg = "#809DFF" },
   string = { fg = "#FFFCD7" },
   annotation = { fg = "#ff7b72" },
-  attribute = { fg = "#ff7b72" },
+  attribute = { fg = "#ffffff" },
   modifier = { fg = "#ff7b72" },
   escape = { fg = "#de669a", gui = "bold,italic" },
 }
