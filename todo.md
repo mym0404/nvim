@@ -3,7 +3,6 @@
 - file, grep float center
 - hover documentation formatting
 - blink documentation fill if empty
-- don't collapse if explorer searching
 
 # Sub
 
