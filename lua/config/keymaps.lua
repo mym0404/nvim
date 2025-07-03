@@ -422,6 +422,20 @@ local function map_close_bracket()
   end, { expr = true, nowait = true, silent = true })
 end
 
+local function map_copies()
+  vim.keymap.set("n", "<leader>Cp", function()
+    local path = vim.fn.expand("%:p")
+    vim.cmd("let @+ = expand('%:p')")
+    vim.notify("Copied: " .. path, vim.log.levels.INFO, { title = "Copy File Path" })
+  end, { desc = "copy current file path" })
+
+  vim.keymap.set("n", "<leader>Cd", function()
+    local path = vim.fn.expand("%:h")
+    vim.cmd("let @+ = expand('%:h')")
+    vim.notify("Copied: " .. path, vim.log.levels.INFO, { title = "Copy Directory Path" })
+  end, { desc = "copy current file directory path" })
+end
+
 reset_keymaps()
 map_template_string()
 map_react_prop_bracket()
@@ -446,3 +460,4 @@ map_select_all()
 map_git_actions()
 map_package_info()
 map_close_bracket()
+map_copies()
