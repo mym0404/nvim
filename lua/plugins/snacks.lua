@@ -112,7 +112,7 @@ return {
     },
     scroll = { enabled = false },
     indent = { enabled = true, priority = 1, only_current = true, only_scope = true },
-    image = { enabled = false },
+    image = { enabled = true },
     ---@type snacks.explorer.Config
     explorer = {
       replace_netrw = false,

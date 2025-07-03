@@ -37,7 +37,7 @@ return {
         left_pad = 2,
         right_pad = 0,
         min_width = 0,
-        border = false,
+        border = true,
         border_virtual = true,
         border_prefix = false,
         above = "▄",
