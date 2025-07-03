@@ -140,66 +140,23 @@ return {
 
         treesitter_highlighting = true,
         draw = function(opts)
-          ---@type fun(detail: string): string
-          local function prettify_detail(detail)
-            detail = detail or ""
+          local docs = require("utils/docs")
+          ---@type fun(detail: string, opts: any): string
 
-            local result_lines = {}
-            local in_code_block = false
-
-            for line in detail:gmatch("([^\r\n]*)[\r\n]?") do
-              local trimmed_line = line:gsub("^%s*(.-)%s*$", "%1")
-
-              local code_block_index = trimmed_line:find("```")
-
-              if code_block_index then
-                in_code_block = not in_code_block
-
-                if in_code_block then
-                  local before = line:sub(1, code_block_index - 1)
-                  local after = line:sub(code_block_index)
-
-                  if before:match("%S") then
-                    table.insert(result_lines, before)
-                  end
-                  table.insert(result_lines, after)
-                else
-                  table.insert(result_lines, line)
-                end
-              elseif in_code_block then
-                table.insert(result_lines, line)
-              else
-                line = line:gsub("^%s*%(alias%)", "")
-                line = line:gsub("^import.+$", "")
-                line = line:gsub("^Auto import.+$", "")
-                line = line:gsub("^%s*(.-)%s*$", "%1")
-                table.insert(result_lines, line)
-              end
-            end
-
-            while #result_lines > 0 and result_lines[1]:match("^%s*$") do
-              table.remove(result_lines, 1)
-            end
-
-            while #result_lines > 0 and result_lines[#result_lines]:match("^%s*$") do
-              table.remove(result_lines, #result_lines)
-            end
-
-            return table.concat(result_lines, "\n")
-          end
           -- vim.notify(opts.item.documentation.value)
           -- vim.notify("prettied: " .. prettify_detail(opts.item.documentation.value))
 
-          vim.notify(vim.bo[opts.window.buf].filetype)
+          -- vim.notify(vim.bo[opts.window.buf].filetype)
+          vim.notify(opts.item.detail)
           opts.default_implementation({
-            detail = prettify_detail(opts.item.detail),
+            detail = docs.prettify_detail(opts.item.detail, { trim = false }),
             documentation = opts.item.documentation == nil and nil
-              or type(opts.item.documentation) == "string" and prettify_detail(
+              or type(opts.item.documentation) == "string" and docs.prettify_detail(
                 opts.item.documentation
               )
               or {
                 kind = opts.item.documentation.kind,
-                value = prettify_detail(opts.item.documentation.value),
+                value = docs.prettify_detail(opts.item.documentation.value),
                 -- value = opts.item.documentation.value,
               },
           })

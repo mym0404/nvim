@@ -381,7 +381,7 @@ local theme = lush(function(injected_functions)
     sym("@markup.underline")({ gui = "underline" }),
     sym("@markup.strong")({ fg = text.fg, gui = "bold" }),
     sym("@markup.strikethrough")({ fg = text.fg, gui = "strikethrough" }),
-    sym("@markup.raw")({ fg = text.fg, gui = "italic" }),
+    sym("@markup.raw")({ fg = text.fg }),
     sym("@markup.list")(code.keyword),
     sym("@markup.list.unchecked")({ fg = "#6e7681" }),
     sym("@markup.list.checked")({ fg = "#3fb950" }),
