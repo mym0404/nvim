@@ -135,6 +135,7 @@ return {
           winblend = 0,
           desired_min_height = 30,
           max_height = 50,
+          min_width = 40,
         },
 
         treesitter_highlighting = true,
@@ -189,6 +190,7 @@ return {
           -- vim.notify(opts.item.documentation.value)
           -- vim.notify("prettied: " .. prettify_detail(opts.item.documentation.value))
 
+          vim.notify(vim.bo[opts.window.buf].filetype)
           opts.default_implementation({
             detail = prettify_detail(opts.item.detail),
             documentation = opts.item.documentation == nil and nil

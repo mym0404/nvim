@@ -38,19 +38,20 @@ return {
         documentation = {
           enabled = true,
           silent = true,
-          -- view = "hover",
+          view = "hover",
           ---@type NoiceViewOptions
-          -- opts = {
-          --   lang = "markdown",
-          --   replace = true,
-          --   render = "plain",
-          --   format = { "{message}" },
-          --   win_options = { concealcursor = "n", conceallevel = 3, wrap = true },
-          --   border = {
-          --     style = "rounded",
-          --     padding = { 1, 2 },
-          --   },
-          -- },
+          opts = {
+            lang = "markdown",
+            replace = true,
+            render = "plain",
+            format = { "{message}" },
+            win_options = { concealcursor = "n", conceallevel = 3, wrap = true },
+            border = {
+              style = "rounded",
+              padding = { top = 1, bottom = 1, left = 1, right = 1 },
+            },
+            win_options = {},
+          },
         },
         signature = {
           enabled = false,

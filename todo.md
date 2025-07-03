@@ -1,6 +1,10 @@
 # Primary
 
 - file, grep float center
+- hover documentation formatting
+- blink documentation trim, remove export like
+- blink documentation fill if empty
+- don't collapse if explorer searching
 
 # Sub
 
