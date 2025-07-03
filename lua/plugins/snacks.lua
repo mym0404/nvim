@@ -208,7 +208,13 @@ return {
           focus = "list",
           title = " " .. vim.fn.fnamemodify(vim.fs.root(0, { ".git" }) or "", ":t"),
           ---@type fun(item:snacks.picker.finder.Item, ctx:snacks.picker.finder.ctx):(boolean|snacks.picker.finder.Item|nil)
-          transform = function(item, _)
+          transform = function(item, ctx)
+            local is_empty = ctx.filter:is_empty()
+
+            if not is_empty then
+              return true
+            end
+
             if item.dir and item.parent == nil then
               return false
             end
