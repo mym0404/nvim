@@ -149,7 +149,7 @@ return {
           desired_min_height = 60,
           max_height = 60,
           min_width = 40,
-          max_width = 999,
+          max_width = 70,
           desired_min_width = 40,
         },
 

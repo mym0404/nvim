@@ -30,6 +30,7 @@ local vscode_layout_preview = {
       title = "{title} {live} {flags}",
       title_pos = "center",
       focusable = true,
+      height = 1,
     },
     { win = "list", border = "rounded", max_height = 15, focusable = true, height = 0.4 },
     {

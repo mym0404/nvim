@@ -423,7 +423,7 @@ local function map_close_bracket()
 end
 
 local function map_copies()
-  vim.keymap.set("n", "<leader>Cp", function()
+  vim.keymap.set("n", "<leader>Cf", function()
     local path = vim.fn.expand("%:p")
     vim.cmd("let @+ = expand('%:p')")
     vim.notify("Copied: " .. path, vim.log.levels.INFO, { title = "Copy File Path" })
