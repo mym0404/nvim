@@ -1146,7 +1146,7 @@ local theme = lush(function(injected_functions)
 
     RenderMarkdownBullet({ fg = palette.theme }),
     RenderMarkdownChecked({ sym("@markup.list.checked") }),
-    RenderMarkdownCode({ bg = "#323232" }),
+    RenderMarkdownCode({ bg = "#212121" }),
     RenderMarkdownCodeFallback(text),
     RenderMarkdownCodeInfo({ sym("@label") }),
     RenderMarkdownCodeInline({}),
