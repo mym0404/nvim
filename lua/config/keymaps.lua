@@ -216,10 +216,9 @@ local function map_docs_hover()
   vim.keymap.set("n", "<s-d>", function()
     vim.lsp.buf.hover({
       silent = true,
-      title = "Docs",
+      title = "🌱 Docs",
       max_width = 100,
       max_height = 120,
-      width = 80,
       wrap = true,
       zindex = 100,
 
