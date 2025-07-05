@@ -254,6 +254,7 @@ return {
           win = {
             list = {
               keys = {
+                ["<F6>"] = "explorer_rename",
                 ["<M-h>"] = function()
                   require("smart-splits").resize_left(5)
                 end,

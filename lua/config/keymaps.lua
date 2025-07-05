@@ -115,8 +115,8 @@ end
 
 local function map_rename()
   vim.keymap.set("n", "<F6>", function()
-    utils.run_key(":IncRename ", "n")
-  end, { desc = "Rename file" })
+    return ":IncRename " .. vim.fn.expand("<cword>")
+  end, { desc = "Rename file", expr = true })
 end
 
 local function map_delete_file()
