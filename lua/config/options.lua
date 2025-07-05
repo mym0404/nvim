@@ -18,7 +18,6 @@ vim.g.loaded_netrwPlugin = 1
 opt.iminsert = 0
 opt.imsearch = 0
 
-
 opt.guicursor =
   "n-v-c-sm:block-blinkwait1000-blinkon500-blinkoff500,i-ci-ve:ver25,r-cr-o:hor20,t:block-blinkon500-blinkoff500-TermCursor"
 
@@ -67,3 +66,4 @@ opt.foldlevelstart = 99
 opt.foldenable = true
 
 opt.laststatus = 3
+vim.o.winborder = "rounded"

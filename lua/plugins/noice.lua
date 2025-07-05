@@ -6,9 +6,9 @@ return {
     opts = {
       lsp = {
         override = {
-          ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
-          ["vim.lsp.util.stylize_markdown"] = true,
-          ["cmp.entry.get_documentation"] = true,
+          ["vim.lsp.util.convert_input_to_markdown_lines"] = false,
+          ["vim.lsp.util.stylize_markdown"] = false,
+          ["cmp.entry.get_documentation"] = false,
         },
         -- cmdline = {
         --   opts = {},
@@ -19,24 +19,24 @@ return {
         popupmenu = { enabled = true },
         hover = {
           silent = true,
-          enabled = true,
+          enabled = false,
         },
         documentation = {
-          enabled = true,
+          enabled = false,
           silent = true,
           view = "hover",
           ---@type NoiceViewOptions
           opts = {
-            border = {
-              style = "rounded",
-              padding = { 0, 1 },
-            },
+            -- border = {
+            --   style = "rounded",
+            --   padding = { 0, 1 },
+            -- },
             -- buf_options = { filetype = "markdown" },
-            win_options = { concealcursor = "n", conceallevel = 3, wrap = true },
-            lang = "markdown",
-            replace = true,
-            render = "markdown",
-            format = { "{message}" },
+            -- win_options = { concealcursor = "n", conceallevel = 3, wrap = true },
+            -- lang = "markdown",
+            -- replace = true,
+            -- render = "markdown",
+            -- format = { "{message}" },
           },
         },
         signature = {
@@ -127,6 +127,7 @@ return {
         vim.cmd([[messages clear]])
       end
       require("noice").setup(opts)
+      require("utils/docs").setup()
     end,
   },
 }

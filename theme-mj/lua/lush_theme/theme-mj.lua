@@ -30,6 +30,8 @@ local searched_selected = { fg = palette.text, bg = "#db16a3", gui = "bold,under
 local folded = { bg = "#112620", fg = "white", gui = "italic,bold" }
 local border = { fg = "#424242" }
 local win_border = { fg = "#313131" }
+local float = { fg = palette.text, bg = "#1c1e1f" }
+local pmenu = { fg = palette.text, bg = "#1c1e1f" }
 
 local vcs = {
   added = {
@@ -93,13 +95,14 @@ local theme = lush(function(injected_functions)
     FlashBackdrop({ fg = "#828282" }),
     Substitute({ bg = "#0036a3", fg = "white", gui = "bold" }),
     Number(code.number),
+    CursorLine({ bg = "#323232" }),
 
     Search(searched),
     IncSearch(searched_selected),
 
     Normal(text),
     Visual(visual),
-    Scrollbar({ bg = "#646464" }),
+    Scrollbar({ bg = "#4c4c4c" }),
 
     FlashMatch(searched),
     FlashCurrent(searched),
@@ -310,16 +313,15 @@ local theme = lush(function(injected_functions)
     WinBarNC({ bg = "#0d1117", fg = "#6e7681", gui = "bold" }),
     WinBar({ bg = "#0d1117", fg = "#6e7681", gui = "bold" }),
     FloatBorder(border),
-    NormalFloat({ fg = "#ffffff" }),
+    NormalFloat(float),
+    PmenuThumb({ bg = "#17335a" }),
+    PmenuSel(visual),
+    Pmenu(pmenu),
     NormalNC({ fg = "#e6edf3" }),
     Whitespace({ fg = "#484f58" }),
     ColorColumn({ bg = "#171b22" }),
-    CursorLine({ bg = "#1f1f1f" }),
     TabLineSel({ fg = "#0d1117" }),
     TabLine({ fg = "#7d8590" }),
-    PmenuThumb({ bg = "#17335a" }),
-    PmenuSel({ bg = "#1c3d6a" }),
-    Pmenu({ fg = "white" }),
     SpellLocal({ gui = undercurl, sp = "#2f81f7" }),
     SpellRare({ gui = undercurl, sp = "#2f81f7" }),
     SpellCap({ gui = undercurl, sp = "#d29922" }),
@@ -369,7 +371,7 @@ local theme = lush(function(injected_functions)
     sym("@string.special.path.gitignore")({ fg = "#d2a8ff" }),
     sym("@string.regexp")(code.escape),
     sym("@string.escape")(code.escape),
-    sym("@punctuation.special")(special),
+    sym("@punctuation.special")({ fg = special.fg }),
     sym("@punctuation.delimiter")(text),
     sym("@punctuation.bracket")({ fg = "#e6edf3" }),
     sym("@property")({ sym("@variable.member") }),
@@ -1144,9 +1146,10 @@ local theme = lush(function(injected_functions)
 
     RenderMarkdownBullet({ fg = palette.theme }),
     RenderMarkdownChecked({ sym("@markup.list.checked") }),
-    RenderMarkdownCode({ bg = "#171b22" }),
+    RenderMarkdownCode({ bg = "#323232" }),
     RenderMarkdownCodeFallback(text),
     RenderMarkdownCodeInfo({ sym("@label") }),
+    RenderMarkdownCodeInline({}),
     RenderMarkdownDash({ fg = palette.text_sub2 }),
     RenderMarkdownError({ DiagnosticError }),
     RenderMarkdownH1Bg({ fg = "#B2EBF2", bg = "#1A2B35" }),

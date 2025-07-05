@@ -1,5 +1,15 @@
 local docs = {}
 
+local Markdown = require("noice.text.markdown")
+local require = require("noice.util.lazy")
+
+local Config = require("noice.config")
+local Format = require("noice.lsp.format")
+local Hacks = require("noice.util.hacks")
+local Message = require("noice.message")
+
+function docs.setup() end
+
 function docs.get_space_indent(line)
   local space_indent = line:match("^(%s*)")
   local count = 0

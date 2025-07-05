@@ -2,9 +2,7 @@
 # Comprehensive Markdown Features
 
 This file demonstrates a wide range of Markdown features.
-
 ## Headings
-
 ### Heading 3
 #### Heading 4
 ##### Heading 5
