@@ -81,7 +81,7 @@ return {
         width = "block",
         left_margin = 0,
         left_pad = 2,
-        right_pad = 10,
+        right_pad = 0,
         min_width = 50,
         border = "thin",
         language_border = "█",

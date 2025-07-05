@@ -219,6 +219,10 @@ local function map_docs_hover()
       title = "Docs",
       max_width = 100,
       max_height = 120,
+      width = 80,
+      wrap = true,
+      zindex = 100,
+
       title_pos = "center",
       relative = "cursor",
       anchor_bias = "auto",
