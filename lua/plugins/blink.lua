@@ -85,6 +85,7 @@ return {
         },
       },
       list = {
+        max_items = 50,
         selection = {
           preselect = true,
           auto_insert = false,
@@ -104,7 +105,7 @@ return {
               ellipsis = false,
               text = function(ctx)
                 local kind_icon, _, _ = require("mini.icons").get("lsp", ctx.kind)
-                return kind_icon
+                return kind_icon .. " "
               end,
               -- (optional) use highlights from mini.icons
               highlight = function(ctx)
@@ -113,7 +114,7 @@ return {
               end,
             },
             label = {
-              width = { fill = true, max = 60 },
+              width = { fill = true, max = 30 },
               text = function(ctx)
                 local highlights_info = require("colorful-menu").blink_highlights(ctx)
                 if highlights_info ~= nil then
@@ -165,15 +166,17 @@ return {
           -- vim.notify(opts.item.detail)
           opts.default_implementation({
             detail = docs.prettify_detail(opts.item.detail, { trim = false }),
-            documentation = opts.item.documentation == nil and nil
-              or type(opts.item.documentation) == "string" and docs.prettify_detail(
-                opts.item.documentation
-              )
-              or {
-                kind = opts.item.documentation.kind,
-                value = docs.prettify_detail(opts.item.documentation.value),
-                -- value = opts.item.documentation.value,
-              },
+            documentation = opts.item.documentation
+                and (
+                  type(opts.item.documentation) == "string"
+                    and docs.prettify_detail(opts.item.documentation)
+                  or {
+                    kind = opts.item.documentation.kind,
+                    value = docs.prettify_detail(opts.item.documentation.value),
+                    -- value = opts.item.documentation.value,
+                  }
+                )
+              or nil,
           })
         end,
       },

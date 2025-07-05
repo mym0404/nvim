@@ -245,32 +245,25 @@ end
 
 local function map_hover_scroll()
   local function scroll(dir)
-    -- Check for a floating window with buftype=nofile, which is likely a hover window
-    local floating_win_found = false
     for _, winid in ipairs(vim.api.nvim_list_wins()) do
       local config = vim.api.nvim_win_get_config(winid)
       if config.relative ~= "" then
         local bufnr = vim.api.nvim_win_get_buf(winid)
-        if vim.api.nvim_get_option_value("buftype", { buf = bufnr }) == "nofile" then
-          floating_win_found = true
-          break
+        if vim.bo[bufnr].buftype == "nofile" then
+          local Util = require("noice.util")
+          Util.nui.scroll(winid, dir * 4)
+          return ""
         end
       end
     end
 
-    if floating_win_found and vim.lsp.buf and vim.lsp.buf.scroll_docs then
-      -- Attempt to scroll LSP docs. This should only affect LSP hover windows.
-      vim.lsp.buf.scroll_docs(dir * 10)
-      return "" -- Consume keys
-    end
-
-    -- Fallback to default behavior
     return dir > 0 and "<C-f>" or "<C-b>"
   end
 
   vim.keymap.set("n", "<C-f>", function()
     return scroll(1)
   end, { expr = true, silent = true, noremap = true, desc = "Scroll down (hover or buffer)" })
+
   vim.keymap.set("n", "<C-b>", function()
     return scroll(-1)
   end, { expr = true, silent = true, noremap = true, desc = "Scroll up (hover or buffer)" })

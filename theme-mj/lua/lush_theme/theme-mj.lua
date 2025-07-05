@@ -30,8 +30,8 @@ local searched_selected = { fg = palette.text, bg = "#db16a3", gui = "bold,under
 local folded = { bg = "#112620", fg = "white", gui = "italic,bold" }
 local border = { fg = "#424242" }
 local win_border = { fg = "#313131" }
-local float = { fg = palette.text, bg = "#1c1e1f" }
-local pmenu = { fg = palette.text, bg = "#1c1e1f" }
+local float = { fg = palette.text }
+local pmenu = { fg = palette.text }
 
 local vcs = {
   added = {
