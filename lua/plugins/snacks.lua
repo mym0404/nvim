@@ -20,7 +20,8 @@ local vscode_layout_preview = {
     backdrop = true,
     row = 2,
     width = 0.60,
-    min_width = 80,
+    min_width = 90,
+    max_width = 140,
     height = 0.8,
     border = "none",
     box = "vertical",
@@ -50,8 +51,9 @@ local vscode_layout_without_preview = {
   layout = {
     backdrop = true,
     row = 2,
-    width = 0.50,
-    min_width = 60,
+    width = 0.5,
+    min_width = 90,
+    max_width = 140,
     height = 0.7,
     max_height = 35,
     border = "none",
@@ -427,16 +429,8 @@ return {
           return LazyVim.pick(cmd, opts)()
         end,
         header = [[
-                               *   
-                                  *
-                             .      
-                     *   '*'  *    
                         *  ' '  *  
                            * . .   
-                       *   .. '  * 
-                            '..    
-                           *  .. * 
-                              ..   
                            *   ' * 
                                '   
                              *   * 
