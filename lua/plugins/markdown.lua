@@ -1,4 +1,4 @@
-local ft = { "markdown", "Avante", "help", "text", "txt" }
+local ft = { "markdown", "markdown.mdx", "mdx", "Avante", "help", "text", "txt" }
 
 return {
 
