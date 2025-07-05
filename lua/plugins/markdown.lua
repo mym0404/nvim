@@ -91,7 +91,7 @@ return {
         below = "▀",
         inline_left = "",
         inline_right = "",
-        inline_pad = 1,
+        inline_pad = 0,
         highlight = "RenderMarkdownCode",
         highlight_info = "RenderMarkdownCodeInfo",
         highlight_language = nil,
