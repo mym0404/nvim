@@ -58,7 +58,7 @@ return {
         },
       },
       gemini = {
-        model = "gemini-2.5-pro",
+        model = "gemini-2.5-flash",
         extra_request_body = {
           max_tokens = 300,
           temperature = 0.15,
