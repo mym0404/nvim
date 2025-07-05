@@ -1,4 +1,4 @@
-local utils = require("../utils/utils")
+local utils = require("utils/utils")
 
 local function reset_keymaps()
   local reset_keys = {
@@ -27,7 +27,7 @@ local function map_comments()
 end
 
 local function customizeExitInsertMode()
-  for _, key in ipairs({ "jj", "jk", "kj", "ㅓㅏ", "ㅓㅓ" }) do
+  for _, key in ipairs({ "jk" }) do
     vim.keymap.set(
       { "i" },
       key,
@@ -243,24 +243,57 @@ local function map_scroll()
   end, { noremap = true, nowait = true, expr = true })
 end
 
+local function map_hover_scroll()
+  local function scroll(dir)
+    -- Check for a floating window with buftype=nofile, which is likely a hover window
+    local floating_win_found = false
+    for _, winid in ipairs(vim.api.nvim_list_wins()) do
+      local config = vim.api.nvim_win_get_config(winid)
+      if config.relative ~= "" then
+        local bufnr = vim.api.nvim_win_get_buf(winid)
+        if vim.api.nvim_get_option_value("buftype", { buf = bufnr }) == "nofile" then
+          floating_win_found = true
+          break
+        end
+      end
+    end
+
+    if floating_win_found and vim.lsp.buf and vim.lsp.buf.scroll_docs then
+      -- Attempt to scroll LSP docs. This should only affect LSP hover windows.
+      vim.lsp.buf.scroll_docs(dir * 10)
+      return "" -- Consume keys
+    end
+
+    -- Fallback to default behavior
+    return dir > 0 and "<C-f>" or "<C-b>"
+  end
+
+  vim.keymap.set("n", "<C-f>", function()
+    return scroll(1)
+  end, { expr = true, silent = true, noremap = true, desc = "Scroll down (hover or buffer)" })
+  vim.keymap.set("n", "<C-b>", function()
+    return scroll(-1)
+  end, { expr = true, silent = true, noremap = true, desc = "Scroll up (hover or buffer)" })
+end
+
 local function map_tstools()
-  vim.keymap.set("n", "<leader>co", function()
-    if vim.bo.filetype == "typescript" or vim.bo.filetype == "typescriptreact" then
-      require("typescript-tools.api").organize_imports(true)
-    end
-  end, { desc = "Organize Import" })
-
-  vim.keymap.set("n", "<leader>cm", function()
-    if vim.bo.filetype == "typescript" or vim.bo.filetype == "typescriptreact" then
-      require("typescript-tools.api").add_missing_imports(true)
-    end
-  end, { desc = "Add Missing Imports" })
-
-  vim.keymap.set("n", "gs", function()
-    if vim.bo.filetype == "typescript" or vim.bo.filetype == "typescriptreact" then
-      require("typescript-tools.api").go_to_source_definition(true, { loclist = true })
-    end
-  end, { desc = "Go to Source with TSTool" })
+  -- vim.keymap.set("n", "<leader>co", function()
+  --   if vim.bo.filetype == "typescript" or vim.bo.filetype == "typescriptreact" then
+  --     require("typescript-tools.api").organize_imports(true)
+  --   end
+  -- end, { desc = "Organize Import" })
+  --
+  -- vim.keymap.set("n", "<leader>cm", function()
+  --   if vim.bo.filetype == "typescript" or vim.bo.filetype == "typescriptreact" then
+  --     require("typescript-tools.api").add_missing_imports(true)
+  --   end
+  -- end, { desc = "Add Missing Imports" })
+  --
+  -- vim.keymap.set("n", "gs", function()
+  --   if vim.bo.filetype == "typescript" or vim.bo.filetype == "typescriptreact" then
+  --     require("typescript-tools.api").go_to_source_definition(true, { loclist = true })
+  --   end
+  -- end, { desc = "Go to Source with TSTool" })
 end
 
 local function map_package_info()
@@ -386,7 +419,7 @@ local function map_template_string()
     Rule("{", "}", allowed_ft)
       :with_pair(cond.before_text("$"))
       :with_pair(cond.is_inside_quote())
-      :replace_endpair(function(opts)
+      :replace_endpair(function(_)
         local node = require("nvim-treesitter.ts_utils").get_node_at_cursor()
         if node == nil then
           return "}"
@@ -452,6 +485,7 @@ map_delete_buffer()
 map_tstools()
 map_docs_hover()
 map_scroll()
+map_hover_scroll()
 map_shift_cr()
 map_comments()
 manipulate_yank_paste_register_behavior()

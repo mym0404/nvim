@@ -2,7 +2,7 @@ local utils = require("utils/utils")
 return {
   "neovim/nvim-lspconfig",
   dependencies = {
-    "hrsh7th/cmp-nvim-lsp",
+    -- "hrsh7th/cmp-nvim-lsp",
     { "antosha417/nvim-lsp-file-operations", config = true },
   },
   opts = {
@@ -14,7 +14,7 @@ return {
       jdtls = {},
       kotlin_language_server = {},
       vtsls = {
-        enabled = false,
+        enabled = true,
       },
       marksman = {
         filetypes = { "markdown", "markdown.mdx" },
