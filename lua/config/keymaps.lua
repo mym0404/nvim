@@ -218,8 +218,9 @@ local function map_docs_hover()
       silent = true,
       title = "🌱 Docs",
       max_width = 100,
+      width = 70,
       max_height = 120,
-      wrap = true,
+      wrap = false,
       zindex = 100,
 
       title_pos = "center",
