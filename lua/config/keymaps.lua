@@ -273,24 +273,37 @@ local function map_hover_scroll()
   end, { expr = true, silent = true, noremap = true, desc = "Scroll up (hover or buffer)" })
 end
 
-local function map_tstools()
-  -- vim.keymap.set("n", "<leader>co", function()
-  --   if vim.bo.filetype == "typescript" or vim.bo.filetype == "typescriptreact" then
-  --     require("typescript-tools.api").organize_imports(true)
-  --   end
-  -- end, { desc = "Organize Import" })
-  --
-  -- vim.keymap.set("n", "<leader>cm", function()
-  --   if vim.bo.filetype == "typescript" or vim.bo.filetype == "typescriptreact" then
-  --     require("typescript-tools.api").add_missing_imports(true)
-  --   end
-  -- end, { desc = "Add Missing Imports" })
-  --
-  -- vim.keymap.set("n", "gs", function()
-  --   if vim.bo.filetype == "typescript" or vim.bo.filetype == "typescriptreact" then
-  --     require("typescript-tools.api").go_to_source_definition(true, { loclist = true })
-  --   end
-  -- end, { desc = "Go to Source with TSTool" })
+local function configure_lsp_keymaps()
+  vim.api.nvim_create_autocmd("BufWritePost", {
+    callback = function(opts)
+      if utils.is_js_ft(opts.buf) then
+        require("vtsls.commands").remove_unused_imports()
+      end
+    end,
+  })
+  vim.keymap.set("n", "<leader>co", function()
+    if utils.is_js_ft() then
+      require("vtsls.commands").organize_imports()
+    else
+      vim.lsp.commands.organize_imports()
+    end
+  end, { desc = "Organize Import" })
+
+  vim.keymap.set("n", "<leader>cm", function()
+    if utils.is_js_ft() then
+      require("vtsls.commands").add_missing_imports()
+    else
+      vim.lsp.commands.add_missing_imports()
+    end
+  end, { desc = "Add Missing Imports" })
+
+  vim.keymap.set("n", "gs", function()
+    if utils.is_js_ft() then
+      require("vtsls.commands").goto_source_definition()
+    else
+      vim.lsp.commands.goto_source_definition()
+    end
+  end, { desc = "Go to Source with TSTool" })
 end
 
 local function map_package_info()
@@ -479,7 +492,7 @@ reset_keymaps()
 map_template_string()
 map_react_prop_bracket()
 map_delete_buffer()
-map_tstools()
+configure_lsp_keymaps()
 map_docs_hover()
 map_scroll()
 map_hover_scroll()

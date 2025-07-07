@@ -64,14 +64,6 @@ vim.api.nvim_create_autocmd("LspAttach", {
   end,
 })
 
-vim.api.nvim_create_autocmd("BufWritePost", {
-  callback = function(opts)
-    if utils.is_js_ft(opts.buf) then
-      -- require("typescript-tools.api").remove_unused_imports(true)
-    end
-  end,
-})
-
 -- vim.api.nvim_create_autocmd("LspNotify", {
 --   callback = function(opts)
 --     if opts.data.method == "textDocument/didOpen" and utils.is_js_ft(opts.buf) then
