@@ -273,26 +273,23 @@ local function map_hover_scroll()
   end, { expr = true, silent = true, noremap = true, desc = "Scroll up (hover or buffer)" })
 end
 
-local function configure_lsp_keymaps()
-  vim.api.nvim_create_autocmd("BufWritePost", {
-    callback = function(opts)
-      if utils.is_js_ft(opts.buf) then
-        require("vtsls.commands").remove_unused_imports()
-      end
-    end,
-    desc = "remove unused imports on save",
-  })
-  vim.keymap.set("n", "<leader>co", function()
-    if utils.is_js_ft() then
-      require("vtsls.commands").organize_imports()
-    else
-      local context = {
-        diagnostics = vim.diagnostic.get_line_diagnostics(),
-        only = { "source.organizeImports", "source" },
-      }
-      vim.lsp.buf.code_action({ context = context, apply = true })
-    end
-  end, { desc = "Organize Import", silent = true })
+local function configure_lsp()
+  -- vim.api.nvim_create_autocmd("BufWritePre", {
+  --   callback = function(opts)
+  --     if utils.is_js_ft(opts.buf) then
+  --       require("vtsls.commands").remove_unused_imports()
+  --     end
+  --   end,
+  --   desc = "remove unused imports on save",
+  -- })
+  -- vim.keymap.set("n", "<leader>co", function()
+  --   local context = {
+  --     diagnostics = vim.diagnostic.get_line_diagnostics(),
+  --     only = { "source.organizeImports" },
+  --   }
+  --   vim.lsp.buf.code_action({ context = context, apply = true })
+  --   vim.lsp.buf.format({ async = true, timeout_ms = 1000 })
+  -- end, { desc = "Organize Import", silent = true })
 
   vim.keymap.set("n", "<leader>cm", function()
     if utils.is_js_ft() then
@@ -306,13 +303,13 @@ local function configure_lsp_keymaps()
     end
   end, { desc = "Add Missing Imports", silent = true })
 
-  vim.keymap.set("n", "gs", function()
-    if utils.is_js_ft() then
-      require("vtsls.commands").goto_source_definition()
-    else
-      vim.lsp.commands.goto_source_definition()
-    end
-  end, { desc = "Go to Source with TSTool", silent = true })
+  -- vim.keymap.set("n", "gs", function()
+  --   if utils.is_js_ft() then
+  --     require("vtsls.commands").goto_source_definition()
+  --   else
+  --     vim.lsp.commands.goto_source_definition()
+  --   end
+  -- end, { desc = "Go to Source with TSTool", silent = true })
 end
 
 local function map_package_info()
@@ -501,7 +498,7 @@ reset_keymaps()
 map_template_string()
 map_react_prop_bracket()
 map_delete_buffer()
-configure_lsp_keymaps()
+configure_lsp()
 map_docs_hover()
 map_scroll()
 map_hover_scroll()
