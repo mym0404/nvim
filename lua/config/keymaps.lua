@@ -286,7 +286,11 @@ local function configure_lsp_keymaps()
     if utils.is_js_ft() then
       require("vtsls.commands").organize_imports()
     else
-      vim.lsp.buf.code_action({ context = { only = { "source.organizeImports" } }, apply = true })
+      local context = {
+        diagnostics = vim.diagnostic.get_line_diagnostics(),
+        only = { "source.organizeImports", "source" },
+      }
+      vim.lsp.buf.code_action({ context = context, apply = true })
     end
   end, { desc = "Organize Import", silent = true })
 
@@ -294,7 +298,11 @@ local function configure_lsp_keymaps()
     if utils.is_js_ft() then
       require("vtsls.commands").add_missing_imports()
     else
-      vim.lsp.buf.code_action({ context = { only = { "source.addMissingImports" } }, apply = true })
+      local context = {
+        diagnostics = vim.diagnostic.get_line_diagnostics(),
+        only = { "source.addMissingImports", "quickfix", "source" },
+      }
+      vim.lsp.buf.code_action({ context = context, apply = true })
     end
   end, { desc = "Add Missing Imports", silent = true })
 
