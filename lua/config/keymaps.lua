@@ -280,22 +280,23 @@ local function configure_lsp_keymaps()
         require("vtsls.commands").remove_unused_imports()
       end
     end,
+    desc = "remove unused imports on save",
   })
   vim.keymap.set("n", "<leader>co", function()
     if utils.is_js_ft() then
       require("vtsls.commands").organize_imports()
     else
-      vim.lsp.commands.organize_imports()
+      vim.lsp.buf.code_action({ context = { only = { "source.organizeImports" } }, apply = true })
     end
-  end, { desc = "Organize Import" })
+  end, { desc = "Organize Import", silent = true })
 
   vim.keymap.set("n", "<leader>cm", function()
     if utils.is_js_ft() then
       require("vtsls.commands").add_missing_imports()
     else
-      vim.lsp.commands.add_missing_imports()
+      vim.lsp.buf.code_action({ context = { only = { "source.addMissingImports" } }, apply = true })
     end
-  end, { desc = "Add Missing Imports" })
+  end, { desc = "Add Missing Imports", silent = true })
 
   vim.keymap.set("n", "gs", function()
     if utils.is_js_ft() then
@@ -303,7 +304,7 @@ local function configure_lsp_keymaps()
     else
       vim.lsp.commands.goto_source_definition()
     end
-  end, { desc = "Go to Source with TSTool" })
+  end, { desc = "Go to Source with TSTool", silent = true })
 end
 
 local function map_package_info()
