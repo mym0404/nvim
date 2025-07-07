@@ -18,7 +18,7 @@ local palette = {
   untracked_label = "#E0787C",
   untracked_undercurl = "#E0787C",
   text = "#ffffff",
-  text_sub = "#747474",
+  text_sub = "#929292",
   text_sub2 = "#333333",
 }
 local special = { fg = "#c79cff", bg = "#2a2136", gui = "bold" }
@@ -306,7 +306,7 @@ local theme = lush(function(injected_functions)
     LspReferenceWrite({ bg = "#17335a" }),
     LspReferenceText({ bg = "#17335a" }),
     LspReferenceRead({ bg = "#17335a" }),
-    LspInlayHint({ bg = "#171b22", fg = "#8b949e" }),
+    LspInlayHint(text_sub),
     LspCodeLensSeparator({ fg = "#6e7681" }),
     LspCodeLens({ fg = "#8b949e" }),
     Cursor({ bg = "#e6edf3", fg = "#0d1117" }),
