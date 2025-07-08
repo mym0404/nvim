@@ -92,7 +92,7 @@ return {
         },
       },
       menu = {
-        min_width = 50,
+        -- min_width = 50,
         draw = {
           padding = 1,
           gap = 1,
@@ -115,7 +115,7 @@ return {
               end,
             },
             label = {
-              width = { fill = true },
+              width = { fill = true, min = 40, max = 50 },
               text = function(ctx)
                 local highlights_info = require("colorful-menu").blink_highlights(ctx)
                 if highlights_info ~= nil then
@@ -196,7 +196,7 @@ return {
       -- adding any nvim-cmp sources here will enable them
       -- with blink.compat
       compat = {},
-      default = { "avante", "lsp", "path", "snippets", "buffer" },
+      default = { "mj", "avante", "lsp", "path", "snippets", "buffer" },
       providers = {
         -- copilot = {
         --   name = "copilot",
@@ -208,6 +208,11 @@ return {
         avante = {
           module = "blink-cmp-avante",
           name = "Avante",
+          opts = {},
+        },
+        mj = {
+          module = "utils/blink-source-provider",
+          name = "MJ",
           opts = {},
         },
       },
