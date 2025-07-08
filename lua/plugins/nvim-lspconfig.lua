@@ -15,6 +15,24 @@ return {
       kotlin_language_server = {},
       vtsls = {
         enabled = true,
+        settings = {
+          typescript = {
+            inlayHints = {
+              parameterNames = { enabled = "literals" },
+              parameterTypes = { enabled = true },
+              variableTypes = { enabled = true },
+              propertyDeclarationTypes = { enabled = true },
+              functionLikeReturnTypes = { enabled = true },
+              enumMemberValues = { enabled = true },
+            },
+            preferences = {
+              importModuleSpecifierPreference = "relative",
+              jsxAttributeCompletionStyle = "braces",
+              quotePreference = "single",
+              includeCompletionsForModuleExports = true,
+            },
+          },
+        },
       },
       marksman = {
         filetypes = { "markdown", "markdown.mdx" },
