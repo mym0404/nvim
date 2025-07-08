@@ -22,6 +22,7 @@ local function getOS()
 end
 
 local is_windows = getOS() == "Windows"
+local is_macos = getOS() == "Darwin"
 local CMD = is_windows and "ALT" or "CMD"
 local CTRL = "CTRL"
 local OPT = "OPT"
@@ -40,6 +41,12 @@ local function setup_core()
 	}
 	c.initial_cols = 160
 	c.initial_rows = 34
+
+	c.use_ime = true
+	c.use_dead_keys = true
+	if is_macos then
+		c.enable_wayland = false
+	end
 
 	c.color_scheme = "Tokyo Night"
 	c.adjust_window_size_when_changing_font_size = false
@@ -67,8 +74,8 @@ local function setup_core()
 		c.dpi = 144
 	end
 
-	c.window_background_opacity = 0.5
-	c.macos_window_background_blur = 2
+	c.window_background_opacity = 0.8
+	c.macos_window_background_blur = 15
 	-- Removes the title bar, leaving only the tab bar. Keeps
 	-- the ability to resize by dragging the window's edges.
 	-- On macOS, 'RESIZE|INTEGRATED_BUTTONS' also looks nice if
