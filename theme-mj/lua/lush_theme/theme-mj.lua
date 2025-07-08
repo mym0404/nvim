@@ -18,7 +18,7 @@ local palette = {
   untracked_label = "#E0787C",
   untracked_undercurl = "#E0787C",
   text = "#ffffff",
-  text_sub = "#929292",
+  text_sub = "#727272",
   text_sub2 = "#333333",
 }
 local special = { fg = "#c79cff", bg = "#2a2136", gui = "bold" }
