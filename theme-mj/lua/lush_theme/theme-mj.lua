@@ -81,6 +81,10 @@ local code = {
   attribute = { fg = "#ffffff" },
   modifier = { fg = "#ff7b72" },
   escape = { fg = "#de669a", gui = "bold,italic" },
+  inlay_hint = {
+    fg = hsl(text_sub.fg).lighten(30),
+    bg = hsl("#313133"),
+  },
 }
 
 local theme = lush(function(injected_functions)
@@ -306,10 +310,7 @@ local theme = lush(function(injected_functions)
     LspReferenceWrite({ bg = "#17335a" }),
     LspReferenceText({ bg = "#17335a" }),
     LspReferenceRead({ bg = "#17335a" }),
-    LspInlayHint({
-      fg = hsl(text_sub.fg).lighten(30),
-      bg = hsl("#313133"),
-    }),
+    LspInlayHint(code.inlay_hint),
     LspCodeLensSeparator({ fg = "#6e7681" }),
     LspCodeLens({ fg = "#8b949e" }),
     Cursor({ bg = "#e6edf3", fg = "#0d1117" }),
