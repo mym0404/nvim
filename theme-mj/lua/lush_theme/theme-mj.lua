@@ -1,7 +1,7 @@
 ---@diagnostic disable: undefined-global
 local lush = require("lush")
--- local hsl = lush.hsl
--- local hsluv = lush.hsluv
+local hsl = lush.hsl
+local hsluv = lush.hsluv
 
 local undercurl = require("utils/utils").is_windows and "undercurl,bold" or "undercurl"
 
@@ -18,7 +18,7 @@ local palette = {
   untracked_label = "#E0787C",
   untracked_undercurl = "#E0787C",
   text = "#ffffff",
-  text_sub = "#727272",
+  text_sub = "#6D6D73",
   text_sub2 = "#333333",
 }
 local special = { fg = "#c79cff", bg = "#2a2136", gui = "bold" }
@@ -306,7 +306,10 @@ local theme = lush(function(injected_functions)
     LspReferenceWrite({ bg = "#17335a" }),
     LspReferenceText({ bg = "#17335a" }),
     LspReferenceRead({ bg = "#17335a" }),
-    LspInlayHint({ fg = text_sub.fg, bg = "#212121" }),
+    LspInlayHint({
+      fg = hsl(text_sub.fg).lighten(30),
+      bg = hsl("#313133"),
+    }),
     LspCodeLensSeparator({ fg = "#6e7681" }),
     LspCodeLens({ fg = "#8b949e" }),
     Cursor({ bg = "#e6edf3", fg = "#0d1117" }),
