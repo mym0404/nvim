@@ -31,7 +31,8 @@ opt.expandtab = true
 opt.imsearch = 0
 opt.imsearch = 0
 
-opt.mouse = "a"
+opt.mouse = ""
+vim.o.mousemodel = "extend"
 opt.showmode = false
 opt.exrc = true
 
