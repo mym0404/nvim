@@ -6,10 +6,11 @@ return {
     { "antosha417/nvim-lsp-file-operations", config = true },
   },
   opts = {
-    inlay_hints = { enabled = true },
+    -- inlay_hints = { enabled = true, filter = {} },
     servers = {
       sourcekit = {
         enabled = utils.is_mac,
+        settings = {},
       },
       jdtls = {},
       kotlin_language_server = {},

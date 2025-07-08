@@ -119,3 +119,13 @@ vim.api.nvim_create_autocmd("BufEnter", {
   end,
   desc = "Warn if file is git ignored",
 })
+
+vim.api.nvim_create_autocmd("BufEnter", {
+  callback = function(opts)
+    if vim.bo[opts.buf].filetype == "swift" then
+      vim.lsp.inlay_hint.enable(false)
+    else
+      vim.lsp.inlay_hint.enable(true)
+    end
+  end,
+})
