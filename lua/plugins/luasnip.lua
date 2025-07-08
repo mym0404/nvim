@@ -24,9 +24,12 @@ return {
         or ft == "typescript"
         or ft == "javascriptreact"
         or ft == "typescriptreact"
+      local is_swift = ft == "swift"
 
       if is_react then
         return { "js" }
+      elseif is_swift then
+        return { "swift" }
       else
         return require("luasnip.extras.filetype_functions").from_filetype_load(bufnr)
       end
