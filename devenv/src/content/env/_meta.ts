@@ -2,10 +2,11 @@ import type { MetaRecord } from "nextra";
 
 const meta: MetaRecord = {
 	index: "Getting Started",
-	lazygit: "lazygit.yml",
-	git: "git",
+	lazygit: "lazygit",
+	gitconfig: "gitconfig",
 	zsh: "zsh",
-	"karabiner-element": "karabiner",
+	wezterm: "wezterm",
+	karabiner: "karabiner",
 };
 
 export default meta;

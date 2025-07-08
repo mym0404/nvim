@@ -42,7 +42,7 @@ return {
     cmdline = {
       enabled = true,
       keymap = {
-        -- 안녕asd
+        -- asd
         ["<tab>"] = { "accept_and_enter", "fallback" },
         -- ["<s-tab>"] = { "select_prev", "fallback" },
         ["<CR>"] = {
