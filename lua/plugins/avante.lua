@@ -15,29 +15,29 @@ return {
   end,
   event = "VeryLazy",
   version = false, -- Never set this value to "*"! Never!
+  dependencies = {
+    {
+      -- support for image pasting
+      "HakonHarnes/img-clip.nvim",
+      event = "VeryLazy",
+      opts = {
+        -- recommended settings
+        default = {
+          embed_image_as_base64 = false,
+          prompt_for_file_name = false,
+          drag_and_drop = {
+            insert_mode = true,
+          },
+          -- required for Windows users
+          use_absolute_path = true,
+        },
+      },
+    },
+  },
   ---@module 'avante'
   ---@type avante.Config
-  dependencies = {
-    -- {
-    --   -- support for image pasting
-    --   "HakonHarnes/img-clip.nvim",
-    --   event = "VeryLazy",
-    --   opts = {
-    --     -- recommended settings
-    --     default = {
-    --       embed_image_as_base64 = false,
-    --       prompt_for_file_name = false,
-    --       drag_and_drop = {
-    --         insert_mode = true,
-    --       },
-    --       -- required for Windows users
-    --       use_absolute_path = true,
-    --     },
-    --   },
-    -- },
-  },
   opts = {
-    provider = "gemini",
+    provider = "gemini_pro",
     providers = {
       openai = {
         endpoint = "https://api.openai.com/v1",
@@ -60,9 +60,14 @@ return {
       gemini = {
         model = "gemini-2.5-flash",
         extra_request_body = {
-          max_tokens = 300,
+          max_tokens = 8192,
           temperature = 0.15,
         },
+      },
+      gemini_pro = {
+        __inherited_from = "gemini",
+        model = "gemini-2.5-pro",
+        reasoning_effort = "low",
       },
     },
     hints = {
@@ -84,6 +89,7 @@ return {
       auto_apply_diff_after_generation = false,
       auto_approve_tool_permissions = true,
     },
+    override_prompt_dir = vim.fn.stdpath("config") .. "/avante_prompts",
     windows = {
       sidebar_header = {
         enabled = false,
