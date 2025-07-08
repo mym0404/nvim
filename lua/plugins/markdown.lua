@@ -15,10 +15,10 @@ return {
       render_modes = { "n", "c", "t" },
       preset = "none",
       anti_conceal = {
-        enabled = false,
+        enabled = true,
         ignore = {
           code_background = true,
-          sign = true,
+          sign = false,
         },
         above = 0,
         below = 0,
