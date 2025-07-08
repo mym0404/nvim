@@ -120,12 +120,11 @@ vim.api.nvim_create_autocmd("BufEnter", {
   desc = "Warn if file is git ignored",
 })
 
-vim.api.nvim_create_autocmd("BufEnter", {
+vim.api.nvim_create_autocmd("LspAttach", {
   callback = function(opts)
-    if vim.bo[opts.buf].filetype == "swift" then
+    local client = vim.lsp.get_client_by_id(opts.data.client_id)
+    if client ~= nil and client.name == "sourceskit" then
       vim.lsp.inlay_hint.enable(false)
-    else
-      vim.lsp.inlay_hint.enable(true)
     end
   end,
 })
