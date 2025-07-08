@@ -306,7 +306,7 @@ local theme = lush(function(injected_functions)
     LspReferenceWrite({ bg = "#17335a" }),
     LspReferenceText({ bg = "#17335a" }),
     LspReferenceRead({ bg = "#17335a" }),
-    LspInlayHint(text_sub),
+    LspInlayHint({ fg = text_sub.fg, bg = "#212121" }),
     LspCodeLensSeparator({ fg = "#6e7681" }),
     LspCodeLens({ fg = "#8b949e" }),
     Cursor({ bg = "#e6edf3", fg = "#0d1117" }),
