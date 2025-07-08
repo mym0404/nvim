@@ -124,7 +124,6 @@ vim.api.nvim_create_autocmd("LspAttach", {
   callback = function(opts)
     local client = vim.lsp.get_client_by_id(opts.data.client_id)
     if client ~= nil and client.name == "sourcekit" then
-      vim.notify(client.name)
       vim.lsp.inlay_hint.enable(false)
     end
   end,
