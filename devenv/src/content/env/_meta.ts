@@ -5,6 +5,7 @@ const meta: MetaRecord = {
 	lazygit: "lazygit.yml",
 	git: "git",
 	zsh: "zsh",
+	"karabiner-element": "karabiner",
 };
 
 export default meta;
