@@ -195,7 +195,7 @@ return {
       -- adding any nvim-cmp sources here will enable them
       -- with blink.compat
       compat = {},
-      default = { "avante", "lsp", "path", "snippets" },
+      default = { "avante", "lsp", "path", "snippets", "buffer" },
       providers = {
         -- copilot = {
         --   name = "copilot",
