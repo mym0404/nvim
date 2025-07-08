@@ -92,6 +92,7 @@ return {
         },
       },
       menu = {
+        min_width = 50,
         draw = {
           padding = 1,
           gap = 1,
@@ -114,7 +115,7 @@ return {
               end,
             },
             label = {
-              width = { fill = true, max = 30 },
+              width = { fill = true },
               text = function(ctx)
                 local highlights_info = require("colorful-menu").blink_highlights(ctx)
                 if highlights_info ~= nil then
