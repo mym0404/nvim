@@ -74,8 +74,8 @@ local function setup_core()
 		c.dpi = 144
 	end
 
-	c.window_background_opacity = 0.8
-	c.macos_window_background_blur = 15
+	c.window_background_opacity = is_macos and 0.01 or 0.9
+	c.macos_window_background_blur = 25
 	-- Removes the title bar, leaving only the tab bar. Keeps
 	-- the ability to resize by dragging the window's edges.
 	-- On macOS, 'RESIZE|INTEGRATED_BUTTONS' also looks nice if
@@ -144,7 +144,7 @@ local function setup_core()
 		window:set_right_status(wezterm.format(elements))
 	end)
 
-	c.native_macos_fullscreen_mode = true
+	c.native_macos_fullscreen_mode = false
 end
 
 local function setup_basic_keys()
