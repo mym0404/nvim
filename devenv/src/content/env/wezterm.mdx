@@ -208,28 +208,33 @@ local function setup_windows_keys()
 	table.insert(c.keys, { key = "v", mods = CTRL, action = wezterm.action.PasteFrom("Clipboard") })
 	table.insert(c.keys, { key = "c", mods = CTRL, action = wezterm.action.CopyTo("Clipboard") })
 
-  -- There are mouse binding to mimc Windows Terminal and let you copy
-  -- To copy just highlight something and right click. Simple
-  local mouse_bindings = {
-    {
-      event = { Down = { streak = 3, button = "Left" } },
-      action = wezterm.action.SelectTextAtMouseCursor("SemanticZone"),
-      mods = "NONE",
-    },
-    {
-      event = { Down = { streak = 1, button = "Right" } },
-      mods = "NONE",
-      action = wezterm.action_callback(function(window, pane)
-		local has_selection = window:get_selection_text_for_pane(pane) ~= ""
-		if has_selection then
-			window:perform_action(act.CopyTo("ClipboardAndPrimarySelection"), pane)
-			window:perform_action(act.ClearSelection, pane)
-		else
-			window:perform_action(act({ PasteFrom = "Clipboard" }), pane)
-		end
-      end),
-    },
-  }
+	-- Add CTRL+number keys to activate specific tabs
+	for i = 1, 9 do
+		table.insert(c.keys, { key = tostring(i), mods = CTRL, action = wezterm.action.ActivateTab(i - 1) })
+	end
+
+	-- There are mouse binding to mimc Windows Terminal and let you copy
+	-- To copy just highlight something and right click. Simple
+	local mouse_bindings = {
+		{
+			event = { Down = { streak = 3, button = "Left" } },
+			action = wezterm.action.SelectTextAtMouseCursor("SemanticZone"),
+			mods = "NONE",
+		},
+		{
+			event = { Down = { streak = 1, button = "Right" } },
+			mods = "NONE",
+			action = wezterm.action_callback(function(window, pane)
+				local has_selection = window:get_selection_text_for_pane(pane) ~= ""
+				if has_selection then
+					window:perform_action(act.CopyTo("ClipboardAndPrimarySelection"), pane)
+					window:perform_action(act.ClearSelection, pane)
+				else
+					window:perform_action(act({ PasteFrom = "Clipboard" }), pane)
+				end
+			end),
+		},
+	}
 	c.mouse_bindings = mouse_bindings
 end
 -- Table mapping keypresses to actions
