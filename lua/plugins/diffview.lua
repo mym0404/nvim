@@ -1,10 +1,12 @@
 return {
   "sindrets/diffview.nvim",
   opts = {
+    -- enhanced_diff_hl = true,
     file_panel = {
       listing_style = "tree",
       win_config = {
-        -- type = "float",
+        position = "bottom",
+        height = 16,
       },
       tree_options = {
         flatten_dirs = false,
@@ -13,9 +15,9 @@ return {
     file_history_panel = {
       listing_style = "tree",
       win_config = {
-        position = "left",
-        height = 0,
-        width = 35,
+        position = "bottom",
+        height = 16,
+        -- width = 35,
         win_opts = {},
       },
     },
