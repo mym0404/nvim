@@ -27,9 +27,9 @@ local function map_comments()
 end
 
 local function customizeExitInsertMode()
-  for _, key in ipairs({ "jk" }) do
+  for _, key in ipairs({ "jk", "jj" }) do
     vim.keymap.set(
-      { "i" },
+      { "i", "t" },
       key,
       "<Esc>",
       { noremap = true, silent = true, desc = "Exit insert mode" }
