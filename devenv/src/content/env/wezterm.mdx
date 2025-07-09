@@ -206,7 +206,7 @@ local function setup_windows_keys()
 	-- c.disable_default_key_bindings = true
 	-- this adds the ability to use ctrl+v to paste the system clipboard
 	table.insert(c.keys, { key = "v", mods = CTRL, action = wezterm.action.PasteFrom("Clipboard") })
-	table.insert(c.keys, { key = "c", mods = CTRL, action = wezterm.action.CopyTo("Clipboard") })
+	-- table.insert(c.keys, { key = "c", mods = CTRL, action = wezterm.action.CopyTo("Clipboard") })
 
 	-- Add CTRL+number keys to activate specific tabs
 	for i = 1, 9 do
