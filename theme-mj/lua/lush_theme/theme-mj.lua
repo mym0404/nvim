@@ -44,7 +44,7 @@ local vcs = {
   },
   modified_highlight = {
     label = { fg = "#72A7D7" },
-    code = { bg = "#2a3354" },
+    code = { bg = "#2a3354", gui = "bold" },
   },
   deleted = {
     label = { fg = palette.error_label },
@@ -128,11 +128,7 @@ local theme = lush(function(injected_functions)
     DiffAdd(vcs.added.code),
     DiffDelete(vcs.deleted.code),
     DiffChange(vcs.modified.code),
-    DiffText({
-      fg = vcs.modified.code.fg,
-      bg = vcs.modified_highlight.code.bg,
-      gui = "bold",
-    }),
+    DiffText(vcs.modified_highlight.code),
     diffOldFile({ fg = "#d29922" }),
     diffIndexLine({ fg = "#ff7b72" }),
     diffLine({ fg = "#79c0ff" }),
