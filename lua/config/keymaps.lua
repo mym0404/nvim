@@ -27,7 +27,7 @@ local function map_comments()
 end
 
 local function customizeExitInsertMode()
-  local keys = { "jk", "jj" }
+  local keys = { "jk" }
   for _, key in ipairs(keys) do
     vim.keymap.set(
       { "i" },
@@ -36,14 +36,14 @@ local function customizeExitInsertMode()
       { noremap = true, silent = true, desc = "Exit insert mode" }
     )
   end
-  for _, key in ipairs(keys) do
-    vim.keymap.set(
-      { "t" },
-      key,
-      "<Esc><Esc>",
-      { noremap = true, silent = true, desc = "Exit insert mode" }
-    )
-  end
+  -- for _, key in ipairs(keys) do
+  --   vim.keymap.set(
+  --     { "t" },
+  --     key,
+  --     "<Esc><Esc>",
+  --     { noremap = true, silent = true, desc = "Exit insert mode" }
+  --   )
+  -- end
 end
 
 local function manipulate_yank_paste_register_behavior()
