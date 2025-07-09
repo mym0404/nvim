@@ -95,11 +95,17 @@ return {
             kind_icon = {
               ellipsis = false,
               text = function(ctx)
-                local kind_icon, _, _ = require("mini.icons").get("lsp", ctx.kind)
+                local is_copilot = ctx.kind == "Copilot"
+                local kind_icon, _, _ = is_copilot and " "
+                  or require("mini.icons").get("lsp", ctx.kind)
                 return kind_icon .. " "
               end,
               -- (optional) use highlights from mini.icons
               highlight = function(ctx)
+                local is_copilot = ctx.kind == "Copilot"
+                if is_copilot then
+                  return "Special"
+                end
                 local _, hl, _ = require("mini.icons").get("lsp", ctx.kind)
                 return hl
               end,
