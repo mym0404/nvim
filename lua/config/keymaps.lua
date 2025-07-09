@@ -481,17 +481,28 @@ local function map_close_bracket()
 end
 
 local function map_copies()
-  vim.keymap.set("n", "<leader>Cf", function()
+  vim.keymap.set("n", "<leader>yf", function()
     local path = vim.fn.expand("%:p")
     vim.cmd("let @+ = expand('%:p')")
     vim.notify("Copied: " .. path, vim.log.levels.INFO, { title = "Copy File Path" })
   end, { desc = "copy current file path" })
 
-  vim.keymap.set("n", "<leader>Cd", function()
+  vim.keymap.set("n", "<leader>yd", function()
     local path = vim.fn.expand("%:h")
     vim.cmd("let @+ = expand('%:h')")
     vim.notify("Copied: " .. path, vim.log.levels.INFO, { title = "Copy Directory Path" })
   end, { desc = "copy current file directory path" })
+
+  vim.keymap.set("n", "<leader>yD", function()
+    local diagnostics = vim.diagnostic.get(nil)
+    local formatted_diagnostics = vim.inspect(diagnostics)
+    vim.fn.setreg("+", formatted_diagnostics)
+    vim.notify(
+      "Diagnostics copied to clipboard",
+      vim.log.levels.INFO,
+      { title = "Copy Diagnostics" }
+    )
+  end, { desc = "Copy diagnostics to clipboard" })
 end
 
 reset_keymaps()
