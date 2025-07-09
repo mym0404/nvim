@@ -31,6 +31,7 @@ return {
               jsxAttributeCompletionStyle = "braces",
               quotePreference = "single",
               includeCompletionsForModuleExports = true,
+              importModuleSpecifierEnding = "auto",
             },
           },
         },

@@ -1,5 +1,6 @@
 # Primary
 
+- diffview - diffview highlighting
 - noice - hover documentation formatting
 - noice - hover documentation highlighting
 - blink documentation fill if empty
