@@ -37,7 +37,7 @@ return {
   ---@module 'avante'
   ---@type avante.Config
   opts = {
-    provider = "gemini",
+    provider = "copilot",
     providers = {
       ---@type AvanteSupportedProvider
       copilot = {

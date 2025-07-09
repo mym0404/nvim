@@ -26,7 +26,7 @@ local text = { fg = palette.text }
 local text_sub = { fg = palette.text_sub }
 local visual = { bg = "#214283" }
 local searched = { bg = "#46ba1c", fg = palette.text }
-local searched_selected = { fg = palette.text, bg = "#db16a3", gui = "bold,underline" }
+local searched_selected = { fg = palette.text, bg = "#db16a3", gui = "bold" }
 local folded = { bg = "#112620", fg = "white", gui = "italic,bold" }
 local border = { fg = "#424242" }
 local win_border = { fg = "#313131" }
