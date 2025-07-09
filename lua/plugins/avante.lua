@@ -37,7 +37,7 @@ return {
   ---@module 'avante'
   ---@type avante.Config
   opts = {
-    provider = "gemini_pro",
+    provider = "claude",
     providers = {
       openai = {
         endpoint = "https://api.openai.com/v1",
@@ -53,7 +53,7 @@ return {
         model = "claude-sonnet-4-20250514",
         timeout = 30000,
         extra_request_body = {
-          temperature = 0.75,
+          temperature = 0.1,
           max_tokens = 20480,
         },
       },
