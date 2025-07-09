@@ -17,7 +17,7 @@ return {
       anti_conceal = {
         enabled = true,
         ignore = {
-          code_background = true,
+          code_background = false,
           sign = false,
         },
         above = 0,
