@@ -40,7 +40,7 @@ local vcs = {
   },
   modified = {
     label = { fg = "#72A7D7" },
-    code = { bg = "#303D47" },
+    code = { bg = "#54618f" },
   },
   modified_highlight = {
     label = { fg = "#72A7D7" },
