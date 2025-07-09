@@ -6,6 +6,10 @@ local c = wezterm.config_builder()
 local act = wezterm.action
 
 local function getOS()
+	local is_windows = os.getenv("WINDOWS")
+	if is_windows ~= nil then
+		return "Windows"
+	end
 	-- ask LuaJIT first
 	if jit then
 		return jit.os
@@ -23,7 +27,7 @@ end
 
 local is_windows = getOS() == "Windows"
 local is_macos = getOS() == "Darwin"
-local CMD = is_windows and "ALT" or "CMD"
+local CMD = "CMD"
 local CTRL = "CTRL"
 local OPT = "OPT"
 local SHIFT = "SHIFT"
@@ -51,7 +55,6 @@ local function setup_core()
 	c.color_scheme = "Tokyo Night"
 	c.adjust_window_size_when_changing_font_size = false
 
-	-- c.font = wezterm.font("D2Coding", { weight = "Medium" })
 	c.font = wezterm.font_with_fallback({
 		{ family = "D2Coding", weight = "Regular" },
 		{ family = "JetBrainsMonoHangul Nerd Font Mono" },
@@ -61,17 +64,20 @@ local function setup_core()
 
 	-- Slightly transparent and blurred background
 	c.front_end = "WebGpu"
-	c.cell_width = 0.93
 	-- c.freetype_load_flags = "NO_HINTING"
 	c.freetype_load_target = "Light"
 	-- c.freetype_render_target = "HorizontalLcd"
-	c.custom_block_glyphs = true -- 블록 글리프 자체 계산 (선명도 개선)  [oai_citation:1‡wezterm.org](https://wezterm.org/config/lua/config/custom_block_glyphs.html?utm_source=chatgpt.com)
-
-	-- 📐 줄 높이 및 DPI 조정
-	c.line_height = 1.15
+	c.custom_block_glyphs = true
+	if is_windows then
+		c.cell_width = 1
+		c.line_height = 1.1
+	else
+		c.cell_width = 0.93
+		c.line_height = 1.15
+	end
 
 	if is_windows then
-		c.dpi = 144
+		c.dpi = 96
 	end
 
 	local blur_mode = false
@@ -83,7 +89,9 @@ local function setup_core()
 	-- On macOS, 'RESIZE|INTEGRATED_BUTTONS' also looks nice if
 	-- you want to keep the window controls visible and integrate
 	-- them into the tab bar.
-	c.window_decorations = "RESIZE"
+	if not is_windows then
+		c.window_decorations = "RESIZE"
+	end
 	-- Sets the font for the window frame (tab bar)
 	c.window_frame = {
 		font = wezterm.font({ family = "Berkeley Mono", weight = "Bold" }),
@@ -91,7 +99,8 @@ local function setup_core()
 	}
 	local function segments_for_right_status(window)
 		return {
-			window:active_workspace(),
+			is_windows and "WSL" or "Darwin",
+			-- window:active_workspace(),
 			wezterm.strftime("%a %b %-d %H:%M"),
 			"MJ",
 		}
@@ -170,7 +179,7 @@ local function setup_basic_keys()
 		},
 		{
 			key = "w",
-			mods = CMD,
+			mods = is_windows and CTRL or CMD,
 			action = wezterm.action_callback(function(window, pane)
 				local tab = pane:tab()
 				local panes = tab:panes()
@@ -179,6 +188,45 @@ local function setup_basic_keys()
 					window:perform_action(act.CloseCurrentPane({ confirm = false }), pane)
 				else
 					window:perform_action(act.CloseCurrentTab({ confirm = false }), pane)
+				end
+			end),
+		},
+		{
+			key = "t",
+			mods = is_windows and CTRL or CMD,
+			action = act.SpawnTab("CurrentPaneDomain"),
+		},
+	}
+end
+local function setup_windows_keys()
+	if not is_windows then
+		return
+	end
+
+	-- c.disable_default_key_bindings = true
+	-- this adds the ability to use ctrl+v to paste the system clipboard
+	table.insert(c.keys, { key = "V", mods = "CTRL", action = wezterm.action.PasteFrom("Clipboard") })
+	table.insert(c.keys, { key = "C", mods = "CTRL", action = wezterm.action.CopyTo("Clipboard") })
+	c.mouse_bindings = mouse_bindings
+
+	-- There are mouse binding to mimc Windows Terminal and let you copy
+	-- To copy just highlight something and right click. Simple
+	mouse_bindings = {
+		{
+			event = { Down = { streak = 3, button = "Left" } },
+			action = wezterm.action.SelectTextAtMouseCursor("SemanticZone"),
+			mods = "NONE",
+		},
+		{
+			event = { Down = { streak = 1, button = "Right" } },
+			mods = "NONE",
+			action = wezterm.action_callback(function(window, pane)
+				local has_selection = window:get_selection_text_for_pane(pane) ~= ""
+				if has_selection then
+					window:perform_action(act.CopyTo("ClipboardAndPrimarySelection"), pane)
+					window:perform_action(act.ClearSelection, pane)
+				else
+					window:perform_action(act({ PasteFrom = "Clipboard" }), pane)
 				end
 			end),
 		},
@@ -249,7 +297,7 @@ local function register_split_multiplexing()
 	end
 
 	local function split_nav(is_horizontal)
-		local mods = CMD .. (is_horizontal and "|" .. OPT or "")
+		local mods = (is_windows and CTRL or CMD) .. (is_horizontal and "|" .. OPT or "")
 		return {
 			key = "0",
 			mods = mods,
@@ -276,6 +324,7 @@ local function register_split_multiplexing()
 end
 setup_basic_keys()
 setup_core()
+setup_windows_keys()
 regsiter_smart_splits_multiplexer()
 register_split_multiplexing()
 
