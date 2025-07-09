@@ -27,7 +27,7 @@ local text_sub = { fg = palette.text_sub }
 local visual = { bg = "#214283" }
 local searched = { bg = "#46ba1c", fg = palette.text }
 local searched_selected = { fg = palette.text, bg = "#db16a3", gui = "bold" }
-local folded = { bg = "#112620", fg = "white", gui = "italic,bold" }
+local folded = { bg = "#281e2e", fg = "white", gui = "italic" }
 local border = { fg = "#424242" }
 local win_border = { fg = "#313131" }
 local float = { fg = palette.text }
@@ -40,11 +40,11 @@ local vcs = {
   },
   modified = {
     label = { fg = "#72A7D7" },
-    code = { bg = "#54618f" },
+    code = { bg = "#26315c" },
   },
   modified_highlight = {
     label = { fg = "#72A7D7" },
-    code = { bg = "#2a3354", gui = "bold" },
+    code = { bg = "#5a689c", gui = "bold" },
   },
   deleted = {
     label = { fg = palette.error_label },
@@ -1190,26 +1190,29 @@ local theme = lush(function(injected_functions)
     DiffviewSecondary({ fg = "#fffcd7" }),
     DiffviewPrimary({ fg = "#c7ffb8" }),
     DiffviewDim1({ fg = "#7ae755" }),
-    DiffviewFilePanelFileName({ fg = "#ffffff" }),
-    DiffviewFilePanelCounter({ fg = "#ffffff", gui = "bold" }),
-    DiffviewFilePanelTitle({ fg = "#a7d5ff", gui = "bold" }),
-    DiffviewStatusIgnored({ Comment }),
-    DiffviewStatusBroken({ diffRemoved }),
-    DiffviewStatusDeleted({ diffRemoved }),
-    DiffviewStatusUnknown({ diffRemoved }),
-    DiffviewStatusUnmerged({ diffChanged }),
-    DiffviewStatusTypeChange({ diffChanged }),
-    DiffviewStatusCopied({ diffChanged }),
-    DiffviewStatusModified({ diffChanged }),
-    DiffviewStatusUntracked({ diffAdded }),
+    DiffviewFilePanelFileName(text),
+    DiffviewFilePanelCounter({ fg = text.fg, gui = "bold" }),
+    DiffviewFilePanelTitle({ fg = palette.theme, gui = "bold" }),
+    DiffviewFilePanelConflicts({ DiagnosticSignWarn }),
+    DiffviewFilePanelInsertions(vcs.added.label),
+    DiffviewFilePanelPath({ Comment }),
+    DiffviewFilePanelDeletions(vcs.deleted.label),
+    DiffviewFilePanelRootPath({ DiffviewFilePanelTitle }),
+    DiffviewStatusRenamed(vcs.modified.label),
+    DiffviewStatusAdded(vcs.added.label),
+    DiffviewStatusIgnored(vcs.ignored.label),
+    DiffviewStatusBroken(vcs.deleted.label),
+    DiffviewStatusDeleted(vcs.deleted.label),
+    DiffviewStatusUnknown(vcs.deleted.label),
+    DiffviewStatusUnmerged(vcs.modified.label),
+    DiffviewStatusTypeChange(vcs.modified.label),
+    DiffviewStatusCopied(vcs.modified.label),
+    DiffviewStatusModified(vcs.modified.label),
+    DiffviewStatusUntracked(vcs.untracked.label),
     DiffviewReflogSelector({ Special }),
     DiffviewHash(special),
     DiffviewFolderSign({ PreProc }),
     DiffviewFolderName({ Directory }),
-    DiffviewFilePanelConflicts({ DiagnosticSignWarn }),
-    DiffviewFilePanelInsertions({ diffAdded }),
-    DiffviewFilePanelPath({ Comment }),
-    DiffviewFilePanelRootPath({ DiffviewFilePanelTitle }),
     DiffviewCursorLine({ CursorLine }),
     DiffviewNonText({ NonText }),
     DiffviewReference({ Function }),
@@ -1223,10 +1226,7 @@ local theme = lush(function(injected_functions)
     DiffviewDiffAdd({ DiffAdd }),
     DiffviewNormal({ Normal }),
     DiffviewWinSeparator({ WinSeparator }),
-    DiffviewStatusRenamed({ diffChanged }),
-    DiffviewStatusAdded({ diffAdded }),
     DiffviewFilePanelSelected({ Type }),
-    DiffviewFilePanelDeletions({ diffRemoved }),
     DiffviewDiffAddAsDelete({ bg = "red" }),
     DiffviewDiffDeleteDim({ Comment }),
   }
