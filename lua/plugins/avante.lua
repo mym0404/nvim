@@ -37,11 +37,24 @@ return {
   ---@module 'avante'
   ---@type avante.Config
   opts = {
-    provider = "claude",
+    provider = "gemini",
     providers = {
+      ---@type AvanteSupportedProvider
+      copilot = {
+        endpoint = "https://api.githubcopilot.com",
+        model = "gpt-4o-2024-11-20",
+        proxy = nil, -- [protocol://]host[:port] Use this proxy
+        allow_insecure = false, -- Allow insecure server connections
+        timeout = 30000, -- Timeout in milliseconds
+        context_window = 64000, -- Number of tokens to send to the model for context
+        extra_request_body = {
+          temperature = 0.1,
+          max_tokens = 20480,
+        },
+      },
       openai = {
         endpoint = "https://api.openai.com/v1",
-        model = "gpt-4o-mini",
+        model = "gpt-4o",
         timeout = 30000,
         extra_request_body = {
           temperature = 0.20,

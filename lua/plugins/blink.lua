@@ -14,7 +14,7 @@ return {
       "saghen/blink.compat",
       optional = false, -- make optional so it's only enabled if any extras need it
       opts = {},
-      -- version = not vim.g.lazyvim_blink_main and "*",
+      version = not vim.g.lazyvim_blink_main and "*",
     },
     "Kaiser-Yang/blink-cmp-avante",
   },
@@ -186,7 +186,7 @@ return {
       -- adding any nvim-cmp sources here will enable them
       -- with blink.compat
       compat = {},
-      default = { "mj", "copilot", "avante", "lsp", "path", "snippets", "buffer" },
+      default = { "copilot", "avante", "lsp", "path", "snippets", "buffer", "mj" },
       providers = {
         copilot = {
           name = "copilot",
@@ -204,6 +204,7 @@ return {
           module = "utils/blink-source-provider",
           name = "MJ",
           opts = {},
+          async = true,
         },
       },
     },
