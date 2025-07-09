@@ -487,21 +487,50 @@ local function map_copies()
     vim.notify("Copied: " .. path, vim.log.levels.INFO, { title = "Copy File Path" })
   end, { desc = "copy current file path" })
 
-  vim.keymap.set("n", "<leader>yd", function()
+  vim.keymap.set("n", "<leader>yD", function()
     local path = vim.fn.expand("%:h")
     vim.cmd("let @+ = expand('%:h')")
     vim.notify("Copied: " .. path, vim.log.levels.INFO, { title = "Copy Directory Path" })
   end, { desc = "copy current file directory path" })
 
-  vim.keymap.set("n", "<leader>yD", function()
+  vim.keymap.set("n", "<leader>yd", function()
     local diagnostics = vim.diagnostic.get(nil)
-    local formatted_diagnostics = vim.inspect(diagnostics)
-    vim.fn.setreg("+", formatted_diagnostics)
-    vim.notify(
-      "Diagnostics copied to clipboard",
-      vim.log.levels.INFO,
-      { title = "Copy Diagnostics" }
-    )
+    local formatted_diagnostics_list = {}
+    local severity_map = {
+      [vim.diagnostic.severity.ERROR] = "Error",
+      [vim.diagnostic.severity.WARN] = "Warning",
+      [vim.diagnostic.severity.INFO] = "Info",
+      [vim.diagnostic.severity.HINT] = "Hint",
+    }
+    local current_file_path = vim.fn.expand("%:p")
+
+    for _, diag in ipairs(diagnostics) do
+      local severity_str = severity_map[diag.severity] or "Unknown"
+      table.insert(
+        formatted_diagnostics_list,
+        string.format(
+          "%s:%d:%d: %s: [%s] %s",
+          current_file_path,
+          diag.lnum + 1,
+          diag.col + 1,
+          diag.source or "Unknown",
+          severity_str,
+          diag.message
+        )
+      )
+    end
+
+    local final_output = table.concat(formatted_diagnostics_list, "\n")
+    vim.fn.setreg("+", final_output)
+    if #formatted_diagnostics_list == 0 then
+      vim.notify("No diagnostics to copy", vim.log.levels.INFO, { title = "Copy Diagnostics" })
+    else
+      vim.notify(
+        string.format("%d diagnostics copied to clipboard", #formatted_diagnostics_list),
+        vim.log.levels.INFO,
+        { title = "Copy Diagnostics" }
+      )
+    end
   end, { desc = "Copy diagnostics to clipboard" })
 end
 
