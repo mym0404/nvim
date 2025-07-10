@@ -180,8 +180,8 @@ return {
         end,
       },
       ghost_text = {
-        -- enabled = vim.g.ai_cmp,
-        enabled = true,
+        enabled = vim.g.ai_cmp,
+        -- enabled = true,
       },
     },
     -- experimental signature help support
