@@ -29,23 +29,33 @@ return {
     keymap = {
       preset = "default",
       ["<tab>"] = {
-        "accept",
-        "snippet_forward",
+        -- "accept",
+        -- "snippet_forward",
         "fallback",
       },
       -- ["<s-tab>"] = { "accept", "fallback" },
       ["<CR>"] = {
-        -- "accept",
+        "accept",
         "fallback",
       },
     },
     cmdline = {
       enabled = true,
       keymap = {
-        -- asd
-        ["<tab>"] = { "accept_and_enter", "fallback" },
+        ["<tab>"] = { "fallback" },
         -- ["<s-tab>"] = { "select_prev", "fallback" },
         ["<CR>"] = {
+          function()
+            if vim.fn.getcmdtype() == ":" then
+              local cmp = require("blink-cmp")
+              if cmp.is_visible() then
+                require("blink-cmp").accept_and_enter()
+                return true
+              end
+              return false
+            end
+            return false
+          end,
           "fallback",
         },
       },
@@ -194,16 +204,16 @@ return {
       -- adding any nvim-cmp sources here will enable them
       -- with blink.compat
       compat = {},
-      default = { "copilot", "avante", "lsp", "path", "snippets", "buffer", "mj" },
+      default = { "avante", "lsp", "path", "snippets", "buffer", "mj" },
 
       providers = {
-        copilot = {
-          name = "copilot",
-          module = "blink-cmp-copilot",
-          kind = "Copilot",
-          score_offset = -10,
-          async = true,
-        },
+        -- copilot = {
+        --   name = "copilot",
+        --   module = "blink-cmp-copilot",
+        --   kind = "Copilot",
+        --   score_offset = -10,
+        --   async = true,
+        -- },
         avante = {
           module = "blink-cmp-avante",
           name = "Avante",
