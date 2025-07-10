@@ -194,15 +194,17 @@ return {
       -- adding any nvim-cmp sources here will enable them
       -- with blink.compat
       compat = {},
-      default = { "copilot", "avante", "lsp", "path", "snippets", "buffer", "mj" },
+      default = { "avante", "lsp", "path", "snippets", "buffer", "mj" },
+
       providers = {
-        copilot = {
-          name = "copilot",
-          module = "blink-cmp-copilot",
-          kind = "Copilot",
-          score_offset = 100,
-          async = true,
-        },
+        -- copilot = {
+        --   enabled = vim.g.ai_cmp,
+        --   name = "copilot",
+        --   module = "blink-cmp-copilot",
+        --   kind = "Copilot",
+        --   score_offset = 100,
+        --   async = true,
+        -- },
         avante = {
           module = "blink-cmp-avante",
           name = "Avante",
@@ -212,7 +214,7 @@ return {
           module = "utils/blink-source-provider",
           name = "MJ",
           opts = {},
-          async = true,
+          score_offset = -10,
         },
       },
     },

@@ -19,7 +19,7 @@ return {
     history = true,
     delete_check_events = "TextChanged",
     load_ft_func = function(bufnr)
-      local ft = vim.bo.filetype
+      local ft = vim.bo[bufnr].filetype
       local is_react = ft == "javascript"
         or ft == "typescript"
         or ft == "javascriptreact"

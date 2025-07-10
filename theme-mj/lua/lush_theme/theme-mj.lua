@@ -18,7 +18,7 @@ local palette = {
   untracked_label = "#E0787C",
   untracked_undercurl = "#E0787C",
   text = "#ffffff",
-  text_sub = "#6D6D73",
+  text_sub = "#737373",
   text_sub2 = "#333333",
 }
 local special = { fg = "#c79cff", bg = "#2a2136", gui = "bold" }
@@ -104,6 +104,9 @@ local theme = lush(function(injected_functions)
     Substitute({ bg = "#0036a3", fg = "white", gui = "bold" }),
     Number(code.number),
     CursorLine({ bg = "#323232" }),
+
+    CopilotAnnotation(special),
+    CopilotSuggestion({ fg = "#779abf" }),
 
     Search(searched),
     IncSearch(searched_selected),
