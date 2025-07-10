@@ -494,7 +494,7 @@ local function map_copies()
     local path = vim.fn.expand("%:.")
     vim.fn.setreg("+", path)
     vim.notify("Copied: " .. path, vim.log.levels.INFO, { title = "Copy File Path" })
-  end, { desc = "copy current file path" })
+  end, { desc = "copy current file path", nowait = true })
 
   vim.keymap.set("n", "yd", function()
     local file_path = vim.fn.expand("%:p")
@@ -504,7 +504,7 @@ local function map_copies()
     end
     vim.fn.setreg("+", relative_path)
     vim.notify("Copied: " .. relative_path, vim.log.levels.INFO, { title = "Copy Directory Path" })
-  end, { desc = "copy current file directory path" })
+  end, { desc = "copy current file directory path", nowait = true })
 
   vim.keymap.set("n", "yl", function()
     local file_path = vim.fn.expand("%:p")
@@ -516,7 +516,7 @@ local function map_copies()
     local path_with_line = relative_path .. ":" .. line_num
     vim.fn.setreg("+", path_with_line)
     vim.notify("Copied: " .. path_with_line, vim.log.levels.INFO, { title = "Copy File with line" })
-  end, { desc = "copy current file with line" })
+  end, { desc = "copy current file with line", nowait = true })
 
   vim.keymap.set("v", "yl", function()
     local file_path = vim.fn.expand("%:p")
@@ -534,7 +534,7 @@ local function map_copies()
       { title = "Copy File with line range" }
     )
     utils.go_to_normal_mode()
-  end, { desc = "copy current file with line range" })
+  end, { desc = "copy current file with line range", nowait = true })
 
   vim.keymap.set("n", "yw", function()
     local current_bufnr = vim.api.nvim_get_current_buf()
@@ -612,7 +612,7 @@ local function map_copies()
         { title = "Copy Diagnostics" }
       )
     end
-  end, { desc = "Copy diagnostics to clipboard" })
+  end, { desc = "Copy diagnostics to clipboard", nowait = true })
 end
 
 reset_keymaps()

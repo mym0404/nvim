@@ -80,10 +80,11 @@ local function setup_core()
 		c.dpi = 96
 	end
 
+	local transparency_mode = true
 	local blur_mode = false
 	local little_blur = true
-	c.window_background_opacity = blur_mode and is_macos and 0.1 or 0.9
-	c.macos_window_background_blur = blur_mode and (little_blur and 20 or 40) or 0
+	c.window_background_opacity = transparency_mode and 0.45 or blur_mode and is_macos and 0.2 or 0.9
+	c.macos_window_background_blur = transparency_mode and 0 or blur_mode and (little_blur and 20 or 40) or 0
 	-- Removes the title bar, leaving only the tab bar. Keeps
 	-- the ability to resize by dragging the window's edges.
 	-- On macOS, 'RESIZE|INTEGRATED_BUTTONS' also looks nice if
