@@ -536,83 +536,92 @@ local function map_copies()
     utils.go_to_normal_mode()
   end, { desc = "copy current file with line range", nowait = true })
 
-  vim.keymap.set("n", "yw", function()
-    local current_bufnr = vim.api.nvim_get_current_buf()
-    local formatted_diagnostics_list = {}
-    local severity_map = {
-      [vim.diagnostic.severity.ERROR] = "Error",
-      [vim.diagnostic.severity.WARN] = "Warning",
-      -- [vim.diagnostic.severity.INFO] = "Info",
-      -- [vim.diagnostic.severity.HINT] = "Hint",
-    }
+  local function register_diagnostic_yank(command, severity_map)
+    vim.keymap.set("n", command, function()
+      local current_bufnr = vim.api.nvim_get_current_buf()
+      local formatted_diagnostics_list = {}
 
-    local current_filetype = vim.bo[current_bufnr].filetype
-    local js_filetypes = {
-      javascript = true,
-      javascriptreact = true,
-      typescript = true,
-      typescriptreact = true,
-    }
+      local current_filetype = vim.bo[current_bufnr].filetype
+      local js_filetypes = {
+        javascript = true,
+        javascriptreact = true,
+        typescript = true,
+        typescriptreact = true,
+      }
 
-    local function normalize_filetype(ft)
-      if js_filetypes[ft] then
-        return "javascript"
+      local function normalize_filetype(ft)
+        if js_filetypes[ft] then
+          return "javascript"
+        end
+        return ft
       end
-      return ft
-    end
 
-    local normalized_current_ft = normalize_filetype(current_filetype)
+      local normalized_current_ft = normalize_filetype(current_filetype)
 
-    -- Get all loaded buffers and filter diagnostics from them
-    local loaded_buffers = vim.api.nvim_list_bufs()
-    for _, bufnr in ipairs(loaded_buffers) do
-      if vim.api.nvim_buf_is_loaded(bufnr) then
-        local diag_filetype = vim.bo[bufnr].filetype
-        local normalized_diag_ft = normalize_filetype(diag_filetype)
+      -- Get all loaded buffers and filter diagnostics from them
+      local loaded_buffers = vim.api.nvim_list_bufs()
+      for _, bufnr in ipairs(loaded_buffers) do
+        if vim.api.nvim_buf_is_loaded(bufnr) then
+          local diag_filetype = vim.bo[bufnr].filetype
+          local normalized_diag_ft = normalize_filetype(diag_filetype)
 
-        if normalized_diag_ft == normalized_current_ft then
-          local buffer_diagnostics = vim.diagnostic.get(bufnr)
-          for _, diag in ipairs(buffer_diagnostics) do
-            local severity_str = severity_map[diag.severity] or "Unknown"
-            if severity_str ~= "Unknown" then
-              local file_path = vim.api.nvim_buf_get_name(bufnr)
+          if normalized_diag_ft == normalized_current_ft then
+            local buffer_diagnostics = vim.diagnostic.get(bufnr)
+            for _, diag in ipairs(buffer_diagnostics) do
+              local severity_str = severity_map[diag.severity] or "Unknown"
+              if severity_str ~= "Unknown" then
+                local file_path = vim.api.nvim_buf_get_name(bufnr)
 
-              -- Convert to relative path from project root
-              local relative_path = vim.fn.fnamemodify(file_path, ":.")
-              if vim.startswith(relative_path, "/") then
-                relative_path = file_path
-              end
+                -- Convert to relative path from project root
+                local relative_path = vim.fn.fnamemodify(file_path, ":.")
+                if vim.startswith(relative_path, "/") then
+                  relative_path = file_path
+                end
 
-              table.insert(
-                formatted_diagnostics_list,
-                string.format(
-                  "%s:%d:%d: %s: [%s] %s",
-                  relative_path,
-                  diag.lnum + 1,
-                  diag.col + 1,
-                  diag.source or "Unknown",
-                  severity_str,
-                  diag.message
+                table.insert(
+                  formatted_diagnostics_list,
+                  string.format(
+                    "%s:%d:%d: %s: [%s] %s",
+                    relative_path,
+                    diag.lnum + 1,
+                    diag.col + 1,
+                    diag.source or "Unknown",
+                    severity_str,
+                    diag.message
+                  )
                 )
-              )
+              end
             end
           end
         end
       end
-    end
 
-    local final_output = table.concat(formatted_diagnostics_list, "\n")
-    vim.fn.setreg("+", final_output)
-    if #formatted_diagnostics_list == 0 then
-      vim.notify("No diagnostics to copy", vim.log.levels.WARN, { title = "Copy Diagnostics" })
-    else
-      vim.notify(
-        string.format("%d diagnostics copied to clipboard", #formatted_diagnostics_list),
-        vim.log.levels.INFO,
-        { title = "Copy Diagnostics" }
-      )
-    end
-  end, { desc = "Copy diagnostics to clipboard", nowait = true })
+      local final_output = table.concat(formatted_diagnostics_list, "\n")
+      vim.fn.setreg("+", final_output)
+      if #formatted_diagnostics_list == 0 then
+        vim.notify("No diagnostics to copy", vim.log.levels.WARN, { title = "Copy Diagnostics" })
+      else
+        vim.notify(
+          string.format("%d diagnostics copied to clipboard", #formatted_diagnostics_list),
+          vim.log.levels.INFO,
+          { title = "Copy Diagnostics" }
+        )
+      end
+    end, { desc = "Copy diagnostics to clipboard", nowait = true })
+  end
+
+  register_diagnostic_yank("yx", {
+    vim.diagnostic.severity.ERROR,
+    vim.diagnostic.severity.WARN,
+    vim.diagnostic.severity.INFO,
+    vim.diagnostic.severity.HINT,
+  })
+  register_diagnostic_yank("yw", {
+    vim.diagnostic.severity.ERROR,
+    vim.diagnostic.severity.WARN,
+    -- vim.diagnostic.severity.INFO,
+    -- vim.diagnostic.severity.HINT,
+  })
 end
 
 reset_keymaps()
