@@ -82,7 +82,7 @@ return {
         },
       },
       menu = {
-        -- min_width = 50,
+        max_height = 20,
         draw = {
           padding = 1,
           gap = 1,
@@ -147,7 +147,7 @@ return {
           border = "rounded",
           winblend = 0,
           desired_min_height = 60,
-          max_height = 60,
+          max_height = 90,
           min_width = 40,
           max_width = 70,
           desired_min_width = 40,
@@ -194,17 +194,16 @@ return {
       -- adding any nvim-cmp sources here will enable them
       -- with blink.compat
       compat = {},
-      default = { "avante", "lsp", "path", "snippets", "buffer", "mj" },
+      default = { "copilot", "avante", "lsp", "path", "snippets", "buffer", "mj" },
 
       providers = {
-        -- copilot = {
-        --   enabled = vim.g.ai_cmp,
-        --   name = "copilot",
-        --   module = "blink-cmp-copilot",
-        --   kind = "Copilot",
-        --   score_offset = 100,
-        --   async = true,
-        -- },
+        copilot = {
+          name = "copilot",
+          module = "blink-cmp-copilot",
+          kind = "Copilot",
+          score_offset = -10,
+          async = true,
+        },
         avante = {
           module = "blink-cmp-avante",
           name = "Avante",

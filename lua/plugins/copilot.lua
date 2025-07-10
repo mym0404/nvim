@@ -27,9 +27,9 @@ return {
       hide_during_completion = false,
 
       keymap = {
-        accept = "<c-e>",
-        next = "<c-]>",
-        prev = "<c-[>",
+        -- accept = "<c-e>",
+        -- next = "<c-]>",
+        -- prev = "<c-[>",
       },
     },
     panel = { enabled = false },

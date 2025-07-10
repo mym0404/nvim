@@ -69,4 +69,4 @@ opt.foldenable = true
 opt.laststatus = 3
 vim.o.winborder = "rounded"
 
-vim.g.ai_cmp = false
+vim.g.ai_cmp = true
