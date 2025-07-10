@@ -490,49 +490,121 @@ local function map_close_bracket()
 end
 
 local function map_copies()
-  vim.keymap.set("n", "<leader>yf", function()
-    local path = vim.fn.expand("%:p")
-    vim.cmd("let @+ = expand('%:p')")
+  vim.keymap.set("n", "yf", function()
+    local path = vim.fn.expand("%:.")
+    vim.fn.setreg("+", path)
     vim.notify("Copied: " .. path, vim.log.levels.INFO, { title = "Copy File Path" })
   end, { desc = "copy current file path" })
 
-  vim.keymap.set("n", "<leader>yD", function()
-    local path = vim.fn.expand("%:h")
-    vim.cmd("let @+ = expand('%:h')")
-    vim.notify("Copied: " .. path, vim.log.levels.INFO, { title = "Copy Directory Path" })
+  vim.keymap.set("n", "yd", function()
+    local file_path = vim.fn.expand("%:p")
+    local relative_path = vim.fn.fnamemodify(file_path, ":.:h")
+    if vim.startswith(relative_path, "/") then
+      relative_path = vim.fn.expand("%:h")
+    end
+    vim.fn.setreg("+", relative_path)
+    vim.notify("Copied: " .. relative_path, vim.log.levels.INFO, { title = "Copy Directory Path" })
   end, { desc = "copy current file directory path" })
 
-  vim.keymap.set("n", "<leader>yd", function()
-    local diagnostics = vim.diagnostic.get(nil)
+  vim.keymap.set("n", "yl", function()
+    local file_path = vim.fn.expand("%:p")
+    local relative_path = vim.fn.fnamemodify(file_path, ":.")
+    if vim.startswith(relative_path, "/") then
+      relative_path = file_path
+    end
+    local line_num = vim.fn.line(".")
+    local path_with_line = relative_path .. ":" .. line_num
+    vim.fn.setreg("+", path_with_line)
+    vim.notify("Copied: " .. path_with_line, vim.log.levels.INFO, { title = "Copy File with line" })
+  end, { desc = "copy current file with line" })
+
+  vim.keymap.set("v", "yl", function()
+    local file_path = vim.fn.expand("%:p")
+    local relative_path = vim.fn.fnamemodify(file_path, ":.")
+    if vim.startswith(relative_path, "/") then
+      relative_path = file_path
+    end
+    local start_line, end_line = utils.get_start_and_end_lines()
+    local path_with_lines = start_line == end_line and relative_path .. ":" .. start_line
+      or relative_path .. ":" .. start_line .. "-" .. end_line
+    vim.fn.setreg("+", path_with_lines)
+    vim.notify(
+      "Copied: " .. path_with_lines,
+      vim.log.levels.INFO,
+      { title = "Copy File with line range" }
+    )
+    utils.go_to_normal_mode()
+  end, { desc = "copy current file with line range" })
+
+  vim.keymap.set("n", "yw", function()
+    local current_bufnr = vim.api.nvim_get_current_buf()
     local formatted_diagnostics_list = {}
     local severity_map = {
       [vim.diagnostic.severity.ERROR] = "Error",
       [vim.diagnostic.severity.WARN] = "Warning",
-      [vim.diagnostic.severity.INFO] = "Info",
-      [vim.diagnostic.severity.HINT] = "Hint",
+      -- [vim.diagnostic.severity.INFO] = "Info",
+      -- [vim.diagnostic.severity.HINT] = "Hint",
     }
-    local current_file_path = vim.fn.expand("%:p")
 
-    for _, diag in ipairs(diagnostics) do
-      local severity_str = severity_map[diag.severity] or "Unknown"
-      table.insert(
-        formatted_diagnostics_list,
-        string.format(
-          "%s:%d:%d: %s: [%s] %s",
-          current_file_path,
-          diag.lnum + 1,
-          diag.col + 1,
-          diag.source or "Unknown",
-          severity_str,
-          diag.message
-        )
-      )
+    local current_filetype = vim.bo[current_bufnr].filetype
+    local js_filetypes = {
+      javascript = true,
+      javascriptreact = true,
+      typescript = true,
+      typescriptreact = true,
+    }
+
+    local function normalize_filetype(ft)
+      if js_filetypes[ft] then
+        return "javascript"
+      end
+      return ft
+    end
+
+    local normalized_current_ft = normalize_filetype(current_filetype)
+
+    -- Get all loaded buffers and filter diagnostics from them
+    local loaded_buffers = vim.api.nvim_list_bufs()
+    for _, bufnr in ipairs(loaded_buffers) do
+      if vim.api.nvim_buf_is_loaded(bufnr) then
+        local diag_filetype = vim.bo[bufnr].filetype
+        local normalized_diag_ft = normalize_filetype(diag_filetype)
+
+        if normalized_diag_ft == normalized_current_ft then
+          local buffer_diagnostics = vim.diagnostic.get(bufnr)
+          for _, diag in ipairs(buffer_diagnostics) do
+            local severity_str = severity_map[diag.severity] or "Unknown"
+            if severity_str ~= "Unknown" then
+              local file_path = vim.api.nvim_buf_get_name(bufnr)
+
+              -- Convert to relative path from project root
+              local relative_path = vim.fn.fnamemodify(file_path, ":.")
+              if vim.startswith(relative_path, "/") then
+                relative_path = file_path
+              end
+
+              table.insert(
+                formatted_diagnostics_list,
+                string.format(
+                  "%s:%d:%d: %s: [%s] %s",
+                  relative_path,
+                  diag.lnum + 1,
+                  diag.col + 1,
+                  diag.source or "Unknown",
+                  severity_str,
+                  diag.message
+                )
+              )
+            end
+          end
+        end
+      end
     end
 
     local final_output = table.concat(formatted_diagnostics_list, "\n")
     vim.fn.setreg("+", final_output)
     if #formatted_diagnostics_list == 0 then
-      vim.notify("No diagnostics to copy", vim.log.levels.INFO, { title = "Copy Diagnostics" })
+      vim.notify("No diagnostics to copy", vim.log.levels.WARN, { title = "Copy Diagnostics" })
     else
       vim.notify(
         string.format("%d diagnostics copied to clipboard", #formatted_diagnostics_list),
