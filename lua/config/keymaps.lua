@@ -62,6 +62,15 @@ end
 
 local function map_esc()
   vim.keymap.set("x", "q", "<Esc>", { silent = true, desc = "Exit visual mode with q" })
+  -- if blink.cmp completion menu is showing, close it or return <esc> itself
+  vim.keymap.set("i", "<esc>", function()
+    local cmp = require("blink.cmp")
+    if cmp.is_menu_visible() then
+      cmp.hide()
+      return ""
+    end
+    return "<Esc>"
+  end, { silent = true, expr = true })
 end
 
 local function configure_git_diff()
@@ -494,7 +503,7 @@ local function map_copies()
     local path = vim.fn.expand("%:.")
     vim.fn.setreg("+", path)
     vim.notify("Copied: " .. path, vim.log.levels.INFO, { title = "Copy File Path" })
-  end, { desc = "copy current file path", nowait = true })
+  end, { desc = "copy current file path" })
 
   vim.keymap.set("n", "yd", function()
     local file_path = vim.fn.expand("%:p")
@@ -504,7 +513,7 @@ local function map_copies()
     end
     vim.fn.setreg("+", relative_path)
     vim.notify("Copied: " .. relative_path, vim.log.levels.INFO, { title = "Copy Directory Path" })
-  end, { desc = "copy current file directory path", nowait = true })
+  end, { desc = "copy current file directory path" })
 
   vim.keymap.set("n", "yl", function()
     local file_path = vim.fn.expand("%:p")
@@ -516,7 +525,7 @@ local function map_copies()
     local path_with_line = relative_path .. ":" .. line_num
     vim.fn.setreg("+", path_with_line)
     vim.notify("Copied: " .. path_with_line, vim.log.levels.INFO, { title = "Copy File with line" })
-  end, { desc = "copy current file with line", nowait = true })
+  end, { desc = "copy current file with line" })
 
   vim.keymap.set("v", "yl", function()
     local file_path = vim.fn.expand("%:p")
@@ -534,7 +543,7 @@ local function map_copies()
       { title = "Copy File with line range" }
     )
     utils.go_to_normal_mode()
-  end, { desc = "copy current file with line range", nowait = true })
+  end, { desc = "copy current file with line range" })
 
   local function register_diagnostic_yank(command, severity_map)
     vim.keymap.set("n", command, function()
@@ -607,7 +616,7 @@ local function map_copies()
           { title = "Copy Diagnostics" }
         )
       end
-    end, { desc = "Copy diagnostics to clipboard", nowait = true })
+    end, { desc = "Copy diagnostics to clipboard" })
   end
 
   register_diagnostic_yank("yx", {
