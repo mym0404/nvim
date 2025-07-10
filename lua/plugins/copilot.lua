@@ -27,7 +27,7 @@ return {
       hide_during_completion = false,
 
       keymap = {
-        accept = "<c-.>",
+        accept = "<c-e>",
         next = "<c-]>",
         prev = "<c-[>",
       },
