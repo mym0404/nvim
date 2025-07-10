@@ -30,7 +30,7 @@ return {
       preset = "default",
       ["<tab>"] = {
         -- "accept",
-        -- "snippet_forward",
+        "snippet_forward",
         "fallback",
       },
       -- ["<s-tab>"] = { "accept", "fallback" },
