@@ -292,15 +292,15 @@ local function map_hover_scroll()
 end
 
 local function configure_lsp()
-  vim.api.nvim_create_autocmd("BufWritePre", {
-    callback = function(opts)
-      if utils.is_js_ft(opts.buf) then
-        require("vtsls.commands").remove_unused_imports()
-        vim.lsp.buf.format({})
-      end
-    end,
-    desc = "remove unused imports on save",
-  })
+  -- vim.api.nvim_create_autocmd("BufWritePre", {
+  --   callback = function(opts)
+  --     if utils.is_js_ft(opts.buf) then
+  --       require("vtsls.commands").remove_unused_imports()
+  --       vim.lsp.buf.format({})
+  --     end
+  --   end,
+  --   desc = "remove unused imports on save",
+  -- })
   vim.keymap.set("n", "<leader>co", function()
     if utils.is_js_ft() then
       -- require("vtsls.commands").remove_unused_imports()
