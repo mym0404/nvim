@@ -22,6 +22,7 @@ local palette = {
   text_sub2 = "#333333",
 }
 local special = { fg = "#c79cff", bg = "#2a2136", gui = "bold" }
+local special_theme = { fg = palette.theme, bg = "#0d254d", gui = "bold" }
 local text = { fg = palette.text }
 local text_sub = { fg = palette.text_sub }
 local visual = { bg = "#214283" }
@@ -1232,6 +1233,35 @@ local theme = lush(function(injected_functions)
     DiffviewFilePanelSelected({ Type }),
     DiffviewDiffAddAsDelete({ bg = "red" }),
     DiffviewDiffDeleteDim({ Comment }),
+
+    GrugFarHelpWinHeader({ Title }),
+    GrugFarHelpHeaderKey({ Identifier }),
+    GrugFarHelpHeader({ ModeMsg }),
+    GrugFarResultsMatchRemoved({ DiffDelete }),
+    GrugFarResultsMatchAdded({ DiffAdd }),
+    GrugFarHelpWinActionKey({ Identifier }),
+    GrugFarResultsMatch({ DiffText }),
+    GrugFarResultsActionMessage({ ModeMsg }),
+    GrugFarInputPlaceholder(text_sub),
+    GrugFarResultsStats(special),
+    GrugFarResultsChangeIndicator({}),
+    GrugFarResultsLineNr({ LineNr }),
+    GrugFarResultsNumbersSeparator({ GrugFarResultsLineNr }),
+    GrugFarResultsColumnNr({ GrugFarResultsLineNr }),
+    GrugFarResultsCursorLineNo({ CursorLineNr }),
+    GrugFarResultsPath({ Underlined }),
+    GrugFarResultsLongLineStr(special),
+    GrugFarResultsNumberLabel({ Identifier }),
+    GrugFarResultsCmdHeader({ Underlined }),
+    GrugFarResultsDiffSeparatorIndicator({ Normal }),
+    GrugFarResultsAddIndicator({}),
+    GrugFarResultsHeader(special_theme),
+    GrugFarResultsRemoveIndicator({}),
+    GrugFarInputLabel({ Title }),
+    GrugFarHelpWinActionDescription({ NormalFloat }),
+    GrugFarVisualBufrange({ Visual }),
+    GrugFarHelpWinActionText({ ModeMsg }),
+    GrugFarHelpWinActionPrefix({ Title }),
   }
 end)
 return theme
