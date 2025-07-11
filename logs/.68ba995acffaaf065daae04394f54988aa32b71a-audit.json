@@ -1,0 +1,15 @@
+{
+    "keep": {
+        "days": true,
+        "amount": 14
+    },
+    "auditLog": "/Users/mj/.config/nvim/logs/.68ba995acffaaf065daae04394f54988aa32b71a-audit.json",
+    "files": [
+        {
+            "date": 1752241083102,
+            "name": "/Users/mj/.config/nvim/logs/mcp-puppeteer-2025-07-11.log",
+            "hash": "179fb75cad2c27e3b25cd23a52a5cbaa70c8b246e031c7914cb2503f0d01aa18"
+        }
+    ],
+    "hashType": "sha256"
+}
