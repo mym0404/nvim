@@ -6,7 +6,7 @@ name = MJ Studio
 email = mym0404@gmail.com
 
 [core]
-excludesfile = ~/.gitignore_global
+excludesfile = ~/.gitignore
 autocrlf = input
 compression = 0
 filemode = false
@@ -163,4 +163,13 @@ allowedSignersFile =
 
 [credential]
 helper = osxkeychain
+```
+
+```yml filename="~/.gitignore"
+*~
+**/.DS_Store
+.idea
+!.vscode/tasks.json
+!.vscode/launch.json
+**/.claude/settings.local.json
 ```
