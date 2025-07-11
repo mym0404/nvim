@@ -292,22 +292,26 @@ local function map_hover_scroll()
 end
 
 local function configure_lsp()
-  -- vim.api.nvim_create_autocmd("BufWritePre", {
-  --   callback = function(opts)
-  --     if utils.is_js_ft(opts.buf) then
-  --       require("vtsls.commands").remove_unused_imports()
-  --     end
-  --   end,
-  --   desc = "remove unused imports on save",
-  -- })
-  -- vim.keymap.set("n", "<leader>co", function()
-  --   local context = {
-  --     diagnostics = vim.diagnostic.get_line_diagnostics(),
-  --     only = { "source.organizeImports" },
-  --   }
-  --   vim.lsp.buf.code_action({ context = context, apply = true })
-  --   vim.lsp.buf.format({ async = true, timeout_ms = 1000 })
-  -- end, { desc = "Organize Import", silent = true })
+  vim.api.nvim_create_autocmd("BufWritePre", {
+    callback = function(opts)
+      if utils.is_js_ft(opts.buf) then
+        require("vtsls.commands").remove_unused_imports()
+      end
+    end,
+    desc = "remove unused imports on save",
+  })
+  vim.keymap.set("n", "<leader>co", function()
+    if utils.is_js_ft() then
+      -- require("vtsls.commands").remove_unused_imports()
+      return
+    end
+    local context = {
+      diagnostics = vim.diagnostic.get_line_diagnostics(),
+      only = { "source.organizeImports" },
+    }
+    vim.lsp.buf.code_action({ context = context, apply = true })
+    vim.lsp.buf.format({ async = true, timeout_ms = 1000 })
+  end, { desc = "Organize Import", silent = true })
 
   vim.keymap.set("n", "<leader>cm", function()
     if utils.is_js_ft() then
