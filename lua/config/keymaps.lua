@@ -27,7 +27,7 @@ local function map_comments()
 end
 
 local function customizeExitInsertMode()
-  local keys = { "jk" }
+  local keys = { "jk", "jj" }
   for _, key in ipairs(keys) do
     vim.keymap.set(
       { "i" },
@@ -296,6 +296,7 @@ local function configure_lsp()
     callback = function(opts)
       if utils.is_js_ft(opts.buf) then
         require("vtsls.commands").remove_unused_imports()
+        vim.lsp.buf.format({})
       end
     end,
     desc = "remove unused imports on save",

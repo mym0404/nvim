@@ -106,7 +106,7 @@ local theme = lush(function(injected_functions)
     CursorLine({ bg = "#323232" }),
 
     CopilotAnnotation(special),
-    CopilotSuggestion({ fg = "#b8c0db" }),
+    CopilotSuggestion({ fg = "#98b0cb" }),
 
     Search(searched),
     IncSearch(searched_selected),
