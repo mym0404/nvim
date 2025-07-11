@@ -5,7 +5,30 @@
   "selectedAuthType": "gemini-api-key",
   "theme": "Default",
   "preferredEditor": "neovim",
-  "usageStatisticEnabled": false
+  "usageStatisticEnabled": false,
+  "mcpServers": {
+    "puppeteer": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "puppeteer-mcp-server"
+      ]
+    },
+    "github": {
+      "command": "docker",
+      "args": [
+        "run",
+        "-i",
+        "--rm",
+        "-e",
+        "GITHUB_PERSONAL_ACCESS_TOKEN",
+        "ghcr.io/github/github-mcp-server"
+      ],
+      "env": {
+        "GITHUB_PERSONAL_ACCESS_TOKEN": "${GITHUB_TOKEN}"
+      }
+    }
+  }
 }
 ```
 
