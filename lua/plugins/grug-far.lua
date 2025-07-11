@@ -12,6 +12,9 @@ return {
       prevInput = { n = "<s-tab>" },
     },
     -- Use floating window
-    windowCreationCommand = "lua require('nui.popup')({ enter = true, focusable = true, border = { style = 'rounded' }, position = '50%', size = { width = '90%', height = '80%' } }):mount()",
+    windowCreationCommand = "tabnew",
+    openTargetWindow = {
+      preferredLocation = "right",
+    },
   },
 }

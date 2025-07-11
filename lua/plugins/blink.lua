@@ -24,7 +24,7 @@ return {
   ---@type blink.cmp.Config
   opts = {
     enabled = function()
-      return not vim.tbl_contains({ "AvantePromptInput" }, vim.bo.filetype)
+      return not vim.tbl_contains({ "AvantePromptInput", "grug-far" }, vim.bo.filetype)
     end,
     keymap = {
       preset = "default",
