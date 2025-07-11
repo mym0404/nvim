@@ -505,45 +505,44 @@ end
 
 local function map_copies()
   vim.keymap.set("n", "yf", function()
-    local path = vim.fn.expand("%:.")
-    vim.fn.setreg("+", path)
-    vim.notify("Copied: " .. path, vim.log.levels.INFO, { title = "Copy File Path" })
+    local absolute_path = vim.fn.expand("%:p")
+    local relative_path = vim.fn.expand("%:.")
+    vim.fn.setreg("+", absolute_path)
+    vim.notify("Copied: " .. relative_path, vim.log.levels.INFO, { title = "Copy File Path" })
   end, { desc = "copy current file path" })
 
   vim.keymap.set("n", "yd", function()
-    local file_path = vim.fn.expand("%:p")
-    local relative_path = vim.fn.fnamemodify(file_path, ":.:h")
-    if vim.startswith(relative_path, "/") then
-      relative_path = vim.fn.expand("%:h")
-    end
-    vim.fn.setreg("+", relative_path)
-    vim.notify("Copied: " .. relative_path, vim.log.levels.INFO, { title = "Copy Directory Path" })
+    local absolute_dir = vim.fn.expand("%:p:h")
+    local relative_dir = vim.fn.expand("%:.:h")
+    vim.fn.setreg("+", absolute_dir)
+    vim.notify("Copied: " .. relative_dir, vim.log.levels.INFO, { title = "Copy Directory Path" })
   end, { desc = "copy current file directory path" })
 
   vim.keymap.set("n", "yl", function()
-    local file_path = vim.fn.expand("%:p")
-    local relative_path = vim.fn.fnamemodify(file_path, ":.")
-    if vim.startswith(relative_path, "/") then
-      relative_path = file_path
-    end
+    local absolute_path = vim.fn.expand("%:p")
+    local relative_path = vim.fn.expand("%:.")
     local line_num = vim.fn.line(".")
-    local path_with_line = relative_path .. ":" .. line_num
-    vim.fn.setreg("+", path_with_line)
-    vim.notify("Copied: " .. path_with_line, vim.log.levels.INFO, { title = "Copy File with line" })
+    local absolute_path_with_line = absolute_path .. ":" .. line_num
+    local relative_path_with_line = relative_path .. ":" .. line_num
+    vim.fn.setreg("+", absolute_path_with_line)
+    vim.notify(
+      "Copied: " .. relative_path_with_line,
+      vim.log.levels.INFO,
+      { title = "Copy File with line" }
+    )
   end, { desc = "copy current file with line" })
 
   vim.keymap.set("v", "yl", function()
-    local file_path = vim.fn.expand("%:p")
-    local relative_path = vim.fn.fnamemodify(file_path, ":.")
-    if vim.startswith(relative_path, "/") then
-      relative_path = file_path
-    end
+    local absolute_path = vim.fn.expand("%:p")
+    local relative_path = vim.fn.expand("%:.")
     local start_line, end_line = utils.get_start_and_end_lines()
-    local path_with_lines = start_line == end_line and relative_path .. ":" .. start_line
+    local absolute_path_with_lines = start_line == end_line and absolute_path .. ":" .. start_line
+      or absolute_path .. ":" .. start_line .. "-" .. end_line
+    local relative_path_with_lines = start_line == end_line and relative_path .. ":" .. start_line
       or relative_path .. ":" .. start_line .. "-" .. end_line
-    vim.fn.setreg("+", path_with_lines)
+    vim.fn.setreg("+", absolute_path_with_lines)
     vim.notify(
-      "Copied: " .. path_with_lines,
+      "Copied: " .. relative_path_with_lines,
       vim.log.levels.INFO,
       { title = "Copy File with line range" }
     )
