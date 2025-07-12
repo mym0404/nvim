@@ -23,6 +23,7 @@ local palette = {
 }
 local special = { fg = "#c79cff", bg = "#2a2136", gui = "bold" }
 local special_theme = { fg = palette.theme, bg = "#0d254d", gui = "bold" }
+local match_text = special_theme
 local text = { fg = palette.text }
 local text_sub = { fg = palette.text_sub }
 local visual = { bg = "#214283" }
@@ -553,7 +554,7 @@ local theme = lush(function(injected_functions)
     BlinkCmpScrollBarThumb({ PmenuThumb }),
     BlinkCmpSignatureHelpActiveParameter({ LspSignatureActiveParameter }),
     BlinkCmpSignatureHelpBorder(border),
-    BlinkCmpLabelMatch(special),
+    BlinkCmpLabelMatch(match_text),
     Bold({ gui = "bold" }),
     Boolean(code.keyword),
     Character(code.string),
@@ -724,7 +725,7 @@ local theme = lush(function(injected_functions)
     NoicePopupBorder(border),
     NoicePopupmenu({ Pmenu }),
     NoicePopupmenuBorder(border),
-    NoicePopupmenuMatch(special),
+    NoicePopupmenuMatch(match_text),
     NoicePopupmenuSelected({ PmenuSel }),
     NoiceScrollbarThumb({ PmenuThumb }),
     NoiceSplit({ NormalFloat }),
@@ -879,7 +880,7 @@ local theme = lush(function(injected_functions)
     SnacksPickerLspUnavailable({ fg = DiagnosticError.fg }),
     SnacksPickerManPage(special),
     SnacksPickerManSection({ Number }),
-    SnacksPickerMatch(special),
+    SnacksPickerMatch(match_text),
     SnacksPickerPathHidden(text),
     SnacksPickerPathIgnored(vcs.ignored.label),
     SnacksPickerPickWin({ Search }),
