@@ -27,7 +27,8 @@ local match_text = special_theme
 local text = { fg = palette.text }
 local text_sub = { fg = palette.text_sub }
 local visual = { bg = "#214283" }
-local searched = { bg = "#46ba1c", fg = palette.text }
+-- local searched = { bg = "#46ba1c", fg = palette.text }
+local searched = match_text
 local searched_selected = { fg = palette.text, bg = "#db16a3", gui = "bold" }
 local folded = { bg = "#281e2e", fg = "white", gui = "italic" }
 local border = { fg = "#424242" }
@@ -1238,10 +1239,10 @@ local theme = lush(function(injected_functions)
     GrugFarHelpWinHeader({ Title }),
     GrugFarHelpHeaderKey({ Identifier }),
     GrugFarHelpHeader({ ModeMsg }),
-    GrugFarResultsMatchRemoved({ DiffDelete }),
-    GrugFarResultsMatchAdded({ DiffAdd }),
+    GrugFarResultsMatchRemoved(vcs.deleted.code),
+    GrugFarResultsMatchAdded(vcs.added.code),
     GrugFarHelpWinActionKey({ Identifier }),
-    GrugFarResultsMatch({ DiffText }),
+    GrugFarResultsMatch(match_text),
     GrugFarResultsActionMessage({ ModeMsg }),
     GrugFarInputPlaceholder(text_sub),
     GrugFarResultsStats(special),
