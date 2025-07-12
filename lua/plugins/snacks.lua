@@ -405,21 +405,26 @@ return {
       },
       sort = {},
       matcher = {
-        history_bonus = true,
-        frecency = false,
+        filename_bonus = true,
+        history_bonus = false,
+        frecency = true,
         cwd_bonus = false,
-        sort_empty = false,
       },
       formatters = {
         file = {
           filename_first = true,
-          truncate = 100,
+          truncate = 80,
           icon_width = 3,
         },
         severity = {
           icons = true,
           level = false,
           pos = "right",
+        },
+      },
+      previewers = {
+        file = {
+          max_size = 1024 * 1024 * 5,
         },
       },
     },
