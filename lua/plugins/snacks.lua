@@ -20,7 +20,7 @@ local vscode_layout_preview = {
     backdrop = true,
     row = 2,
     width = 0.60,
-    min_width = 90,
+    min_width = 114,
     max_width = 140,
     height = 0.8,
     border = "none",
@@ -52,7 +52,7 @@ local vscode_layout_without_preview = {
     backdrop = true,
     row = 2,
     width = 0.5,
-    min_width = 90,
+    min_width = 100,
     max_width = 140,
     height = 0.7,
     max_height = 35,
@@ -74,6 +74,7 @@ local common_exclude = { ".git", "~", ".idea", ".DS_Store" }
 
 return {
   "folke/snacks.nvim",
+  dev = true,
   lazy = false,
   priority = 1000,
   ---@module "snacks.nvim"
@@ -405,6 +406,9 @@ return {
       },
       sort = {},
       matcher = {
+        fuzzy = true,
+        smartcase = true,
+        ignorecase = true,
         filename_bonus = true,
         history_bonus = false,
         frecency = true,

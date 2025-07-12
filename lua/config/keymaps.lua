@@ -487,7 +487,7 @@ local function map_close_bracket()
   end, { expr = true, nowait = true, silent = true })
 end
 
-local function map_copies()
+local function map_yank()
   vim.keymap.set("n", "yf", function()
     local absolute_path = vim.fn.expand("%:p")
     local relative_path = vim.fn.expand("%:.")
@@ -501,6 +501,23 @@ local function map_copies()
     vim.fn.setreg("+", absolute_dir)
     vim.notify("Copied: " .. relative_dir, vim.log.levels.INFO, { title = "Copy Directory Path" })
   end, { desc = "copy current file directory path" })
+
+  vim.keymap.set("n", "yb", function()
+    local buffers = vim.fn.getbufinfo({ buflisted = 1 })
+    local absolute_paths = {}
+    for _, buf in ipairs(buffers) do
+      if buf.name and buf.name ~= "" then
+        table.insert(absolute_paths, buf.name)
+      end
+    end
+    local absolute_paths_string = table.concat(absolute_paths, "\n")
+    vim.fn.setreg("+", absolute_paths_string)
+    vim.notify(
+      "Copied: " .. #absolute_paths .. " buffer paths",
+      vim.log.levels.INFO,
+      { title = "Copy Buffer Paths" }
+    )
+  end, { desc = "copy all buffer absolute paths" })
 
   vim.keymap.set("n", "yl", function()
     local absolute_path = vim.fn.expand("%:p")
@@ -646,4 +663,4 @@ map_select_all()
 map_git_actions()
 map_package_info()
 map_close_bracket()
-map_copies()
+map_yank()
