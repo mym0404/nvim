@@ -406,8 +406,8 @@ return {
       sort = {},
       matcher = {
         history_bonus = true,
-        frecency = true,
-        cwd_bonus = true,
+        frecency = false,
+        cwd_bonus = false,
         sort_empty = false,
       },
       formatters = {
