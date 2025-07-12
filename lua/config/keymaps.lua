@@ -292,26 +292,26 @@ local function map_hover_scroll()
 end
 
 local function configure_lsp()
-  -- vim.api.nvim_create_autocmd("BufWritePre", {
-  --   callback = function(opts)
-  --     if utils.is_js_ft(opts.buf) then
-  --       require("vtsls.commands").remove_unused_imports()
-  --       vim.lsp.buf.format({})
-  --     end
-  --   end,
-  --   desc = "remove unused imports on save",
-  -- })
+  vim.api.nvim_create_autocmd("BufWritePre", {
+    callback = function(opts)
+      if utils.is_js_ft(opts.buf) then
+        require("vtsls.commands").remove_unused_imports()
+        LazyVim.format({ force = true })
+      end
+    end,
+    desc = "remove unused imports on save",
+  })
   vim.keymap.set("n", "<leader>co", function()
     if utils.is_js_ft() then
-      -- require("vtsls.commands").remove_unused_imports()
-      return
+      require("vtsls.commands").remove_unused_imports()
+    else
+      local context = {
+        diagnostics = vim.diagnostic.get_line_diagnostics(),
+        only = { "source.organizeImports" },
+      }
+      vim.lsp.buf.code_action({ context = context, apply = true })
     end
-    local context = {
-      diagnostics = vim.diagnostic.get_line_diagnostics(),
-      only = { "source.organizeImports" },
-    }
-    vim.lsp.buf.code_action({ context = context, apply = true })
-    vim.lsp.buf.format({ async = true, timeout_ms = 1000 })
+    LazyVim.format({ force = true })
   end, { desc = "Organize Import", silent = true })
 
   vim.keymap.set("n", "<leader>cm", function()
@@ -324,6 +324,7 @@ local function configure_lsp()
       }
       vim.lsp.buf.code_action({ context = context, apply = true })
     end
+    LazyVim.format({ force = true })
   end, { desc = "Add Missing Imports", silent = true })
 
   -- vim.keymap.set("n", "gs", function()
@@ -333,6 +334,10 @@ local function configure_lsp()
   --     vim.lsp.commands.goto_source_definition()
   --   end
   -- end, { desc = "Go to Source with TSTool", silent = true })
+
+  vim.keymap.set({ "n", "i" }, "<c-x>", function()
+    LazyVim.format({ force = true })
+  end, { desc = "Format" })
 end
 
 local function map_package_info()
@@ -492,12 +497,8 @@ end
 
 local function map_close_bracket()
   vim.keymap.set("i", "}", function()
-    if vim.bo.filetype == "swift" then
-      require("conform").format({
-        bufnr = vim.api.nvim_get_current_buf(),
-        async = true,
-        quiet = true,
-      })
+    if vim.bo.filetype == "swift" or utils.is_js_ft() then
+      LazyVim.format({ force = true })
     end
     return "}"
   end, { expr = true, nowait = true, silent = true })
