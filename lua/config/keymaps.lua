@@ -317,6 +317,9 @@ local function configure_lsp()
 
   vim.keymap.set({ "n", "i" }, "<c-x>", function()
     LazyVim.format({ force = true })
+    if vim.api.nvim_get_mode().mode == "i" then
+      utils.go_to_normal_mode()
+    end
   end, { desc = "Format" })
 end
 
