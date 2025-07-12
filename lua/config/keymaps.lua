@@ -309,7 +309,6 @@ local function configure_lsp()
 
   vim.keymap.set("n", "<leader>cm", function()
     local context = {
-      diagnostics = vim.diagnostic.get_line_diagnostics(),
       only = { "source.addMissingImports" },
     }
     vim.lsp.buf.code_action({ context = context, apply = true })
