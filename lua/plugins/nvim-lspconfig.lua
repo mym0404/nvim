@@ -38,10 +38,10 @@ return {
       },
       marksman = {
         filetypes = { "markdown", "markdown.mdx" },
-        on_attach = function(client, bufnr)
-          -- Disable diagnostics for markdown files
-          vim.diagnostic.enable(false, { bufnr = bufnr })
-        end,
+        -- on_attach = function(client, bufnr)
+        --   -- Disable diagnostics for markdown files
+        --   vim.diagnostic.enable(false, { bufnr = bufnr })
+        -- end,
       },
     },
     setup = {
