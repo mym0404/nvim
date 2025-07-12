@@ -293,47 +293,27 @@ end
 
 local function configure_lsp()
   vim.api.nvim_create_autocmd("BufWritePre", {
-    callback = function(opts)
-      if utils.is_js_ft(opts.buf) then
-        require("vtsls.commands").remove_unused_imports()
-        LazyVim.format({ force = true })
-      end
+    pattern = { "*.ts", "*.tsx", "*.js", "*.jsx" },
+    callback = function()
+      LazyVim.format({ force = true })
     end,
-    desc = "remove unused imports on save",
+    desc = "format on save",
   })
   vim.keymap.set("n", "<leader>co", function()
-    if utils.is_js_ft() then
-      require("vtsls.commands").remove_unused_imports()
-    else
-      local context = {
-        diagnostics = vim.diagnostic.get_line_diagnostics(),
-        only = { "source.organizeImports" },
-      }
-      vim.lsp.buf.code_action({ context = context, apply = true })
-    end
-    LazyVim.format({ force = true })
+    local context = {
+      diagnostics = vim.diagnostic.get_line_diagnostics(),
+      only = { "source.organizeImports" },
+    }
+    vim.lsp.buf.code_action({ context = context, apply = true })
   end, { desc = "Organize Import", silent = true })
 
   vim.keymap.set("n", "<leader>cm", function()
-    if utils.is_js_ft() then
-      require("vtsls.commands").add_missing_imports()
-    else
-      local context = {
-        diagnostics = vim.diagnostic.get_line_diagnostics(),
-        only = { "source.addMissingImports", "quickfix", "source" },
-      }
-      vim.lsp.buf.code_action({ context = context, apply = true })
-    end
-    LazyVim.format({ force = true })
+    local context = {
+      diagnostics = vim.diagnostic.get_line_diagnostics(),
+      only = { "source.addMissingImports" },
+    }
+    vim.lsp.buf.code_action({ context = context, apply = true })
   end, { desc = "Add Missing Imports", silent = true })
-
-  -- vim.keymap.set("n", "gs", function()
-  --   if utils.is_js_ft() then
-  --     require("vtsls.commands").goto_source_definition()
-  --   else
-  --     vim.lsp.commands.goto_source_definition()
-  --   end
-  -- end, { desc = "Go to Source with TSTool", silent = true })
 
   vim.keymap.set({ "n", "i" }, "<c-x>", function()
     LazyVim.format({ force = true })
