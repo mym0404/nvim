@@ -74,6 +74,7 @@ local common_exclude = { ".git", "~", ".idea", ".DS_Store" }
 
 return {
   "folke/snacks.nvim",
+  -- branch = "fix/smartcase-highlight-issue-2043",
   dev = true,
   lazy = false,
   priority = 1000,
