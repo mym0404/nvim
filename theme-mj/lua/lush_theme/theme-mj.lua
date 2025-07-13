@@ -43,15 +43,19 @@ local vcs = {
   },
   modified = {
     label = { fg = "#72A7D7" },
-    code = { bg = "#26315c" },
+    code = { bg = "#1B415C" },
   },
   modified_highlight = {
     label = { fg = "#72A7D7" },
-    code = { bg = "#5a689c", gui = "bold" },
+    code = { bg = "#3572A2" },
   },
   deleted = {
     label = { fg = palette.error_label },
-    code = { bg = "#9B464B" },
+    code = { bg = "#5C1B1A" },
+  },
+  deleted_highlight = {
+    label = { fg = palette.error_label },
+    code = { bg = "#A23535" },
   },
   conflicted = {
     code = { bg = "#442A45" },
