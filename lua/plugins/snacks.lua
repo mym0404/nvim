@@ -113,7 +113,7 @@ return {
       height = { min = 1, max = 0.5 },
       sort = { "added", "level" },
       ---@type snacks.notifier.style
-      style = "compact",
+      style = "minimal",
     },
     scroll = { enabled = false },
     indent = { enabled = true, priority = 1, only_current = true, only_scope = true },
