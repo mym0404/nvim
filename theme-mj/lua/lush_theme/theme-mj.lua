@@ -18,6 +18,7 @@ local palette = {
   untracked_label = "#E0787C",
   untracked_undercurl = "#E0787C",
   text = "#ffffff",
+  text_sub_light = "#a0a0a0",
   text_sub = "#737373",
   text_sub2 = "#333333",
 }
@@ -26,6 +27,7 @@ local special_theme = { fg = palette.theme, bg = "#0d254d", gui = "bold" }
 local match_text = special_theme
 local text = { fg = palette.text }
 local text_sub = { fg = palette.text_sub }
+local text_sub_light = { fg = palette.text_sub_light }
 local visual = { bg = "#214283" }
 local searched = { bg = "#46ba1c", fg = palette.text }
 -- local searched = match_text
@@ -119,6 +121,9 @@ local theme = lush(function(injected_functions)
     IncSearch(searched_selected),
 
     Normal(text),
+    Text(text),
+    TextSub(text_sub),
+    TextSubLight(text_sub_light),
     Visual(visual),
     Scrollbar({ bg = "#4c4c4c" }),
 

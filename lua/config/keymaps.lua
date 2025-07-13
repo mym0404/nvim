@@ -301,7 +301,7 @@ local function configure_lsp()
   })
   vim.keymap.set("n", "<leader>co", function()
     local context = {
-      diagnostics = vim.diagnostic.get_line_diagnostics(),
+      -- diagnostics = vim.diagnostic.get_line_diagnostics(),
       only = { "source.organizeImports" },
     }
     vim.lsp.buf.code_action({ context = context, apply = true })
@@ -309,6 +309,7 @@ local function configure_lsp()
 
   vim.keymap.set("n", "<leader>cm", function()
     local context = {
+      -- diagnostics = vim.diagnostic.get_line_diagnostics(),
       only = { "source.addMissingImports" },
     }
     vim.lsp.buf.code_action({ context = context, apply = true })
@@ -680,3 +681,17 @@ map_package_info()
 map_close_bracket()
 map_yank()
 map_tab_move()
+
+vim.keymap.set("n", "XX", function()
+  local capabilities = require("blink.cmp").get_lsp_capabilities()
+  local lspconfig = require("lspconfig")
+
+  lspconfig["sourcekit"].setup({ capabilities = capabilities })
+
+  local clients = vim.lsp.get_active_clients({ bufnr = vim.api.nvim_get_current_buf() })
+
+  for _, client in ipairs(clients) do
+    vim.notify("LSP: " .. client.name)
+    vim.notify(vim.inspect(client.capabilities))
+  end
+end, {})

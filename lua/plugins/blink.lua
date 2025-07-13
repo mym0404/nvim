@@ -93,14 +93,15 @@ return {
         },
       },
       menu = {
+        min_width = 40,
         max_height = 20,
         draw = {
           padding = 1,
           gap = 1,
           treesitter = { "lsp" },
           columns = {
-            { "kind_icon", gap = 1 },
-            { "label", "label_description", gap = 3, "source_name" },
+            { "kind_icon" },
+            { "label", "label_description", "source_name", gap = 1 },
           },
           components = {
             kind_icon = {
@@ -124,27 +125,19 @@ return {
               end,
             },
             label = {
-              width = { fill = true, min = 40, max = 50 },
+              width = { fill = true, min = 38 },
+              highlight = "Text",
+            },
+            label_description = {
+              -- width = { fill = false },
+              highlight = "TextSubLight",
+            },
+            source_name = {
+              width = { fixed = 1 },
               text = function(ctx)
-                local highlights_info = require("colorful-menu").blink_highlights(ctx)
-                if highlights_info ~= nil then
-                  return highlights_info.label
-                else
-                  return ctx.label
-                end
+                return ctx.source_name:sub(1, 1):upper()
               end,
-              highlight = function(ctx)
-                local highlights = {}
-                local highlights_info = require("colorful-menu").blink_highlights(ctx)
-                if highlights_info ~= nil then
-                  highlights = highlights_info.highlights
-                end
-                for _, idx in ipairs(ctx.label_matched_indices) do
-                  table.insert(highlights, { idx, idx + 1, group = "BlinkCmpLabelMatch" })
-                end
-                -- Do something else
-                return highlights
-              end,
+              highlight = "YankyYanked",
             },
           },
         },
@@ -152,16 +145,15 @@ return {
 
       documentation = {
         auto_show = true,
-        auto_show_delay_ms = 1000,
+        auto_show_delay_ms = 300,
         window = {
           scrollbar = true,
           border = "rounded",
-          winblend = 0,
           desired_min_height = 60,
           max_height = 90,
-          min_width = 40,
+          min_width = 60,
           max_width = 70,
-          desired_min_width = 40,
+          desired_min_width = 60,
         },
 
         treesitter_highlighting = true,

@@ -21,7 +21,7 @@ return {
     -- Use floating window
     windowCreationCommand = "tabnew",
     openTargetWindow = {
-      preferredLocation = "right",
+      preferredLocation = "below",
     },
   },
 }
