@@ -637,6 +637,22 @@ local function map_yank()
   })
 end
 
+local function map_tab_move()
+  vim.keymap.set("n", "[<tab>", function()
+    local tab_count = vim.fn.tabpagenr("$")
+    if tab_count > 1 then
+      vim.cmd("tabprevious")
+    end
+  end, { desc = "Move to previous tab" })
+
+  vim.keymap.set("n", "]<tab>", function()
+    local tab_count = vim.fn.tabpagenr("$")
+    if tab_count > 1 then
+      vim.cmd("tabnext")
+    end
+  end, { desc = "Move to next tab" })
+end
+
 reset_keymaps()
 map_template_string()
 map_react_prop_bracket()
@@ -663,3 +679,4 @@ map_git_actions()
 map_package_info()
 map_close_bracket()
 map_yank()
+map_tab_move()
