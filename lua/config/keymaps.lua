@@ -505,7 +505,7 @@ local function map_yank()
     local buffers = vim.fn.getbufinfo({ buflisted = 1 })
     local absolute_paths = {}
     for _, buf in ipairs(buffers) do
-      if buf.name and buf.name ~= "" then
+      if buf.name and buf.name ~= "" and vim.fn.isdirectory(buf.name) == 0 then
         table.insert(absolute_paths, buf.name)
       end
     end
