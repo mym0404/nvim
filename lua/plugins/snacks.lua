@@ -117,7 +117,11 @@ return {
     },
     scroll = { enabled = false },
     indent = { enabled = true, priority = 1, only_current = true, only_scope = true },
-    image = { enabled = false },
+    image = {
+      enabled = true,
+      force = true,
+      doc = { enabled = true, inline = true, float = true },
+    },
     ---@type snacks.explorer.Config
     explorer = {
       replace_netrw = false,
