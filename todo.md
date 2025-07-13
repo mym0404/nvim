@@ -1,8 +1,5 @@
 # Primary
 
-- snacks picker - left right keymap to move cursor
-- yankypaste highlight
-- diffview - diffview highlighting
 - noice - hover documentation formatting
 - noice - hover documentation highlighting
 - blink documentation fill if empty
@@ -14,5 +11,3 @@
 # Not Plan
 
 - string 에선 completion 안되게 
-- diffview floating window (this is not possible)
-- file, grep float center

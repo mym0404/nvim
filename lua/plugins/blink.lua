@@ -43,6 +43,8 @@ return {
       keymap = {
         ["<tab>"] = { "fallback" },
         -- ["<s-tab>"] = { "select_prev", "fallback" },
+        ["<left>"] = false,
+        ["<right>"] = false,
         ["<CR>"] = {
           function()
             if vim.fn.getcmdtype() == ":" then
