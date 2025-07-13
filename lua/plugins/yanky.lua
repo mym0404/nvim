@@ -4,7 +4,7 @@ return {
   desc = "Better Yank/Paste",
   event = "LazyFile",
   opts = {
-    highlight = { timer = 150 },
+    highlight = { timer = 200, on_put = true, on_yank = true },
   },
   keys = {
     {

@@ -150,8 +150,8 @@ local theme = lush(function(injected_functions)
     Warn(warn),
     VirtualTextHint({ fg = "#7d8590" }),
 
-    YankyPut({ fg = info_line.fg, bg = info_line.bg, gui = "bold" }),
-    YankyYanked({ fg = info_line.fg, bg = info_line.bg, gui = "bold" }),
+    YankyPut(match_text),
+    YankyYanked(match_text),
 
     DiagnosticError(error),
     DiagnosticHint(hint),
