@@ -44,13 +44,6 @@ opt.breakindent = true
 opt.ignorecase = true
 opt.smartcase = true
 
-vim.api.nvim_create_autocmd("TextYankPost", {
-  desc = "Highlight when yanking (copying) text",
-  group = vim.api.nvim_create_augroup("kickstart-highlight-yank", { clear = true }),
-  callback = function()
-    vim.hl.on_yank()
-  end,
-})
 opt.termguicolors = true
 
 vim.g.lazyvim_prettier_needs_config = true

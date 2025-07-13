@@ -128,3 +128,6 @@ vim.api.nvim_create_autocmd("LspAttach", {
     end
   end,
 })
+
+-- Disable LazyVim's default highlight_yank autocmd to prevent conflicts
+vim.api.nvim_clear_autocmds({ group = "lazyvim_highlight_yank" })

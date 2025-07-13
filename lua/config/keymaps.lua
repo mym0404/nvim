@@ -492,14 +492,14 @@ local function map_yank()
     local relative_path = vim.fn.expand("%:.")
     vim.fn.setreg("+", absolute_path)
     vim.notify("Copied: " .. relative_path, vim.log.levels.INFO, { title = "Copy File Path" })
-  end, { desc = "copy current file path" })
+  end, { desc = "copy current file path", nowait = true })
 
   vim.keymap.set("n", "yd", function()
     local absolute_dir = vim.fn.expand("%:p:h")
     local relative_dir = vim.fn.expand("%:.:h")
     vim.fn.setreg("+", absolute_dir)
     vim.notify("Copied: " .. relative_dir, vim.log.levels.INFO, { title = "Copy Directory Path" })
-  end, { desc = "copy current file directory path" })
+  end, { desc = "copy current file directory path", nowait = true })
 
   vim.keymap.set("n", "yb", function()
     local buffers = vim.fn.getbufinfo({ buflisted = 1 })
@@ -516,7 +516,7 @@ local function map_yank()
       vim.log.levels.INFO,
       { title = "Copy Buffer Paths" }
     )
-  end, { desc = "copy all buffer absolute paths" })
+  end, { desc = "copy all buffer absolute paths", nowait = true })
 
   vim.keymap.set("n", "yl", function()
     local absolute_path = vim.fn.expand("%:p")
@@ -530,7 +530,7 @@ local function map_yank()
       vim.log.levels.INFO,
       { title = "Copy File with line" }
     )
-  end, { desc = "copy current file with line" })
+  end, { desc = "copy current file with line", nowait = true })
 
   vim.keymap.set("v", "yl", function()
     local absolute_path = vim.fn.expand("%:p")
@@ -547,7 +547,7 @@ local function map_yank()
       { title = "Copy File with line range" }
     )
     utils.go_to_normal_mode()
-  end, { desc = "copy current file with line range" })
+  end, { desc = "copy current file with line range", nowait = true })
 
   local function register_diagnostic_yank(command, severity_map)
     vim.keymap.set("n", command, function()
@@ -620,7 +620,7 @@ local function map_yank()
           { title = "Copy Diagnostics" }
         )
       end
-    end, { desc = "Copy diagnostics to clipboard" })
+    end, { desc = "Copy diagnostics to clipboard", nowait = true })
   end
 
   register_diagnostic_yank("yx", {
