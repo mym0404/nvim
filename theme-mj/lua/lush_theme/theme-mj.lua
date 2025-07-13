@@ -1230,7 +1230,7 @@ local theme = lush(function(injected_functions)
     DiffviewStatusLine({ StatusLine }),
     DiffviewEndOfBuffer({ EndOfBuffer }),
     DiffviewSignColumn({ Normal }),
-    DiffviewDiffDelete(vcs.deleted.code),
+    DiffviewDiffDelete({ bg = vcs.deleted.code.bg, fg = vcs.deleted.code.bg }),
     DiffviewDiffText({ DiffText }),
     DiffviewDiffChange({ DiffChange }),
     DiffviewDiffAdd({ DiffAdd }),
