@@ -2,18 +2,10 @@
 
 ```json filename="~/.gemini/settings.json"
 {
-  "selectedAuthType": "gemini-api-key",
-  "theme": "Default",
+  "theme": "Shades Of Purple",
+  "selectedAuthType": "oauth-personal",
   "preferredEditor": "neovim",
-  "usageStatisticEnabled": false,
   "mcpServers": {
-    "puppeteer": {
-      "command": "npx",
-      "args": [
-        "-y",
-        "puppeteer-mcp-server"
-      ]
-    },
     "github": {
       "command": "docker",
       "args": [
@@ -27,6 +19,15 @@
       "env": {
         "GITHUB_PERSONAL_ACCESS_TOKEN": "${GITHUB_TOKEN}"
       }
+    },
+    "figma": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "figma-developer-mcp",
+        "--figma-api-key=${FIGMA_ACCESS_TOKEN}",
+        "--stdio"
+      ]
     }
   }
 }
@@ -83,4 +84,6 @@
 
 7. Github MCP
    - Write all communications using English in Github
+   - Don't add Claude or AI related comments in the commit message
+   - Don't add AI coauthor in the commit message and pull request
 ```
