@@ -138,7 +138,29 @@ local function map_rename()
 end
 
 local function map_delete_file()
-  vim.keymap.set("n", "<space>cd", function()
+  vim.keymap.set("n", "<space>cR", function()
+    local current_file = vim.api.nvim_buf_get_name(0)
+    if current_file == "" then
+      vim.notify("No file to rename", vim.log.levels.WARN)
+      return
+    end
+
+    local current_name = vim.fn.fnamemodify(current_file, ":t")
+    vim.ui.input({
+      prompt = "Rename file: ",
+      default = current_name,
+    }, function(input)
+      if input and input ~= "" and input ~= current_name then
+        local new_path = vim.fn.fnamemodify(current_file, ":h") .. "/" .. input
+        vim.cmd("saveas " .. vim.fn.fnameescape(new_path))
+        vim.cmd("bdelete #")
+        vim.fn.delete(current_file)
+        vim.notify("File renamed to: " .. input, vim.log.levels.INFO)
+      end
+    end)
+  end, { desc = "Rename current file", nowait = true })
+
+  vim.keymap.set("n", "<space>cD", function()
     local current_buffer_file_path = vim.api.nvim_buf_get_name(0)
     vim.cmd("bdelete")
     vim.cmd("!rm " .. current_buffer_file_path)
