@@ -73,9 +73,9 @@ local vscode_layout_without_preview = {
 local common_exclude = { ".git", "~", ".idea", ".DS_Store" }
 
 return {
-  "folke/snacks.nvim",
-  -- branch = "fix/smartcase-highlight-issue-2043",
-  dev = true,
+  "mym0404/snacks.nvim",
+  branch = "fix/smartcase-highlight-issue-2043",
+  dev = false,
   lazy = false,
   priority = 1000,
   ---@module "snacks.nvim"

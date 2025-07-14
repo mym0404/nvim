@@ -14,6 +14,23 @@ return {
       },
       render_modes = { "n", "c", "t" },
       preset = "none",
+      win_options = {
+        -- Window options to use that change between rendered and raw view.
+        -- @see :h 'conceallevel'
+        conceallevel = {
+          -- Used when not being rendered, get user setting.
+          default = vim.o.conceallevel,
+          -- Used when being rendered, concealed text is completely hidden.
+          rendered = 0,
+        },
+        -- @see :h 'concealcursor'
+        concealcursor = {
+          -- Used when not being rendered, get user setting.
+          default = vim.o.concealcursor,
+          -- Used when being rendered, show concealed text in all modes.
+          rendered = "",
+        },
+      },
       anti_conceal = {
         enabled = true,
         ignore = {
