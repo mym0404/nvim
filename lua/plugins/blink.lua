@@ -129,7 +129,7 @@ return {
               highlight = "Text",
             },
             label_description = {
-              -- width = { fill = false },
+              -- width = { fixed = 20 },
               highlight = "TextSubLight",
             },
             source_name = {
