@@ -9,7 +9,7 @@ return {
       -- Available options:
       -- "modern", "classic", "minimal", "powerline",
       -- "ghost", "simple", "nonerdfont", "amongus"
-      preset = "amongus",
+      preset = "classic",
 
       transparent_bg = false, -- Set the background of the diagnostic to transparent
       transparent_cursorline = false, -- Set the background of the cursorline to transparent (only one the first diagnostic)
@@ -33,7 +33,7 @@ return {
       options = {
         -- Display the source of the diagnostic (e.g., basedpyright, vsserver, lua_ls etc.)
         show_source = {
-          enabled = false,
+          enabled = true,
           if_many = false,
         },
 
@@ -68,10 +68,10 @@ return {
         -- }
         multilines = {
           -- Enable multiline diagnostic messages
-          enabled = false,
+          enabled = true,
 
           -- Always show messages on all lines for multiline diagnostics
-          always_show = false,
+          always_show = true,
         },
 
         -- Display all diagnostic messages on the cursor line
@@ -136,7 +136,15 @@ return {
         -- You should not change this unless the plugin does not work with your configuration
         overwrite_events = nil,
       },
-      disabled_ft = {}, -- List of filetypes to disable the plugin
+      disabled_ft = {
+        "markdown", -- Disable diagnostics for markdown files
+        "text", -- Disable diagnostics for plain text files
+        "help", -- Disable diagnostics for help files
+        "gitcommit", -- Disable diagnostics for git commit messages
+        "gitrebase", -- Disable diagnostics for git rebase messages
+        "diff", -- Disable diagnostics for diff files
+      }, -- List of filetypes to disable the plugin
     })
+    vim.diagnostic.config({ virtual_text = false })
   end,
 }
