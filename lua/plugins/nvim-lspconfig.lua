@@ -4,19 +4,19 @@ require("lspconfig.configs").biome2 = {
   default_config = {
     cmd = { "biome", "lsp-proxy" },
     filetypes = {
-      "astro",
-      "css",
-      "graphql",
-      "html",
+      -- "astro",
+      -- "css",
+      -- "graphql",
+      -- "html",
       "javascript",
       "javascriptreact",
-      "json",
-      "jsonc",
-      "svelte",
+      -- "json",
+      -- "jsonc",
+      -- "svelte",
       "typescript",
       "typescript.tsx",
       "typescriptreact",
-      "vue",
+      -- "vue",
     },
     root_dir = function(fname)
       local ret =
