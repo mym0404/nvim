@@ -682,15 +682,10 @@ local function map_ufo()
 end
 
 local function map_tab()
-  vim.keymap.set("i", "<tab>", function()
+  vim.keymap.set({ "i" }, "<tab>", function()
     local sug = require("copilot.suggestion")
-    local snip = require("luasnip")
-    vim.notify(
-      snip.jumpable(1) and "Jumping to next snippet" or "Accepting suggestion",
-      vim.log.levels.INFO
-    )
-    if snip.jumpable(1) then
-      snip.jump(1)
+    if vim.snippet.active({ direction = 1 }) then
+      vim.snippet.jump(1)
     elseif sug.is_visible() then
       sug.accept()
     else
