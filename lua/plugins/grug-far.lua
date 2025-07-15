@@ -11,6 +11,7 @@ return {
       applyNext = { n = "<cr>" },
       nextInput = { n = "<tab>" },
       prevInput = { n = "<s-tab>" },
+      historyOpen = { n = "<localleader>h" },
     },
     engines = {
       ripgrep = {},
