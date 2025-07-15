@@ -28,7 +28,6 @@ return {
     keymap = {
       preset = "default",
       ["<tab>"] = {
-        -- "accept",
         "snippet_forward",
         "fallback",
       },

@@ -681,6 +681,24 @@ local function map_ufo()
   vim.keymap.set("n", "zM", require("ufo").closeAllFolds)
 end
 
+local function map_tab()
+  vim.keymap.set("i", "<tab>", function()
+    local sug = require("copilot.suggestion")
+    local snip = require("luasnip")
+    vim.notify(
+      snip.jumpable(1) and "Jumping to next snippet" or "Accepting suggestion",
+      vim.log.levels.INFO
+    )
+    if snip.jumpable(1) then
+      snip.jump(1)
+    elseif sug.is_visible() then
+      sug.accept()
+    else
+      return "<tab>"
+    end
+  end, { expr = true, desc = "Toggle tab close or new" })
+end
+
 reset_keymaps()
 map_template_string()
 map_react_prop_bracket()
@@ -709,3 +727,4 @@ map_close_bracket()
 map_yank()
 map_tab_move()
 map_ufo()
+map_tab()

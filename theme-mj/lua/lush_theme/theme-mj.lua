@@ -24,6 +24,7 @@ local palette = {
 }
 local special = { fg = "#c79cff", bg = "#2a2136", gui = "bold" }
 local special_theme = { fg = palette.theme, bg = "#0d254d", gui = "bold" }
+local special_orange = { fg = "#e8b45f", bg = "#473518", gui = "bold" }
 local match_text = special_theme
 local text = { fg = palette.text }
 local text_sub = { fg = palette.text_sub }
@@ -924,7 +925,7 @@ local theme = lush(function(injected_functions)
     SnacksWinKey(code.keyword),
     SnacksWinKeyDesc({ Function }),
     SnacksWinKeySep({ NonText }),
-    SnippetTabstop({}),
+    SnippetTabstop({ fg = special_orange.fg, bg = special_orange.bg }),
     SpecialChar(special),
     SpecialComment(special),
     SpecialKey({ NonText }),
