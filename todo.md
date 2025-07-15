@@ -1,10 +1,5 @@
 # Primary
 
-- diffview highlighting
-- folding highlighting
-- folding formatting
-- region folding
-
 - noice - hover documentation formatting
 - noice - hover documentation highlighting
 - blink documentation fill if empty
