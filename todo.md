@@ -1,6 +1,5 @@
 # Primary
 
-- auto completion tab navigation
 - region snippets
 - region folding
 - noice - hover documentation formatting
