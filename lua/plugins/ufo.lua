@@ -14,7 +14,7 @@ return {
       "comment",
     } },
     fold_virt_text_handler = function(virtText, lnum, endLnum, width, truncate)
-      local newVirtText = {}
+      local newVirtText = { { "▼ ", "Folded" } }
       local lineCount = endLnum - lnum + 1
 
       -- Check if the first line contains a region pattern
@@ -24,8 +24,8 @@ return {
       if regionName then
         -- For regions, only show the region name and line count
         local cleanRegionName = regionName:gsub("^%s*(.-)%s*$", "%1")
-        local suffix = ("▼ %s (%d lines) "):format(cleanRegionName, lineCount)
-        table.insert(newVirtText, { suffix, "Folded" })
+        local suffix = ("⚡️ %s (%d lines)"):format(cleanRegionName, lineCount)
+        table.insert(newVirtText, { suffix, "FoldedRegion" })
         return newVirtText
       end
 
