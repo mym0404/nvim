@@ -78,11 +78,11 @@ return {
           elements = {
             {
               id = "repl",
-              size = 0.5,
+              size = 0.1,
             },
             {
               id = "console",
-              size = 0.5,
+              size = 0.9,
             },
           },
           position = "bottom",
