@@ -1,5 +1,8 @@
 # Primary
 
+- auto completion tab navigation
+- region snippets
+- region folding
 - noice - hover documentation formatting
 - noice - hover documentation highlighting
 - blink documentation fill if empty

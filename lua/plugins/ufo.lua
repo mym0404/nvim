@@ -5,13 +5,16 @@ return {
     "kevinhwang91/promise-async",
   },
   opts = {
-    provider_selector = function()
+    provider_selector = function(_, filetype, _)
+      if filetype == "swift" then
+        return { "treesitter", "indent" }
+      end
       return { "lsp", "indent" }
     end,
     open_fold_hl_timeout = 500,
     close_fold_kinds_for_ft = { default = {
       "imports",
-      "comment",
+      "region",
     } },
     fold_virt_text_handler = function(virtText, lnum, endLnum, width, truncate)
       local newVirtText = {}
