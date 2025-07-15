@@ -137,6 +137,7 @@ return {
         overwrite_events = nil,
       },
       disabled_ft = {
+        "markdown.mdx",
         "markdown", -- Disable diagnostics for markdown files
         "text", -- Disable diagnostics for plain text files
         "help", -- Disable diagnostics for help files

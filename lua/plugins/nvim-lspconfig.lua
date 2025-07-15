@@ -78,9 +78,21 @@ return {
       biome2 = {},
     },
     setup = {
-      ["*"] = function(server, _)
-        local capabilities = require("blink.cmp").get_lsp_capabilities()
+      ["*"] = function(server, config)
         local lspconfig = require("lspconfig")
+        local capabilities = config.capabilities
+
+        -- apply ufo lsp capabilities for folding
+        capabilities = vim.tbl_deep_extend("force", capabilities, {
+          textDocument = {
+            foldingRange = {
+              dynamicRegistration = false,
+              lineFoldingOnly = true,
+            },
+          },
+        })
+        -- apply blink lsp capabilities
+        capabilities = require("blink.cmp").get_lsp_capabilities(capabilities)
 
         lspconfig[server].setup({ capabilities = capabilities })
       end,

@@ -32,7 +32,7 @@ local visual = { bg = "#214283" }
 local searched = { bg = "#46ba1c", fg = palette.text }
 -- local searched = match_text
 local searched_selected = { fg = palette.text, bg = "#db16a3", gui = "bold" }
-local folded = { bg = "#281e2e", fg = "white", gui = "italic" }
+local folded = { bg = "#323242", fg = "#87A8E8", gui = "bold,italic" }
 local border = { fg = "#424242" }
 local win_border = { fg = "#313131" }
 local float = { fg = palette.text }
@@ -104,6 +104,7 @@ local theme = lush(function(injected_functions)
   local sym = injected_functions.sym
   return {
     Special(special),
+    sym("@Special")(special),
     Type(code.type),
     PreProc({ fg = "#ff7b72" }),
     Keyword(code.keyword),
@@ -1124,7 +1125,7 @@ local theme = lush(function(injected_functions)
     SnacksPickerGitStatusUntracked(vcs.untracked.label),
     SnacksPickerGitType({ Title }),
 
-    UfoFoldedEllipsis(text_sub),
+    UfoFoldedEllipsis(text),
     UfoCursorFoldedLine({ fg = "red" }),
 
     AvanteButtonPrimary({ fg = "#1e222a", bg = "#abb2bf" }),
@@ -1235,14 +1236,14 @@ local theme = lush(function(injected_functions)
     DiffviewStatusLine({ StatusLine }),
     DiffviewEndOfBuffer({ EndOfBuffer }),
     DiffviewSignColumn({ Normal }),
-    DiffviewDiffDelete({ bg = vcs.deleted.code.bg, fg = vcs.deleted.code.bg }),
+    DiffviewDiffDelete({ bg = "NONE", fg = "#111111" }),
     DiffviewDiffText({ DiffText }),
     DiffviewDiffChange({ DiffChange }),
     DiffviewDiffAdd({ DiffAdd }),
     DiffviewNormal({ Normal }),
     DiffviewWinSeparator({ WinSeparator }),
     DiffviewFilePanelSelected({ Type }),
-    DiffviewDiffAddAsDelete({ bg = "red" }),
+    DiffviewDiffAddAsDelete({ bg = "purple" }),
     DiffviewDiffDeleteDim({ Comment }),
 
     GrugFarHelpWinHeader({ Title }),

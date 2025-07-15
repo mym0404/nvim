@@ -676,6 +676,11 @@ local function map_tab_move()
   end, { desc = "Move to next tab" })
 end
 
+local function map_ufo()
+  vim.keymap.set("n", "zR", require("ufo").openAllFolds)
+  vim.keymap.set("n", "zM", require("ufo").closeAllFolds)
+end
+
 reset_keymaps()
 map_template_string()
 map_react_prop_bracket()
@@ -703,3 +708,4 @@ map_package_info()
 map_close_bracket()
 map_yank()
 map_tab_move()
+map_ufo()

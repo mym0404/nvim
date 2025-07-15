@@ -1,5 +1,10 @@
 #!/usr/bin/env zx
 /* eslint-disable max-len */
+
+// #region
+
+// #endregion
+
 // region ZX Util
 import fs from 'fs-extra';
 const join = path.join;
@@ -105,7 +110,7 @@ const HEADING = `// @ts-nocheck
  */
  `;
 // endregion
-const langs = ["c", "cpp", "javascript", "typescript", "typescriptreact", "javascriptreact", "python", "swift", "kotlin", "java"]
+const langs = ["c", "cpp", "javascript", "typescript", "typescriptreact", "javascriptreact", "python", "swift", "kotlin", "java", "json"]
 const q = `
 ;; extends
 
@@ -113,7 +118,9 @@ const q = `
 [swift]((class_declaration name: (type_identifier) @code.class) (#set! priority 200))
 [swift]((custom_operator) @code.operator (#set! priority 200))
 [swift]((parameter name: (simple_identifier)) @code (#set! priority 150))
-[swift] ((value_argument name: (value_argument_label) @code) (#set! priority 150))
+[swift]((value_argument name: (value_argument_label) @code) (#set! priority 150))
+
+[javascript,javascriptreact,typescript,typescriptreact]((hash_bang_line) @Special)
 `.trim()
 async function main() {
   const base_path = join(resolve(__dirname, '..'), "after", "queries");
