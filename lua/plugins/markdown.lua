@@ -21,7 +21,7 @@ return {
           -- Used when not being rendered, get user setting.
           default = vim.o.conceallevel,
           -- Used when being rendered, concealed text is completely hidden.
-          rendered = 0,
+          rendered = 2,
         },
         -- @see :h 'concealcursor'
         concealcursor = {
@@ -29,6 +29,15 @@ return {
           default = vim.o.concealcursor,
           -- Used when being rendered, show concealed text in all modes.
           rendered = "",
+        },
+      },
+      patterns = {
+        markdown = {
+          disable = true,
+          directives = {
+            { id = 17, name = "conceal_lines" },
+            { id = 18, name = "conceal_lines" },
+          },
         },
       },
       anti_conceal = {

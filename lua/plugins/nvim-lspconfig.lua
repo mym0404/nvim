@@ -24,7 +24,7 @@ require("lspconfig.configs").biome2 = {
       return ret
     end,
     workspace_required = true,
-    -- single_file_support = false,
+    single_file_support = true,
     settings = {},
   },
 }
