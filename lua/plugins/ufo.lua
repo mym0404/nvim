@@ -14,23 +14,30 @@ return {
       "comment",
     } },
     fold_virt_text_handler = function(virtText, lnum, endLnum, width, truncate)
-      local newVirtText = { { "▼ ", "Folded" } }
+      local newVirtText = {}
       local lineCount = endLnum - lnum + 1
 
-      -- Check if the first line contains a region pattern
+      -- Check if the first line contains a region pattern or import statement
       local line = vim.api.nvim_buf_get_lines(0, lnum - 1, lnum, false)[1] or ""
       local regionName = line:match("#region%s+(.+)") or line:match("//region%s+(.+)")
+      local isImport = line:match("^%s*import%s")
 
       if regionName then
-        -- For regions, only show the region name and line count
         local cleanRegionName = regionName:gsub("^%s*(.-)%s*$", "%1")
-        local suffix = ("⚡️ %s (%d lines)"):format(cleanRegionName, lineCount)
-        table.insert(newVirtText, { suffix, "FoldedRegion" })
+        local suffix = ("▼ %s "):format(cleanRegionName, lineCount)
+        local linesSuffix = ("(%d lines)"):format(lineCount)
+        table.insert(newVirtText, { suffix, "FoldedBold" })
+        table.insert(newVirtText, { linesSuffix, "@code.folded_line_token" })
+        return newVirtText
+      elseif isImport then
+        local linesSuffix = ("... (%d lines)"):format(lineCount)
+        table.insert(newVirtText, { "import ", "Keyword" })
+        table.insert(newVirtText, { linesSuffix, "@code.folded_line_token" })
         return newVirtText
       end
 
       -- For non-regions, use the original text processing
-      local suffix = (" (%d lines) "):format(lineCount)
+      local suffix = ("... (%d lines)"):format(lineCount)
       local sufWidth = vim.fn.strdisplaywidth(suffix)
       local targetWidth = width - sufWidth
 
@@ -54,7 +61,8 @@ return {
         curWidth = curWidth + chunkWidth
       end
 
-      table.insert(newVirtText, { suffix, "Folded" })
+      table.insert(newVirtText, { " ", "Folded" })
+      table.insert(newVirtText, { suffix, "@code.folded_line_token" })
       return newVirtText
     end,
   },

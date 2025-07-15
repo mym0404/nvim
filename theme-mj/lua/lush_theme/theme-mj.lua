@@ -32,7 +32,7 @@ local visual = { bg = "#214283" }
 local searched = { bg = "#46ba1c", fg = palette.text }
 -- local searched = match_text
 local searched_selected = { fg = palette.text, bg = "#db16a3", gui = "bold" }
-local folded = { bg = "#222231", fg = "#87A8E8", gui = "italic" }
+local folded = { fg = "#87A8E8" }
 local border = { fg = "#424242" }
 local win_border = { fg = "#313131" }
 local float = { fg = palette.text }
@@ -98,12 +98,18 @@ local code = {
     fg = hsl(text_sub.fg).lighten(30),
     bg = hsl("#313133"),
   },
+  folded_line_token = {
+    fg = special.fg,
+    bg = special.bg,
+    gui = "bold",
+  },
 }
 
 local theme = lush(function(injected_functions)
   local sym = injected_functions.sym
   return {
     Special(special),
+    MatchText(match_text),
     sym("@Special")(special),
     Type(code.type),
     PreProc({ fg = "#ff7b72" }),
@@ -354,7 +360,7 @@ local theme = lush(function(injected_functions)
     SignColumn({ fg = "#6e7681" }),
     FoldColumn({ fg = "#6e7681" }),
     Folded(folded),
-    FoldedRegion({ fg = folded.fg, bg = folded.bg, gui = "bold" }),
+    FoldedBold({ fg = folded.fg, bg = folded.bg, gui = "bold" }),
     WarningMsg({ fg = "#d29922" }),
     Title({ fg = palette.theme, gui = "bold" }),
     MoreMsg({ fg = "#2f8cf7", gui = "bold" }),
@@ -372,6 +378,7 @@ local theme = lush(function(injected_functions)
     sym("@code.class")(code.class),
     sym("@code.operator")(text),
     sym("@code")(text),
+    sym("@code.folded_line_token")(code.folded_line_token),
 
     sym("@variable")(text),
     sym("@variable.parameter")(text),
