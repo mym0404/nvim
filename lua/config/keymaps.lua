@@ -270,18 +270,27 @@ local function map_docs_hover()
   end, { desc = "hover documentation", silent = true })
 end
 
+local _timer
 local function map_scroll()
   vim.keymap.set("n", "<C-d>", function()
-    vim.schedule(function()
+    if _timer ~= nil then
+      pcall(_timer.stop, _timer)
+      pcall(_timer.close, _timer)
+    end
+    _timer = vim.defer_fn(function()
       vim.cmd("normal! zz")
-    end)
+    end, 0)
     return "15<C-d>"
   end, { noremap = true, nowait = true, expr = true })
 
   vim.keymap.set("n", "<C-u>", function()
-    vim.schedule(function()
+    if _timer ~= nil then
+      pcall(_timer.stop, _timer)
+      pcall(_timer.close, _timer)
+    end
+    _timer = vim.defer_fn(function()
       vim.cmd("normal! zz")
-    end)
+    end, 0)
     return "15<C-u>"
   end, { noremap = true, nowait = true, expr = true })
 end
