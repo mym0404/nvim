@@ -1,7 +1,7 @@
 # .wezterm.lua
 
 ```lua filename="~/.wezterm.lua"
-local opacity = 0.8
+local opacity = 1
 local blur = 0
 
 local wezterm = require("wezterm")
@@ -59,7 +59,7 @@ local function setup_core()
 	c.adjust_window_size_when_changing_font_size = false
 
 	c.font = wezterm.font_with_fallback({
-		{ family = "D2Coding", weight = "Regular" },
+		{ family = "D2Coding" },
 		{ family = "JetBrainsMonoHangul Nerd Font Mono" },
 	})
 	c.harfbuzz_features = { "calt=0", "clig=0", "liga=0" }
@@ -67,15 +67,15 @@ local function setup_core()
 
 	-- Slightly transparent and blurred background
 	c.front_end = "WebGpu"
-	-- c.freetype_load_flags = "NO_HINTING"
+	c.freetype_load_flags = "NO_HINTING"
 	c.freetype_load_target = "Light"
-	-- c.freetype_render_target = "HorizontalLcd"
-	c.custom_block_glyphs = true
+	c.freetype_render_target = "HorizontalLcd"
+	-- c.custom_block_glyphs = true
 	if is_windows then
 		c.cell_width = 1
 		c.line_height = 1.1
 	else
-		c.cell_width = 0.93
+		c.cell_width = 1
 		c.line_height = 1.15
 	end
 
@@ -156,7 +156,7 @@ local function setup_core()
 		window:set_right_status(wezterm.format(elements))
 	end)
 
-	c.native_macos_fullscreen_mode = false
+	c.native_macos_fullscreen_mode = true
 end
 
 local function setup_basic_keys()
