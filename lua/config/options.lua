@@ -36,7 +36,6 @@ opt.showmode = false
 opt.exrc = true
 
 vim.schedule(function()
-  -- hello
   opt.clipboard = "unnamedplus"
 end)
 
@@ -55,7 +54,7 @@ vim.o.foldcolumn = "0"
 vim.o.foldlevel = 99
 vim.o.foldlevelstart = 99
 vim.o.foldenable = true
-vim.o.fillchars = [[eob: ,fold: ,foldopen:,foldsep:|,foldclose:]]
+vim.o.fillchars = [[eob: ,fold: ,foldopen:,foldsep:|,foldclose:]]
 
 opt.laststatus = 3
 vim.o.winborder = "rounded"
