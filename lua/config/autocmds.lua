@@ -120,13 +120,13 @@ vim.api.nvim_create_autocmd("BufEnter", {
   desc = "Warn if file is git ignored",
 })
 
-vim.api.nvim_create_autocmd("BufEnter", {
-  callback = function(opts)
-    if vim.bo[opts.buf].filetype == "swift" then
-      vim.lsp.inlay_hint.enable(false, { bufnr = opts.buf })
-    end
-  end,
-})
+-- vim.api.nvim_create_autocmd("BufEnter", {
+--   callback = function(opts)
+--     if vim.bo[opts.buf].filetype == "swift" then
+--       vim.lsp.inlay_hint.enable(false, { bufnr = opts.buf })
+--     end
+--   end,
+-- })
 
 -- Disable LazyVim's default highlight_yank autocmd to prevent conflicts
 vim.api.nvim_clear_autocmds({ group = "lazyvim_highlight_yank" })

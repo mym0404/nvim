@@ -35,7 +35,7 @@ return {
     { "antosha417/nvim-lsp-file-operations", config = true },
   },
   opts = {
-    inlay_hints = { enabled = true },
+    inlay_hints = { enabled = false },
     servers = {
       sourcekit = {
         enabled = utils.is_mac,

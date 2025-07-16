@@ -29,12 +29,10 @@ end
 local function customizeExitInsertMode()
   local keys = { "jk", "jj" }
   for _, key in ipairs(keys) do
-    vim.keymap.set(
-      { "i" },
-      key,
-      "<Esc>",
-      { noremap = true, silent = true, desc = "Exit insert mode" }
-    )
+    vim.keymap.set({ "i" }, key, function()
+      vim.snippet.stop()
+      return "<esc>"
+    end, { expr = true, noremap = true, silent = true, desc = "Exit insert mode" })
   end
   -- for _, key in ipairs(keys) do
   --   vim.keymap.set(
@@ -69,6 +67,7 @@ local function map_esc()
       cmp.hide()
       return ""
     end
+    vim.snippet.stop()
     return "<Esc>"
   end, { silent = true, expr = true })
 end
@@ -318,6 +317,8 @@ local function configure_lsp()
     pattern = { "*.ts", "*.tsx", "*.js", "*.jsx" },
     callback = function()
       LazyVim.format({ force = true })
+      -- stop snippets
+      vim.snippet.stop()
     end,
     desc = "format on save",
   })
@@ -342,6 +343,8 @@ local function configure_lsp()
     if vim.api.nvim_get_mode().mode == "i" then
       utils.go_to_normal_mode()
     end
+    -- stop snippets
+    vim.snippet.stop()
   end, { desc = "Format" })
 end
 
