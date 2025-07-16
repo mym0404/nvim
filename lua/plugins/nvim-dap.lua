@@ -14,6 +14,7 @@ return {
       xcodebuild.setup(codelldbPath)
 
       vim.keymap.set("n", "<leader>Xd", xcodebuild.build_and_debug, { desc = "Build & Debug" })
+      vim.keymap.set("n", "<leader>Xc", ":XcodebuildCleanDerivedData<cr>", { desc = "Clean Build" })
       vim.keymap.set(
         "n",
         "<leader>dr",
