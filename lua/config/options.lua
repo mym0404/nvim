@@ -29,7 +29,6 @@ opt.expandtab = true
 -- opt.shiftwidth = 8
 
 opt.imsearch = 0
-opt.imsearch = 0
 
 -- opt.mouse = ""
 -- vim.o.mousemodel = "extend"
@@ -37,6 +36,7 @@ opt.showmode = false
 opt.exrc = true
 
 vim.schedule(function()
+  -- hello
   opt.clipboard = "unnamedplus"
 end)
 
@@ -50,14 +50,12 @@ vim.g.lazyvim_prettier_needs_config = true
 -- vim.g.lazyvim_cmp = "nvim-cmp"
 -- vim.g.snacks_animate = false
 
--- opt.foldmethod = "manual"
--- opt.foldexpr = nil
-opt.foldcolumn = "1"
-opt.foldlevel = 99
--- opt.foldtext = "v:lua.require'ufo.main'.foldtext()"
--- opt.foldexpr = "v:lua.vim.lsp.foldexpr()"
-opt.foldlevelstart = 99
-opt.foldenable = true
+opt.foldmethod = "manual"
+vim.o.foldcolumn = "0"
+vim.o.foldlevel = 99
+vim.o.foldlevelstart = 99
+vim.o.foldenable = true
+vim.o.fillchars = [[eob: ,fold: ,foldopen:,foldsep:|,foldclose:]]
 
 opt.laststatus = 3
 vim.o.winborder = "rounded"

@@ -360,7 +360,7 @@ local theme = lush(function(injected_functions)
     Conceal({ fg = "#8b949e" }),
     SignColumn({ fg = "#6e7681" }),
     FoldColumn({ fg = "#6e7681" }),
-    Folded(folded),
+    Folded({ fg = special.fg }),
     FoldedBold({ fg = folded.fg, bg = folded.bg, gui = "bold" }),
     WarningMsg({ fg = "#d29922" }),
     Title({ fg = palette.theme, gui = "bold" }),
