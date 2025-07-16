@@ -128,7 +128,14 @@ return {
       },
       refresh = 50, -- refresh at most every 50ms
     },
-    scroll = { enabled = false },
+    scroll = {
+      enabled = false,
+      animate = { duration = { step = 32, total = 160 }, easing = "linear" },
+      animate_repeat = { delay = 50, duration = { step = 20, total = 30 }, easing = "linear" },
+      -- filter = function (buf)
+      --
+      -- end
+    },
     indent = { enabled = true, priority = 1, only_current = true, only_scope = true },
     image = {
       enabled = true,
