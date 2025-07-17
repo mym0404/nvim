@@ -153,10 +153,12 @@ M.is_js_ft = function(buf)
   return false
 end
 local function has_unused_imports(buf)
-  local diagnostics = vim.diagnostic.get(buf) -- 현재 버퍼 기준
+  local diagnostics = vim.diagnostic.get(buf)
   for _, d in ipairs(diagnostics) do
     if
-      d.message:lower():match("unused import") or d.message:lower():match("imported but never used")
+      d.message:lower():match("is declared but")
+      or d.message:lower():match("unused import")
+      or d.message:lower():match("imported but never used")
     then
       return true
     end
