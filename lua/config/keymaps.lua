@@ -259,6 +259,7 @@ local function map_docs_hover()
       max_width = 100,
       width = 70,
       max_height = 120,
+      height = 100,
       wrap = false,
       zindex = 100,
 
