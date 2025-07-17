@@ -723,6 +723,20 @@ local function map_tab()
   end, { expr = true, desc = "Toggle tab close or new" })
 end
 
+local function map_undo_redo()
+  vim.keymap.set("n", "u", function()
+    local view = vim.fn.winsaveview()
+    vim.cmd("undo")
+    vim.fn.winrestview(view)
+  end, { desc = "Undo without scrolling", silent = true })
+
+  vim.keymap.set("n", "<C-r>", function()
+    local view = vim.fn.winsaveview()
+    vim.cmd("redo")
+    vim.fn.winrestview(view)
+  end, { desc = "Redo without scrolling", silent = true })
+end
+
 reset_keymaps()
 map_template_string()
 map_react_prop_bracket()
@@ -752,3 +766,4 @@ map_yank()
 map_tab_move()
 map_ufo()
 map_tab()
+map_undo_redo()

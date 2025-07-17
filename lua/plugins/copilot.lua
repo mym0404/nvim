@@ -22,7 +22,7 @@ return {
     suggestion = {
       enabled = not vim.g.ai_cmp,
       auto_trigger = true,
-      debounce = 50,
+      debounce = 1000,
 
       hide_during_completion = false,
 
