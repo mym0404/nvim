@@ -270,38 +270,38 @@ local function map_docs_hover()
   end, { desc = "hover documentation", silent = true })
 end
 
--- local _timer
--- local do_zz_after_scroll = false
--- local function map_scroll()
---   local delay = 100
---   local function reset_timer()
---     if _timer ~= nil then
---       pcall(_timer.stop, _timer)
---       pcall(_timer.close, _timer)
---     end
---     _timer = nil
---   end
+local _timer
+local do_zz_after_scroll = false
+local function map_scroll()
+  local delay = 0
+  local function reset_timer()
+    if _timer ~= nil then
+      pcall(_timer.stop, _timer)
+      pcall(_timer.close, _timer)
+    end
+    _timer = nil
+  end
 
--- vim.keymap.set("n", "<C-d>", function()
---   if do_zz_after_scroll then
---     reset_timer()
---     _timer = vim.defer_fn(function()
---       vim.cmd("normal! zz")
---     end, delay)
---   end
---   return "15<C-d>"
--- end, { noremap = true, nowait = true, expr = true })
---
--- vim.keymap.set("n", "<C-u>", function()
---   if do_zz_after_scroll then
---     reset_timer()
---     _timer = vim.defer_fn(function()
---       vim.cmd("normal! zz")
---     end, delay)
---   end
---   return "15<C-u>"
--- end, { noremap = true, nowait = true, expr = true })
--- end
+  vim.keymap.set("n", "<C-d>", function()
+    if do_zz_after_scroll then
+      reset_timer()
+      _timer = vim.defer_fn(function()
+        vim.cmd("normal! zz")
+      end, delay)
+    end
+    return "15<C-d>"
+  end, { noremap = true, nowait = true, expr = true })
+
+  vim.keymap.set("n", "<C-u>", function()
+    if do_zz_after_scroll then
+      reset_timer()
+      _timer = vim.defer_fn(function()
+        vim.cmd("normal! zz")
+      end, delay)
+    end
+    return "15<C-u>"
+  end, { noremap = true, nowait = true, expr = true })
+end
 
 local function map_hover_scroll()
   local function scroll(dir)
@@ -728,7 +728,7 @@ map_react_prop_bracket()
 map_delete_buffer()
 configure_lsp()
 map_docs_hover()
--- map_scroll()
+map_scroll()
 map_hover_scroll()
 map_shift_cr()
 map_comments()
