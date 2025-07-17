@@ -108,12 +108,12 @@ return {
     },
     notifier = {
       enabled = true,
-      timeout = 2500,
-      width = { min = 35, max = 0.5 },
-      height = { min = 1, max = 0.5 },
+      timeout = 1800,
+      width = { min = 35, max = 50 },
+      height = { min = 1, max = 50 },
       sort = { "added", "level" },
       ---@type snacks.notifier.style
-      style = "minimal",
+      style = "compact",
     },
     statuscolumn = {
       left = { "mark", "fold" }, -- priority of signs on the left (high to low)

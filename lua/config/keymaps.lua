@@ -613,10 +613,10 @@ local function map_yank()
         [vim.diagnostic.severity.HINT] = 0,
       }
       local severity_icons = {
-        [vim.diagnostic.severity.ERROR] = "",
-        [vim.diagnostic.severity.WARN] = "",
-        [vim.diagnostic.severity.INFO] = "",
-        [vim.diagnostic.severity.HINT] = "",
+        [vim.diagnostic.severity.ERROR] = "",
+        [vim.diagnostic.severity.WARN] = "",
+        [vim.diagnostic.severity.INFO] = "",
+        [vim.diagnostic.severity.HINT] = "",
       }
       local severity_name = {
         [vim.diagnostic.severity.ERROR] = "Error",
@@ -687,22 +687,29 @@ local function map_yank()
         vim.notify("No diagnostics to copy", vim.log.levels.INFO, { title = "Copy Diagnostics" })
       else
         local ret = ""
-        for severity, count in pairs(severity_counts) do
+        local severities_to_iterate = {
+          vim.diagnostic.severity.ERROR,
+          vim.diagnostic.severity.WARN,
+          vim.diagnostic.severity.INFO,
+          vim.diagnostic.severity.HINT,
+        }
+        for _, severity in ipairs(severities_to_iterate) do
+          local count = severity_counts[severity]
           if count > 0 then
             ret = ret
               .. string.format(
-                "%s %d %s \n",
+                "%s  %d %s\n",
                 severity_icons[severity],
                 count,
                 severity_name[severity]
               )
           end
         end
-        vim.notify(
-          string.format(ret, #formatted_diagnostics_list),
-          vim.log.levels.INFO,
-          { title = "Copy Diagnostics" }
-        )
+        if #ret > 0 then
+          -- remove last \n
+          ret = ret:sub(1, -2)
+        end
+        vim.notify(ret, vim.log.levels.INFO, { title = "Copy Diagnostics" })
       end
     end, { desc = "Copy diagnostics to clipboard", nowait = true })
   end
