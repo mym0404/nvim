@@ -332,6 +332,12 @@ end
 local function configure_lsp()
   vim.api.nvim_create_autocmd("BufWritePre", {
     callback = function(opts)
+      -- Skip if buffer is not writable or has special buftype
+      local buftype = vim.bo[opts.buf].buftype
+      if buftype ~= "" then
+        return
+      end
+
       utils.on_save_action(opts.buf, function()
         vim.snippet.stop()
         vim.cmd("noautocmd write")
