@@ -456,7 +456,7 @@ local theme = lush(function(injected_functions)
     sym("@keyword.exception")(code.keyword),
     sym("@function")({ Function }),
     sym("@function.builtin")({ Function }),
-    sym("@constructor")({ fg = "#ffa657" }),
+    sym("@constructor")(code.keyword),
     sym("@constructor.lua")({ fg = "#e6edf3" }),
     sym("@constant")({ Constant }),
     sym("@constant.html")({ sym("@tag") }),
