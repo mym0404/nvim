@@ -61,3 +61,4 @@ vim.o.winborder = "rounded"
 
 vim.g.ai_cmp = false
 vim.g.vim_json_conceal = 0
+vim.g.autoformat = false

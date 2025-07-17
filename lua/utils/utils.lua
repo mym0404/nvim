@@ -153,6 +153,19 @@ M.is_js_ft = function(buf)
   return false
 end
 
+M.on_save_action = function(buf, cb)
+  cb = cb or function() end
+  if M.is_js_ft(buf) then
+    require("vtsls.commands").remove_unused_imports(buf, function()
+      LazyVim.format({ force = true })
+      cb()
+    end)
+  else
+    LazyVim.format({ force = true })
+    cb()
+  end
+end
+
 local function getOS()
   -- ask LuaJIT first
   if jit then

@@ -331,14 +331,15 @@ end
 
 local function configure_lsp()
   vim.api.nvim_create_autocmd("BufWritePre", {
-    pattern = { "*.ts", "*.tsx", "*.js", "*.jsx" },
-    callback = function()
-      LazyVim.format({ force = true })
-      -- stop snippets
-      vim.snippet.stop()
+    callback = function(opts)
+      utils.on_save_action(opts.buf, function()
+        vim.snippet.stop()
+        vim.cmd("noautocmd write")
+      end)
     end,
-    desc = "format on save",
+    nested = false,
   })
+
   vim.keymap.set("n", "<leader>co", function()
     local context = {
       -- diagnostics = vim.diagnostic.get_line_diagnostics(),
@@ -356,12 +357,13 @@ local function configure_lsp()
   end, { desc = "Add Missing Imports", silent = true })
 
   vim.keymap.set({ "n", "i" }, "<c-x>", function()
-    LazyVim.format({ force = true })
-    if vim.api.nvim_get_mode().mode == "i" then
-      utils.go_to_normal_mode()
-    end
-    -- stop snippets
-    vim.snippet.stop()
+    utils.on_save_action(0, function()
+      if vim.api.nvim_get_mode().mode == "i" then
+        utils.go_to_normal_mode()
+      end
+      -- stop snippets
+      vim.snippet.stop()
+    end)
   end, { desc = "Format" })
 end
 
