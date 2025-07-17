@@ -272,7 +272,7 @@ local function map_docs_hover()
 end
 
 local _timer
-local do_zz_after_scroll = false
+local do_zz_after_scroll = true
 local function map_scroll()
   local delay = 0
   local function reset_timer()
