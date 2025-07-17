@@ -274,7 +274,7 @@ end
 local _timer
 local do_zz_after_scroll = true
 local function map_scroll()
-  local delay = 1
+  local delay = 0
   local function reset_timer()
     if _timer ~= nil then
       pcall(_timer.stop, _timer)
