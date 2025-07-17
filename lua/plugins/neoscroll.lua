@@ -13,5 +13,6 @@ return {
       "zb",
     },
     duration_multiplier = 0.4,
+    stop_eof = false,
   },
 }

@@ -1283,6 +1283,9 @@ local theme = lush(function(injected_functions)
     GrugFarVisualBufrange({ Visual }),
     GrugFarHelpWinActionText({ ModeMsg }),
     GrugFarHelpWinActionPrefix({ Title }),
+
+    LuasnipInsertNodePassive(special_orange),
+    -- LuasnipSnippetPassive(special),
   }
 end)
 return theme
