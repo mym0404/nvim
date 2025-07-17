@@ -284,23 +284,23 @@ local function map_scroll()
   end
 
   vim.keymap.set("n", "<C-d>", function()
-    if do_zz_after_scroll then
-      reset_timer()
-      _timer = vim.defer_fn(function()
-        vim.cmd("normal! zz")
-      end, delay)
-    end
-    return "15<C-d>"
+    -- if do_zz_after_scroll then
+    --   reset_timer()
+    --   _timer = vim.defer_fn(function()
+    --     vim.cmd("normal! zz")
+    --   end, delay)
+    -- end
+    return "15<C-d>zz"
   end, { noremap = true, nowait = true, expr = true })
 
   vim.keymap.set("n", "<C-u>", function()
-    if do_zz_after_scroll then
-      reset_timer()
-      _timer = vim.defer_fn(function()
-        vim.cmd("normal! zz")
-      end, delay)
-    end
-    return "15<C-u>"
+    -- if do_zz_after_scroll then
+    --   reset_timer()
+    --   _timer = vim.defer_fn(function()
+    --     vim.cmd("normal! zz")
+    --   end, delay)
+    -- end
+    return "15<C-u>zz"
   end, { noremap = true, nowait = true, expr = true })
 end
 
@@ -606,6 +606,25 @@ local function map_yank()
       local current_bufnr = vim.api.nvim_get_current_buf()
       local formatted_diagnostics_list = {}
 
+      local severity_counts = {
+        [vim.diagnostic.severity.ERROR] = 0,
+        [vim.diagnostic.severity.WARN] = 0,
+        [vim.diagnostic.severity.INFO] = 0,
+        [vim.diagnostic.severity.HINT] = 0,
+      }
+      local severity_icons = {
+        [vim.diagnostic.severity.ERROR] = "",
+        [vim.diagnostic.severity.WARN] = "",
+        [vim.diagnostic.severity.INFO] = "",
+        [vim.diagnostic.severity.HINT] = "",
+      }
+      local severity_name = {
+        [vim.diagnostic.severity.ERROR] = "Error",
+        [vim.diagnostic.severity.WARN] = "Warning",
+        [vim.diagnostic.severity.INFO] = "Info",
+        [vim.diagnostic.severity.HINT] = "Hint",
+      }
+
       local current_filetype = vim.bo[current_bufnr].filetype
       local js_filetypes = {
         javascript = true,
@@ -635,6 +654,7 @@ local function map_yank()
             for _, diag in ipairs(buffer_diagnostics) do
               local severity_str = severity_map[diag.severity] or "Unknown"
               if severity_str ~= "Unknown" then
+                severity_counts[diag.severity] = severity_counts[diag.severity] + 1
                 local file_path = vim.api.nvim_buf_get_name(bufnr)
 
                 -- Convert to relative path from project root
@@ -664,10 +684,22 @@ local function map_yank()
       local final_output = table.concat(formatted_diagnostics_list, "\n")
       vim.fn.setreg("+", final_output)
       if #formatted_diagnostics_list == 0 then
-        vim.notify("No diagnostics to copy", vim.log.levels.WARN, { title = "Copy Diagnostics" })
+        vim.notify("No diagnostics to copy", vim.log.levels.INFO, { title = "Copy Diagnostics" })
       else
+        local ret = ""
+        for severity, count in pairs(severity_counts) do
+          if count > 0 then
+            ret = ret
+              .. string.format(
+                "%s %d %s \n",
+                severity_icons[severity],
+                count,
+                severity_name[severity]
+              )
+          end
+        end
         vim.notify(
-          string.format("%d diagnostics copied to clipboard", #formatted_diagnostics_list),
+          string.format(ret, #formatted_diagnostics_list),
           vim.log.levels.INFO,
           { title = "Copy Diagnostics" }
         )
@@ -713,11 +745,14 @@ end
 local function map_tab()
   vim.keymap.set({ "i" }, "<tab>", function()
     local sug = require("copilot.suggestion")
-    if vim.snippet.active({ direction = 1 }) then
+    local length = vim.snippet._session ~= nil and #vim.snippet._session.tabstops or nil
+    if length ~= nil and length >= 2 and vim.snippet.active({ direction = 1 }) then
       vim.snippet.jump(1)
     elseif sug.is_visible() then
+      vim.snippet.stop()
       sug.accept()
     else
+      vim.snippet.stop()
       return "<tab>"
     end
   end, { expr = true, desc = "Toggle tab close or new" })
