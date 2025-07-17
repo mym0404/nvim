@@ -148,8 +148,8 @@ return {
         window = {
           scrollbar = true,
           border = "rounded",
-          desired_min_height = 60,
-          max_height = 90,
+          desired_min_height = 80,
+          max_height = 120,
           min_width = 60,
           max_width = 70,
           desired_min_width = 60,

@@ -152,6 +152,37 @@ M.is_js_ft = function(buf)
   end
   return false
 end
+local function has_unused_imports(buf)
+  local diagnostics = vim.diagnostic.get(buf)
+  for _, d in ipairs(diagnostics) do
+    if
+      d.message:lower():match("is declared but")
+      or d.message:lower():match("unused import")
+      or d.message:lower():match("imported but never used")
+    then
+      return true
+    end
+  end
+  return false
+end
+M.on_save_action = function(buf, cb)
+  local view = vim.fn.winsaveview()
+  cb = cb or function() end
+  local on_complete = function()
+    LazyVim.format({ force = true })
+    cb()
+  end
+  if M.is_js_ft(buf) then
+    if has_unused_imports(buf) then
+      require("vtsls.commands").remove_unused_imports(buf, on_complete)
+    else
+      on_complete()
+    end
+  else
+    on_complete()
+  end
+  vim.fn.winrestview(view)
+end
 
 local function getOS()
   -- ask LuaJIT first

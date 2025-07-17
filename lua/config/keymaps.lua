@@ -259,6 +259,7 @@ local function map_docs_hover()
       max_width = 100,
       width = 70,
       max_height = 120,
+      height = 100,
       wrap = false,
       zindex = 100,
 
@@ -270,38 +271,38 @@ local function map_docs_hover()
   end, { desc = "hover documentation", silent = true })
 end
 
--- local _timer
--- local do_zz_after_scroll = false
--- local function map_scroll()
---   local delay = 100
---   local function reset_timer()
---     if _timer ~= nil then
---       pcall(_timer.stop, _timer)
---       pcall(_timer.close, _timer)
---     end
---     _timer = nil
---   end
+local _timer
+local do_zz_after_scroll = true
+local function map_scroll()
+  local delay = 0
+  local function reset_timer()
+    if _timer ~= nil then
+      pcall(_timer.stop, _timer)
+      pcall(_timer.close, _timer)
+    end
+    _timer = nil
+  end
 
--- vim.keymap.set("n", "<C-d>", function()
---   if do_zz_after_scroll then
---     reset_timer()
---     _timer = vim.defer_fn(function()
---       vim.cmd("normal! zz")
---     end, delay)
---   end
---   return "15<C-d>"
--- end, { noremap = true, nowait = true, expr = true })
---
--- vim.keymap.set("n", "<C-u>", function()
---   if do_zz_after_scroll then
---     reset_timer()
---     _timer = vim.defer_fn(function()
---       vim.cmd("normal! zz")
---     end, delay)
---   end
---   return "15<C-u>"
--- end, { noremap = true, nowait = true, expr = true })
--- end
+  vim.keymap.set("n", "<C-d>", function()
+    -- if do_zz_after_scroll then
+    --   reset_timer()
+    --   _timer = vim.defer_fn(function()
+    --     vim.cmd("normal! zz")
+    --   end, delay)
+    -- end
+    return "15<C-d>zz"
+  end, { noremap = true, nowait = true, expr = true })
+
+  vim.keymap.set("n", "<C-u>", function()
+    -- if do_zz_after_scroll then
+    --   reset_timer()
+    --   _timer = vim.defer_fn(function()
+    --     vim.cmd("normal! zz")
+    --   end, delay)
+    -- end
+    return "15<C-u>zz"
+  end, { noremap = true, nowait = true, expr = true })
+end
 
 local function map_hover_scroll()
   local function scroll(dir)
@@ -331,14 +332,21 @@ end
 
 local function configure_lsp()
   vim.api.nvim_create_autocmd("BufWritePre", {
-    pattern = { "*.ts", "*.tsx", "*.js", "*.jsx" },
-    callback = function()
-      LazyVim.format({ force = true })
-      -- stop snippets
-      vim.snippet.stop()
+    callback = function(opts)
+      -- Skip if buffer is not writable or has special buftype
+      local buftype = vim.bo[opts.buf].buftype
+      if buftype ~= "" then
+        return
+      end
+
+      utils.on_save_action(opts.buf, function()
+        vim.snippet.stop()
+        vim.cmd("noautocmd write")
+      end)
     end,
-    desc = "format on save",
+    nested = false,
   })
+
   vim.keymap.set("n", "<leader>co", function()
     local context = {
       -- diagnostics = vim.diagnostic.get_line_diagnostics(),
@@ -356,12 +364,13 @@ local function configure_lsp()
   end, { desc = "Add Missing Imports", silent = true })
 
   vim.keymap.set({ "n", "i" }, "<c-x>", function()
-    LazyVim.format({ force = true })
-    if vim.api.nvim_get_mode().mode == "i" then
-      utils.go_to_normal_mode()
-    end
-    -- stop snippets
-    vim.snippet.stop()
+    utils.on_save_action(0, function()
+      if vim.api.nvim_get_mode().mode == "i" then
+        utils.go_to_normal_mode()
+      end
+      -- stop snippets
+      vim.snippet.stop()
+    end)
   end, { desc = "Format" })
 end
 
@@ -597,6 +606,25 @@ local function map_yank()
       local current_bufnr = vim.api.nvim_get_current_buf()
       local formatted_diagnostics_list = {}
 
+      local severity_counts = {
+        [vim.diagnostic.severity.ERROR] = 0,
+        [vim.diagnostic.severity.WARN] = 0,
+        [vim.diagnostic.severity.INFO] = 0,
+        [vim.diagnostic.severity.HINT] = 0,
+      }
+      local severity_icons = {
+        [vim.diagnostic.severity.ERROR] = "",
+        [vim.diagnostic.severity.WARN] = "",
+        [vim.diagnostic.severity.INFO] = "",
+        [vim.diagnostic.severity.HINT] = "",
+      }
+      local severity_name = {
+        [vim.diagnostic.severity.ERROR] = "Error",
+        [vim.diagnostic.severity.WARN] = "Warning",
+        [vim.diagnostic.severity.INFO] = "Info",
+        [vim.diagnostic.severity.HINT] = "Hint",
+      }
+
       local current_filetype = vim.bo[current_bufnr].filetype
       local js_filetypes = {
         javascript = true,
@@ -626,6 +654,7 @@ local function map_yank()
             for _, diag in ipairs(buffer_diagnostics) do
               local severity_str = severity_map[diag.severity] or "Unknown"
               if severity_str ~= "Unknown" then
+                severity_counts[diag.severity] = severity_counts[diag.severity] + 1
                 local file_path = vim.api.nvim_buf_get_name(bufnr)
 
                 -- Convert to relative path from project root
@@ -655,10 +684,22 @@ local function map_yank()
       local final_output = table.concat(formatted_diagnostics_list, "\n")
       vim.fn.setreg("+", final_output)
       if #formatted_diagnostics_list == 0 then
-        vim.notify("No diagnostics to copy", vim.log.levels.WARN, { title = "Copy Diagnostics" })
+        vim.notify("No diagnostics to copy", vim.log.levels.INFO, { title = "Copy Diagnostics" })
       else
+        local ret = ""
+        for severity, count in pairs(severity_counts) do
+          if count > 0 then
+            ret = ret
+              .. string.format(
+                "%s %d %s \n",
+                severity_icons[severity],
+                count,
+                severity_name[severity]
+              )
+          end
+        end
         vim.notify(
-          string.format("%d diagnostics copied to clipboard", #formatted_diagnostics_list),
+          string.format(ret, #formatted_diagnostics_list),
           vim.log.levels.INFO,
           { title = "Copy Diagnostics" }
         )
@@ -704,14 +745,31 @@ end
 local function map_tab()
   vim.keymap.set({ "i" }, "<tab>", function()
     local sug = require("copilot.suggestion")
-    if vim.snippet.active({ direction = 1 }) then
+    local length = vim.snippet._session ~= nil and #vim.snippet._session.tabstops or nil
+    if length ~= nil and length >= 2 and vim.snippet.active({ direction = 1 }) then
       vim.snippet.jump(1)
     elseif sug.is_visible() then
+      vim.snippet.stop()
       sug.accept()
     else
+      vim.snippet.stop()
       return "<tab>"
     end
   end, { expr = true, desc = "Toggle tab close or new" })
+end
+
+local function map_undo_redo()
+  vim.keymap.set("n", "u", function()
+    local view = vim.fn.winsaveview()
+    vim.cmd("undo")
+    vim.fn.winrestview(view)
+  end, { desc = "Undo without scrolling", silent = true })
+
+  vim.keymap.set("n", "<C-r>", function()
+    local view = vim.fn.winsaveview()
+    vim.cmd("redo")
+    vim.fn.winrestview(view)
+  end, { desc = "Redo without scrolling", silent = true })
 end
 
 reset_keymaps()
@@ -720,7 +778,7 @@ map_react_prop_bracket()
 map_delete_buffer()
 configure_lsp()
 map_docs_hover()
--- map_scroll()
+map_scroll()
 map_hover_scroll()
 map_shift_cr()
 map_comments()
@@ -743,3 +801,4 @@ map_yank()
 map_tab_move()
 map_ufo()
 map_tab()
+map_undo_redo()

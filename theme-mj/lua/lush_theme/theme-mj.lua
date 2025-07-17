@@ -21,17 +21,23 @@ local palette = {
   text_sub_light = "#a0a0a0",
   text_sub = "#737373",
   text_sub2 = "#333333",
+  special = "#c79cff",
+  special_bg = "#2a2136",
+  special_theme = "#9ebaff",
+  special_theme_bg = "#0d254d",
+  special_orange = "#e8b45f",
+  special_orange_bg = "#473518",
 }
-local special = { fg = "#c79cff", bg = "#2a2136", gui = "bold" }
-local special_theme = { fg = palette.theme, bg = "#0d254d", gui = "bold" }
-local special_orange = { fg = "#e8b45f", bg = "#473518", gui = "bold" }
-local match_text = special_theme
+local special = { fg = palette.special, bg = palette.special_bg, gui = "bold" }
+local special_theme = { fg = palette.special_theme, bg = palette.special_theme_bg, gui = "bold" }
+local special_orange = { fg = palette.special_orange, bg = palette.special_orange_bg, gui = "bold" }
+
 local text = { fg = palette.text }
 local text_sub = { fg = palette.text_sub }
 local text_sub_light = { fg = palette.text_sub_light }
 local visual = { bg = "#214283" }
 local searched = { bg = "#46ba1c", fg = palette.text }
--- local searched = match_text
+-- local searched = special_theme
 local searched_selected = { fg = palette.text, bg = "#db16a3", gui = "bold" }
 local folded = { fg = "#87A8E8" }
 local border = { fg = "#424242" }
@@ -100,8 +106,8 @@ local code = {
     bg = hsl("#313133"),
   },
   folded_line_token = {
-    fg = special.fg,
-    bg = special.bg,
+    fg = special_orange.fg,
+    bg = special_orange.bg,
     gui = "bold",
   },
 }
@@ -110,7 +116,7 @@ local theme = lush(function(injected_functions)
   local sym = injected_functions.sym
   return {
     Special(special),
-    MatchText(match_text),
+    MatchText(special_theme),
     sym("@Special")(special),
     Type(code.type),
     PreProc({ fg = "#ff7b72" }),
@@ -167,8 +173,8 @@ local theme = lush(function(injected_functions)
     Warn(warn),
     VirtualTextHint({ fg = "#7d8590" }),
 
-    YankyPut(match_text),
-    YankyYanked(match_text),
+    YankyPut(special_theme),
+    YankyYanked(special_theme),
 
     DiagnosticError(error),
     DiagnosticHint(hint),
@@ -360,8 +366,8 @@ local theme = lush(function(injected_functions)
     Conceal({ fg = "#8b949e" }),
     SignColumn({ fg = "#6e7681" }),
     FoldColumn({ fg = "#6e7681" }),
-    Folded({ fg = special.fg }),
-    FoldedBold({ fg = folded.fg, bg = folded.bg, gui = "bold" }),
+    Folded({ fg = special_orange.fg }),
+    FoldedBold({ fg = special_orange.fg, bg = special_orange.bg, gui = "bold" }),
     WarningMsg({ fg = "#d29922" }),
     Title({ fg = palette.theme, gui = "bold" }),
     MoreMsg({ fg = "#2f8cf7", gui = "bold" }),
@@ -450,7 +456,7 @@ local theme = lush(function(injected_functions)
     sym("@keyword.exception")(code.keyword),
     sym("@function")({ Function }),
     sym("@function.builtin")({ Function }),
-    sym("@constructor")({ fg = "#ffa657" }),
+    sym("@constructor")(code.keyword),
     sym("@constructor.lua")({ fg = "#e6edf3" }),
     sym("@constant")({ Constant }),
     sym("@constant.html")({ sym("@tag") }),
@@ -574,7 +580,7 @@ local theme = lush(function(injected_functions)
     BlinkCmpScrollBarThumb({ PmenuThumb }),
     BlinkCmpSignatureHelpActiveParameter({ LspSignatureActiveParameter }),
     BlinkCmpSignatureHelpBorder(border),
-    BlinkCmpLabelMatch(match_text),
+    BlinkCmpLabelMatch(special_theme),
     Bold({ gui = "bold" }),
     Boolean(code.keyword),
     Character(code.string),
@@ -745,7 +751,7 @@ local theme = lush(function(injected_functions)
     NoicePopupBorder(border),
     NoicePopupmenu({ Pmenu }),
     NoicePopupmenuBorder(border),
-    NoicePopupmenuMatch(match_text),
+    NoicePopupmenuMatch(special_theme),
     NoicePopupmenuSelected({ PmenuSel }),
     NoiceScrollbarThumb({ PmenuThumb }),
     NoiceSplit({ NormalFloat }),
@@ -900,8 +906,8 @@ local theme = lush(function(injected_functions)
     SnacksPickerLspUnavailable({ fg = DiagnosticError.fg }),
     SnacksPickerManPage(special),
     SnacksPickerManSection({ Number }),
-    SnacksPickerMatch(match_text),
-    SnacksPickerSearch(match_text),
+    SnacksPickerMatch(special_theme),
+    SnacksPickerSearch(special_theme),
     SnacksPickerPathHidden(text),
     SnacksPickerPathIgnored(vcs.ignored.label),
     SnacksPickerPickWin({ Search }),
@@ -1261,7 +1267,7 @@ local theme = lush(function(injected_functions)
     GrugFarResultsMatchRemoved(vcs.deleted.code),
     GrugFarResultsMatchAdded(vcs.added.code),
     GrugFarHelpWinActionKey({ Identifier }),
-    GrugFarResultsMatch(match_text),
+    GrugFarResultsMatch(special_theme),
     GrugFarResultsActionMessage({ ModeMsg }),
     GrugFarInputPlaceholder(text_sub),
     GrugFarResultsStats(special),

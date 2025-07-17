@@ -43,6 +43,10 @@ local function setup_core()
 			distribution = "Ubuntu-24.04",
 		} }
 	end
+	c.inactive_pane_hsb = {
+		saturation = 0.6,
+		brightness = 0.6,
+	}
 	c.set_environment_variables = {
 		PATH = "/opt/homebrew/bin:" .. os.getenv("PATH"),
 	}
@@ -69,6 +73,7 @@ local function setup_core()
 	c.front_end = "WebGpu"
 	c.freetype_load_flags = "NO_HINTING"
 	c.freetype_load_target = "Light"
+	-- c.freetype_render_target = "Normal"
 	c.freetype_render_target = "HorizontalLcd"
 	-- c.custom_block_glyphs = true
 	if is_windows then
