@@ -154,6 +154,7 @@ M.is_js_ft = function(buf)
 end
 
 M.on_save_action = function(buf, cb)
+  local view = vim.fn.winsaveview()
   cb = cb or function() end
   if M.is_js_ft(buf) then
     require("vtsls.commands").remove_unused_imports(buf, function()
@@ -164,6 +165,7 @@ M.on_save_action = function(buf, cb)
     LazyVim.format({ force = true })
     cb()
   end
+  vim.fn.winrestview(view)
 end
 
 local function getOS()
