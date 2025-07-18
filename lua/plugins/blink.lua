@@ -94,6 +94,7 @@ return {
       menu = {
         min_width = 40,
         max_height = 20,
+        scrollbar = false,
         draw = {
           padding = 1,
           gap = 1,

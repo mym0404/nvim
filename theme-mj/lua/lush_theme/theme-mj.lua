@@ -926,7 +926,7 @@ local theme = lush(function(injected_functions)
     SnacksPickerUndoRemoved({ Removed }),
     SnacksPickerUndoSaved(special),
     SnacksPickerUnselected({ NonText }),
-    SnacksStatusColumnMark({ DiagnosticHint }),
+    SnacksStatusColumnMark({ fg = special_orange.fg, gui = "bold" }),
     SnacksWinBar({ Title }),
     SnacksWinKey(code.keyword),
     SnacksWinKeyDesc({ Function }),
