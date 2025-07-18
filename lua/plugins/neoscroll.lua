@@ -1,6 +1,6 @@
 return {
   "karb94/neoscroll.nvim",
-  enabled = false,
+  enabled = true,
   opts = {
     mappings = {
       "<C-u>",
@@ -13,7 +13,7 @@ return {
       "zz",
       "zb",
     },
-    duration_multiplier = 0.4,
+    duration_multiplier = 0.3,
     stop_eof = false,
   },
 }
