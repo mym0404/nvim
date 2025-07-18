@@ -1,8 +1,8 @@
 # .wezterm.lua
 
 ```lua filename="~/.wezterm.lua"
-local opacity = 1
-local blur = 0
+local opacity = 0.5
+local blur = 20
 
 local wezterm = require("wezterm")
 local c = wezterm.config_builder()
@@ -44,7 +44,7 @@ local function setup_core()
 		} }
 	end
 	c.inactive_pane_hsb = {
-		saturation = 0.6,
+		saturation = 0.7,
 		brightness = 0.6,
 	}
 	c.set_environment_variables = {
@@ -54,7 +54,8 @@ local function setup_core()
 	c.initial_rows = 34
 
 	c.use_ime = true
-	c.use_dead_keys = true
+	-- c.use_dead_keys = false
+	-- c.ime_preedit_rendering = "System"
 	if is_macos then
 		c.enable_wayland = false
 	end
@@ -90,6 +91,10 @@ local function setup_core()
 
 	c.window_background_opacity = opacity
 	c.macos_window_background_blur = blur
+	c.use_fancy_tab_bar = false
+	c.enable_tab_bar = true
+	c.hide_tab_bar_if_only_one_tab = true
+	c.tab_max_width = 120
 	-- Removes the title bar, leaving only the tab bar. Keeps
 	-- the ability to resize by dragging the window's edges.
 	-- On macOS, 'RESIZE|INTEGRATED_BUTTONS' also looks nice if
@@ -117,9 +122,6 @@ local function setup_core()
 		local segments = segments_for_right_status(window)
 
 		local color_scheme = window:effective_config().resolved_palette
-		-- Note the use of wezterm.color.parse here, this returns
-		-- a Color object, which comes with functionality for lightening
-		-- or darkening the colour (amongst other things).
 		local bg = wezterm.color.parse(color_scheme.background)
 		local fg = color_scheme.foreground
 
@@ -159,6 +161,8 @@ local function setup_core()
 		end
 
 		window:set_right_status(wezterm.format(elements))
+		print(wezterm.format(elements))
+		print(elements)
 	end)
 
 	c.native_macos_fullscreen_mode = true
@@ -245,9 +249,18 @@ local function setup_windows_keys()
 end
 -- Table mapping keypresses to actions
 
-c.colors = { foreground = "white", background = "#111111" }
+c.colors = {
+	foreground = "white",
+	background = "#111111",
+	tab_bar = {
+		active_tab = {},
+		inactive_tab = {},
+	},
+}
 
-c.animation_fps = 60
+local fps = 240
+c.max_fps = fps
+c.animation_fps = fps
 c.default_cursor_style = "BlinkingBar"
 c.cursor_blink_rate = 400
 
