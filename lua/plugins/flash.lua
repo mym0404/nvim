@@ -51,8 +51,7 @@ return {
   keys = {},
   config = function(_, opts)
     require("flash").setup(opts)
-    vim.keymap.del({ "n", "o", "x" }, "s")
-    vim.keymap.set({ "n", "o", "x" }, "f", function()
+    vim.keymap.set({ "n", "o", "x" }, "s", function()
       require("flash").jump({
         search = {
           mode = "search",
