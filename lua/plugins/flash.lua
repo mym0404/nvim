@@ -48,25 +48,17 @@ return {
       },
     },
   },
-  keys = {
-    {
-      "s",
-      mode = { "n", "o", "x" },
-      function()
-        require("flash").jump()
-      end,
-      desc = "Flash",
-    },
-    -- { "r", mode = "o", function() require("flash").remote() end, desc = "Remote Flash" },
-    -- { "<c-s>", mode = { "c" }, function() require("flash").toggle() end, desc = "Toggle Flash Search" },
-  },
+  keys = {},
   config = function(_, opts)
     require("flash").setup(opts)
-    vim.keymap.set({ "o", "x" }, "T", function()
-      require("flash").treesitter_search()
-    end, { desc = "Treesitter Search" })
-    vim.keymap.set({ "n", "x", "o" }, "t", function()
-      require("flash").treesitter()
-    end, { desc = "Flash Treesitter" })
+    vim.keymap.del({ "n", "o", "x" }, "s")
+    vim.keymap.set({ "n", "o", "x" }, "f", function()
+      require("flash").jump({
+        search = {
+          mode = "search",
+          multi_window = false,
+        },
+      })
+    end, { desc = "Flash Search" })
   end,
 }
