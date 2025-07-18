@@ -62,11 +62,11 @@ local function map_esc()
   vim.keymap.set("x", "q", "<Esc>", { silent = true, desc = "Exit visual mode with q" })
   -- if blink.cmp completion menu is showing, close it or return <esc> itself
   vim.keymap.set("i", "<esc>", function()
-    local cmp = require("blink.cmp")
-    if cmp.is_menu_visible() then
-      cmp.hide()
-      return ""
-    end
+    -- local cmp = require("blink.cmp")
+    -- if cmp.is_menu_visible() then
+    --   cmp.hide()
+    --   return ""
+    -- end
     vim.snippet.stop()
     return "<Esc>"
   end, { silent = true, expr = true })
@@ -137,7 +137,7 @@ local function map_rename()
 end
 
 local function map_delete_file()
-  vim.keymap.set("n", "<space>cR", function()
+  vim.keymap.set("n", "<leader>cR", function()
     local current_file = vim.api.nvim_buf_get_name(0)
     if current_file == "" then
       vim.notify("No file to rename", vim.log.levels.WARN)
@@ -159,7 +159,7 @@ local function map_delete_file()
     end)
   end, { desc = "Rename current file", nowait = true })
 
-  vim.keymap.set("n", "<space>cD", function()
+  vim.keymap.set("n", "<leader>cd", function()
     local current_buffer_file_path = vim.api.nvim_buf_get_name(0)
     vim.cmd("bdelete")
     vim.cmd("!rm " .. current_buffer_file_path)
