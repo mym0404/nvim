@@ -532,7 +532,9 @@ end
 local function map_close_bracket()
   vim.keymap.set("i", "}", function()
     if vim.bo.filetype == "swift" or utils.is_js_ft() then
-      LazyVim.format({ force = true })
+      vim.schedule(function()
+        LazyVim.format({ force = true })
+      end)
     end
     return "}"
   end, { expr = true, nowait = true, silent = true })
