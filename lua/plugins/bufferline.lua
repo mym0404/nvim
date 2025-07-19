@@ -19,7 +19,29 @@ return {
       style_preset = require("bufferline").style_preset.minimal,
       name_formatter = function(buf)
         local name = buf.name
-        local extensions_to_drop = { "swift", "kt", "jsx", "js", "tsx", "ts", "lua" }
+        local extensions_to_drop = {
+          "mjs",
+          "cjs",
+          "swift",
+          "kt",
+          "jsx",
+          "js",
+          "tsx",
+          "ts",
+          "lua",
+          "json",
+          "md",
+          "txt",
+          "html",
+          "css",
+          "scss",
+          "sass",
+          "less",
+          "yaml",
+          "yml",
+          "xml",
+        }
+        vim.notify(name)
         for _, ext in ipairs(extensions_to_drop) do
           if name:match("." .. ext .. "$") then
             return " " .. name:gsub("." .. ext .. "$", "")
