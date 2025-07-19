@@ -41,7 +41,6 @@ return {
           "yml",
           "xml",
         }
-        vim.notify(name)
         for _, ext in ipairs(extensions_to_drop) do
           if name:match("." .. ext .. "$") then
             return " " .. name:gsub("." .. ext .. "$", "")
