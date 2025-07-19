@@ -14,9 +14,9 @@ return {
       "zb",
     },
     duration_multiplier = 0.3,
-    post_hook = function()
-      require("utils.utils").run_key("zz", "m")
-    end,
+    -- post_hook = function()
+    --   require("utils.utils").run_key("zz", "n")
+    -- end,
     stop_eof = false,
   },
 }
