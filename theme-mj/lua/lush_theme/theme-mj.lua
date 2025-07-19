@@ -42,7 +42,7 @@ local searched_selected = { fg = palette.text, bg = "#db16a3", gui = "bold" }
 local folded = { fg = "#87A8E8" }
 local border = { fg = "#424242" }
 local win_border = { fg = "#313131" }
-local float = { fg = palette.text, bg = "yellow" }
+local float = { fg = palette.text }
 local pmenu = { fg = palette.text }
 
 local vcs = {
