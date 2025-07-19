@@ -44,7 +44,7 @@ local function setup_core()
 		} }
 	end
 	c.inactive_pane_hsb = {
-		saturation = 0.7,
+		saturation = 0.6,
 		brightness = 0.6,
 	}
 	c.set_environment_variables = {
@@ -105,66 +105,19 @@ local function setup_core()
 	end
 	-- Sets the font for the window frame (tab bar)
 	c.window_frame = {
-		font = wezterm.font({ family = "Berkeley Mono", weight = "Bold" }),
-		font_size = 11,
+		font = wezterm.font({ family = "D2Coding" }),
+		font_size = 10,
+		-- border_left_width = "4px",
+		-- border_right_width = "4px",
+		-- border_bottom_height = "4px",
+		-- border_top_height = "4px",
 	}
-	local function segments_for_right_status(window)
-		return {
-			is_windows and "WSL" or "Darwin",
-			-- window:active_workspace(),
-			wezterm.strftime("%a %b %-d %H:%M"),
-			"MJ",
-		}
-	end
-
-	wezterm.on("update-status", function(window, _)
-		local SOLID_LEFT_ARROW = wezterm.nerdfonts.pl_right_hard_divider
-		local segments = segments_for_right_status(window)
-
-		local color_scheme = window:effective_config().resolved_palette
-		local bg = wezterm.color.parse(color_scheme.background)
-		local fg = color_scheme.foreground
-
-		-- Each powerline segment is going to be coloured progressively
-		-- darker/lighter depending on whether we're on a dark/light colour
-		-- scheme. Let's establish the "from" and "to" bounds of our gradient.
-		local gradient_to, gradient_from = bg, bg
-		gradient_from = gradient_to:lighten(0.2)
-
-		-- Yes, WezTerm supports creating gradients, because why not?! Although
-		-- they'd usually be used for setting high fidelity gradients on your terminal's
-		-- background, we'll use them here to give us a sample of the powerline segment
-		-- colours we need.
-		local gradient = wezterm.color.gradient(
-			{
-				orientation = "Horizontal",
-				colors = { gradient_from, gradient_to },
-			},
-			#segments -- only gives us as many colours as we have segments.
-		)
-
-		-- We'll build up the elements to send to wezterm.format in this table.
-		local elements = {}
-
-		for i, seg in ipairs(segments) do
-			local is_first = i == 1
-
-			if is_first then
-				table.insert(elements, { Background = { Color = "none" } })
-			end
-			table.insert(elements, { Foreground = { Color = gradient[i] } })
-			table.insert(elements, { Text = SOLID_LEFT_ARROW })
-
-			table.insert(elements, { Background = { Color = gradient[i] } })
-			table.insert(elements, { Foreground = { Color = fg } })
-			table.insert(elements, { Text = " " .. seg .. " " })
-		end
-
-		window:set_right_status(wezterm.format(elements))
-		print(wezterm.format(elements))
-		print(elements)
-	end)
-
+	c.window_padding = {
+		left = 4,
+		right = 4,
+		top = 2,
+		bottom = 0,
+	}
 	c.native_macos_fullscreen_mode = true
 end
 
@@ -249,9 +202,45 @@ local function setup_windows_keys()
 end
 -- Table mapping keypresses to actions
 
+local tab_bg = "#111111"
+local tab_fg = "#808080"
 c.colors = {
 	foreground = "white",
 	background = "#111111",
+	tab_bar = {
+		-- The color of the strip that goes along the top of the window
+		-- (does not apply when fancy tab bar is in use)
+		background = tab_bg,
+
+		-- The active tab is the one that has focus in the window
+		active_tab = {
+			-- The color of the background area for the tab
+			bg_color = "#232b3d",
+			-- The color of the text for the tab
+			fg_color = "#c3c3c3",
+			-- intensity = "Bold",
+			underline = "None",
+			italic = false,
+			strikethrough = false,
+		},
+
+		-- Inactive tabs are the tabs that do not have focus
+		inactive_tab = {
+			bg_color = tab_bg,
+			fg_color = tab_fg,
+			intensity = "Normal",
+		},
+
+		-- inactive_tab_hover = {
+		-- 	bg_color = "#3b3052",
+		-- 	fg_color = "#909090",
+		-- },
+
+		new_tab = {
+			bg_color = tab_bg,
+			fg_color = tab_fg,
+		},
+	},
 }
 
 local fps = 240
