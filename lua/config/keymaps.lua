@@ -779,6 +779,17 @@ local function map_undo_redo()
   end, { desc = "Redo without scrolling", silent = true })
 end
 
+local function map_get_meta()
+  vim.keymap.set("n", "<leader>Mf", function()
+    local filename = vim.api.nvim_buf_get_name(0)
+    vim.notify("filename: " .. filename)
+  end)
+  vim.keymap.set("n", "<leader>Mt", function()
+    local filetype = vim.bo.filetype
+    vim.notify("filetype: " .. filetype)
+  end)
+end
+
 reset_keymaps()
 map_template_string()
 map_react_prop_bracket()
@@ -809,3 +820,4 @@ map_tab_move()
 map_ufo()
 map_tab()
 map_undo_redo()
+map_get_meta()
