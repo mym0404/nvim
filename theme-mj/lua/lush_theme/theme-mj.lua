@@ -38,7 +38,7 @@ local text_sub_light = { fg = palette.text_sub_light }
 local visual = { bg = "#214283" }
 local searched = { bg = "#46ba1c", fg = palette.text }
 -- local searched = special_theme
-local searched_selected = { fg = palette.text, bg = "#db16a3", gui = "bold" }
+local searched_selected = { fg = palette.text, bg = "#db16a3" }
 local folded = { fg = "#87A8E8" }
 local border = { fg = "#424242" }
 local win_border = { fg = "#313131" }
