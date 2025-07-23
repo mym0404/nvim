@@ -9,6 +9,9 @@ return {
     search = {
       multi_window = false,
     },
+    prompt = {
+      enabled = false,
+    },
     jump = {
       pos = "end",
       autojump = false,
