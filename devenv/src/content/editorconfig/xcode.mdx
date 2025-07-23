@@ -6,9 +6,10 @@ Download [xcode-config.tar.gz](/xcode-config.tar.gz)
 curl -O https://devenv.mjstudio.net/xcode-config.tar.gz
 ```
 
-unzip the archive and move to xcode config directory
+unzip the archive and move to the xcode config directory
 
 ```shell
 export XPATH=~/Library/Developer/Xcode/UserData
-mkdir -p xcode-config && tar -xzf xcode-config.tar.gz -C xcode-config && cp -r xcode-config/* $XPATH/ && rm -rf xcode-config
+rm -rf $XPATH/CodeSnippets $XPATH/FontAndColorThemes $XPATH/KeyBindings
+tar -xzf xcode-config.tar.gz && cp -r xcode-config/* $XPATH/ && rm -rf xcode-config
 ```
