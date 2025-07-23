@@ -67,6 +67,7 @@ return {
             event = "msg_show",
             any = {
               { find = "No formatter available" },
+              { find = "Spawning language server with cmd:" },
             },
           },
           opts = { skip = true },
