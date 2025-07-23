@@ -9,5 +9,6 @@ curl -O https://devenv.mjstudio.net/xcode-config.tar.gz
 unzip the archive and move to xcode config directory
 
 ```shell
-tar -xzf xcode-config.tar.gz && mv xcode-config/* ~/Library/Developer/Xcode/UserData/
+export XPATH=~/Library/Developer/Xcode/UserData
+tar -xzf xcode-config.tar.gz && mv xcode-config/* $XPATH/
 ```
