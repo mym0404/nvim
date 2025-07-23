@@ -38,7 +38,7 @@ local text_sub_light = { fg = palette.text_sub_light }
 local visual = { bg = "#214283" }
 local searched = { bg = "#46ba1c", fg = palette.text }
 -- local searched = special_theme
-local searched_selected = { fg = palette.text, bg = "#db16a3", gui = "bold" }
+local searched_selected = { fg = palette.text, bg = "#db16a3" }
 local folded = { fg = "#87A8E8" }
 local border = { fg = "#424242" }
 local win_border = { fg = "#313131" }
@@ -100,7 +100,8 @@ local code = {
   annotation = { fg = "#ff7b72" },
   attribute = { fg = "#ffffff" },
   modifier = { fg = "#ff7b72" },
-  escape = { fg = "#de669a", gui = "bold,italic" },
+  escape_string = { fg = "#de669a", gui = "bold,italic" },
+  escape = special_orange,
   inlay_hint = {
     fg = hsl(text_sub.fg).lighten(30),
     bg = hsl("#313133"),
@@ -339,7 +340,6 @@ local theme = lush(function(injected_functions)
     String(code.string),
     Comment(code.comment),
     LspSignatureActiveParameter(text),
-    SnacksPickerGitStatusModified({ fg = "#80CBC4" }),
     LspReferenceWrite({ bg = "#17335a" }),
     LspReferenceText({ bg = "#17335a" }),
     LspReferenceRead({ bg = "#17335a" }),
@@ -409,7 +409,9 @@ local theme = lush(function(injected_functions)
     sym("@string.special.url")({ fg = code.keyword.fg, gui = "underline " }),
     sym("@string.special.path.gitignore")({ fg = "#d2a8ff" }),
     sym("@string.regexp")(code.escape),
-    sym("@string.escape")(code.escape),
+    sym("@lsp.type.regexp")(code.escape_string),
+    sym("@operator.regex")(code.escape_string),
+    sym("@string.escape")(code.escape_string),
     sym("@punctuation.special")({ fg = special.fg }),
     sym("@punctuation.delimiter")(text),
     sym("@punctuation.bracket")({ fg = "#e6edf3" }),
@@ -440,7 +442,6 @@ local theme = lush(function(injected_functions)
     sym("@lsp.type.type")({ sym("@type") }),
     sym("@lsp.type.type.typescript")(code.keyword),
     sym("@lsp.type.struct")(code.struct),
-    sym("@lsp.type.regexp")({ sym("@string.regexp") }),
     sym("@lsp.type.parameter")({ sym("@variable.parameter") }),
     sym("@lsp.type.modifier")(code.modifier),
     sym("@lsp.type.interface")(code.interface),
@@ -1136,6 +1137,7 @@ local theme = lush(function(injected_functions)
     SnacksPickerGitStatusDeleted(vcs.deleted.label),
     SnacksPickerGitStatusIgnored(vcs.ignored.label),
     SnacksPickerGitStatusStaged(vcs.modified.label),
+    SnacksPickerGitStatusModified(vcs.modified.label),
     SnacksPickerGitStatusUnmerged({ fg = DiagnosticError.fg }),
     SnacksPickerGitStatusUntracked(vcs.untracked.label),
     SnacksPickerGitType({ Title }),

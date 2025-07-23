@@ -114,7 +114,8 @@ vim.api.nvim_create_autocmd("BufEnter", {
     local cmd = "git check-ignore -q -- " .. vim.fn.shellescape(file_path)
     local _ = vim.fn.system(cmd)
     if vim.v.shell_error == 0 then
-      vim.notify("Ignored File", vim.log.levels.WARN, { title = "Git" })
+      vim.notify_once("Ignored File", vim.log.levels.WARN, { title = "Git" })
+      vim.bo.readonly = true
     end
   end,
   desc = "Warn if file is git ignored",
