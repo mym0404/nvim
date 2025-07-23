@@ -67,6 +67,7 @@ return {
             any = {
               { event = "notify", find = "No formatter available" },
               { event = "notify", find = ".*Spawning language server with cmd:.*" },
+              { event = "notify", find = "Invalid server name" },
             },
           },
           opts = { skip = true },
