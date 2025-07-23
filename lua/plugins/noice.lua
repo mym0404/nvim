@@ -62,6 +62,15 @@ return {
           },
           view = "mini",
         },
+        {
+          filter = {
+            event = "msg_show",
+            any = {
+              { find = "No formatter available" },
+            },
+          },
+          opts = { skip = true },
+        },
       },
       presets = {
         bottom_search = false,
