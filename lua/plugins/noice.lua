@@ -64,10 +64,9 @@ return {
         },
         {
           filter = {
-            event = "msg_show",
             any = {
-              { find = "No formatter available" },
-              { find = "Spawning language server with cmd:" },
+              { event = "notify", find = "No formatter available" },
+              { event = "notify", find = ".*Spawning language server with cmd:.*" },
             },
           },
           opts = { skip = true },
