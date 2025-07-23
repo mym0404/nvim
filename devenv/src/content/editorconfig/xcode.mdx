@@ -10,5 +10,5 @@ unzip the archive and move to xcode config directory
 
 ```shell
 export XPATH=~/Library/Developer/Xcode/UserData
-tar -xzf xcode-config.tar.gz && cp -r xcode-config/* $XPATH/ && rm -rf xcode-config
+mkdir -p xcode-config && tar -xzf xcode-config.tar.gz -C xcode-config && mv xcode-config/* $XPATH/ && rm -rf xcode-config
 ```
