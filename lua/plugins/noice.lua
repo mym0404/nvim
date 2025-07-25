@@ -62,6 +62,16 @@ return {
           },
           view = "mini",
         },
+        {
+          filter = {
+            any = {
+              { event = "notify", find = "No formatter available" },
+              { event = "notify", find = ".*Spawning language server with cmd:.*" },
+              { event = "notify", find = "Invalid server name" },
+            },
+          },
+          opts = { skip = true },
+        },
       },
       presets = {
         bottom_search = false,

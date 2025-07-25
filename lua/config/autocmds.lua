@@ -121,6 +121,12 @@ vim.api.nvim_create_autocmd("BufEnter", {
   desc = "Warn if file is git ignored",
 })
 
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = { "markdown", "text" },
+  callback = function()
+    vim.opt_local.spell = false
+  end,
+})
 -- vim.api.nvim_create_autocmd("BufEnter", {
 --   callback = function(opts)
 --     if vim.bo[opts.buf].filetype == "swift" then
