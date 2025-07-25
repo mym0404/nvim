@@ -529,17 +529,6 @@ local function map_template_string()
   })
 end
 
-local function map_close_bracket()
-  vim.keymap.set("i", "}", function()
-    if vim.bo.filetype == "swift" or utils.is_js_ft() then
-      vim.schedule(function()
-        LazyVim.format({ force = true })
-      end)
-    end
-    return "}"
-  end, { expr = true, nowait = true, silent = true })
-end
-
 local function map_yank()
   vim.keymap.set("n", "yf", function()
     local absolute_path = vim.fn.expand("%:p")
@@ -816,7 +805,6 @@ map_smart_splits()
 map_select_all()
 map_git_actions()
 map_package_info()
-map_close_bracket()
 map_yank()
 map_tab_move()
 map_ufo()
