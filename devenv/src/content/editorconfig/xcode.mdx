@@ -13,3 +13,16 @@ export XPATH=~/Library/Developer/Xcode/UserData
 rm -rf $XPATH/CodeSnippets $XPATH/FontAndColorThemes $XPATH/KeyBindings
 tar -xzf xcode-config.tar.gz && cp -r xcode-config/* $XPATH/ && rm -rf xcode-config
 ```
+
+## For upload
+
+To upload your changes, you can use the following command:
+
+```shell
+cd ~/Downloads
+export XPATH=~/Library/Developer/Xcode/UserData
+cd $XPATH
+tar -czf ~/Downloads/xcode-config.tar.gz CodeSnippets FontAndColorThemes KeyBindings
+cd ~/Downlodas
+mv xcode-config.tar.gz ~/.config/nvim/devenv/public
+```
