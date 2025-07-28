@@ -271,37 +271,37 @@ local function map_docs_hover()
   end, { desc = "hover documentation", silent = true })
 end
 
--- local _timer
--- local do_zz_after_scroll = false
+local _timer
+local do_zz_after_scroll = true
 local function map_scroll()
-  -- local delay = 0
-  -- local function reset_timer()
-  --   if _timer ~= nil then
-  --     pcall(_timer.stop, _timer)
-  --     pcall(_timer.close, _timer)
-  --   end
-  --   _timer = nil
-  -- end
-  --
-  -- vim.keymap.set("n", "<C-d>", function()
-  --   if do_zz_after_scroll then
-  --     reset_timer()
-  --     _timer = vim.defer_fn(function()
-  --       vim.cmd("normal! zz")
-  --     end, delay)
-  --   end
-  --   return "15<C-d>"
-  -- end, { noremap = true, nowait = true, expr = true })
-  --
-  -- vim.keymap.set("n", "<C-u>", function()
-  --   if do_zz_after_scroll then
-  --     reset_timer()
-  --     _timer = vim.defer_fn(function()
-  --       vim.cmd("normal! zz")
-  --     end, delay)
-  --   end
-  --   return "15<C-u>"
-  -- end, { noremap = true, nowait = true, expr = true })
+  local delay = 0
+  local function reset_timer()
+    if _timer ~= nil then
+      pcall(_timer.stop, _timer)
+      pcall(_timer.close, _timer)
+    end
+    _timer = nil
+  end
+
+  vim.keymap.set("n", "<C-d>", function()
+    if do_zz_after_scroll then
+      reset_timer()
+      _timer = vim.defer_fn(function()
+        vim.cmd("normal! zz")
+      end, delay)
+    end
+    return "15<C-d>"
+  end, { noremap = true, nowait = true, expr = true })
+
+  vim.keymap.set("n", "<C-u>", function()
+    if do_zz_after_scroll then
+      reset_timer()
+      _timer = vim.defer_fn(function()
+        vim.cmd("normal! zz")
+      end, delay)
+    end
+    return "15<C-u>"
+  end, { noremap = true, nowait = true, expr = true })
 end
 
 local function map_hover_scroll()
@@ -340,7 +340,6 @@ local function configure_lsp()
       end
 
       utils.on_save_action(opts.buf, function()
-        vim.snippet.stop()
         vim.cmd("noautocmd write")
       end)
     end,
