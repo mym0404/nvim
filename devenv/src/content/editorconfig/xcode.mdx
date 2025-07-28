@@ -20,9 +20,10 @@ To upload your changes, you can use the following command:
 
 ```shell
 cd ~/Downloads
+mkdir -p xcode-config
 export XPATH=~/Library/Developer/Xcode/UserData
-cd $XPATH
-tar -czf ~/Downloads/xcode-config.tar.gz CodeSnippets FontAndColorThemes KeyBindings
-cd ~/Downlodas
+cp -r $XPATH/CodeSnippets $XPATH/FontAndColorThemes $XPATH/KeyBindings xcode-config/
+tar -czf xcode-config.tar.gz xcode-config
 mv xcode-config.tar.gz ~/.config/nvim/devenv/public
+rm -rf xcode-config
 ```
