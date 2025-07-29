@@ -284,13 +284,18 @@ local function map_scroll()
   end
 
   vim.keymap.set("n", "<C-d>", function()
+    local row = vim.api.nvim_win_get_cursor(0)[1]
+    local height = vim.api.nvim_win_get_height(0)
+
+    local isUpmost = row < 15 or (row + 15) < (height / 2)
+
     if do_zz_after_scroll then
       reset_timer()
       _timer = vim.defer_fn(function()
         vim.cmd("normal! zz")
       end, delay)
     end
-    return "15<C-d>"
+    return isUpmost and math.floor(height / 2) .. "G" or "15<C-d>"
   end, { noremap = true, nowait = true, expr = true })
 
   vim.keymap.set("n", "<C-u>", function()
