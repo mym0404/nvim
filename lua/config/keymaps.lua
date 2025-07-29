@@ -271,41 +271,16 @@ local function map_docs_hover()
   end, { desc = "hover documentation", silent = true })
 end
 
-local _timer
-local do_zz_after_scroll = true
 local function map_scroll()
-  local delay = 0
-  local function reset_timer()
-    if _timer ~= nil then
-      pcall(_timer.stop, _timer)
-      pcall(_timer.close, _timer)
-    end
-    _timer = nil
-  end
-
   vim.keymap.set("n", "<C-d>", function()
     local row = vim.api.nvim_win_get_cursor(0)[1]
     local height = vim.api.nvim_win_get_height(0)
-
     local isUpmost = row < 15 or (row + 15) < (height / 2)
-
-    if do_zz_after_scroll then
-      reset_timer()
-      _timer = vim.defer_fn(function()
-        vim.cmd("normal! zz")
-      end, delay)
-    end
-    return isUpmost and math.floor(height / 2) .. "G" or "15<C-d>"
+    return isUpmost and math.max(row + 15, math.floor(height / 2)) .. "Gzz" or "15<C-d>zz"
   end, { noremap = true, nowait = true, expr = true })
 
   vim.keymap.set("n", "<C-u>", function()
-    if do_zz_after_scroll then
-      reset_timer()
-      _timer = vim.defer_fn(function()
-        vim.cmd("normal! zz")
-      end, delay)
-    end
-    return "15<C-u>"
+    return "15<C-u>zz"
   end, { noremap = true, nowait = true, expr = true })
 end
 
