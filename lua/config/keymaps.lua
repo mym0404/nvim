@@ -324,7 +324,6 @@ local function configure_lsp()
       end)
     end,
     nested = false,
-    silent = true,
   })
 
   vim.keymap.set("n", "<leader>co", function()
