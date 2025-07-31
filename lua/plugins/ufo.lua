@@ -14,7 +14,7 @@ return {
     open_fold_hl_timeout = 500,
     close_fold_kinds_for_ft = {
       default = {
-        "imports",
+        -- "imports",
       },
     },
     fold_virt_text_handler = function(virtText, lnum, endLnum, width, truncate)

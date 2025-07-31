@@ -320,7 +320,7 @@ local function configure_lsp()
       end
 
       utils.on_save_action(opts.buf, function()
-        vim.cmd("noautocmd write")
+        vim.cmd("silent! noautocmd write")
       end)
     end,
     nested = false,
