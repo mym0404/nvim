@@ -81,6 +81,8 @@
    - if you unsure how to do it, then use Web Search using fetch tools
 ```
 
+## MCP
+
 ```shell filename="~/.claude/claude.mcp.sh"
 # Puppeteer
 # claude mcp add puppeteer -s user -- npx -y puppeteer-mcp-server
@@ -92,4 +94,14 @@ claude mcp add figma -s user -- npx -y figma-developer-mcp --figma-api-key=${FIG
 claude mcp add serena -- uvx --from git+https://github.com/oraios/serena serena start-mcp-server --context ide-assistant
 # Check whats been installed
 claude mcp list
+```
+
+## Commands
+
+```shell filename="~/claude/commands/init-serena.md"
+---
+description: Init Serena MCP
+---
+
+execute `/mcp__serena__initial_instructions` to initialize Serena MCP for enhanced semantic analysis.
 ```
