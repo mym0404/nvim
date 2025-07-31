@@ -10,6 +10,70 @@ This is keyboard macro utility for MacOS
             "complex_modifications": {
                 "rules": [
                     {
+                        "description": "Xcode jk to escape",
+                        "manipulators": [
+                            {
+                                "conditions": [
+                                    {
+                                        "bundle_identifiers": [
+                                            "^com\\.apple\\.dt\\.Xcode$"
+                                        ],
+                                        "type": "frontmost_application_if"
+                                    }
+                                ],
+                                "from": {
+                                    "modifiers": { "optional": ["any"] },
+                                    "simultaneous": [
+                                        { "key_code": "j" },
+                                        { "key_code": "k" }
+                                    ],
+                                    "simultaneous_options": {
+                                        "key_down_order": "insensitive",
+                                        "key_up_order": "insensitive",
+                                        "key_up_when": "any"
+                                    }
+                                },
+                                "to": [{ "key_code": "escape" }],
+                                "type": "basic"
+                            }
+                        ]
+                    },
+                    {
+                        "description": "Toggle Full Screen",
+                        "enabled": false,
+                        "manipulators": [
+                            {
+                                "from": {
+                                    "key_code": "f",
+                                    "modifiers": { "mandatory": ["left_control", "left_command"] }
+                                },
+                                "to": [{ "shell_command": "/opt/homebrew/bin/yabai -m window --toggle native-fullscreen" }],
+                                "type": "basic"
+                            }
+                        ]
+                    },
+                    {
+                        "description": "Focus next/prev space using Ctrl + Arrow keys",
+                        "manipulators": [
+                            {
+                                "from": {
+                                    "key_code": "right_arrow",
+                                    "modifiers": { "mandatory": ["left_control"] }
+                                },
+                                "to": [{ "shell_command": "/opt/homebrew/bin/yabai -m space --focus next" }],
+                                "type": "basic"
+                            },
+                            {
+                                "from": {
+                                    "key_code": "left_arrow",
+                                    "modifiers": { "mandatory": ["left_control"] }
+                                },
+                                "to": [{ "shell_command": "/opt/homebrew/bin/yabai -m space --focus prev" }],
+                                "type": "basic"
+                            }
+                        ]
+                    },
+                    {
                         "description": "ESC 누를 때 입력기가 한글이면 영어로 전환 후 ESC",
                         "manipulators": [
                             {
