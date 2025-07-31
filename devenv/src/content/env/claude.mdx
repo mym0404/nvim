@@ -88,6 +88,8 @@
 claude mcp add-json github '{"command":"docker","args":["run","-i","--rm","-e","GITHUB_PERSONAL_ACCESS_TOKEN","ghcr.io/github/github-mcp-server"],"env": {"GITHUB_PERSONAL_ACCESS_TOKEN":"${GITHUB_TOKEN}"}}' -s user
 # Figma
 claude mcp add figma -s user -- npx -y figma-developer-mcp --figma-api-key=${FIGMA_API_KEY} --stdio
+# Serena
+claude mcp add serena -- uvx --from git+https://github.com/oraios/serena serena start-mcp-server --context ide-assistant
 # Check whats been installed
 claude mcp list
 ```

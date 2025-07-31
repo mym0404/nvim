@@ -7,8 +7,10 @@ const meta: MetaRecord = {
 	zsh: "zsh",
 	wezterm: "wezterm",
 	karabiner: "karabiner",
-  claude: "claude",
+	claude: "claude",
 	gemini: "gemini",
+	intellij: "Jetbrains IDE",
+	serena: "serena",
 };
 
 export default meta;
