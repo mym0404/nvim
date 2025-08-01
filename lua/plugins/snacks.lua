@@ -113,7 +113,7 @@ return {
       height = { min = 1, max = 50 },
       sort = { "added", "level" },
       ---@type snacks.notifier.style
-      style = "compact",
+      style = "minimal",
     },
     statuscolumn = {
       left = { "mark", "fold" }, -- priority of signs on the left (high to low)

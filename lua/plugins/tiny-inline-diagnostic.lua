@@ -45,7 +45,7 @@ return {
 
         -- Add messages to diagnostics when multiline diagnostics are enabled
         -- If set to false, only signs will be displayed
-        add_messages = true,
+        add_messages = false,
 
         -- Time (in milliseconds) to throttle updates while moving the cursor
         -- Increase this value for better performance if your computer is slow
@@ -68,7 +68,7 @@ return {
         -- }
         multilines = {
           -- Enable multiline diagnostic messages
-          enabled = true,
+          enabled = false,
 
           -- Always show messages on all lines for multiline diagnostics
           always_show = true,
@@ -146,6 +146,6 @@ return {
         "diff", -- Disable diagnostics for diff files
       }, -- List of filetypes to disable the plugin
     })
-    vim.diagnostic.config({ virtual_text = false })
+    vim.diagnostic.config({ virtual_text = false, float = false })
   end,
 }
