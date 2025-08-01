@@ -236,28 +236,28 @@ return {
           auto_confirm = false,
           focus = "list",
           title = " " .. vim.fn.fnamemodify(vim.fs.root(0, { ".git" }) or "", ":t"),
-          ---@type fun(item:snacks.picker.finder.Item, ctx:snacks.picker.finder.ctx):(boolean|snacks.picker.finder.Item|nil)
-          transform = function(item, ctx)
-            local is_empty = ctx.filter:is_empty()
-
-            if not is_empty then
-              return true
-            end
-
-            if item.dir and item.parent == nil then
-              return false
-            end
-            local original = table.deepcopy(item)
-            local cur = original
-            while cur.parent ~= nil do
-              if cur.parent.parent == nil then
-                cur.parent = nil
-                break
-              end
-              cur = cur.parent
-            end
-            return original
-          end,
+          -- -@type fun(item:snacks.picker.finder.Item, ctx:snacks.picker.finder.ctx):(boolean|snacks.picker.finder.Item|nil)
+          -- transform = function(item, ctx)
+          --   local is_empty = ctx.filter:is_empty()
+          --
+          --   if not is_empty then
+          --     return true
+          --   end
+          --
+          --   if item.dir and item.parent == nil then
+          --     return false
+          --   end
+          --   local original = table.deepcopy(item)
+          --   local cur = original
+          --   while cur.parent ~= nil do
+          --     if cur.parent.parent == nil then
+          --       cur.parent = nil
+          --       break
+          --     end
+          --     cur = cur.parent
+          --   end
+          --   return original
+          -- end,
           layout = {
             layout = {
               backdrop = false,
