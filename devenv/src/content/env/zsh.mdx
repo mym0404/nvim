@@ -1,6 +1,25 @@
 # .zshrc Macos
 
+## Install `zsh` theme `lambda-gitster` from my fork
+
+```sh
+git clone https://github.com/mym0404/lambda-gitster.git
+cd lambda-gitster
+cp lambda-gitster.zsh-theme ~/.oh-my-zsh/custom/themes
+```
+
+## Plugins
+
+```shell
+# zsh-nvm
+git clone https://github.com/lukechilds/zsh-nvm.git \
+  ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/zsh-nvm
+```
+
+## .zshrc
+
 ```shell filename="~/.zshrc"
+# zmodload zsh/zprof
 export ZSH="~/.oh-my-zsh"
 
 ZSH_THEME="lambda-gitster"
@@ -23,12 +42,15 @@ alias -g -- --help='--help 2>&1 | bat --language=help --style=plain'
         https://github.com/marlonrichert/zsh-snap.git ~/Repos/znap
 source ~/Repos/znap/znap.zsh  # Start Znap
 
-# Plugins
+# Oh-My-Zsh
+export NVM_LAZY_LOAD=true
+zstyle ':omz:update' mode auto
 plugins=(
     git
     zsh-autosuggestions
     git-auto-fetch
     direnv
+    zsh-nvm
 )
 ZSH_AUTOSUGGEST_STRATEGY=(history completion)
 
@@ -62,11 +84,6 @@ eval "$(rbenv init -)"
 #Java
 export PATH="$HOME/.jenv/bin:$PATH"
 eval "$(jenv init -)"
-
-#Nvm
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 #Path
 export ANDROID_HOME=$HOME/Library/Android/sdk
@@ -123,10 +140,10 @@ cd ~/Desktop
 fi
 
 # Auto add node_modules/.bin into PATH
-
+ 
 # 1) Declare a global variable to store the previously added pm bin path
 typeset -g ZPM_BIN=""
-
+ 
 # 2) Helper to locate package.json up to the Git top-level directory
 _locate_pkg() {
   local dir=$1 top
@@ -141,7 +158,7 @@ _locate_pkg() {
   [[ -f $top/package.json ]] && echo "$top" && return 0
   return 1
 }
-
+ 
 # 3) Function to update PATH with the project’s local bin
 update_pm_bin() {
   # 3-1) Remove the previously added bin directory from PATH
@@ -149,30 +166,47 @@ update_pm_bin() {
     path=( ${path:#$ZPM_BIN} )
     ZPM_BIN=""
   fi
-
+ 
   # 3-2) Find the directory containing package.json
   local root bin_dir
   root=$(_locate_pkg "$PWD") || return
-
-  # 3-3) Determine which package manager is in use and set bin_dir
+ 
+  # 3-3) Determine bin directory without calling package manager commands
+  # Most package managers use node_modules/.bin as the standard location
+  local default_bin="$root/node_modules/.bin"
+  
   if [[ -f $root/pnpm-lock.yaml ]]; then
-    bin_dir=$(pnpm --prefix "$root" bin)
+    # pnpm typically uses node_modules/.bin unless using a different store
+    bin_dir="$default_bin"
   elif [[ -f $root/yarn.lock ]]; then
-    bin_dir=$(yarn --cwd "$root" bin)
+    # Yarn 1.x uses node_modules/.bin, Yarn 2+ might use different structure
+    if [[ -f $root/.yarnrc.yml ]] && grep -q "nodeLinker.*pnp" "$root/.yarnrc.yml" 2>/dev/null; then
+      # Yarn PnP mode - skip as it doesn't use traditional node_modules
+      return
+    else
+      bin_dir="$default_bin"
+    fi
   elif [[ -f $root/bun.lockb ]]; then
-    bin_dir="$root/node_modules/.bin"
+    bin_dir="$default_bin"
   else
-    bin_dir=$(npm --prefix "$root" bin)
+    # npm uses node_modules/.bin
+    bin_dir="$default_bin"
   fi
-
+ 
   # 3-4) If bin_dir exists, prepend it to PATH and record it
   [[ -d $bin_dir ]] || return
   path=( $bin_dir $path )
   ZPM_BIN=$bin_dir
 }
-
+ 
 # 4) Register hook to run on directory change, and run once at shell startup
 autoload -U add-zsh-hook
 add-zsh-hook chpwd update_pm_bin
 update_pm_bin
+
+### end of logic
+
+. "$HOME/.local/share/../bin/env"
+
+# zprof
 ```
