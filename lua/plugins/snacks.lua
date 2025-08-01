@@ -522,7 +522,7 @@ return {
       function()
         local root = vim.fs.root(0, { ".git" })
         Snacks.picker.explorer({
-          enter = true,
+          enter = false,
           cwd = root,
           ignored = true,
           hidden = true,
