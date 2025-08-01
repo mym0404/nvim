@@ -1,6 +1,6 @@
 local utils = require("utils/utils")
 
-require("lspconfig.configs").biome2 = {
+require("lspconfig.configs").biome = {
   default_config = {
     cmd = { "biome", "lsp-proxy" },
     filetypes = {

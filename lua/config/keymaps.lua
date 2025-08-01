@@ -510,43 +510,44 @@ end
 
 local function map_yank()
   vim.keymap.set("n", "yf", function()
-    local absolute_path = vim.fn.expand("%:p")
+    -- local absolute_path = vim.fn.expand("%:p")
     local relative_path = vim.fn.expand("%:.")
-    vim.fn.setreg("+", absolute_path)
+    vim.fn.setreg("+", relative_path)
     vim.notify("Copied: " .. relative_path, vim.log.levels.INFO, { title = "Copy File Path" })
   end, { desc = "copy current file path", nowait = true })
 
   vim.keymap.set("n", "yd", function()
-    local absolute_dir = vim.fn.expand("%:p:h")
+    -- local absolute_dir = vim.fn.expand("%:p:h")
     local relative_dir = vim.fn.expand("%:.:h")
-    vim.fn.setreg("+", absolute_dir)
+    vim.fn.setreg("+", relative_dir)
     vim.notify("Copied: " .. relative_dir, vim.log.levels.INFO, { title = "Copy Directory Path" })
   end, { desc = "copy current file directory path", nowait = true })
 
   vim.keymap.set("n", "yb", function()
     local buffers = vim.fn.getbufinfo({ buflisted = 1 })
-    local absolute_paths = {}
+    local relative_paths = {}
     for _, buf in ipairs(buffers) do
       if buf.name and buf.name ~= "" and vim.fn.isdirectory(buf.name) == 0 then
-        table.insert(absolute_paths, buf.name)
+        local relative_path = vim.fn.fnamemodify(buf.name, ":.")
+        table.insert(relative_paths, relative_path)
       end
     end
-    local absolute_paths_string = table.concat(absolute_paths, "\n")
+    local absolute_paths_string = table.concat(relative_paths, "\n")
     vim.fn.setreg("+", absolute_paths_string)
     vim.notify(
-      "Copied: " .. #absolute_paths .. " buffer paths",
+      "Copied: " .. #relative_paths .. " buffer paths",
       vim.log.levels.INFO,
       { title = "Copy Buffer Paths" }
     )
   end, { desc = "copy all buffer absolute paths", nowait = true })
 
   vim.keymap.set("n", "yl", function()
-    local absolute_path = vim.fn.expand("%:p")
+    -- local absolute_path = vim.fn.expand("%:p")
     local relative_path = vim.fn.expand("%:.")
     local line_num = vim.fn.line(".")
-    local absolute_path_with_line = absolute_path .. ":" .. line_num
+    -- local absolute_path_with_line = absolute_path .. ":" .. line_num
     local relative_path_with_line = relative_path .. ":" .. line_num
-    vim.fn.setreg("+", absolute_path_with_line)
+    vim.fn.setreg("+", relative_path_with_line)
     vim.notify(
       "Copied: " .. relative_path_with_line,
       vim.log.levels.INFO,
@@ -562,7 +563,7 @@ local function map_yank()
       or absolute_path .. ":" .. start_line .. "-" .. end_line
     local relative_path_with_lines = start_line == end_line and relative_path .. ":" .. start_line
       or relative_path .. ":" .. start_line .. "-" .. end_line
-    vim.fn.setreg("+", absolute_path_with_lines)
+    vim.fn.setreg("+", relative_path_with_lines)
     vim.notify(
       "Copied: " .. relative_path_with_lines,
       vim.log.levels.INFO,
