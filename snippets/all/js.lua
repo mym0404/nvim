@@ -28,7 +28,29 @@ local parse = require("luasnip.util.parser").parse_snippet
 local ms = ls.multi_snippet
 local k = require("luasnip.nodes.key_indexer").new_key
 
+local function capitalize(args)
+  local word = args[1][1]
+  return (word:gsub("^%l", string.upper))
+end
+
 return {
+  s(
+    "zod schema",
+    fmt(
+      [[
+export const {}Schema = z.object({{
+  {}
+}});
+export type {} = z.infer<typeof {}Schema>;
+    ]],
+      {
+        i(1, "name"),
+        i(0),
+        f(capitalize, { 1 }),
+        rep(1),
+      }
+    )
+  ),
   s(
     "Function Component",
     fmt(
