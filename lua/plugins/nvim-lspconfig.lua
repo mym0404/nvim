@@ -44,9 +44,11 @@ return {
       },
       jdtls = {},
       biome = {
+        enabled = true,
+      },
+      biome2 = {
         enabled = false,
       },
-      biome2 = {},
       kotlin_language_server = {},
       vtsls = {
         enabled = true,
