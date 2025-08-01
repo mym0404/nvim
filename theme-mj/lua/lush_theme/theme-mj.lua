@@ -1296,12 +1296,12 @@ local theme = lush(function(injected_functions)
     -- LuasnipSnippetPassive(special),
 
     RainbowDelimiterRed({ fg = "#ff6b6b" }),
-    RainbowDelimiterYellow({ fg = "#ffd93d" }),
-    RainbowDelimiterBlue({ fg = "#6bcf7f" }),
-    RainbowDelimiterOrange({ fg = "#ff9f43" }),
+    RainbowDelimiterYellow({ fg = "#ff9500" }),
+    RainbowDelimiterBlue({ fg = "#ffd93d" }),
+    RainbowDelimiterOrange({ fg = "#7ed321" }),
     RainbowDelimiterGreen({ fg = "#4ecdc4" }),
-    RainbowDelimiterViolet({ fg = "#a55eea" }),
-    RainbowDelimiterCyan({ fg = "#26d0ce" }),
+    RainbowDelimiterViolet({ fg = "#50e3c2" }),
+    RainbowDelimiterCyan({ fg = "#bd10e0" }),
   }
 end)
 return theme
