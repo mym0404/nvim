@@ -41,7 +41,7 @@ return {
 export const {}Schema = z.object({{
   {}
 }});
-export type {}Schema = z.infer<typeof {}Schema>;
+export type {} = z.infer<typeof {}Schema>;
     ]],
       {
         i(1, "name"),
