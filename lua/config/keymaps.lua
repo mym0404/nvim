@@ -760,14 +760,17 @@ local function map_get_meta()
   end)
 end
 
+-- if not vim.g.vscode then
+map_scroll()
+map_hover_scroll()
+-- end
+
 reset_keymaps()
 map_template_string()
 map_react_prop_bracket()
 map_delete_buffer()
 configure_lsp()
 map_docs_hover()
-map_scroll()
-map_hover_scroll()
 map_shift_cr()
 map_comments()
 manipulate_yank_paste_register_behavior()
