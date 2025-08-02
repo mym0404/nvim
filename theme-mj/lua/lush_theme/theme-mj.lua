@@ -56,11 +56,15 @@ local vcs = {
   },
   modified_highlight = {
     label = { fg = "#72A7D7" },
-    code = { bg = "#3572A2" },
+    -- code = { bg = "#3572A2" },
+    code = { bg = "#1B415C" },
   },
   deleted = {
     label = { fg = palette.error_label },
     code = { bg = "#5C1B1A" },
+  },
+  deleted_smooth = {
+    code = { bg = "#5c3333" },
   },
   deleted_highlight = {
     label = { fg = palette.error_label },
@@ -1253,7 +1257,7 @@ local theme = lush(function(injected_functions)
     DiffviewStatusLine({ StatusLine }),
     DiffviewEndOfBuffer({ EndOfBuffer }),
     DiffviewSignColumn({ Normal }),
-    DiffviewDiffDelete({ bg = "NONE", fg = "#111111" }),
+    DiffviewDiffDelete({ bg = vcs.deleted_smooth.code.bg, fg = vcs.deleted_smooth.code.bg }),
     DiffviewDiffText({ DiffText }),
     DiffviewDiffChange({ DiffChange }),
     DiffviewDiffAdd({ DiffAdd }),
