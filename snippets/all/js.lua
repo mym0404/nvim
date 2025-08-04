@@ -418,8 +418,8 @@ export default createCtx;
     t(util.to_str_list([[
 #!/usr/bin/env zx
 /* eslint-disable max-len */
-// region ZX Util
-import fs from 'fs-etra'
+// #region ZX Util
+import fs from 'fs-extra'
 
 const join = path.join;
 const resolve = path.resolve;
@@ -547,7 +547,7 @@ const HEADING = `// @ts-nocheck
  */
  `;
 
-// endregion
+// #endregion
 
 async function main(){
 
