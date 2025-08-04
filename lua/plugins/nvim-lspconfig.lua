@@ -1,33 +1,33 @@
 local utils = require("utils/utils")
 
-require("lspconfig.configs").biome = {
-  default_config = {
-    cmd = { "biome", "lsp-proxy" },
-    filetypes = {
-      -- "astro",
-      -- "css",
-      -- "graphql",
-      -- "html",
-      "javascript",
-      "javascriptreact",
-      -- "json",
-      -- "jsonc",
-      -- "svelte",
-      "typescript",
-      "typescript.tsx",
-      "typescriptreact",
-      -- "vue",
-    },
-    root_dir = function(fname)
-      local ret =
-        require("lspconfig.util").root_pattern("biome.json", "biome.jsonc", "package.json")(fname)
-      return ret
-    end,
-    workspace_required = true,
-    single_file_support = true,
-    settings = {},
-  },
-}
+-- require("lspconfig.configs").biome = {
+--   default_config = {
+--     cmd = { "biome", "lsp-proxy" },
+--     filetypes = {
+--       -- "astro",
+--       -- "css",
+--       -- "graphql",
+--       -- "html",
+--       "javascript",
+--       "javascriptreact",
+--       -- "json",
+--       -- "jsonc",
+--       -- "svelte",
+--       "typescript",
+--       "typescript.tsx",
+--       "typescriptreact",
+--       -- "vue",
+--     },
+--     root_dir = function(fname)
+--       local ret =
+--         require("lspconfig.util").root_pattern("biome.json", "biome.jsonc", "package.json")(fname)
+--       return ret
+--     end,
+--     workspace_required = true,
+--     single_file_support = true,
+--     settings = {},
+--   },
+-- }
 
 return {
   "neovim/nvim-lspconfig",
@@ -45,9 +45,6 @@ return {
       jdtls = {},
       biome = {
         enabled = true,
-      },
-      biome2 = {
-        enabled = false,
       },
       kotlin_language_server = {},
       vtsls = {

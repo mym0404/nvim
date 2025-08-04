@@ -28,6 +28,25 @@
         "--figma-api-key=${FIGMA_ACCESS_TOKEN}",
         "--stdio"
       ]
+    },
+    "serena": {
+      "command": "uvx",
+      "args": [
+        "--from",
+        "git+https://github.com/oraios/serena",
+        "serena",
+        "start-mcp-server",
+        "--context",
+        "ide-assistant"
+      ]
+    },
+    "shadcn-ui": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "shadcn-ui-mcp-server",
+        "--stdio"
+      ]
     }
   }
 }
