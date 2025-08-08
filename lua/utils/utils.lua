@@ -174,10 +174,10 @@ M.on_save_action = function(buf, cb)
   end
   if M.is_js_ft(buf) then
     local has_eslint = vim.fn.exists(":EslintFixAll")
-    local has_unused_imports = has_unused_imports(buf)
+    local has_unused = has_unused_imports(buf)
 
     -- Run specific code actions at once
-    if has_unused_imports then
+    if has_unused then
       vim.lsp.buf.code_action({
         context = {
           only = {
