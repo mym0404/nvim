@@ -173,16 +173,26 @@ M.on_save_action = function(buf, cb)
     cb()
   end
   if M.is_js_ft(buf) then
-    -- Run EslintFixAll if command exists
-    if vim.fn.exists(":EslintFixAll") > 0 then
+    local has_eslint = vim.fn.exists(":EslintFixAll")
+    local has_unused_imports = has_unused_imports(buf)
+
+    -- Run specific code actions at once
+    if has_unused_imports then
+      vim.lsp.buf.code_action({
+        context = {
+          only = {
+            "source.removeUnusedImports",
+          },
+          diagnostics = {},
+        },
+        apply = true,
+      })
+    end
+    if has_eslint then
       vim.cmd("EslintFixAll")
     end
-
-    if has_unused_imports(buf) then
-      require("vtsls.commands").remove_unused_imports(buf, on_complete)
-    else
-      on_complete()
-    end
+    -- Small delay to let code actions complete before formatting
+    on_complete()
   else
     on_complete()
   end
