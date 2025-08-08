@@ -169,7 +169,7 @@ M.on_save_action = function(buf, cb)
   local view = vim.fn.winsaveview()
   cb = cb or function() end
   local on_complete = function()
-    LazyVim.format({ force = true })
+    -- LazyVim.format({ force = true })
     cb()
   end
   if M.is_js_ft(buf) then
@@ -191,7 +191,6 @@ M.on_save_action = function(buf, cb)
     if has_eslint then
       vim.cmd("EslintFixAll")
     end
-    -- Small delay to let code actions complete before formatting
     on_complete()
   else
     on_complete()
