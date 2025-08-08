@@ -173,6 +173,11 @@ M.on_save_action = function(buf, cb)
     cb()
   end
   if M.is_js_ft(buf) then
+    -- Run EslintFixAll if command exists
+    if vim.fn.exists(":EslintFixAll") > 0 then
+      vim.cmd("EslintFixAll")
+    end
+
     if has_unused_imports(buf) then
       require("vtsls.commands").remove_unused_imports(buf, on_complete)
     else
