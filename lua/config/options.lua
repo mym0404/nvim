@@ -61,4 +61,7 @@ vim.o.winborder = "rounded"
 
 vim.g.ai_cmp = false
 vim.g.vim_json_conceal = 0
-vim.g.autoformat = false
+
+vim.g.autoformat = true
+vim.g.lazyvim_eslint_auto_format = true
+vim.g.lazyvim_prettier_needs_config = true
