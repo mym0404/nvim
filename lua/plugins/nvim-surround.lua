@@ -16,6 +16,6 @@ return {
       change = "cs",
       change_line = "cS",
     },
-    move_cursor = "begin",
+    move_cursor = "sticky",
   },
 }
