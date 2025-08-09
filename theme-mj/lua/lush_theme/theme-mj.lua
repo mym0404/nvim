@@ -111,8 +111,8 @@ local code = {
     bg = hsl("#313133"),
   },
   folded_line_token = {
-    fg = special_orange.fg,
-    bg = special_orange.bg,
+    fg = special_theme.fg,
+    bg = special_theme.bg,
     gui = "bold",
   },
 }
@@ -936,7 +936,7 @@ local theme = lush(function(injected_functions)
     SnacksWinKey(code.keyword),
     SnacksWinKeyDesc({ Function }),
     SnacksWinKeySep({ NonText }),
-    SnippetTabstop({ fg = special_orange.fg, bg = special_orange.bg }),
+    -- SnippetTabstop({ fg = special_orange.fg, bg = special_orange.bg }),
     SpecialChar(special),
     SpecialComment(special),
     SpecialKey({ NonText }),
