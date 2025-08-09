@@ -49,7 +49,7 @@ return {
       eslint = { enabled = true },
       kotlin_language_server = {},
       vtsls = {
-        enabled = true,
+        enabled = false,
         settings = {
           typescript = {
             inlayHints = {
