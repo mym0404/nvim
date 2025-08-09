@@ -94,6 +94,8 @@ claude mcp add figma -s user -- npx -y figma-developer-mcp --figma-api-key=${FIG
 claude mcp add serena -- uvx --from git+https://github.com/oraios/serena serena start-mcp-server --context ide-assistant
 # shadcn-ui
 claude mcp add shadcn-ui -s user -- npx -y shadcn-ui-mcp-server
+# puppeteer
+claude mcp add puppeteer --scope user -- npx -y puppeteer-mcp-server
 # Check whats been installed
 claude mcp list
 ```
