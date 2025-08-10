@@ -1,34 +1,5 @@
 local utils = require("utils/utils")
 
--- require("lspconfig.configs").biome = {
---   default_config = {
---     cmd = { "biome", "lsp-proxy" },
---     filetypes = {
---       -- "astro",
---       -- "css",
---       -- "graphql",
---       -- "html",
---       "javascript",
---       "javascriptreact",
---       -- "json",
---       -- "jsonc",
---       -- "svelte",
---       "typescript",
---       "typescript.tsx",
---       "typescriptreact",
---       -- "vue",
---     },
---     root_dir = function(fname)
---       local ret =
---         require("lspconfig.util").root_pattern("biome.json", "biome.jsonc", "package.json")(fname)
---       return ret
---     end,
---     workspace_required = true,
---     single_file_support = true,
---     settings = {},
---   },
--- }
-
 return {
   "neovim/nvim-lspconfig",
   dependencies = {
@@ -85,15 +56,6 @@ return {
           autocmd BufWritePre *.tsx,*.ts,*.jsx,*.js EslintFixAll
         ]])
       end,
-      -- eslint = function()
-      --   require("lazyvim.util").lsp.on_attach(function(client)
-      --     if client.name == "eslint" then
-      --       client.server_capabilities.documentFormattingProvider = true
-      --     elseif client.name == "tsserver" then
-      --       client.server_capabilities.documentFormattingProvider = false
-      --     end
-      --   end)
-      -- end,
       ["*"] = function(server, config)
         local lspconfig = require("lspconfig")
         local capabilities = config.capabilities
