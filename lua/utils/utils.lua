@@ -173,14 +173,14 @@ M.on_save_action = function(buf, cb)
     cb()
   end
   if M.is_js_ft(buf) then
-    -- local has_eslint = false
-    -- local clients = vim.lsp.get_clients({ bufnr = buf })
-    -- for _, client in ipairs(clients) do
-    --   if client.name == "eslint" then
-    --     has_eslint = true
-    --     break
-    --   end
-    -- end
+    local has_eslint = false
+    local clients = vim.lsp.get_clients({ bufnr = buf })
+    for _, client in ipairs(clients) do
+      if client.name == "eslint" then
+        has_eslint = true
+        break
+      end
+    end
     local has_unused = has_unused_imports(buf)
 
     -- Run specific code actions at once
@@ -195,9 +195,9 @@ M.on_save_action = function(buf, cb)
         apply = true,
       })
     end
-    -- if has_eslint then
-    --   vim.cmd("EslintFixAll")
-    -- end
+    if has_eslint then
+      vim.cmd("EslintFixAll")
+    end
     on_complete()
   else
     on_complete()

@@ -14,10 +14,10 @@ return {
         -- fish = { "fish_indent" },
         sh = { "shfmt" },
         zsh = { "shfmt" },
-        javascript = { "biome-check", "prettier" },
-        javascriptreact = { "biome-check", "prettier" },
-        typescript = { "biome-check", "prettier" },
-        typescriptreact = { "biome-check", "prettier" },
+        javascript = { "biome-check", "prettier", stop_after_first = true },
+        javascriptreact = { "biome-check", "prettier", stop_after_first = true },
+        typescript = { "biome-check", "prettier", stop_after_first = true },
+        typescriptreact = { "biome-check", "prettier", stop_after_first = true },
         swift = { "swiftformat" },
       },
       -- The options you set here will be merged with the builtin formatters.
@@ -41,6 +41,9 @@ return {
     }
     opts.formatters["biome-check"] = {
       require_cwd = true,
+    }
+    opts.formatters["prettier"] = {
+      required_cwd = true,
     }
     return opts
   end,
