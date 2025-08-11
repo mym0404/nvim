@@ -19,28 +19,28 @@ return {
       },
       eslint = { enabled = true },
       kotlin_language_server = {},
-      vtsls = {
-        enabled = false,
-        settings = {
-          typescript = {
-            inlayHints = {
-              parameterNames = { enabled = "literals" },
-              parameterTypes = { enabled = true },
-              variableTypes = { enabled = true },
-              propertyDeclarationTypes = { enabled = true },
-              functionLikeReturnTypes = { enabled = true },
-              enumMemberValues = { enabled = true },
-            },
-            preferences = {
-              importModuleSpecifierPreference = "relative",
-              jsxAttributeCompletionStyle = "braces",
-              quotePreference = "single",
-              includeCompletionsForModuleExports = true,
-              importModuleSpecifierEnding = "auto",
-            },
-          },
-        },
-      },
+      -- vtsls = {
+      --   enabled = false,
+      --   settings = {
+      --     typescript = {
+      --       inlayHints = {
+      --         parameterNames = { enabled = "literals" },
+      --         parameterTypes = { enabled = true },
+      --         variableTypes = { enabled = true },
+      --         propertyDeclarationTypes = { enabled = true },
+      --         functionLikeReturnTypes = { enabled = true },
+      --         enumMemberValues = { enabled = true },
+      --       },
+      --       preferences = {
+      --         importModuleSpecifierPreference = "relative",
+      --         jsxAttributeCompletionStyle = "braces",
+      --         quotePreference = "single",
+      --         includeCompletionsForModuleExports = true,
+      --         importModuleSpecifierEnding = "auto",
+      --       },
+      --     },
+      --   },
+      -- },
       marksman = {
         filetypes = { "markdown", "markdown.mdx" },
         -- on_attach = function(client, bufnr)

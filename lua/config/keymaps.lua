@@ -328,7 +328,7 @@ local function configure_lsp()
 
   vim.keymap.set("n", "<leader>co", function()
     local context = {
-      -- diagnostics = vim.diagnostic.get_line_diagnostics(),
+      diagnostics = vim.diagnostic.get(0),
       only = { "source.organizeImports" },
     }
     vim.lsp.buf.code_action({ context = context, apply = true })

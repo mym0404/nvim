@@ -188,9 +188,10 @@ M.on_save_action = function(buf, cb)
       vim.lsp.buf.code_action({
         context = {
           only = {
-            "source.removeUnusedImports",
+            "source.organizeImports",
           },
-          diagnostics = {},
+          diagnostics = vim.diagnostic.get(0),
+          triggerKind = 1,
         },
         apply = true,
       })
