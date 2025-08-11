@@ -63,7 +63,7 @@
   "rainbow-delimiters.nvim": { "branch": "master", "commit": "97bf4b8ef9298644a29fcd9dd41a0210cf08cac7" },
   "render-markdown.nvim": { "branch": "main", "commit": "3da7bb459f6cff03980dd1e106c46f3e62ff4d9f" },
   "smart-splits.nvim": { "branch": "master", "commit": "52ee119752ee7e98a2a62f0f172926b5fbbc28a5" },
-  "snacks.nvim": { "branch": "fix/smartcase-highlight-issue-2043", "commit": "821b0313e1f00f4ea6f5583ab6168355c423c622" },
+  "snacks.nvim": { "branch": "fix/smartcase-highlight-issue-2043", "commit": "846d78d64149f69ee4db24030bc80d82bba14f22" },
   "telescope.nvim": { "branch": "master", "commit": "b4da76be54691e854d3e0e02c36b0245f945c2c7" },
   "tiny-inline-diagnostic.nvim": { "branch": "main", "commit": "7dcf8542059fb15c978de845fc8665428ae13a04" },
   "todo-comments.nvim": { "branch": "main", "commit": "304a8d204ee787d2544d8bc23cd38d2f929e7cc5" },

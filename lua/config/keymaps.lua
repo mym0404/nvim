@@ -344,6 +344,10 @@ local function configure_lsp()
       vim.snippet.stop()
     end)
   end, { desc = "Format" })
+
+  vim.keymap.set({ "n" }, "<leader>cL", function()
+    vim.cmd("LspRestart")
+  end, { desc = "Restart LSP" })
 end
 
 local function map_package_info()
