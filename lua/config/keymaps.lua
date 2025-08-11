@@ -327,19 +327,11 @@ local function configure_lsp()
   })
 
   vim.keymap.set("n", "<leader>co", function()
-    local context = {
-      diagnostics = vim.diagnostic.get(0),
-      only = { "source.organizeImports" },
-    }
-    vim.lsp.buf.code_action({ context = context, apply = true })
+    utils.organize_imports(0)
   end, { desc = "Organize Import", silent = true })
 
   vim.keymap.set("n", "<leader>cm", function()
-    local context = {
-      -- diagnostics = vim.diagnostic.get_line_diagnostics(),
-      only = { "source.addMissingImports" },
-    }
-    vim.lsp.buf.code_action({ context = context, apply = true })
+    utils.add_missing_imports(0)
   end, { desc = "Add Missing Imports", silent = true })
 
   vim.keymap.set({ "n", "i" }, "<c-x>", function()

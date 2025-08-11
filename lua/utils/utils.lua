@@ -165,6 +165,54 @@ local function has_unused_imports(buf)
   end
   return false
 end
+
+M.organize_imports = function(buf)
+  local ts = require("typescript-tools.api")
+  if M.is_js_ft(buf) then
+    ts.organize_imports(true)
+  else
+    -- Use LSP for non-JS/TS files
+    vim.lsp.buf.code_action({
+      context = {
+        only = { "source.organizeImports" },
+        diagnostics = {},
+      },
+      apply = true,
+    })
+  end
+end
+M.remove_unused_imports = function(buf)
+  local ts = require("typescript-tools.api")
+  if M.is_js_ft(buf) then
+    ts.remove_unused_imports(true)
+  else
+    -- Use LSP for non-JS/TS files
+    vim.lsp.buf.code_action({
+      context = {
+        only = { "source.removeUnusedImports" },
+        diagnostics = {},
+      },
+      apply = true,
+    })
+  end
+end
+
+M.add_missing_imports = function(buf)
+  local ts = require("typescript-tools.api")
+  if M.is_js_ft(buf) then
+    ts.add_missing_imports(true)
+  else
+    -- Use LSP for non-JS/TS files
+    vim.lsp.buf.code_action({
+      context = {
+        only = { "source.addMissingImports" },
+        diagnostics = {},
+      },
+      apply = true,
+    })
+  end
+end
+
 M.on_save_action = function(buf, cb)
   local view = vim.fn.winsaveview()
   cb = cb or function() end
@@ -185,16 +233,7 @@ M.on_save_action = function(buf, cb)
 
     -- Run specific code actions at once
     if has_unused then
-      vim.lsp.buf.code_action({
-        context = {
-          only = {
-            "source.organizeImports",
-          },
-          diagnostics = vim.diagnostic.get(0),
-          triggerKind = 1,
-        },
-        apply = true,
-      })
+      M.remove_unused_imports(buf)
     end
     if has_eslint then
       vim.cmd("EslintFixAll")
