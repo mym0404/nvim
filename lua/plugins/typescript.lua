@@ -29,7 +29,7 @@ return {
         -- described below
         tsserver_format_options = {},
         tsserver_file_preferences = {
-          importModuleSpecifierPreference = "relative",
+          importModuleSpecifierPreference = "project-relative",
           jsxAttributeCompletionStyle = "braces",
           quotePreference = "single",
           includeCompletionsForModuleExports = true,
