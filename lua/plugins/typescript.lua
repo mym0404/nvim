@@ -37,7 +37,7 @@ return {
         },
         -- locale of all tsserver messages, supported locales you can find here:
         -- https://github.com/microsoft/TypeScript/blob/3c221fc086be52b19801f6e8d82596d04607ede6/src/compiler/utilitiesPublic.ts#L620
-        tsserver_locale = "ko",
+        -- tsserver_locale = "ko",
         -- mirror of VSCode's `typescript.suggest.completeFunctionCalls`
         complete_function_calls = false,
         include_completions_with_insert_text = true,
