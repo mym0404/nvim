@@ -67,6 +67,45 @@ nnoremap <c-a> :action $SelectAll<CR>
 " Multiplex
 nnoremap <c-h> :action PrevSplitter<CR>
 nnoremap <c-l> :action NextSplitter<CR>
+nnoremap <m-h> :action StretchSplitToLeft<CR>
+nnoremap <m-j> :action StretchSplitToBottom<CR>
+nnoremap <m-k> :action StretchSplitToTop<CR>
+nnoremap <m-l> :action StretchSplitToRight<CR>
+
+" Window
+nnoremap q :action CloseContent<CR>
+
+" Git
+nnoremap <leader>gr :action ChangesView.Revert<CR><Esc>
+xnoremap <leader>gr :action Vcs.RollbackChangedLines<CR><Esc>
+nnoremap <leader>z :action Compare.SameVersion<CR>
+
+" Yank Path
+nnoremap yf :action CopyReference<CR>
+nnoremap yl :action CopyPathWithLineNumber<CR>
+xnoremap yl :action CopyPathWithLineNumber<CR>
+
+nnoremap <leader>p :action PasteMultiple<CR>
+nnoremap K :action MoveLineUp<CR>
+nnoremap J :action MoveLineDown<CR>
+vnoremap K :action MoveLineUp<CR>
+vnoremap J :action MoveLineDown<CR>
+
+" Docs
+nnoremap D :action QuickJavaDoc<CR>
+
+" Jump
+nnoremap [d :action GotoPreviousError<CR>
+nnoremap ]d :action GotoNextError<CR>
+
+" Select All
+nnoremap <c-a> :action $SelectAll<CR>
+
+" Scroll
+
+" Multiplex
+nnoremap <c-h> :action PrevSplitter<CR>
+nnoremap <c-l> :action NextSplitter<CR>
 nnoremap <c-j> :action NextSplitter<CR>
 nnoremap <c-k> :action PrevSplitter<CR>
 nnoremap <m-h> :action StretchSplitToLeft<CR>
