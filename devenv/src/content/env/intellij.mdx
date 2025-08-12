@@ -1,6 +1,9 @@
-# Intellij 
+# Intellij
 
 ```shell filename="~/.ideavimrc"
+" Reset Keymaps
+nunmap <leader><space>
+
 " Options
 let mapleader = " "
 set relativenumber
@@ -9,9 +12,14 @@ set hlsearch
 set incsearch
 set ignorecase
 set smartcase
-set scroll=15
-nnoremap <esc> :noh<cr><esc>
 
+" Scroll
+set scroll=15
+nnoremap <C-u> <C-u>zz
+nnoremap <C-d> <C-d>zz
+
+" Which-Key
+" set which-key
 
 " Easy Motion
 set easymotion
@@ -21,7 +29,8 @@ omap s <Plug>(easymotion-bd-f)
 " Highlight Yank
 Plug 'machakann/vim-highlightedyank'
 let g:highlightedyank_highlight_duration = "300"
-let g:highlightedyank_highlight_color = "rgba(111, 197, 255, 50)"
+let g:highlightedyank_highlight_color = "rgba(13, 37, 77, 255)"
+let g:highlightedyank_highlight_foreground_color = "rgba(158, 186, 255, 255)"
 
 " Matchit
 packadd matchit
@@ -32,8 +41,9 @@ set mini-ai
 " Surround
 Plug 'tpope/vim-surround'
 
-" ESC
+EditorEscape)" ESC
 inoremap jk <Esc>
+nnoremap <esc> :noh<cr><esc>
 
 " Save
 inoremap <C-s> <Esc>:w<CR>
@@ -90,6 +100,10 @@ nnoremap <leader>gr :action ChangesView.Revert<CR><Esc>
 xnoremap <leader>gr :action Vcs.RollbackChangedLines<CR><Esc>
 nnoremap <leader>z :action Compare.SameVersion<CR>
 nnoremap <leader>h :action Vcs.ShowTabbedFileHistory<CR>
+nnoremap <leader>gC :!git add -A && git commit --allow-empty -m "chore: unconscious commit 🐋"<CR>
+nnoremap <leader>gP :!git add -A && git commit --allow-empty -m "chore: unconscious commit 🐋" && git push<CR>
+" Terminal
+nnoremap <leader>gg :!open -a WezTerm $PWD && sleep 0.5 && osascript -e 'tell application "WezTerm" to activate' -e 'tell application "System Events" to keystroke "lazygit" & return'<CR>
 
 " CodeAction
 nnoremap <leader>ca :action ShowIntentionActions<CR>
@@ -104,4 +118,8 @@ xnoremap yl :action CopyPathWithLineNumber<CR>
 
 " ClaudeCode
 nnoremap <leader>C :action com.anthropic.code.plugin.actions.OpenClaudeInTerminalAction<CR>
+
+
+" Project
+nnoremap <leader>P :action $LRU<CR>
 ```
