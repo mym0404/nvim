@@ -100,10 +100,8 @@ nnoremap <leader>gr :action ChangesView.Revert<CR><Esc>
 xnoremap <leader>gr :action Vcs.RollbackChangedLines<CR><Esc>
 nnoremap <leader>z :action Compare.SameVersion<CR>
 nnoremap <leader>h :action Vcs.ShowTabbedFileHistory<CR>
-nnoremap <leader>gC :!git add -A && git commit --allow-empty -m "chore: unconscious commit 🐋"<CR>
-nnoremap <leader>gP :!git add -A && git commit --allow-empty -m "chore: unconscious commit 🐋" && git push<CR>
-" Terminal
-nnoremap <leader>gg :!open -a WezTerm $PWD && sleep 0.5 && osascript -e 'tell application "WezTerm" to activate' -e 'tell application "System Events" to keystroke "lazygit" & return'<CR>
+nnoremap <leader>gc :!git add -A && git commit --allow-empty -m "chore: unconscious commit 🐋"<CR>
+nnoremap <leader>gp :!git add -A && git commit --allow-empty -m "chore: unconscious commit 🐋" && git push<CR>
 
 " CodeAction
 nnoremap <leader>ca :action ShowIntentionActions<CR>
