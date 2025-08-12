@@ -67,18 +67,25 @@ nnoremap <c-a> :action $SelectAll<CR>
 " Multiplex
 nnoremap <c-h> :action PrevSplitter<CR>
 nnoremap <c-l> :action NextSplitter<CR>
+nnoremap <c-j> :action NextSplitter<CR>
+nnoremap <c-k> :action PrevSplitter<CR>
 nnoremap <m-h> :action StretchSplitToLeft<CR>
 nnoremap <m-j> :action StretchSplitToBottom<CR>
 nnoremap <m-k> :action StretchSplitToTop<CR>
 nnoremap <m-l> :action StretchSplitToRight<CR>
 
 " Window
-nnoremap q :action CloseContent<CR>
-
+nnoremap <leader>bd :action CloseContent<CR>
+nnoremap <leader>bo :action CloseAllEditorsButActive<CR>
 " Git
 nnoremap <leader>gr :action Vcs.RollbackChangedLines<CR><Esc>
 xnoremap <leader>gr :action Vcs.RollbackChangedLines<CR><Esc>
 nnoremap <leader>z :action Compare.SameVersion<CR>
+nnoremap <leader>h :action Vcs.ShowTabbedFileHistory<CR>
+
+" CodeAction
+nnoremap <leader>ca :action ShowIntentionActions<CR>
+
 
 " Yank Path
 nnoremap yf :action CopyReference<CR>
