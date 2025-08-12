@@ -116,6 +116,7 @@ nnoremap <m-l> :action StretchSplitToRight<CR>
 " Window
 nnoremap <leader>bd :action CloseContent<CR>
 nnoremap <leader>bo :action CloseAllEditorsButActive<CR>
+
 " Git
 nnoremap <leader>gr :action Vcs.RollbackChangedLines<CR><Esc>
 xnoremap <leader>gr :action Vcs.RollbackChangedLines<CR><Esc>
@@ -130,7 +131,8 @@ nnoremap <leader>cr :action RenameElement<CR>
 
 
 " Yank Path
-nnoremap yf :action CopyReference<CR>
+nnoremap ya :action CopyAbsolutePath<CR>
+nnoremap yf :action CopyContentRootPath<CR>
 nnoremap yl :action CopyPathWithLineNumber<CR>
 xnoremap yl :action CopyPathWithLineNumber<CR>
 
