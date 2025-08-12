@@ -9,7 +9,6 @@ const meta: MetaRecord = {
 	karabiner: "karabiner",
 	claude: "claude",
 	gemini: "gemini",
-	intellij: "Jetbrains IDE",
 	serena: "serena",
 };
 
