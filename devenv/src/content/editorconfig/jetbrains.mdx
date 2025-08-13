@@ -28,7 +28,7 @@ nnoremap <C-d> <C-d>zz
 " set which-key
 
 " Extension Input
-:set keep-english-in-normal
+" :set keep-english-in-normal
 
 " Easy Motion
 set easymotion
@@ -57,8 +57,9 @@ inoremap jk <Esc>
 nnoremap <esc> :noh<cr><esc>
 
 " Save
-inoremap <C-s> <Esc>:w<CR>
-nnoremap <C-s> :w<CR>
+inoremap <C-s> <Esc>:action SaveAll<CR>
+nnoremap <C-s> :action SaveAll<CR>
+vnoremap <C-s> :action SaveAll<CR>gv
 
 " Search & Replace
 nnoremap <leader><space> :action GotoFile<CR>
