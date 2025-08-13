@@ -27,8 +27,12 @@ nnoremap <C-d> <C-d>zz
 " Which-Key
 " set which-key
 
+" Extension Input
+:set keep-english-in-normal
+
 " Easy Motion
 set easymotion
+Plug 'easymotion/vim-easymotion'
 nmap s <Plug>(easymotion-bd-f)
 omap s <Plug>(easymotion-bd-f)
 
@@ -46,6 +50,7 @@ set mini-ai
 
 " Surround
 Plug 'tpope/vim-surround'
+nmap t ys
 
 EditorEscape)" ESC
 inoremap jk <Esc>
@@ -128,4 +133,20 @@ xnoremap yk :action com.anthropic.code.plugin.actions.SendToClaudeAction<CR><ESC
 
 " Project
 nnoremap <leader>P :action $LRU<CR>
+
+" Blackhole Registers
+nnoremap x "_x
+vnoremap x "_x
+nnoremap c "_c
+vnoremap c "_c
+
+" Recording
+xnoremap q <Esc>
+nnoremap q <Nop>
+nnoremap ! qt
+nnoremap @ @t
+
+" Insert
+inoremap <S-CR> <Esc>o
+nnoremap <S-CR> o
 ```
