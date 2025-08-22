@@ -10,11 +10,14 @@ git:
     pager: delta --dark --paging=never
   # Command used when displaying the current branch git log in the main window
   # branchLogCmd: git log --graph --color=always --abbrev-commit --decorate --date=relative --pretty=medium {{branchName}} --
-  branchLogCmd: git log --graph --color=always --abbrev-commit --decorate --format=format:'%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(magenta)- %an%C(reset)%C(auto)%d%C(reset)' --all --date-order
+  branchLogCmd: git log --graph --abbrev-commit --color=always --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(magenta)- %an%C(reset)%C(auto)%d%C(reset)' --all --date-order
   # Commands used to display git log of all branches in the main window, they will be cycled in order of appearance (array of strings)
   # allBranchesLogCmds:
   #   - git log --graph --all --color=always --abbrev-commit --decorate --date=relative  --pretty=medium
-  # log: -order = "date-order"
+  # - git log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(magenta)- %an%C(reset)%C(auto)%d%C(reset)' --all --date-order
+  log:
+    # showWholeGraph: true
+    order: "date-order"
 gui:
   sidePanelWidth: 0.3
   expandedSidePanelWeight: 3
@@ -49,10 +52,7 @@ customCommands:
     command: "git branch -vvv"
   - key: "<c-p>"
     context: "global"
-    command: "git add -A && git status && git commit --allow-empty -m 'chore: unconscious commit 🐋' && git push origin $(git rev-parse --abbrev-ref HEAD)"
-  - key: "C"
-    context: "files,global,worktrees,localBranches,remotes,remoteBranches,tags,commits,reflogCommits"
-    command: "git add -A && git status && git commit --allow-empty -m 'chore: unconscious commit 🐋'"
+    command: "git add -A && git status && git commit --allow-empty -m 'chore: unconscious commit 🦄' && git push origin $(git rev-parse --abbrev-ref HEAD)"
   - key: "c"
     context: "files,global,worktrees,localBranches,remotes,remoteBranches,tags,commits,reflogCommits"
     description: "Create new conventional commit"
@@ -182,7 +182,7 @@ keybinding:
     # 'Files' appended for legacy reasons
     pullFiles: p
     refresh: R
-    createPatchOptionsMenu: <c-n>
+    createPatchOptionsMenu: <c-b>
     nextTab: "]"
     prevTab: "["
     nextScreenMode: +
