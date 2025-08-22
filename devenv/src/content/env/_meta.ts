@@ -10,6 +10,7 @@ const meta: MetaRecord = {
 	claude: "claude",
 	gemini: "gemini",
 	serena: "serena",
+	television: "television",
 };
 
 export default meta;
