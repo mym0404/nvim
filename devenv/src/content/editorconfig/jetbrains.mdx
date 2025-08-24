@@ -20,7 +20,7 @@ set ignorecase
 set smartcase
 set visualbell
 set noerrorbells
-set scrolloff = 5
+set scrolloff = 10
 
 " Scroll
 set scroll=15
@@ -155,4 +155,32 @@ nnoremap @ @t
 " Insert
 inoremap <S-CR> <Esc>o
 nnoremap <S-CR> o
+
+" Sethandler configurations for Ctrl-A to Ctrl-Z
+" sethandler <C-A> a:ide
+" sethandler <C-B> a:vim
+" sethandler <C-C> a:ide
+sethandler <C-D> a:vim
+" sethandler <C-E> a:vim
+" sethandler <C-F> a:vim
+sethandler <C-G> a:vim
+sethandler <C-H> a:ide
+sethandler <C-I> a:vim
+sethandler <C-J> a:ide
+sethandler <C-K> a:ide
+sethandler <C-L> a:ide
+" sethandler <C-M> a:vim
+sethandler <C-N> a:vim
+" sethandler <C-O> a:vim
+sethandler <C-P> a:ide
+" sethandler <C-Q> a:ide
+sethandler <C-R> a:vim
+" sethandler <C-S> a:ide
+" sethandler <C-T> a:ide
+sethandler <C-U> a:vim
+" sethandler <C-V> a:ide
+" sethandler <C-W> a:vim
+sethandler <C-X> a:ide
+" sethandler <C-Y> a:ide
+" sethandler <C-Z> a:ide
 ```
