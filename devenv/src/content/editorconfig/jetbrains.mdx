@@ -1,8 +1,9 @@
 # Intellij
 
-## Webstorm
+## Setting Files
 
-[webstorm.zip](/webstorm.zip)
+- [webstorm.zip](/webstorm.zip)
+- [androidstudio.zip](/androidstudio.zip)
 
 ## .ideavimrc
 
@@ -11,7 +12,7 @@
 nunmap <leader><space>
 
 " Options
-let mapleader = " "
+let mapleader=" "
 set relativenumber
 set clipboard=unnamedplus
 set hlsearch
@@ -20,6 +21,7 @@ set ignorecase
 set smartcase
 set visualbell
 set noerrorbells
+set scrolloff=10
 
 " Scroll
 set scroll=15
@@ -117,22 +119,24 @@ nnoremap <leader>h :action Vcs.ShowTabbedFileHistory<CR>
 nnoremap <leader>gc :!git add -A && git commit --allow-empty -m "chore: unconscious commit 🐋"<CR>
 nnoremap <leader>gp :!git add -A && git commit --allow-empty -m "chore: unconscious commit 🐋" && git push<CR>
 nnoremap <leader>gg :action LazyGit.Open<CR>
+nnoremap ]c :action VcsShowNextChangeMarker<CR>
+nnoremap [c :action VcsShowPrevChangeMarker<CR>
 
 " CodeAction
 nnoremap <leader>ca :action ShowIntentionActions<CR>
 nnoremap <leader>cR :action RenameFile<CR>
 nnoremap <leader>cr :action RenameElement<CR>
+nnoremap gr :action FindUsages<CR>
 
 " Yank Path
 nnoremap ya :action CopyAbsolutePath<CR>
 nnoremap yf :action CopyContentRootPath<CR>
-nnoremap yl :action CopyPathWithLineNumber<CR>
-xnoremap yl :action CopyPathWithLineNumber<CR>
+nnoremap yl :action CopyPathWithLineNumber<CR><esc>
 
 " ClaudeCode
 nnoremap <leader>k :action com.anthropic.code.plugin.actions.OpenClaudeInTerminalAction<CR>
-nnoremap yk :action com.anthropic.code.plugin.actions.SendToClaudeAction<CR><ESC>
-xnoremap yk :action com.anthropic.code.plugin.actions.SendToClaudeAction<CR><ESC>
+" nnoremap <leader>k :action com.anthropic.code.plugin.actions.SendToClaudeAction<CR><ESC>
+" xnoremap <leader>k :action com.anthropic.code.plugin.actions.SendToClaudeAction<CR><ESC>
 
 
 " Project
@@ -153,4 +157,32 @@ nnoremap @ @t
 " Insert
 inoremap <S-CR> <Esc>o
 nnoremap <S-CR> o
+
+" Sethandler configurations for Ctrl-A to Ctrl-Z
+" sethandler <C-A> a:ide
+" sethandler <C-B> a:vim
+" sethandler <C-C> a:ide
+sethandler <C-D> a:vim
+" sethandler <C-E> a:vim
+" sethandler <C-F> a:vim
+sethandler <C-G> a:vim
+sethandler <C-H> a:ide
+sethandler <C-I> a:vim
+sethandler <C-J> a:ide
+sethandler <C-K> a:ide
+sethandler <C-L> a:ide
+" sethandler <C-M> a:vim
+sethandler <C-N> a:vim
+" sethandler <C-O> a:vim
+sethandler <C-P> a:ide
+" sethandler <C-Q> a:ide
+sethandler <C-R> a:vim
+" sethandler <C-S> a:ide
+" sethandler <C-T> a:ide
+sethandler <C-U> a:vim
+" sethandler <C-V> a:ide
+" sethandler <C-W> a:vim
+sethandler <C-X> a:ide
+" sethandler <C-Y> a:ide
+" sethandler <C-Z> a:ide
 ```
