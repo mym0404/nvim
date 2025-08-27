@@ -7,7 +7,6 @@ const meta: MetaRecord = {
 	zsh: "zsh",
 	wezterm: "wezterm",
 	karabiner: "karabiner",
-	claude: "claude",
 	gemini: "gemini",
 	serena: "serena",
 	television: "television",
