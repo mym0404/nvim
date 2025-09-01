@@ -19,7 +19,7 @@ opt.iminsert = 0
 opt.imsearch = 0
 
 opt.guicursor =
-  "n-v-c-sm:block-blinkwait1000-blinkon500-blinkoff500,i-ci-ve:ver25,r-cr-o:hor20,t:block-blinkon500-blinkoff500-TermCursor"
+"n-v-c-sm:block-blinkwait1000-blinkon500-blinkoff500,i-ci-ve:ver25,r-cr-o:hor20,t:block-blinkon500-blinkoff500-TermCursor"
 
 opt.autoindent = true
 opt.smartindent = true
@@ -35,8 +35,40 @@ opt.imsearch = 0
 opt.showmode = false
 opt.exrc = true
 
+-- Sync clipboard between OS and Neovim.
+--  Schedule the setting after `UiEnter` because it can increase startup-time.
+--  Remove this option if you want your OS clipboard to remain independent.
+--  See `:help 'clipboard'`
 vim.schedule(function()
-  opt.clipboard = "unnamedplus"
+  vim.o.clipboard = "unnamedplus"
+
+  -- Fix "waiting for osc52 response from terminal" message
+  -- https://github.com/neovim/neovim/issues/28611
+
+  if vim.env.SSH_TTY ~= nil then
+    -- Set up clipboard for ssh
+
+    local function my_paste(_)
+      return function(_)
+        local content = vim.fn.getreg('"')
+        return vim.split(content, '\n')
+      end
+    end
+
+    vim.g.clipboard = {
+      name = 'OSC 52',
+      copy = {
+        ['+'] = require('vim.ui.clipboard.osc52').copy('+'),
+        ['*'] = require('vim.ui.clipboard.osc52').copy('*'),
+      },
+      paste = {
+        -- No OSC52 paste action since wezterm doesn't support it
+        -- Should still paste from nvim
+        ['+'] = my_paste('+'),
+        ['*'] = my_paste('*'),
+      },
+    }
+  end
 end)
 
 opt.breakindent = true

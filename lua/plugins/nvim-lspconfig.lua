@@ -18,7 +18,7 @@ return {
         enabled = true,
       },
       eslint = { enabled = true },
-      kotlin_language_server = {},
+      -- kotlin_language_server = {},
       vtsls = {
         enabled = true,
         settings = {
