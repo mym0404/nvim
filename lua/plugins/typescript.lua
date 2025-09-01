@@ -1,10 +1,11 @@
 return {
   {
     "yioneko/nvim-vtsls",
-    enabled = false,
+    enabled = true,
   },
   {
     "pmizio/typescript-tools.nvim",
+    enabled = false,
     dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
     opts = {
       settings = {
