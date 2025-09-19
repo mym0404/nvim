@@ -60,15 +60,6 @@ return {
         local lspconfig = require("lspconfig")
         local capabilities = config.capabilities
 
-        -- apply ufo lsp capabilities for folding
-        capabilities = vim.tbl_deep_extend("force", capabilities, {
-          textDocument = {
-            foldingRange = {
-              dynamicRegistration = false,
-              lineFoldingOnly = true,
-            },
-          },
-        })
         -- apply blink lsp capabilities
         capabilities = require("blink.cmp").get_lsp_capabilities(capabilities)
 
