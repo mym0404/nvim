@@ -44,20 +44,20 @@ return {
         -- ["<s-tab>"] = { "select_prev", "fallback" },
         ["<left>"] = false,
         ["<right>"] = false,
-        ["<CR>"] = {
-          function()
-            if vim.fn.getcmdtype() == ":" then
-              local cmp = require("blink-cmp")
-              if cmp.is_visible() then
-                require("blink-cmp").accept_and_enter()
-                return true
-              end
-              return false
-            end
-            return false
-          end,
-          "fallback",
-        },
+        -- ["<CR>"] = {
+        --   function()
+        --     if vim.fn.getcmdtype() == ":" then
+        --       local cmp = require("blink-cmp")
+        --       if cmp.is_visible() then
+        --         require("blink-cmp").accept_and_enter()
+        --         return true
+        --       end
+        --       return false
+        --     end
+        --     return false
+        --   end,
+        --   "fallback",
+        -- },
       },
       completion = { menu = { auto_show = true } },
     },
