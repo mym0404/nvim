@@ -350,57 +350,6 @@ local function configure_lsp()
   end, { desc = "Restart LSP" })
 end
 
-local function map_package_info()
-  vim.keymap.set(
-    { "n" },
-    "<LEADER>Ps",
-    require("package-info").show,
-    { silent = true, noremap = true, desc = "Show dependency versions" }
-  )
-
-  vim.keymap.set(
-    { "n" },
-    "<LEADER>Pc",
-    require("package-info").hide,
-    { silent = true, noremap = true, desc = "Hide dependency versions" }
-  )
-
-  vim.keymap.set(
-    { "n" },
-    "<LEADER>Pt",
-    require("package-info").toggle,
-    { silent = true, noremap = true, desc = "Toggle dependency versions" }
-  )
-
-  vim.keymap.set(
-    { "n" },
-    "<LEADER>Pu",
-    require("package-info").update,
-    { silent = true, noremap = true, desc = "Update dependency on line" }
-  )
-
-  vim.keymap.set(
-    { "n" },
-    "<LEADER>Pd",
-    require("package-info").delete,
-    { silent = true, noremap = true, desc = "Delete dependency on line" }
-  )
-
-  vim.keymap.set(
-    { "n" },
-    "<LEADER>Pi",
-    require("package-info").install,
-    { silent = true, noremap = true, desc = "Install new dependency" }
-  )
-
-  vim.keymap.set(
-    { "n" },
-    "<LEADER>Pp",
-    require("package-info").change_version,
-    { silent = true, noremap = true, desc = "Change dependency version" }
-  )
-end
-
 local function map_delete_buffer()
   vim.keymap.set("n", "<leader>w", function()
     utils.run_key("<leader>bd", "m")
@@ -784,7 +733,6 @@ map_split()
 map_smart_splits()
 map_select_all()
 map_git_actions()
-map_package_info()
 map_yank()
 map_tab_move()
 map_ufo()

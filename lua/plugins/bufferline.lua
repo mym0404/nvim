@@ -22,7 +22,6 @@ return {
         local extensions_to_drop = {
           "mjs",
           "cjs",
-          "swift",
           "kt",
           "jsx",
           "js",

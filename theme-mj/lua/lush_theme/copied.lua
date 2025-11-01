@@ -9,44 +9,6 @@ local theme = lush(function(injected_functions)
   local sym = injected_functions.sym
   return {
     Added({ bg = "#374a37" }), -- Added          xxx guibg=#374a37
-    AvanteAnnotation({ Comment }), -- AvanteAnnotation xxx links to Comment
-    AvanteButtonDanger({ bg = "#abb2bf", fg = "#1e222a" }), -- AvanteButtonDanger xxx guifg=#1e222a guibg=#abb2bf
-    AvanteButtonDangerHover({ bg = "#e06c75", fg = "#1e222a" }), -- AvanteButtonDangerHover xxx guifg=#1e222a guibg=#e06c75
-    AvanteButtonDefault({ bg = "#abb2bf", fg = "#1e222a" }), -- AvanteButtonDefault xxx guifg=#1e222a guibg=#abb2bf
-    AvanteButtonDefaultHover({ bg = "#a9cf8a", fg = "#1e222a" }), -- AvanteButtonDefaultHover xxx guifg=#1e222a guibg=#a9cf8a
-    AvanteButtonPrimary({ bg = "#abb2bf", fg = "#1e222a" }), -- AvanteButtonPrimary xxx guifg=#1e222a guibg=#abb2bf
-    AvanteButtonPrimaryHover({ bg = "#56b6c2", fg = "#1e222a" }), -- AvanteButtonPrimaryHover xxx guifg=#1e222a guibg=#56b6c2
-    AvanteCommentFg({ fg = "#7ae755" }), -- AvanteCommentFg xxx guifg=#7ae755
-    AvanteConfirmTitle({ bg = "#e06c75", fg = "#1e222a" }), -- AvanteConfirmTitle xxx guifg=#1e222a guibg=#e06c75
-    AvanteConflictCurrent({ gui = "bold", bg = "#562c30" }), -- AvanteConflictCurrent xxx cterm=bold gui=bold guibg=#562c30
-    AvanteConflictCurrentLabel({ bg = "#6f393e" }), -- AvanteConflictCurrentLabel xxx guibg=#6f393e
-    AvanteConflictIncoming({ gui = "bold", bg = "#314753" }), -- AvanteConflictIncoming xxx cterm=bold gui=bold guibg=#314753
-    AvanteConflictIncomingLabel({ bg = "#3f5c6b" }), -- AvanteConflictIncomingLabel xxx guibg=#3f5c6b
-    AvanteInlineHint({ Keyword }), -- AvanteInlineHint xxx links to Keyword
-    AvantePopupHint({ NormalFloat }), -- AvantePopupHint xxx links to NormalFloat
-    AvantePromptInput({ fg = "#ffffff" }), -- AvantePromptInput xxx guifg=#ffffff
-    AvantePromptInputBorder({ NormalFloat }), -- AvantePromptInputBorder xxx links to NormalFloat
-    AvanteReversedNormal({ bg = "#ffffff" }), -- AvanteReversedNormal xxx guibg=#ffffff
-    AvanteReversedSubtitle({ fg = "#56b6c2" }), -- AvanteReversedSubtitle xxx guifg=#56b6c2
-    AvanteReversedThirdTitle({ fg = "#353b45" }), -- AvanteReversedThirdTitle xxx guifg=#353b45
-    AvanteReversedTitle({ fg = "#98c379" }), -- AvanteReversedTitle xxx guifg=#98c379
-    AvanteSidebarNormal({ fg = "#ffffff" }), -- AvanteSidebarNormal xxx guifg=#ffffff
-    AvanteSidebarWinHorizontalSeparator({ fg = "#313131" }), -- AvanteSidebarWinHorizontalSeparator xxx guifg=#313131
-    AvanteStateSpinnerCompacting({ Special }), -- AvanteStateSpinnerCompacting xxx links to Special
-    AvanteStateSpinnerFailed({ bg = "#e06c75", fg = "#1e222a" }), -- AvanteStateSpinnerFailed xxx guifg=#1e222a guibg=#e06c75
-    AvanteStateSpinnerGenerating({ bg = "#ab9df2", fg = "#1e222a" }), -- AvanteStateSpinnerGenerating xxx guifg=#1e222a guibg=#ab9df2
-    AvanteStateSpinnerSearching({ Special }), -- AvanteStateSpinnerSearching xxx links to Special
-    AvanteStateSpinnerSucceeded({ bg = "#98c379", fg = "#1e222a" }), -- AvanteStateSpinnerSucceeded xxx guifg=#1e222a guibg=#98c379
-    AvanteStateSpinnerThinking({ Special }), -- AvanteStateSpinnerThinking xxx links to Special
-    AvanteStateSpinnerToolCalling({ bg = "#56b6c2", fg = "#1e222a" }), -- AvanteStateSpinnerToolCalling xxx guifg=#1e222a guibg=#56b6c2
-    AvanteSubtitle({ bg = "#56b6c2", fg = "#1e222a" }), -- AvanteSubtitle xxx guifg=#1e222a guibg=#56b6c2
-    AvanteSuggestion({ Comment }), -- AvanteSuggestion xxx links to Comment
-    AvanteTaskCompleted({ fg = "#98c379" }), -- AvanteTaskCompleted xxx guifg=#98c379
-    AvanteThinking({ fg = "#c678dd" }), -- AvanteThinking xxx guifg=#c678dd
-    AvanteThirdTitle({ bg = "#353b45", fg = "#abb2bf" }), -- AvanteThirdTitle xxx guifg=#abb2bf guibg=#353b45
-    AvanteTitle({ bg = "#98c379", fg = "#1e222a" }), -- AvanteTitle    xxx guifg=#1e222a guibg=#98c379
-    AvanteToBeDeleted({ gui = "strikethrough", bg = "#ffcccc" }), -- AvanteToBeDeleted xxx cterm=strikethrough gui=strikethrough guibg=#ffcccc
-    AvanteToBeDeletedWOStrikethrough({ bg = "#562c30" }), -- AvanteToBeDeletedWOStrikethrough xxx guibg=#562c30
     BlinkCmpCursorLineMenuHack({ bg = "#1c3d6a" }), -- BlinkCmpCursorLineMenuHack xxx guibg=#1c3d6a
     BlinkCmpDoc({ NormalFloat }), -- BlinkCmpDoc    xxx links to NormalFloat
     BlinkCmpDocBorder({ fg = "#424242" }), -- BlinkCmpDocBorder xxx guifg=#424242
@@ -1073,25 +1035,6 @@ local theme = lush(function(injected_functions)
     WinBar({ gui = "bold", bg = "#0d1117", fg = "#6e7681" }), -- WinBar         xxx cterm=bold gui=bold guifg=#6e7681 guibg=#0d1117
     WinBarNC({ gui = "bold", bg = "#0d1117", fg = "#6e7681" }), -- WinBarNC       xxx cterm=bold gui=bold guifg=#6e7681 guibg=#0d1117
     WinSeparator({ fg = "#313131" }), -- WinSeparator   xxx guifg=#313131
-    XcodebuildCoverageFullSign({ fg = "#b3f6c0" }), -- XcodebuildCoverageFullSign xxx guifg=#b3f6c0
-    XcodebuildCoverageNoneSign({ fg = "#fd9491" }), -- XcodebuildCoverageNoneSign xxx guifg=#fd9491
-    XcodebuildCoverageNotExecutableSign({ Comment }), -- XcodebuildCoverageNotExecutableSign xxx links to Comment
-    XcodebuildCoveragePartialSign({ fg = "#eed45f" }), -- XcodebuildCoveragePartialSign xxx guifg=#eed45f
-    XcodebuildCoverageReportError({ fg = "#fd9491" }), -- XcodebuildCoverageReportError xxx guifg=#fd9491
-    XcodebuildCoverageReportOk({ fg = "#b3f6c0" }), -- XcodebuildCoverageReportOk xxx guifg=#b3f6c0
-    XcodebuildCoverageReportWarning({ fg = "#eed45f" }), -- XcodebuildCoverageReportWarning xxx guifg=#eed45f
-    XcodebuildTestExplorerClass({ Type }), -- XcodebuildTestExplorerClass xxx links to Type
-    XcodebuildTestExplorerTarget({ Keyword }), -- XcodebuildTestExplorerTarget xxx links to Keyword
-    XcodebuildTestExplorerTest({ Function }), -- XcodebuildTestExplorerTest xxx links to Function
-    XcodebuildTestExplorerTestDisabled({ Comment }), -- XcodebuildTestExplorerTestDisabled xxx links to Comment
-    XcodebuildTestExplorerTestFailed({ fg = "#fd9491" }), -- XcodebuildTestExplorerTestFailed xxx guifg=#fd9491
-    XcodebuildTestExplorerTestInProgress({ Operator }), -- XcodebuildTestExplorerTestInProgress xxx links to Operator
-    XcodebuildTestExplorerTestNotExecuted({ Normal }), -- XcodebuildTestExplorerTestNotExecuted xxx links to Normal
-    XcodebuildTestExplorerTestPartialExecution({ fg = "#eed45f" }), -- XcodebuildTestExplorerTestPartialExecution xxx guifg=#eed45f
-    XcodebuildTestExplorerTestPassed({ fg = "#b3f6c0" }), -- XcodebuildTestExplorerTestPassed xxx guifg=#b3f6c0
-    XcodebuildTestFailureDurationSign({ DiagnosticSignError }), -- XcodebuildTestFailureDurationSign xxx links to DiagnosticSignError
-    XcodebuildTestFailureSign({ DiagnosticSignError }), -- XcodebuildTestFailureSign xxx links to DiagnosticSignError
-    XcodebuildTestSuccessDurationSign({ DiagnosticSignWarn }), -- XcodebuildTestSuccessDurationSign xxx links to DiagnosticSignWarn
     YankyPut({ gui = "bold", bg = "#1c3d6a", fg = "#2f81f7" }), -- YankyPut       xxx cterm=bold gui=bold guifg=#2f81f7 guibg=#1c3d6a
     YankyYanked({ gui = "bold", bg = "#1c3d6a", fg = "#2f81f7" }), -- YankyYanked    xxx cterm=bold gui=bold guifg=#2f81f7 guibg=#1c3d6a
     cssAtKeyword({ PreProc }), -- cssAtKeyword   xxx links to PreProc

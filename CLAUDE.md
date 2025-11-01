@@ -12,7 +12,6 @@ This is a personal Neovim configuration based on LazyVim starter template. It ex
 - **Multi-language support**: JavaScript/TypeScript, React, Swift, Kotlin, Java, Python, etc.
 - **Tree-sitter syntax highlighting**: Custom highlight queries for multiple languages
 - **Git integration**: Diffview, Gitsigns with custom keymaps
-- **AI-powered tools**: Avante (AI assistant), Copilot integration
 - **Smart editing**: Template string support, JSX prop completion, auto-formatting
 - **Custom keymaps**: Optimized for productivity with Korean input method support
 

@@ -17,7 +17,6 @@ return {
         "typescript",
         "vim",
         "yaml",
-        "swift",
         "gitignore",
         "c",
         "vimdoc",
