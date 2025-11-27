@@ -9,6 +9,13 @@
 ## .ideavimrc
 
 ```shell filename="~/.ideavimrc"
+" Plugins
+" - AceJump
+" - IDEA VIM, IDEA VIM Extension
+" - EasyMotion
+" - AnyObject
+
+
 " Reset Keymaps
 nunmap <leader><space>
 
@@ -32,6 +39,9 @@ nnoremap <C-d> <C-d>zz
 " Which-Key
 " set which-key
 
+" Exchange
+Plug 'tommcdo/vim-exchange'
+
 " Extension Input
 :set keep-english-in-normal
 
@@ -39,6 +49,7 @@ nnoremap <C-d> <C-d>zz
 set easymotion
 Plug 'easymotion/vim-easymotion'
 nmap s <Plug>(easymotion-bd-f)
+xmap s <Plug>(easymotion-bd-f)
 omap s <Plug>(easymotion-bd-f)
 
 " Highlight Yank
@@ -66,10 +77,13 @@ inoremap <C-s> <Esc>:action SaveAll<CR>
 nnoremap <C-s> :action SaveAll<CR>
 vnoremap <C-s> :action SaveAll<CR>gv
 
+" AnyObject
+set anyobject
+
 " Search & Replace
-nnoremap <leader><space> :action GotoFile<CR>
-nnoremap <leader>/ :action FindInPath<CR>
-nnoremap <leader>sr :action ReplaceInPath<CR>
+" nnoremap <leader><space> :action GotoFile<CR>
+" nnoremap <leader>/ :action FindInPath<CR>
+" nnoremap <leader>sr :action ReplaceInPath<CR>
 
 " Comment
 nnoremap gc :action CommentByLineComment<CR><Esc>
