@@ -4,10 +4,18 @@
 
 - [webstorm.zip](/webstorm.zip)
 - [androidstudio.zip](/androidstudio.zip)
+- [clion.zip](/clion.zip)
 
 ## .ideavimrc
 
 ```shell filename="~/.ideavimrc"
+" Plugins
+" - AceJump
+" - IDEA VIM, IDEA VIM Extension
+" - EasyMotion
+" - AnyObject
+
+
 " Reset Keymaps
 nunmap <leader><space>
 
@@ -31,34 +39,18 @@ nnoremap <C-d> <C-d>zz
 " Which-Key
 " set which-key
 
+" Exchange
+Plug 'tommcdo/vim-exchange'
+
 " Extension Input
 :set keep-english-in-normal
 
-" Flash
-" set easymotion
-" Plug 'easymotion/vim-easymotion'
-" nmap s <Plug>(easymotion-bd-f)
-" omap s <Plug>(easymotion-bd-f)
-nmap s <Action>(flash.search)
-xmap s <Action>(flash.search)
-" enhance vim f (find for char in characters to the right of the current cursor)
-nmap f <Action>(flash.find)
-xmap f <Action>(flash.find)
-" enhance vim F (find for char in characters to the left of the current cursor)
-nmap F <Action>(flash.find_backward)
-xmap F <Action>(flash.find_backward)
-" enhance vim t (till for char in characters to the right of the current cursor)
-nmap t <Action>(flash.till)
-xmap t <Action>(flash.till)
-" enhance vim T (till for char in characters to the left of the current cursor)
-nmap T <Action>(flash.till_backward)
-xmap T <Action>(flash.till_backward)
-" enhance vim ; (Repeat the last f/F/t/T search)
-nmap ; <Action>(flash.repeat)
-xmap ; <Action>(flash.repeat)
-" enhance vim , (Repeat the last f/F/t/T search backward)
-nmap , <Action>(flash.repeat_backward)
-xmap , <Action>(flash.repeat_backward)
+" Easy Motion
+set easymotion
+Plug 'easymotion/vim-easymotion'
+nmap s <Plug>(easymotion-bd-f)
+xmap s <Plug>(easymotion-bd-f)
+omap s <Plug>(easymotion-bd-f)
 
 " Highlight Yank
 Plug 'machakann/vim-highlightedyank'
@@ -85,10 +77,13 @@ inoremap <C-s> <Esc>:action SaveAll<CR>
 nnoremap <C-s> :action SaveAll<CR>
 vnoremap <C-s> :action SaveAll<CR>gv
 
+" AnyObject
+set anyobject
+
 " Search & Replace
-nnoremap <leader><space> :action GotoFile<CR>
-nnoremap <leader>/ :action FindInPath<CR>
-nnoremap <leader>sr :action ReplaceInPath<CR>
+" nnoremap <leader><space> :action GotoFile<CR>
+" nnoremap <leader>/ :action FindInPath<CR>
+" nnoremap <leader>sr :action ReplaceInPath<CR>
 
 " Comment
 nnoremap gc :action CommentByLineComment<CR><Esc>
