@@ -1,0 +1,18 @@
+# BFS Direction, dydx template
+
+```cpp
+const int dy[] = {-1, 0, 1, 0}, dx[] = {0, 1, 0, -1}, op[] = {2, 3, 0, 1};
+```
+
+```cpp
+const int dy[] = {-1, -1, 0, 1, 1, 1, 0, -1}, dx[] = {0, 1, 1, 1, 0, -1, -1, -1}, op[] = {4, 5, 6, 7, 0, 1, 2, 3};
+```
+
+```cpp
+for (int d = 0; d < 4; d++) {
+    int ny = $y$ + dy[d], nx = $x$ + dx[d];
+    if (ny >= 0 && ny < $Y$ && nx >= 0 && nx < $X$$1$) {
+        $END$
+    }
+}
+```

@@ -1,0 +1,44 @@
+# Print Util
+
+```cpp
+// region PRINT UTIL
+inline void print(const vector<string> &v) {
+#ifndef LOCAL
+   return;
+#endif
+
+   for (auto &s: v) cerr << s << endl;
+   cerr << endl;
+}
+template<class T>
+void print(const vector<vector<T>> &v) {
+#ifndef LOCAL
+   return;
+#endif
+   for (int i = 0; i < sz(v); i++) {
+      for (int j = 0; j < sz(v[i]); j++)
+         cerr << setfill(' ') << setw(2) << v[i][j] << " ";
+      cerr << endl;
+   }
+   cerr << endl;
+}
+template<class T>
+void print(const vector<vector<vector<T>>> &v) {
+#ifndef LOCAL
+   return;
+#endif
+   for (int i = 0; i < sz(v); i++) {
+      for (int j = 0; j < sz(v[i]); j++) {
+         cout << "[";
+         for (int k = 0; k < sz(v[i][j]); k++) {
+            cout << v[i][j][k];
+            if (k != sz(v[i][j]) - 1) cout << ",";
+         }
+         cout << "] ";
+      }
+      cout << endl;
+   }
+   cout << endl;
+}
+// endregion
+```
