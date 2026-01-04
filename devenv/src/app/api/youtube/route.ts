@@ -108,12 +108,12 @@ export async function POST(request: Request) {
 
 		const title = metadata.title.replace(/"/g, '\\"');
 		const content = `---
-title: "[Listening] ${title}"
-tag: ["English", "Study", "Listening"]
+title: "${title}"
+tag: ["Practice", "Listening"]
 category: English
 date: ${date}
 teaser: ${metadata.thumbnailUrl}
-excerpt: ${sentences[0] || ""}
+description: ${sentences[0] || ""}
 ---
 
 ## Video Info
