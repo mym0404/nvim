@@ -33,9 +33,9 @@ vim.api.nvim_create_autocmd("BufEnter", {
 
 vim.api.nvim_create_autocmd("LspAttach", {
   callback = function(args)
-    local keys = require("lazyvim.plugins.lsp.keymaps").get()
+    -- local keys = require("lazyvim.plugins.lsp.keymaps").get()
     -- disable a keymap
-    keys[#keys + 1] = { "K", false }
+    -- keys[#keys + 1] = { "K", false }
     -- Move visual
     vim.keymap.set(
       "x",
