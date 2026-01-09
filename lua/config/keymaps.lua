@@ -373,43 +373,43 @@ local function map_react_prop_bracket()
   end, { nowait = true, expr = true })
 
   -- / to close tag
-  vim.keymap.set("i", "/", function()
-    if vim.bo.filetype ~= "typescriptreact" and vim.bo.filetype ~= "javascriptreact" then
-      return "/"
-    end
-    local node = require("nvim-treesitter.ts_utils").get_node_at_cursor()
-    local _, col = utils.get_row_and_col()
-    local line = vim.api.nvim_get_current_line()
-    local next_char = line:sub(col + 1, col + 1)
-    local left = line:sub(1, col)
-
-    if not node then
-      return "/"
-    end
-
-    if node ~= nil and node:has_error() and next_char ~= ">" and left:match(".*<[%w%d]+.*") then
-      return "/>"
-    end
-
-    local tag_name = utils.get_jsx_name(node)
-    local next_sibling = node:next_sibling()
-    if
-      node ~= nil
-      and next_sibling ~= nil
-      and tag_name ~= nil
-      and node:type() == "jsx_opening_element"
-      and next_char == ">"
-      and tag_name == utils.get_jsx_name(node:next_sibling())
-    then
-      local start_row, start_col, end_row, end_col = next_sibling:range()
-      vim.schedule(function()
-        vim.api.nvim_buf_set_text(0, start_row, start_col, end_row, end_col, {})
-      end)
-      return "/"
-    end
-
-    return "/"
-  end, { nowait = true, expr = true })
+  -- vim.keymap.set("i", "/", function()
+  --   if vim.bo.filetype ~= "typescriptreact" and vim.bo.filetype ~= "javascriptreact" then
+  --     return "/"
+  --   end
+  --   local node = require("nvim-treesitter.ts_utils").get_node_at_cursor()
+  --   local _, col = utils.get_row_and_col()
+  --   local line = vim.api.nvim_get_current_line()
+  --   local next_char = line:sub(col + 1, col + 1)
+  --   local left = line:sub(1, col)
+  --
+  --   if not node then
+  --     return "/"
+  --   end
+  --
+  --   if node ~= nil and node:has_error() and next_char ~= ">" and left:match(".*<[%w%d]+.*") then
+  --     return "/>"
+  --   end
+  --
+  --   local tag_name = utils.get_jsx_name(node)
+  --   local next_sibling = node:next_sibling()
+  --   if
+  --     node ~= nil
+  --     and next_sibling ~= nil
+  --     and tag_name ~= nil
+  --     and node:type() == "jsx_opening_element"
+  --     and next_char == ">"
+  --     and tag_name == utils.get_jsx_name(node:next_sibling())
+  --   then
+  --     local start_row, start_col, end_row, end_col = next_sibling:range()
+  --     vim.schedule(function()
+  --       vim.api.nvim_buf_set_text(0, start_row, start_col, end_row, end_col, {})
+  --     end)
+  --     return "/"
+  --   end
+  --
+  --   return "/"
+  -- end, { nowait = true, expr = true })
 end
 
 local function map_template_string()
