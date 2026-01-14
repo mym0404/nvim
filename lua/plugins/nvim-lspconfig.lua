@@ -7,6 +7,9 @@ return {
     { "antosha417/nvim-lsp-file-operations", config = true },
   },
   opts = {
+    keys = {
+      { "K", false },
+    },
     inlay_hints = { enabled = false },
     servers = {
       sourcekit = {
