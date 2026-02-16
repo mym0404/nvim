@@ -17,12 +17,11 @@
 - 사용자가 요청한 경우만 아래 규칙 적용:
   - Conventional Commit (`feat:`, `fix:`, `docs:` 등)
   - 커밋 메시지는 영어, 간결하게
-  - AI/Claude 관련 문구 금지
+  - AI/Claude/Codex 관련 문구 금지
   - 자동 커밋 금지
 
 ## 4. Static Type Checking
-- MUST: `package.json` 또는 `CLAUDE.md`에 정의된 타입체크 명령만 사용.
-- MUST NOT: 정의가 없으면 타입체크 실행 금지.
+- MUST: `package.json`에 정의된 명령을 파악하고 우선 사용.
 - MUST: 현재 수정한 파일 범위만 검토하고, 미수정 파일 오류는 무시.
 - SHOULD: 의미 있는 변경 후 검증 수행.
 - 오류 해결 원칙:
