@@ -72,4 +72,9 @@
 - MUST NOT: 개발 서버 실행 금지 (`pnpm dev`, `npm start` 등).
 - SHOULD: Context7 Docs search tool 적극 활용.
 - MUST: 임시 테스트/디버그 파일은 작업 후 삭제.
+
+## 9. Worktree 규칙
+- MUST: worktree 생성/사용 전 반드시 사용자에게 허락을 받는다.
+- MUST: worktree 경로는 프로젝트 내 `.worktrees/` 폴더를 기본으로 사용한다.
+- MUST: `.gitignore`에 `.worktrees/` 항목이 없으면 추가한다.
 ```
