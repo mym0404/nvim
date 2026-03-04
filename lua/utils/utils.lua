@@ -236,7 +236,7 @@ M.on_save_action = function(buf, cb)
       M.remove_unused_imports(buf)
     end
     if has_eslint then
-      vim.cmd("EslintFixAll")
+      -- vim.cmd("EslintFixAll")
     end
     on_complete()
   else
