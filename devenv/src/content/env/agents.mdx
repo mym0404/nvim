@@ -68,12 +68,18 @@
 18. `@ts-ignore`, `@ts-nocheck`, `@ts-expect-error` 등 타입체크 우회 방식 사용 금지.
 19. JS/TS 구현에서는 한 번에 이해 가능한 단순한 흐름을 우선하고, 인지 부하를 높이는 과도한 분기/추상화를 피한다.
 
-## 8. 실행 가이드
+## 8. 플랜 수립 및 수행
+- MUST NOT: 플랜을 세우거나 plan mode를 사용할 때 기간 산정, 인력 할당, 공수 추정, 리소스 예측 등 인간식 프로젝트 관리 항목을 포함하지 않는다.
+- MUST: 플랜에는 실행할 작업과 검증 기준만 적는다.
+- MUST: 플랜 이행을 시작했다면 중간에 멈추거나 계획만 제시한 채 종료하지 말고, 목표가 완전히 완료될 때까지 계속 수행한다.
+- MUST: 플랜 수립은 즉시 실행과 끝까지 완료를 전제로 한다.
+
+## 9. 실행 가이드
 - MUST NOT: 개발 서버 실행 금지 (`pnpm dev`, `npm start` 등).
 - SHOULD: Context7 Docs search tool 적극 활용.
 - MUST: 임시 테스트/디버그 파일은 작업 후 삭제.
 
-## 9. Worktree 규칙
+## 10. Worktree 규칙
 - MUST: worktree 생성/사용 전 반드시 사용자에게 허락을 받는다.
 - MUST: worktree 경로는 프로젝트 내 `.worktrees/` 폴더를 기본으로 사용한다.
 - MUST: `.gitignore`에 `.worktrees/` 항목이 없으면 추가한다.
