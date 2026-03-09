@@ -82,4 +82,11 @@
 ## 10. Worktree 규칙
 - MUST: worktree 경로는 프로젝트 내 `.worktrees/` 폴더를 기본으로 사용한다. (프로젝트의 가이드를 우선하되 없으면 .worktrees)
 - MUST: `.gitignore`에 `.worktrees/` 항목이 없으면 추가한다.
+
+## 11. Test 규칙
+- MUST: microbench 기반으로 테스트 코드를 작성한다.
+- MUST: 당연하거나 자잘한 테스트를 verbose하게 작성하지 않는다. 핵심 기능을 우선 생각해서 정말 필요한 테스트가 무엇인지를 분석을 한 뒤에 작성한다.
+
+## 12. Tool 사용 규칙
+- MUST: CLI/TEST 등 툴을 사용할 때 기본적으로 quite/silent mode를 사용해서 stdout를 최소화한다. 그 이후 경고, 에러가 발생했을 경우에만 해당 케이스들을 verbose하게 출력되게 재시도하여 해당 문제를 집중적으로 해결해나갈 수 있도록 지시한다.
 ```
